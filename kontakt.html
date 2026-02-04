@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt | Samovar</title>
+    <meta name="description" content="Kontakt Samovar - Akademisk russisk sprogkursus for danskere. Skriv til os for spørgsmål om kurser eller samarbejde.">
+    <link rel="canonical" href="https://samovar.netlify.app/kontakt.html">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/advanced.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    
+    <style>
+        .contact-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-m);
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .contact-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .contact-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-l);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .contact-card {
+            background: var(--bg-secondary);
+            padding: var(--space-l);
+            border-radius: 8px;
+            border: 1px solid var(--line-color);
+        }
+        
+        .contact-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-s);
+            color: var(--accent-blue);
+        }
+        
+        .contact-card p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-m);
+            font-size: 0.95rem;
+        }
+        
+        .contact-card a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background: var(--bg-secondary);
+            padding: var(--space-xl);
+            border-radius: 8px;
+            border: 1px solid var(--line-color);
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-m);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--line-color);
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .btn-submit:hover {
+            background: var(--accent-blue-dark, #1a3a4a);
+        }
+        
+        .response-time {
+            text-align: center;
+            margin-top: var(--space-l);
+            padding: var(--space-m);
+            background: var(--accent-green-bg, #e8f5e9);
+            border-radius: 6px;
+            color: var(--accent-green, #2e7d32);
+        }
+        
+        .teacher-section {
+            margin-top: var(--space-xl);
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, #f8f9fa 100%);
+            border-radius: 8px;
+            border: 1px solid var(--line-color);
+        }
+        
+        .teacher-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-l);
+            margin-bottom: var(--space-l);
+        }
+        
+        .teacher-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .teacher-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .teacher-info p {
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 600px) {
+            .teacher-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="om-kursus.html">Om</a>
+                <a href="bibliotek.html">Bibliotek</a>
+                <a href="cases.html">Kasus</a>
+                <a href="phonetics.html">Fonetik</a>
+                <a href="dictionary.html">Ordbog</a>
+                <a href="faq.html">FAQ</a>
+                <a href="kontakt.html" class="active">Kontakt</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 2rem;">
+        <section class="contact-section">
+            <div class="contact-header">
+                <h1>Kontakt os</h1>
+                <p>Har du spørgsmål om kurserne, ønsker du at samarbejde, eller har du brug for hjælp?<br>Vi er her for at hjælpe dig.</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <h3>📧 Email</h3>
+                    <p>Skriv til os for spørgsmål om kurser, teknisk support eller samarbejde.</p>
+                    <a href="mailto:info@samovar.dk">info@samovar.dk</a>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>💬 Telegram</h3>
+                    <p>Den hurtigste måde at få svar på. Tilgængelig på dansk, russisk og engelsk.</p>
+                    <a href="https://t.me/samovar_dk" target="_blank" rel="noopener">@samovar_dk</a>
+                </div>
+                
+                <div class="contact-card">
+                    <h3>📱 WhatsApp</h3>
+                    <p>Foretrækker du WhatsApp? Send os en besked, så vender vi tilbage hurtigst muligt.</p>
+                    <a href="https://wa.me/4500000000" target="_blank" rel="noopener">+45 00 00 00 00</a>
+                </div>
+            </div>
+            
+            <div class="response-time">
+                <strong>⚡ Hurtigt svar</strong> — Vi svarer normalt inden for 24 timer på hverdage.
+            </div>
+            
+            <div class="teacher-section">
+                <div class="teacher-header">
+                    <div class="teacher-avatar">ДБ</div>
+                    <div class="teacher-info">
+                        <h2>Dmitrii Babinov</h2>
+                        <p>Stifter &amp; Lead Instructor</p>
+                    </div>
+                </div>
+                <p>
+                    Mit navn er Dmitrii, og jeg er stifteren af Samovar. Jeg er uddannet sprogpedagog og har 
+                    undervist i russisk for danskere siden 2023. Jeg bor i København og kender både det russiske 
+                    og danske sprogsystem indgående.
+                </p>
+                <p style="margin-top: var(--space-m);">
+                    <strong>Uddannelse:</strong> Moskva State Pedagogical University (MGPU)<br>
+                    <strong>Erfaring:</strong> 5+ års undervisningserfaring<br>
+                    <strong>Sprog:</strong> Russisk (modersmål), Dansk (flydende), Engelsk (flydende)
+                </p>
+            </div>
+            
+            <div class="contact-form" style="margin-top: var(--space-xl);">
+                <h2 style="margin-bottom: var(--space-l);">Send os en besked</h2>
+                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Tak for din besked! Vi vender tilbage snart.');">
+                    <div class="form-group">
+                        <label for="name">Navn</label>
+                        <input type="text" id="name" name="name" required placeholder="Dit navn">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="din@email.dk">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Emne</label>
+                        <input type="text" id="subject" name="subject" required placeholder="Hvad handler din besked om?">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Besked</label>
+                        <textarea id="message" name="message" required placeholder="Skriv din besked her..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Send besked</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <samovar-footer></samovar-footer>
+<script src="/js/cookie-consent.js"></script>
+</body>
+</html>

@@ -229,8 +229,32 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .horizontal-scroll-container {
+        height: auto;
+        min-height: 100vh;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+    
+    .slide {
+        flex: 0 0 auto;
+        min-height: 100vh;
+        height: auto;
+        padding: 100px 5%;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
     .huge-text {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 
     .word-slide {

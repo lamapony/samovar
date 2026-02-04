@@ -16,6 +16,52 @@
         content="Lær russisk gennem logik og struktur. Skræddersyet til dansktalende med fokus på komparativ grammatik.">
     <meta property="og:image" content="images/og-image.jpg">
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Samovar: Akademisk russisk sprogkursus">
+    <meta name="twitter:description" content="Lær russisk gennem logik og struktur. Skræddersyet til dansktalende med fokus på komparativ grammatik.">
+    <meta name="twitter:image" content="images/og-image.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://samovar.netlify.app/">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "Samovar",
+        "description": "Akademisk russisk sprogkursus for danskere",
+        "url": "https://samovar.netlify.app",
+        "logo": "https://samovar.netlify.app/images/logo.svg",
+        "sameAs": [
+            "https://t.me/samovar_dk"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "DKK",
+            "availability": "https://schema.org/InStock"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Russiskundervisning",
+            "itemListElement": [
+                {
+                    "@type": "Course",
+                    "name": "Nybegynderkursus (A0-A1)",
+                    "description": "12 lektioner fra bunden"
+                },
+                {
+                    "@type": "Course", 
+                    "name": "Kasusmester (A2-B1)",
+                    "description": "De seks russiske kasus i dybden"
+                }
+            ]
+        }
+    }
+    </script>
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="css/tooltips.css">
@@ -34,9 +80,12 @@
             </a>
             <nav class="main-nav">
                 <a href="/" class="active">Kursus</a>
+                <a href="om-kursus.html">Om</a>
+                <a href="bibliotek.html">Bibliotek</a>
                 <a href="cases.html">Kasus</a>
                 <a href="phonetics.html">Fonetik</a>
                 <a href="dictionary.html">Ordbog</a>
+                <a href="faq.html">FAQ</a>
             </nav>
         </div>
     </header>
@@ -44,6 +93,7 @@
     <main class="container" style="margin-top: 2rem;">
         <div class="hero">
             <div class="hero-content">
+                <p class="hero-badge">Akademisk russisk sprogkursus for danskere</p>
                 <h1>Grammatik som tankens arkitektur</h1>
                 <p class="lead">
                     Dette kursus <span class="tooltip-word">dekonstruerer<span class="tooltip-popup">analyserer
@@ -51,8 +101,24 @@
                     undtagelser. Vi bruger en komparativ metode, der bygger på dit kendskab til det danske grammatiske
                     system.
                 </p>
-                <a href="#beginner" class="btn btn-primary">Start læringen</a>
-                <a href="beginner/" class="btn btn-secondary" style="margin-left: 0.5rem;">Nybegynderkursus</a>
+                <div class="hero-cta">
+                    <a href="beginner/" class="btn btn-primary btn-large">🚀 Start gratis prøvelektion</a>
+                    <a href="#beginner" class="btn btn-secondary">Udforsk kurser</a>
+                </div>
+                <div class="hero-stats-row">
+                    <div class="hero-stat">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Lektioner</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number">A0-C1</span>
+                        <span class="stat-label">Alle niveauer</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Gratis start</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -70,7 +136,7 @@
                         Starter du fra bunden? Dette kursus er designet til dig, der aldrig har lært russisk.
                         Vi begynder med alfabetet, enkle ord og fraser. Alt på dansk.
                     </p>
-                    <a href="beginner/index-v2.html" class="btn"
+                    <a href="beginner/" class="btn"
                         style="background: white; color: var(--accent-blue); position: relative;">
                         Start Nybegynderkurset
                         <span
@@ -109,7 +175,7 @@
                             </a>
                         </li>
                         <li class="module-item">
-                            <a href="reading.html" class="module-link">
+                            <a href="lessons/reading.html" class="module-link">
                                 <h3><span class="tag active">A1</span> Læseregler</h3>
                                 <span class="module-meta">Hårdt (Ъ) og blødt (Ь) tegn. Svækkelse af konsonanter. Hvad vi
                                     hører, og hvad vi skriver.</span>
@@ -425,14 +491,36 @@
 
             </section>
 
+            <section id="tests" class="content-block" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); margin: 0 calc(-1 * var(--space-m)); padding: var(--space-xl) var(--space-m); margin-bottom: var(--space-xl);">
+                <div class="content-main">
+                    <h2>
+                        <span>Test dig selv</span>
+                        <span class="chapter-num">Praksis</span>
+                    </h2>
+                    <p class="lead">
+                        Interaktive tests for at vurdere dine fremskridt og identificere områder til forbedring.
+                    </p>
+                    <div style="display: flex; gap: var(--space-m); flex-wrap: wrap;">
+                        <a href="tests/begynder-test.html" class="btn btn-primary">📝 Begyndertest (A0-A1)</a>
+                        <a href="tests/kasus-test.html" class="btn" style="background: var(--accent-red); color: white;">🎯 Kasus-test (A1-A2)</a>
+                    </div>
+                </div>
+                <aside class="content-note">
+                    <div class="margin-note">
+                        <strong>Tip</strong>
+                        Tag testen før og efter hvert modul for at se din udvikling. Der er ingen grænse for hvor mange gange du kan prøve!
+                    </div>
+                </aside>
+            </section>
+
             <section id="workshop" class="content-block">
                 <div class="content-main">
                     <h2>
                         <span>Værksted</span>
-                        <span class="chapter-num">Praksis</span>
+                        <span class="chapter-num">Dybdegående</span>
                     </h2>
                     <p class="lead">
-                        Dybdegående artikler og tests til at finpudse sproglige værktøjer.
+                        Artikler og analyser til at finpudse sproglige værktøjer.
                     </p>
                     <a href="articles/index.html" class="btn">Gå til Værkstedet</a>
                 </div>
@@ -465,6 +553,7 @@
 
     <script src="js/intonation-game.js"></script>
     <script src="js/tooltips.js"></script>
+<script src="/js/cookie-consent.js"></script>
 </body>
 
 </html>

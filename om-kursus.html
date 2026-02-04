@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om kurset | Samovar</title>
+    <meta name="description" content="Lær om Samovars unikke metode til at lære russisk. Komparativ grammatik, struktureret læring og fokus på dansk-russiske sprogforskelle.">
+    <link rel="canonical" href="https://samovar.netlify.app/om-kursus.html">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/advanced.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    
+    <style>
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-m);
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .about-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .about-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .method-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-l);
+            margin: var(--space-xl) 0;
+        }
+        
+        .method-card {
+            background: var(--bg-secondary);
+            padding: var(--space-l);
+            border-radius: 8px;
+            border: 1px solid var(--line-color);
+        }
+        
+        .method-card h3 {
+            color: var(--accent-blue);
+            margin-bottom: var(--space-s);
+            font-size: 1.1rem;
+        }
+        
+        .method-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .principle-list {
+            list-style: none;
+            padding: 0;
+            margin: var(--space-l) 0;
+        }
+        
+        .principle-list li {
+            padding: var(--space-m) 0;
+            border-bottom: 1px solid var(--line-color);
+            display: flex;
+            gap: var(--space-m);
+            align-items: flex-start;
+        }
+        
+        .principle-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .principle-num {
+            background: var(--accent-blue);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--space-l) 0;
+            font-size: 0.95rem;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: var(--space-s) var(--space-m);
+            text-align: left;
+            border-bottom: 1px solid var(--line-color);
+        }
+        
+        .comparison-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+        
+        .comparison-table tr:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .level-section {
+            margin: var(--space-xl) 0;
+        }
+        
+        .level-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--line-color);
+            margin-bottom: var(--space-m);
+            overflow: hidden;
+        }
+        
+        .level-header {
+            padding: var(--space-m) var(--space-l);
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #1a3a4a 100%);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .level-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .level-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .level-content {
+            padding: var(--space-l);
+        }
+        
+        .level-content ul {
+            margin: var(--space-s) 0;
+            padding-left: var(--space-m);
+        }
+        
+        .level-content li {
+            margin-bottom: var(--space-xs);
+            color: var(--text-secondary);
+        }
+        
+        .community-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: var(--space-xl);
+            border-radius: 8px;
+            margin: var(--space-xl) 0;
+            text-align: center;
+        }
+        
+        .community-section h2 {
+            margin-bottom: var(--space-m);
+        }
+        
+        .community-links {
+            display: flex;
+            gap: var(--space-m);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: var(--space-l);
+        }
+        
+        .community-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-s) var(--space-m);
+            background: white;
+            border: 1px solid var(--line-color);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-ink);
+            transition: all 0.2s;
+        }
+        
+        .community-link:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="om-kursus.html" class="active">Om</a>
+                <a href="bibliotek.html">Bibliotek</a>
+                <a href="cases.html">Kasus</a>
+                <a href="phonetics.html">Fonetik</a>
+                <a href="dictionary.html">Ordbog</a>
+                <a href="faq.html">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 2rem;">
+        <section class="about-section">
+            <div class="about-header">
+                <h1>Om Samovar</h1>
+                <p>Et struktureret akademisk kursus i russisk for dansktalende. Bygget på komparativ grammatik og logisk progression.</p>
+            </div>
+            
+            <h2>Vores metode</h2>
+            <p>
+                Samovar er ikke et traditionelt sprogkursus. Vi dekonstruerer russisk grammatik og præsenterer den 
+                gennem logiske strukturer, der bygger på dit eksisterende kendskab til dansk. Målet er at gøre 
+                russisk tilgængeligt gennem forståelse, ikke blot memorering.
+            </p>
+            
+            <div class="method-grid">
+                <div class="method-card">
+                    <h3>🔍 Dekonstruktion</h3>
+                    <p>Vi bryder komplekse grammatiske fænomener ned til forståelige komponenter. Intet er "bare sådan" — der er altid logik.</p>
+                </div>
+                
+                <div class="method-card">
+                    <h3>⚖️ Komparativ analyse</h3>
+                    <p>Vi sammenligner konstant russisk med dansk. Hvad er ens? Hvad er anderledes? Hvorfor? Dette skaber mentale anker.</p>
+                </div>
+                
+                <div class="method-card">
+                    <h3>🧱 Struktureret progression</h3>
+                    <p>Hver lektion bygger på den foregående. Ingen huller, ingen spring. Fra A0 til C1 i en logisk rækkefølge.</p>
+                </div>
+                
+                <div class="method-card">
+                    <h3>🎯 Anvendelig viden</h3>
+                    <p>Teori kombineres med praksis. Øvelser, tests og interaktive værktøjer sikrer, at du kan bruge det, du lærer.</p>
+                </div>
+            </div>
+            
+            <h2>Kerneprincipper</h2>
+            <ul class="principle-list">
+                <li>
+                    <span class="principle-num">1</span>
+                    <div>
+                        <strong>Russisk har et system</strong>
+                        <p style="margin: 0; color: var(--text-secondary);">
+                            Selvom russisk kan virke overvældende med sine kasus og aspekter, følger sproget strenge regler. 
+                            Vores job er at afsløre disse regler, ikke at bede dig om at acceptere dem på tro.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="principle-num">2</span>
+                    <div>
+                        <strong>Dansk er udgangspunktet</strong>
+                        <p style="margin: 0; color: var(--text-secondary);">
+                            Vi bruger din forståelse af dansk grammatik som bro til russisk. Artikler, køn, ordstilling — 
+                            det hele har parallelle strukturer, vi udnytter.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="principle-num">3</span>
+                    <div>
+                        <strong>Aktiv læring over passiv memorering</strong>
+                        <p style="margin: 0; color: var(--text-secondary);">
+                            Du lærer ikke russisk ved at læse om det. Du lærer det ved at bruge det. Derfor har vi bygget 
+                            interaktive værktøjer, tests og øvelser ind i hver lektion.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <span class="principle-num">4</span>
+                    <div>
+                        <strong>Fællesskab styrker læring</strong>
+                        <p style="margin: 0; color: var(--text-secondary);">
+                            Sprog lever i samtale. Vi opfordrer til diskussion, spørgsmål og deling af erfaringer. 
+                            Ingen lærer alene.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+            
+            <h2>Dansk vs. Russisk</h2>
+            <p>Her er nogle nøgleforskelle, som kurset adresserer:</p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspekt</th>
+                        <th>Dansk</th>
+                        <th>Russisk</th>
+                        <th>Kursusfokus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Køn</td>
+                        <td>To køn (fælleskøn, intetkøn)</td>
+                        <td>Tre køn (maskulin, feminin, neutrum)</td>
+                        <td>Regler for kønsbestemmelse</td>
+                    </tr>
+                    <tr>
+                        <td>Artikler</td>
+                        <td>Artikler før/efter ord (en, -en, -et)</td>
+                        <td>Ingen artikler</td>
+                        <td>Kontekst uden artikler</td>
+                    </tr>
+                    <tr>
+                        <td>Kasus</td>
+                        <td>Restkasus (genitiv, dativ)</td>
+                        <td>6 kasus (nominativ, genitiv, dativ, akkusativ, instrumentalis, præpositionalis)</td>
+                        <td>Kasus-systemet trin for trin</td>
+                    </tr>
+                    <tr>
+                        <td>Verbalspekter</td>
+                        <td>To tempus (nutid, datid) + hjælpeverber</td>
+                        <td>Tre tempus + aspekt (perfektiv/imperfektiv)</td>
+                        <td>Aspekt som kernefærdighed</td>
+                    </tr>
+                    <tr>
+                        <td>Udtale</td>
+                        <td>Stød, reduktion</td>
+                        <td>Akanje (vokalreduktion), palatalisering</td>
+                        <td>Fonetisk træning</td>
+                    </tr>
+                    <tr>
+                        <td>Ordstilling</td>
+                        <td>Relativt fast (SVO)</td>
+                        <td>Fleksibel, informationsstrukturbaseret</td>
+                        <td>Tema-Rema struktur</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="level-section">
+                <h2>Kursusstruktur</h2>
+                
+                <div class="level-card">
+                    <div class="level-header">
+                        <h3>Nybegynderkursus</h3>
+                        <span class="level-tag">A0 → A1</span>
+                    </div>
+                    <div class="level-content">
+                        <p>12 lektioner fra "Hej" til at kunne præsentere dig selv, bestille kaffe og navigere i byen.</p>
+                        <ul>
+                            <li>Alfabetet og udtale</li>
+                            <li>Grundlæggende hilsner og præsentation</li>
+                            <li>Tal og talord</li>
+                            <li>Familie og relationer</li>
+                            <li>Mad og drikke</li>
+                            <li>Byen og transport</li>
+                        </ul>
+                        <a href="beginner/" class="btn btn-primary" style="margin-top: var(--space-s);">Start nybegynderkursus</a>
+                    </div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-header" style="background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);">
+                        <h3>Grammatikfundament</h3>
+                        <span class="level-tag">A1 → A2</span>
+                    </div>
+                    <div class="level-content">
+                        <p>Substantiver, adjektiver, pronominer og de første kasus. Opbygning af sætninger.</p>
+                        <ul>
+                            <li>Substantiver og køn</li>
+                            <li>Adjektivers kongruens</li>
+                            <li>Pronominer</li>
+                            <li>Nominativ og akkusativ</li>
+                            <li>Præpositioner V/NA</li>
+                            <li>Verber i nutid</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-header" style="background: linear-gradient(135deg, #e17055 0%, #fab1a0 100%);">
+                        <h3>Kasusmester</h3>
+                        <span class="level-tag">A2 → B1</span>
+                    </div>
+                    <div class="level-content">
+                        <p>Alle seks kasus i dybden. Bevægelse, ejerskab, beskrivelse — alt gennem kasus.</p>
+                        <ul>
+                            <li>Genitiv (ejerskab)</li>
+                            <li>Dativ (givning, alder)</li>
+                            <li>Instrumentalis (instrument, agent)</li>
+                            <li>Præpositionalis (om, på, i)</li>
+                            <li>Verbalaspekt dybdegående</li>
+                            <li>Talord og kasus</li>
+                        </ul>
+                        <a href="cases.html" class="btn btn-primary" style="margin-top: var(--space-s); background: linear-gradient(135deg, #e17055 0%, #fab1a0 100%);">Øv kasus</a>
+                    </div>
+                </div>
+                
+                <div class="level-card">
+                    <div class="level-header" style="background: linear-gradient(135deg, #00b894 0%, #55efc4 100%);">
+                        <h3>Avanceret & Mesterskab</h3>
+                        <span class="level-tag">B1 → C1</span>
+                    </div>
+                    <div class="level-content">
+                        <p>Sammensatte sætninger, stilistik, nuancer. Fra korrekt til smukt russisk.</p>
+                        <ul>
+                            <li>Participier og gerundier</li>
+                            <li>Sammensatte sætninger</li>
+                            <li>Betingelsessætninger</li>
+                            <li>Stilistik og register</li>
+                            <li>Forretningsrussisk</li>
+                            <li>Paronymer og præcision</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="community-section">
+                <h2>Bliv en del af fællesskabet</h2>
+                <p>
+                    Samovar er mere end et kursus — det er et fællesskab af danskere, der lærer russisk. 
+                    Stil spørgsmål, del dine fremskridt, få feedback.
+                </p>
+                <div class="community-links">
+                    <a href="https://t.me/samovar_dk" class="community-link" target="_blank" rel="noopener">
+                        💬 Telegram-gruppe
+                    </a>
+                    <a href="kontakt.html" class="community-link">
+                        ✉️ Kontakt os
+                    </a>
+                    <a href="bibliotek.html" class="community-link">
+                        📚 Bibliotek
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <samovar-footer></samovar-footer>
+<script src="/js/cookie-consent.js"></script>
+</body>
+</html>

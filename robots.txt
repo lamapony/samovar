@@ -1,0 +1,15 @@
+# robots.txt for Samovar
+# https://samovar.netlify.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://samovar.netlify.app/sitemap.xml
+
+# Disallow admin or private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Crawl-delay for specific bots (optional)
+# Crawl-delay: 10

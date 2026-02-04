@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Begyndertest | Samovar</title>
+    <meta name="description" content="Test dit kendskab til russisk grundlæggende. Alfabet, hilsner og tal — se hvor meget du har lært!">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/advanced.css">
+    <link rel="stylesheet" href="../css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="../images/logo-icon.svg">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    
+    <style>
+        .test-section {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-m);
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .test-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .test-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            background: var(--line-color);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: var(--space-xl);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-blue-light));
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: var(--space-xl);
+            margin-bottom: var(--space-l);
+            border: 1px solid var(--line-color);
+            display: none;
+        }
+        
+        .question-card.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-number {
+            color: var(--accent-blue);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-s);
+        }
+        
+        .question-text {
+            font-size: 1.25rem;
+            margin-bottom: var(--space-l);
+            line-height: 1.5;
+        }
+        
+        .question-text .russian {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-s);
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid var(--line-color);
+            border-radius: 8px;
+            padding: var(--space-m);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+        }
+        
+        .option:hover {
+            border-color: var(--accent-blue);
+            background: var(--bg-paper);
+        }
+        
+        .option.selected {
+            border-color: var(--accent-blue);
+            background: #e3f2fd;
+        }
+        
+        .option.correct {
+            border-color: var(--color-success);
+            background: var(--color-success-bg);
+        }
+        
+        .option.wrong {
+            border-color: var(--color-error);
+            background: var(--color-error-bg);
+        }
+        
+        .option-letter {
+            width: 32px;
+            height: 32px;
+            background: var(--line-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .option.selected .option-letter,
+        .option.correct .option-letter,
+        .option.wrong .option-letter {
+            background: white;
+        }
+        
+        .feedback {
+            margin-top: var(--space-m);
+            padding: var(--space-m);
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        .feedback.correct {
+            background: var(--color-success-bg);
+            color: var(--color-success);
+        }
+        
+        .feedback.wrong {
+            background: var(--color-error-bg);
+            color: var(--color-error);
+        }
+        
+        .btn-next {
+            margin-top: var(--space-m);
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: var(--space-m) var(--space-xl);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: none;
+        }
+        
+        .btn-next.show {
+            display: inline-block;
+        }
+        
+        .btn-next:hover {
+            background: var(--accent-blue-dark);
+        }
+        
+        .results-card {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #1a3a4a 100%);
+            color: white;
+            border-radius: 12px;
+            padding: var(--space-xl);
+            text-align: center;
+            display: none;
+        }
+        
+        .results-card.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .results-score {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: var(--space-m) 0;
+        }
+        
+        .results-message {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-l);
+            opacity: 0.9;
+        }
+        
+        .results-breakdown {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: var(--space-m);
+            margin: var(--space-l) 0;
+            text-align: left;
+        }
+        
+        .results-breakdown h3 {
+            margin-bottom: var(--space-s);
+            font-size: 1rem;
+        }
+        
+        .results-breakdown ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .results-breakdown li {
+            padding: var(--space-xs) 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn-restart {
+            background: white;
+            color: var(--accent-blue);
+            border: none;
+            padding: var(--space-m) var(--space-xl);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: var(--space-m);
+        }
+        
+        .start-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: var(--space-xl);
+            text-align: center;
+            border: 1px solid var(--line-color);
+        }
+        
+        .start-card h2 {
+            margin-bottom: var(--space-m);
+        }
+        
+        .start-card p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-l);
+        }
+        
+        .btn-start {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: var(--space-m) var(--space-xl);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .btn-start:hover {
+            background: var(--accent-blue-dark);
+        }
+        
+        .test-info {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-top: var(--space-l);
+            flex-wrap: wrap;
+        }
+        
+        .test-info-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="../images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="/om-kursus.html">Om</a>
+                <a href="/bibliotek.html">Bibliotek</a>
+                <a href="/cases.html">Kasus</a>
+                <a href="/phonetics.html">Fonetik</a>
+                <a href="/dictionary.html">Ordbog</a>
+                <a href="/faq.html">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 2rem;">
+        <section class="test-section">
+            <div class="test-header">
+                <h1>📝 Begyndertest</h1>
+                <p>Test dit kendskab til russisk grundlæggende: alfabet, hilsner og tal</p>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <!-- Start Card -->
+            <div class="start-card" id="startCard">
+                <h2>Klar til at teste dig selv?</h2>
+                <p>Denne test dækker det grundlæggende fra Nybegynderkurset. 10 spørgsmål om alfabetet, hilsner og tal.</p>
+                <div class="test-info">
+                    <div class="test-info-item">
+                        <span>⏱️</span> ~5 minutter
+                    </div>
+                    <div class="test-info-item">
+                        <span>❓</span> 10 spørgsmål
+                    </div>
+                    <div class="test-info-item">
+                        <span>📊</span> A0-A1 niveau
+                    </div>
+                </div>
+                <button class="btn-start" onclick="startTest()">Start testen</button>
+            </div>
+            
+            <!-- Questions -->
+            <div class="question-card" id="q1">
+                <div class="question-number">Spørgsmål 1 af 10</div>
+                <div class="question-text">
+                    Hvilket bogstav udtales som "sha"?
+                    <div class="russian">Ш, Щ, Ч, Ж</div>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1, 'Ш')">
+                        <span class="option-letter">A</span>
+                        <span>Ш</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1, 'Щ')">
+                        <span class="option-letter">B</span>
+                        <span>Щ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1, 'Ч')">
+                        <span class="option-letter">C</span>
+                        <span>Ч</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1, 'Ж')">
+                        <span class="option-letter">D</span>
+                        <span>Ж</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback1"></div>
+                <button class="btn-next" id="btn1" onclick="nextQuestion(2)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q2">
+                <div class="question-number">Spørgsmål 2 af 10</div>
+                <div class="question-text">
+                    Hvad betyder "Здравствуйте"?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 2, 'Farvel')">
+                        <span class="option-letter">A</span>
+                        <span>Farvel</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2, 'Tak')">
+                        <span class="option-letter">B</span>
+                        <span>Tak</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2, 'Goddag / Hej (formelt)')">
+                        <span class="option-letter">C</span>
+                        <span>Goddag / Hej (formelt)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2, 'Undskyld')">
+                        <span class="option-letter">D</span>
+                        <span>Undskyld</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback2"></div>
+                <button class="btn-next" id="btn2" onclick="nextQuestion(3)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q3">
+                <div class="question-number">Spørgsmål 3 af 10</div>
+                <div class="question-text">
+                    Hvilket tal er <span class="russian">семь</span> (sem')?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 3, '6')">
+                        <span class="option-letter">A</span>
+                        <span>6</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3, '7')">
+                        <span class="option-letter">B</span>
+                        <span>7</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3, '8')">
+                        <span class="option-letter">C</span>
+                        <span>8</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3, '9')">
+                        <span class="option-letter">D</span>
+                        <span>9</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback3"></div>
+                <button class="btn-next" id="btn3" onclick="nextQuestion(4)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q4">
+                <div class="question-number">Spørgsmål 4 af 10</div>
+                <div class="question-text">
+                    Hvordan siger man "Jeg hedder..." på russisk?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 4, 'Меня зовут...')">
+                        <span class="option-letter">A</span>
+                        <span class="russian" style="font-size: 1.2rem;">Меня зовут...</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4, 'Мне зовут...')">
+                        <span class="option-letter">B</span>
+                        <span class="russian" style="font-size: 1.2rem;">Мне зовут...</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4, 'Я зовут...')">
+                        <span class="option-letter">C</span>
+                        <span class="russian" style="font-size: 1.2rem;">Я зовут...</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4, 'Мой имя...')">
+                        <span class="option-letter">D</span>
+                        <span class="russian" style="font-size: 1.2rem;">Мой имя...</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback4"></div>
+                <button class="btn-next" id="btn4" onclick="nextQuestion(5)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q5">
+                <div class="question-number">Spørgsmål 5 af 10</div>
+                <div class="question-text">
+                    Hvilket bogstav i kyrilliske alfabet svarer til det danske "R"?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 5, 'Р')">
+                        <span class="option-letter">A</span>
+                        <span class="russian">Р</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5, 'Я')">
+                        <span class="option-letter">B</span>
+                        <span class="russian">Я</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5, 'Л')">
+                        <span class="option-letter">C</span>
+                        <span class="russian">Л</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5, 'Г')">
+                        <span class="option-letter">D</span>
+                        <span class="russian">Г</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback5"></div>
+                <button class="btn-next" id="btn5" onclick="nextQuestion(6)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q6">
+                <div class="question-number">Spørgsmål 6 af 10</div>
+                <div class="question-text">
+                    Hvad betyder "спасибо" (spasibo)?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 6, 'Hej')">
+                        <span class="option-letter">A</span>
+                        <span>Hej</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 6, 'Farvel')">
+                        <span class="option-letter">B</span>
+                        <span>Farvel</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 6, 'Tak')">
+                        <span class="option-letter">C</span>
+                        <span>Tak</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 6, 'Undskyld')">
+                        <span class="option-letter">D</span>
+                        <span>Undskyld</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback6"></div>
+                <button class="btn-next" id="btn6" onclick="nextQuestion(7)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q7">
+                <div class="question-number">Spørgsmål 7 af 10</div>
+                <div class="question-text">
+                    Hvordan skrives "mor" på russisk?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 7, 'мать')">
+                        <span class="option-letter">A</span>
+                        <span class="russian">мать</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 7, 'мама')">
+                        <span class="option-letter">B</span>
+                        <span class="russian">мама</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 7, 'мати')">
+                        <span class="option-letter">C</span>
+                        <span class="russian">мати</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 7, 'мамо')">
+                        <span class="option-letter">D</span>
+                        <span class="russian">мамо</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback7"></div>
+                <button class="btn-next" id="btn7" onclick="nextQuestion(8)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q8">
+                <div class="question-number">Spørgsmål 8 af 10</div>
+                <div class="question-text">
+                    Hvad er det russiske ord for "vand"?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 8, 'вино')">
+                        <span class="option-letter">A</span>
+                        <span class="russian">вино</span> (vino)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 8, 'вода')">
+                        <span class="option-letter">B</span>
+                        <span class="russian">вода</span> (voda)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 8, 'водка')">
+                        <span class="option-letter">C</span>
+                        <span class="russian">водка</span> (vodka)
+                    </div>
+                    <div class="option" onclick="selectOption(this, 8, 'вилка')">
+                        <span class="option-letter">D</span>
+                        <span class="russian">вилка</span> (vilka)
+                    </div>
+                </div>
+                <div class="feedback" id="feedback8"></div>
+                <button class="btn-next" id="btn8" onclick="nextQuestion(9)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q9">
+                <div class="question-number">Spørgsmål 9 af 10</div>
+                <div class="question-text">
+                    Hvilket bogstav gør en konsonant "blød" (palataliseret)?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 9, 'ъ (hårdt tegn)')">
+                        <span class="option-letter">A</span>
+                        <span>ъ (hårdt tegn)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 9, 'ь (blødt tegn)')">
+                        <span class="option-letter">B</span>
+                        <span>ь (blødt tegn)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 9, 'ы (y)')">
+                        <span class="option-letter">C</span>
+                        <span>ы (y)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 9, 'й (kort i)')">
+                        <span class="option-letter">D</span>
+                        <span>й (kort i)</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback9"></div>
+                <button class="btn-next" id="btn9" onclick="nextQuestion(10)">Næste spørgsmål →</button>
+            </div>
+            
+            <div class="question-card" id="q10">
+                <div class="question-number">Spørgsmål 10 af 10</div>
+                <div class="question-text">
+                    Hvad betyder "до свидания" (do svidaniya)?
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 10, 'God morgen')">
+                        <span class="option-letter">A</span>
+                        <span>God morgen</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 10, 'På gensyn / Farvel')">
+                        <span class="option-letter">B</span>
+                        <span>På gensyn / Farvel</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 10, 'Godnat')">
+                        <span class="option-letter">C</span>
+                        <span>Godnat</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 10, 'Velkommen')">
+                        <span class="option-letter">D</span>
+                        <span>Velkommen</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback10"></div>
+                <button class="btn-next" id="btn10" onclick="showResults()">Se resultater →</button>
+            </div>
+            
+            <!-- Results -->
+            <div class="results-card" id="resultsCard">
+                <h2>🎉 Test gennemført!</h2>
+                <div class="results-score" id="scoreDisplay">0/10</div>
+                <div class="results-message" id="resultsMessage"></div>
+                <div class="results-breakdown">
+                    <h3>Dine resultater:</h3>
+                    <ul id="resultsList"></ul>
+                </div>
+                <a href="../beginner/" class="btn-restart">Fortsæt læringen →</a>
+                <button class="btn-restart" onclick="restartTest()" style="margin-left: var(--space-m);">Tag testen igen</button>
+            </div>
+        </section>
+    </main>
+    
+    <samovar-footer></samovar-footer>
+    
+    <script>
+        const correctAnswers = {
+            1: 'Ш',
+            2: 'Goddag / Hej (formelt)',
+            3: '7',
+            4: 'Меня зовут...',
+            5: 'Р',
+            6: 'Tak',
+            7: 'мама',
+            8: 'вода',
+            9: 'ь (blødt tegn)',
+            10: 'På gensyn / Farvel'
+        };
+        
+        const explanations = {
+            1: 'Ш udtales "sha". Щ er "shcha", Ч er "tje", Ж er "zj".',
+            2: '"Здравствуйте" er den formelle hilsen, bruges til fremmede og i butikker.',
+            3: '"Семь" (sem') betyder 7. Шесть = 6, восемь = 8, девять = 9.',
+            4: '"Меня зовут" betyder bogstaveligt "Mig kalder..." (jeg kaldes...).',
+            5: 'Р udtales som et rullet R. Я er "ja", Л er "L", Г er "G".',
+            6: '"Спасибо" er det almindelige ord for tak.',
+            7: '"Мама" er det almindelige ord for mor. "Мать" er mere formelt/poetisk.',
+            8: '"Вода" er vand. "Вино" er vin, "водка" er vodka, "вилка" er gaffel.',
+            9: 'Ь (blødt tegn) palataliserer den foregående konsonant.',
+            10: '"До свидания" betyder bogstaveligt "Indtil synet (igen)" = på gensyn.'
+        };
+        
+        let score = 0;
+        let answered = {};
+        
+        function startTest() {
+            document.getElementById('startCard').style.display = 'none';
+            document.getElementById('q1').classList.add('active');
+            updateProgress(1);
+        }
+        
+        function updateProgress(question) {
+            const percent = (question - 1) * 10;
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+        
+        function selectOption(element, question, answer) {
+            if (answered[question]) return;
+            answered[question] = true;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            const isCorrect = answer === correctAnswers[question];
+            const feedback = document.getElementById('feedback' + question);
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '✅ Korrekt! ' + explanations[question];
+                score++;
+            } else {
+                element.classList.add('wrong');
+                feedback.className = 'feedback wrong show';
+                feedback.innerHTML = '❌ Ikke helt. ' + explanations[question];
+                
+                // Highlight correct answer
+                options.forEach(opt => {
+                    if (opt.textContent.includes(correctAnswers[question]) || 
+                        opt.querySelector('.russian')?.textContent === correctAnswers[question]) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            document.getElementById('btn' + question).classList.add('show');
+        }
+        
+        function nextQuestion(num) {
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById('q' + num).classList.add('active');
+            updateProgress(num);
+            window.scrollTo(0, 0);
+        }
+        
+        function showResults() {
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById('resultsCard').classList.add('show');
+            document.getElementById('progressFill').style.width = '100%';
+            
+            document.getElementById('scoreDisplay').textContent = score + '/10';
+            
+            let message = '';
+            if (score === 10) message = 'Perfekt! Du er klar til at avancere! 🌟';
+            else if (score >= 8) message = 'Fantastisk! Du har styr på grundlaget! ⭐';
+            else if (score >= 6) message = 'Godt arbejde! Men der er plads til forbedring. 📚';
+            else if (score >= 4) message: 'Du er på vej! Gennemgå nybegynderkurset igen. 💪';
+            else message = 'Start med nybegynderkurset — du vil lære det hurtigt! 🚀';
+            
+            document.getElementById('resultsMessage').textContent = message;
+            
+            const resultsList = document.getElementById('resultsList');
+            resultsList.innerHTML = `
+                <li><span>Alfabet:</span> <span>${score >= 7 ? '✅' : '⏳'} ${score}/10</span></li>
+                <li><span>Hilsner:</span> <span>${score >= 5 ? '✅' : '⏳'} Behersket</span></li>
+                <li><span>Tal:</span> <span>${score >= 6 ? '✅' : '⏳'} Grundlæggende</span></li>
+                <li><span>Anbefaling:</span> <span>${score >= 7 ? 'Avancer til A1' : 'Fortsæt A0'}</span></li>
+            `;
+            
+            window.scrollTo(0, 0);
+        }
+        
+        function restartTest() {
+            score = 0;
+            answered = {};
+            
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+            
+            document.querySelectorAll('.feedback').forEach(fb => {
+                fb.classList.remove('show');
+            });
+            
+            document.querySelectorAll('.btn-next').forEach(btn => {
+                btn.classList.remove('show');
+            });
+            
+            document.getElementById('resultsCard').classList.remove('show');
+            document.getElementById('startCard').style.display = 'block';
+            document.getElementById('progressFill').style.width = '0%';
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+<script src="/js/cookie-consent.js"></script>
+</body>
+</html>

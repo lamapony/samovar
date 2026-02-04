@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasus-test | Samovar</title>
+    <meta name="description" content="Test dit kendskab til russiske kasus. Nominativ, genitiv, dativ, akkusativ, instrumentalis og præpositionalis — øv og test dig selv!">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/advanced.css">
+    <link rel="stylesheet" href="../css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="../images/logo-icon.svg">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    
+    <style>
+        .test-section {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-m);
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .test-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .test-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .progress-bar {
+            background: var(--line-color);
+            height: 8px;
+            border-radius: 4px;
+            margin-bottom: var(--space-xl);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-red-dark));
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: var(--space-xl);
+            margin-bottom: var(--space-l);
+            border: 1px solid var(--line-color);
+            display: none;
+        }
+        
+        .question-card.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-number {
+            color: var(--accent-red);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-s);
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-l);
+            line-height: 1.5;
+        }
+        
+        .sentence-box {
+            background: white;
+            border: 2px solid var(--line-color);
+            border-radius: 8px;
+            padding: var(--space-m);
+            margin: var(--space-m) 0;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .sentence-box .russian {
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+        }
+        
+        .sentence-box .highlight {
+            background: #fff3cd;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-s);
+        }
+        
+        .option {
+            background: white;
+            border: 2px solid var(--line-color);
+            border-radius: 8px;
+            padding: var(--space-m);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: var(--space-m);
+        }
+        
+        .option:hover {
+            border-color: var(--accent-red);
+            background: var(--bg-paper);
+        }
+        
+        .option.selected {
+            border-color: var(--accent-red);
+            background: #ffebee;
+        }
+        
+        .option.correct {
+            border-color: var(--color-success);
+            background: var(--color-success-bg);
+        }
+        
+        .option.wrong {
+            border-color: var(--color-error);
+            background: var(--color-error-bg);
+        }
+        
+        .option-letter {
+            width: 32px;
+            height: 32px;
+            background: var(--line-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .option.selected .option-letter,
+        .option.correct .option-letter,
+        .option.wrong .option-letter {
+            background: white;
+        }
+        
+        .case-badge {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .feedback {
+            margin-top: var(--space-m);
+            padding: var(--space-m);
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .feedback.show {
+            display: block;
+        }
+        
+        .feedback.correct {
+            background: var(--color-success-bg);
+            color: var(--color-success);
+        }
+        
+        .feedback.wrong {
+            background: var(--color-error-bg);
+            color: var(--color-error);
+        }
+        
+        .btn-next {
+            margin-top: var(--space-m);
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: var(--space-m) var(--space-xl);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: none;
+        }
+        
+        .btn-next.show {
+            display: inline-block;
+        }
+        
+        .btn-next:hover {
+            background: var(--accent-red-dark);
+        }
+        
+        .results-card {
+            background: linear-gradient(135deg, var(--accent-red) 0%, #802020 100%);
+            color: white;
+            border-radius: 12px;
+            padding: var(--space-xl);
+            text-align: center;
+            display: none;
+        }
+        
+        .results-card.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .results-score {
+            font-size: 4rem;
+            font-weight: 700;
+            margin: var(--space-m) 0;
+        }
+        
+        .results-message {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-l);
+            opacity: 0.9;
+        }
+        
+        .case-breakdown {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: var(--space-m);
+            margin: var(--space-l) 0;
+            text-align: left;
+        }
+        
+        .case-breakdown h3 {
+            margin-bottom: var(--space-s);
+            font-size: 1rem;
+        }
+        
+        .case-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-xs) 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .case-item:last-child {
+            border-bottom: none;
+        }
+        
+        .btn-restart {
+            background: white;
+            color: var(--accent-red);
+            border: none;
+            padding: var(--space-m) var(--space-xl);
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: var(--space-m);
+        }
+        
+        .start-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: var(--space-xl);
+            text-align: center;
+            border: 1px solid var(--line-color);
+        }
+        
+        .start-card h2 {
+            margin-bottom: var(--space-m);
+        }
+        
+        .start-card p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-l);
+        }
+        
+        .btn-start {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: var(--space-m) var(--space-xl);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .btn-start:hover {
+            background: var(--accent-red-dark);
+        }
+        
+        .test-info {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-top: var(--space-l);
+            flex-wrap: wrap;
+        }
+        
+        .test-info-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .case-reference {
+            background: white;
+            border: 1px solid var(--line-color);
+            border-radius: 8px;
+            padding: var(--space-m);
+            margin: var(--space-m) 0;
+            font-size: 0.9rem;
+        }
+        
+        .case-reference h4 {
+            font-size: 0.9rem;
+            margin-bottom: var(--space-s);
+            color: var(--accent-blue);
+        }
+        
+        .case-reference-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xs);
+        }
+        
+        .case-ref-item {
+            text-align: center;
+            padding: var(--space-xs);
+            background: var(--bg-secondary);
+            border-radius: 4px;
+        }
+        
+        .case-ref-item .case-name {
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .case-ref-item .case-q {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="../images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="/om-kursus.html">Om</a>
+                <a href="/bibliotek.html">Bibliotek</a>
+                <a href="/cases.html">Kasus</a>
+                <a href="/phonetics.html">Fonetik</a>
+                <a href="/dictionary.html">Ordbog</a>
+                <a href="/faq.html">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 2rem;">
+        <section class="test-section">
+            <div class="test-header">
+                <h1>🎯 Kasus-test</h1>
+                <p>Test din forståelse af de seks russiske kasus og deres anvendelse</p>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <!-- Start Card -->
+            <div class="start-card" id="startCard">
+                <h2>Klar til kasus-udfordringen?</h2>
+                <p>10 spørgsmål om de seks kasus: Nominativ, Genitiv, Dativ, Akkusativ, Instrumentalis og Præpositionalis.</p>
+                
+                <div class="case-reference">
+                    <h4>Spørgeord (husk dem!)</h4>
+                    <div class="case-reference-grid">
+                        <div class="case-ref-item">
+                            <div class="case-name">Nominativ</div>
+                            <div class="case-q">hvem? hvad?</div>
+                        </div>
+                        <div class="case-ref-item">
+                            <div class="case-name">Genitiv</div>
+                            <div class="case-q">hvis? ikke noget</div>
+                        </div>
+                        <div class="case-ref-item">
+                            <div class="case-name">Dativ</div>
+                            <div class="case-q">til hvem?</div>
+                        </div>
+                        <div class="case-ref-item">
+                            <div class="case-name">Akkusativ</div>
+                            <div class="case-q">hvem? (objekt)</div>
+                        </div>
+                        <div class="case-ref-item">
+                            <div class="case-name">Instr.</div>
+                            <div class="case-q">med hvem?</div>
+                        </div>
+                        <div class="case-ref-item">
+                            <div class="case-name">Præpos.</div>
+                            <div class="case-q">om hvem?</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="test-info">
+                    <div class="test-info-item">
+                        <span>⏱️</span> ~8 minutter
+                    </div>
+                    <div class="test-info-item">
+                        <span>❓</span> 10 spørgsmål
+                    </div>
+                    <div class="test-info-item">
+                        <span>📊</span> A1-A2 niveau
+                    </div>
+                </div>
+                <button class="btn-start" onclick="startTest()">Start testen</button>
+            </div>
+            
+            <!-- Question 1 -->
+            <div class="question-card" id="q1">
+                <div class="question-number">Spørgsmål 1 af 10</div>
+                <div class="question-text">
+                    Hvilket kasus bruges til <strong>subjektet</strong> i en sætning (den der handler)?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian"><span class="highlight">Брат</span> читает книгу.</span><br>
+                    <small>(<span class="highlight">Broren</span> læser bogen.)</small>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 1, 'Nominativ')">
+                        <span class="option-letter">A</span>
+                        <span><span class="case-badge">Nominativ</span> — hvem? hvad?</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1, 'Akkusativ')">
+                        <span class="option-letter">B</span>
+                        <span><span class="case-badge">Akkusativ</span> — objektet</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1, 'Genitiv')">
+                        <span class="option-letter">C</span>
+                        <span><span class="case-badge">Genitiv</span> — ejerskab</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 1, 'Dativ')">
+                        <span class="option-letter">D</span>
+                        <span><span class="case-badge">Dativ</span> — modtager</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback1"></div>
+                <button class="btn-next" id="btn1" onclick="nextQuestion(2)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 2 -->
+            <div class="question-card" id="q2">
+                <div class="question-number">Spørgsmål 2 af 10</div>
+                <div class="question-text">
+                    I sætningen "Jeg giver bogen <strong>til min søster</strong>" — hvilket kasus er "til min søster"?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Я даю книгу <span class="highlight">сестре</span>.</span>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 2, 'Genitiv')">
+                        <span class="option-letter">A</span>
+                        <span>Genitiv (hvis?)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2, 'Dativ')">
+                        <span class="option-letter">B</span>
+                        <span>Dativ (til hvem?)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2, 'Akkusativ')">
+                        <span class="option-letter">C</span>
+                        <span>Akkusativ (hvem? objekt)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 2, 'Instrumentalis')">
+                        <span class="option-letter">D</span>
+                        <span>Instrumentalis (med hvem?)</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback2"></div>
+                <button class="btn-next" id="btn2" onclick="nextQuestion(3)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 3 -->
+            <div class="question-card" id="q3">
+                <div class="question-number">Spørgsmål 3 af 10</div>
+                <div class="question-text">
+                    "Jeg ser <strong>katten</strong>" — hvilket kasus er objektet her?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Я вижу <span class="highlight">кошку</span>.</span>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 3, 'Nominativ')">
+                        <span class="option-letter">A</span>
+                        <span>Nominativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3, 'Genitiv')">
+                        <span class="option-letter">B</span>
+                        <span>Genitiv</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3, 'Akkusativ')">
+                        <span class="option-letter">C</span>
+                        <span>Akkusativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 3, 'Præpositionalis')">
+                        <span class="option-letter">D</span>
+                        <span>Præpositionalis</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback3"></div>
+                <button class="btn-next" id="btn3" onclick="nextQuestion(4)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 4 -->
+            <div class="question-card" id="q4">
+                <div class="question-number">Spørgsmål 4 af 10</div>
+                <div class="question-text">
+                    "Der er ikke <strong>noget vand</strong>" — hvilket kasus bruges efter negation med "ikke"?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Нет <span class="highlight">воды</span>.</span>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 4, 'Nominativ')">
+                        <span class="option-letter">A</span>
+                        <span>Nominativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4, 'Genitiv')">
+                        <span class="option-letter">B</span>
+                        <span>Genitiv</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4, 'Akkusativ')">
+                        <span class="option-letter">C</span>
+                        <span>Akkusativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 4, 'Dativ')">
+                        <span class="option-letter">D</span>
+                        <span>Dativ</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback4"></div>
+                <button class="btn-next" id="btn4" onclick="nextQuestion(5)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 5 -->
+            <div class="question-card" id="q5">
+                <div class="question-number">Spørgsmål 5 af 10</div>
+                <div class="question-text">
+                    "Jeg taler <strong>om vejret</strong>" — hvilket kasus bruges efter "om" (о)?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Я говорю о <span class="highlight">погоде</span>.</span>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 5, 'Dativ')">
+                        <span class="option-letter">A</span>
+                        <span>Dativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5, 'Akkusativ')">
+                        <span class="option-letter">B</span>
+                        <span>Akkusativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5, 'Præpositionalis')">
+                        <span class="option-letter">C</span>
+                        <span>Præpositionalis</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 5, 'Instrumentalis')">
+                        <span class="option-letter">D</span>
+                        <span>Instrumentalis</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback5"></div>
+                <button class="btn-next" id="btn5" onclick="nextQuestion(6)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 6 -->
+            <div class="question-card" id="q6">
+                <div class="question-number">Spørgsmål 6 af 10</div>
+                <div class="question-text">
+                    "Jeg kører <strong>med bus</strong>" — hvilket kasus bruges til transportmiddel?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Я еду <span class="highlight">автобусом</span>.</span>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 6, 'Akkusativ')">
+                        <span class="option-letter">A</span>
+                        <span>Akkusativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 6, 'Instrumentalis')">
+                        <span class="option-letter">B</span>
+                        <span>Instrumentalis</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 6, 'Præpositionalis')">
+                        <span class="option-letter">C</span>
+                        <span>Præpositionalis</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 6, 'Genitiv')">
+                        <span class="option-letter">D</span>
+                        <span>Genitiv</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback6"></div>
+                <button class="btn-next" id="btn6" onclick="nextQuestion(7)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 7 -->
+            <div class="question-card" id="q7">
+                <div class="question-number">Spørgsmål 7 af 10</div>
+                <div class="question-text">
+                    "<strong>Min brors</strong> bog" — hvilket kasus udtrykker ejerskab?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Книга <span class="highlight">брата</span>.</span>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 7, 'Genitiv')">
+                        <span class="option-letter">A</span>
+                        <span>Genitiv</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 7, 'Dativ')">
+                        <span class="option-letter">B</span>
+                        <span>Dativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 7, 'Akkusativ')">
+                        <span class="option-letter">C</span>
+                        <span>Akkusativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 7, 'Nominativ')">
+                        <span class="option-letter">D</span>
+                        <span>Nominativ</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback7"></div>
+                <button class="btn-next" id="btn7" onclick="nextQuestion(8)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 8 -->
+            <div class="question-card" id="q8">
+                <div class="question-number">Spørgsmål 8 af 10</div>
+                <div class="question-text">
+                    "Bogen ligger <strong>på bordet</strong>" — hvilket kasus bruges med "på" (на)?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Книга лежит на <span class="highlight">столе</span>.</span>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 8, 'Akkusativ')">
+                        <span class="option-letter">A</span>
+                        <span>Akkusativ (bevægelse)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 8, 'Præpositionalis')">
+                        <span class="option-letter">B</span>
+                        <span>Præpositionalis (sted)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 8, 'Dativ')">
+                        <span class="option-letter">C</span>
+                        <span>Dativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 8, 'Genitiv')">
+                        <span class="option-letter">D</span>
+                        <span>Genitiv</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback8"></div>
+                <button class="btn-next" id="btn8" onclick="nextQuestion(9)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 9 -->
+            <div class="question-card" id="q9">
+                <div class="question-number">Spørgsmål 9 af 10</div>
+                <div class="question-text">
+                    Hvilket kasus bruges efter "med" (с) når det betyder "sammen med"?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Я иду с <span class="highlight">другом</span>.</span><br>
+                    <small>(Jeg går med en ven.)</small>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 9, 'Akkusativ')">
+                        <span class="option-letter">A</span>
+                        <span>Akkusativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 9, 'Instrumentalis')">
+                        <span class="option-letter">B</span>
+                        <span>Instrumentalis</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 9, 'Dativ')">
+                        <span class="option-letter">C</span>
+                        <span>Dativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 9, 'Genitiv')">
+                        <span class="option-letter">D</span>
+                        <span>Genitiv</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback9"></div>
+                <button class="btn-next" id="btn9" onclick="nextQuestion(10)">Næste spørgsmål →</button>
+            </div>
+            
+            <!-- Question 10 -->
+            <div class="question-card" id="q10">
+                <div class="question-number">Spørgsmål 10 af 10</div>
+                <div class="question-text">
+                    "Jeg gav gaven <strong>til ham</strong>" — hvilket kasus er "ham" her?
+                </div>
+                <div class="sentence-box">
+                    <span class="russian">Я подарил подарок <span class="highlight">ему</span>.</span>
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 10, 'Akkusativ')">
+                        <span class="option-letter">A</span>
+                        <span>Akkusativ</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 10, 'Genitiv')">
+                        <span class="option-letter">B</span>
+                        <span>Genitiv</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 10, 'Dativ')">
+                        <span class="option-letter">C</span>
+                        <span>Dativ (modtager)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 10, 'Præpositionalis')">
+                        <span class="option-letter">D</span>
+                        <span>Præpositionalis</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback10"></div>
+                <button class="btn-next" id="btn10" onclick="showResults()">Se resultater →</button>
+            </div>
+            
+            <!-- Results -->
+            <div class="results-card" id="resultsCard">
+                <h2>🎉 Test gennemført!</h2>
+                <div class="results-score" id="scoreDisplay">0/10</div>
+                <div class="results-message" id="resultsMessage"></div>
+                <div class="case-breakdown">
+                    <h3>Kasus-mestring:</h3>
+                    <div id="caseResults"></div>
+                </div>
+                <a href="../cases.html" class="btn-restart">Øv mere i Kasus-konstruktøren →</a>
+                <button class="btn-restart" onclick="restartTest()" style="margin-left: var(--space-m);">Tag testen igen</button>
+            </div>
+        </section>
+    </main>
+    
+    <samovar-footer></samovar-footer>
+    
+    <script>
+        const correctAnswers = {
+            1: 'Nominativ',
+            2: 'Dativ',
+            3: 'Akkusativ',
+            4: 'Genitiv',
+            5: 'Præpositionalis',
+            6: 'Instrumentalis',
+            7: 'Genitiv',
+            8: 'Præpositionalis',
+            9: 'Instrumentalis',
+            10: 'Dativ'
+        };
+        
+        const explanations = {
+            1: 'Subjektet (den der handler) står altid i Nominativ. Spørgeord: hvem? hvad?',
+            2: 'Dativ bruges til modtageren. Spørgeord: til hvem? (кому?)',
+            3: 'Direkte objekt (uden præposition) står i Akkusativ. Spørgeord: hvem? hvad?',
+            4: 'Efter "нет" (der er ikke/ikke noget) bruges Genitiv.',
+            5: '"О" (om) kræver altid Præpositionalis.',
+            6: 'Transportmiddel og redskaber står i Instrumentalis.',
+            7: 'Ejerskab udtrykkes med Genitiv: "brorens bog" = "brata" (Genitiv).',
+            8: '"На" + sted (uden bevægelse) kræver Præpositionalis. Med bevægelse: Akkusativ.',
+            9: '"С" (sammen med) kræver Instrumentalis.',
+            10: 'Modtageren af en gave står i Dativ: "til ham" = "ему" (Dativ).'
+        };
+        
+        const caseStats = {
+            'Nominativ': 0, 'Genitiv': 0, 'Dativ': 0,
+            'Akkusativ': 0, 'Instrumentalis': 0, 'Præpositionalis': 0
+        };
+        
+        let score = 0;
+        let answered = {};
+        
+        function startTest() {
+            document.getElementById('startCard').style.display = 'none';
+            document.getElementById('q1').classList.add('active');
+            updateProgress(1);
+        }
+        
+        function updateProgress(question) {
+            const percent = (question - 1) * 10;
+            document.getElementById('progressFill').style.width = percent + '%';
+        }
+        
+        function selectOption(element, question, answer) {
+            if (answered[question]) return;
+            answered[question] = true;
+            
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            const isCorrect = answer === correctAnswers[question];
+            const feedback = document.getElementById('feedback' + question);
+            
+            if (isCorrect) {
+                element.classList.add('correct');
+                feedback.className = 'feedback correct show';
+                feedback.innerHTML = '✅ Korrekt! ' + explanations[question];
+                score++;
+                caseStats[correctAnswers[question]]++;
+            } else {
+                element.classList.add('wrong');
+                feedback.className = 'feedback wrong show';
+                feedback.innerHTML = '❌ Ikke helt. ' + explanations[question];
+                
+                options.forEach(opt => {
+                    const text = opt.textContent;
+                    if (text.includes(correctAnswers[question])) {
+                        opt.classList.add('correct');
+                    }
+                });
+            }
+            
+            document.getElementById('btn' + question).classList.add('show');
+        }
+        
+        function nextQuestion(num) {
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById('q' + num).classList.add('active');
+            updateProgress(num);
+            window.scrollTo(0, 0);
+        }
+        
+        function showResults() {
+            document.querySelectorAll('.question-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.getElementById('resultsCard').classList.add('show');
+            document.getElementById('progressFill').style.width = '100%';
+            
+            document.getElementById('scoreDisplay').textContent = score + '/10';
+            
+            let message = '';
+            if (score === 10) message = 'Perfekt! Du er kasus-mester! 🏆';
+            else if (score >= 8) message = 'Fantastisk! Du har styr på kasus! ⭐';
+            else if (score >= 6) message = 'Godt arbejde! Men der er plads til forbedring. 📚';
+            else if (score >= 4) message = 'Du er på vej! Øv mere i kasus-konstruktøren. 💪';
+            else message = 'Kasus er svært! Tag det et ad gangen. Start med Nominativ og Akkusativ. 🎯';
+            
+            document.getElementById('resultsMessage').textContent = message;
+            
+            const caseResults = document.getElementById('caseResults');
+            caseResults.innerHTML = `
+                <div class="case-item">
+                    <span>Nominativ (hvem?)</span>
+                    <span>${caseStats['Nominativ'] > 0 ? '✅' : '⏳'}</span>
+                </div>
+                <div class="case-item">
+                    <span>Akkusativ (objekt)</span>
+                    <span>${caseStats['Akkusativ'] > 0 ? '✅' : '⏳'}</span>
+                </div>
+                <div class="case-item">
+                    <span>Genitiv (hvis?)</span>
+                    <span>${caseStats['Genitiv'] > 0 ? '✅' : '⏳'}</span>
+                </div>
+                <div class="case-item">
+                    <span>Dativ (til hvem?)</span>
+                    <span>${caseStats['Dativ'] > 0 ? '✅' : '⏳'}</span>
+                </div>
+                <div class="case-item">
+                    <span>Præpositionalis (om?)</span>
+                    <span>${caseStats['Præpositionalis'] > 0 ? '✅' : '⏳'}</span>
+                </div>
+                <div class="case-item">
+                    <span>Instrumentalis (med?)</span>
+                    <span>${caseStats['Instrumentalis'] > 0 ? '✅' : '⏳'}</span>
+                </div>
+            `;
+            
+            window.scrollTo(0, 0);
+        }
+        
+        function restartTest() {
+            score = 0;
+            answered = {};
+            Object.keys(caseStats).forEach(key => caseStats[key] = 0);
+            
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+            
+            document.querySelectorAll('.feedback').forEach(fb => {
+                fb.classList.remove('show');
+            });
+            
+            document.querySelectorAll('.btn-next').forEach(btn => {
+                btn.classList.remove('show');
+            });
+            
+            document.getElementById('resultsCard').classList.remove('show');
+            document.getElementById('startCard').style.display = 'block';
+            document.getElementById('progressFill').style.width = '0%';
+            
+            window.scrollTo(0, 0);
+        }
+    </script>
+<script src="/js/cookie-consent.js"></script>
+</body>
+</html>

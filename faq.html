@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Samovar</title>
+    <meta name="description" content="Ofte stillede spørgsmål om Samovar russiskkursus. Lær om metoden, tidsforbrug, forudsætninger og mere.">
+    <link rel="canonical" href="https://samovar.netlify.app/faq.html">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/advanced.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    
+    <style>
+        .faq-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-m);
+        }
+        
+        .faq-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .faq-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .faq-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        
+        .faq-search {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .faq-search input {
+            width: 100%;
+            padding: var(--space-m);
+            border: 2px solid var(--line-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .faq-search input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+        
+        .faq-category {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .faq-category h2 {
+            font-size: 1.3rem;
+            color: var(--accent-blue);
+            margin-bottom: var(--space-m);
+            padding-bottom: var(--space-xs);
+            border-bottom: 2px solid var(--line-color);
+        }
+        
+        .faq-item {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-bottom: var(--space-s);
+            overflow: hidden;
+            border: 1px solid var(--line-color);
+        }
+        
+        .faq-question {
+            padding: var(--space-m) var(--space-l);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .faq-question:hover {
+            background: var(--line-color);
+        }
+        
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            color: var(--accent-blue);
+            transition: transform 0.2s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 var(--space-l) var(--space-m);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .faq-answer-content p {
+            margin-bottom: var(--space-s);
+        }
+        
+        .faq-answer-content ul {
+            margin: var(--space-s) 0;
+            padding-left: var(--space-m);
+        }
+        
+        .faq-answer-content li {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .faq-cta {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #1a3a4a 100%);
+            color: white;
+            padding: var(--space-xl);
+            border-radius: 8px;
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+        
+        .faq-cta h2 {
+            margin-bottom: var(--space-m);
+        }
+        
+        .faq-cta p {
+            opacity: 0.9;
+            margin-bottom: var(--space-l);
+        }
+        
+        .faq-cta .btn {
+            background: white;
+            color: var(--accent-blue);
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="om-kursus.html">Om</a>
+                <a href="bibliotek.html">Bibliotek</a>
+                <a href="cases.html">Kasus</a>
+                <a href="phonetics.html">Fonetik</a>
+                <a href="dictionary.html">Ordbog</a>
+                <a href="faq.html" class="active">FAQ</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 2rem;">
+        <section class="faq-section">
+            <div class="faq-header">
+                <h1>Ofte stillede spørgsmål</h1>
+                <p>Find svar på de mest almindelige spørgsmål om Samovar og russisk læring.</p>
+            </div>
+            
+            <div class="faq-search">
+                <input type="text" id="faqSearch" placeholder="Søg i spørgsmål..." onkeyup="searchFAQ()">
+            </div>
+            
+            <div class="faq-category">
+                <h2>🚀 Kom godt i gang</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Er kurset virkelig gratis?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Ja! Hele Samovar-kurset er 100% gratis. Alle lektioner, øvelser, tests og værktøjer er frit tilgængelige. Vi tror på, at kvalitetsundervisning skal være tilgængelig for alle.</p>
+                            <p>Der er ingen skjulte omkostninger, ingen "premium" sektioner, ingen reklamer. Hvis du synes om projektet, kan du støtte os ved at dele det med andre eller bidrage til fællesskabet.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Skal jeg kunne dansk for at bruge kurset?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Ja, kurset er designet specifikt til dansktalende. Vi bruger dansk som referencepunkt konstant — vi sammenligner grammatik, forklarer gennem danske parallelle strukturer og bruger dansk som instruktionssprog.</p>
+                            <p>Hvis du ikke taler dansk flydende, vil du stadig kunne følge med, men du vil gå glip af mange af de komparative indsigter, som gør kurset unikt.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Hvor lang tid tager det at lære russisk?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Det afhænger af dit mål og din indsats:</p>
+                            <ul>
+                                <li><strong>Basis samtale (A1-A2):</strong> 3-6 måneder med 30 minutter om dagen</li>
+                                <li><strong>Flydende samtale (B1):</strong> 1-2 år med regelmæssig øvelse</li>
+                                <li><strong>Avanceret niveau (B2-C1):</strong> 2-4 år afhængigt af eksponering</li>
+                            </ul>
+                            <p>Russisk er kategoriseret som et "svært" sprog for danskere, primært på grund af kyrilliske alfabetet og kasussystemet. Men med struktureret læring er det fuldt ud overkommeligt.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Jeg kender ikke noget til russisk overhovedet. Kan jeg starte?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Absolut! Start med vores <a href="beginner/">Nybegynderkursus</a>. Det er designet til A0-niveau — du behøver ikke at kende et eneste russisk ord.</p>
+                            <p>Vi starter med alfabetet, udtalereglerne og de første hilsener. Alt forklares på dansk, og du kan gå i dit eget tempo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-category">
+                <h2>📚 Om kurset</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Hvad gør Samovar anderledes end andre russiskkurser?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Tre ting adskiller os:</p>
+                            <ul>
+                                <li><strong>Komparativ metode:</strong> Vi lærer dig ikke bare russisk — vi lærer dig forskellene mellem dansk og russisk. Det gør grammatikken logisk, ikke arbitrær.</li>
+                                <li><strong>Struktureret progression:</strong> Hver lektion bygger på den foregående. Ingen huller, ingen antagelser om forudgående viden.</li>
+                                <li><strong>Fokus på forståelse:</strong> Vi forklarer HVORFOR, ikke bare HVAD. Du vil forstå logikken bag russisk grammatik.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Hvor mange lektioner er der?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Kurset er organiseret i flere niveauer:</p>
+                            <ul>
+                                <li><strong>Nybegynder (A0-A1):</strong> 12 lektioner</li>
+                                <li><strong>Fundament (A1-A2):</strong> 15+ lektioner om substantiver, adjektiver, verber</li>
+                                <li><strong>Kasus (A2-B1):</strong> 10+ lektioner om de seks kasus</li>
+                                <li><strong>Avanceret (B1-C1):</strong> 10+ lektioner om syntaks og stilistik</li>
+                            </ul>
+                            <p>Vi tilføjer løbende nyt indhold. Tjek <a href="bibliotek.html">Biblioteket</a> for en komplet oversigt.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Skal jeg følge lektionerne i rækkefølge?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>For nybegynderkurset: <strong>Ja, absolut.</strong> Hver lektion bygger på den foregående. Hvis du springer over, vil du mangle fundamentet.</p>
+                            <p>For grammatikmodulerne: <strong>Anbefalet, men ikke obligatorisk.</strong> Hvis du allerede kender substantiver, kan du springe til verber. Men kasus bør tages i rækkefølge.</p>
+                            <p>Du kan altid bruge <a href="bibliotek.html">Biblioteket</a> til at finde specifikke emner.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Er der tests og øvelser?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Ja! Vi har flere typer øvelser:</p>
+                            <ul>
+                                <li><strong>Interaktive tests:</strong> <a href="tests/begynder-test.html">Begyndertest</a>, <a href="tests/kasus-test.html">Kasus-test</a></li>
+                                <li><strong>Kasus-konstruktør:</strong> <a href="cases.html">Øv bøjninger interaktivt</a></li>
+                                <li><strong>Lektionsquizzer:</strong> Hver lektion har indbyggede øvelser</li>
+                                <li><strong>Fonetikøvelser:</strong> <a href="phonetics.html">Udtaletræning</a></li>
+                            </ul>
+                            <p>Vi arbejder på at tilføje flere test og et progressionssystem.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-category">
+                <h2>🎯 Læring og metode</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Hvad er det sværeste ved russisk for danskere?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Baseret på vores erfaring med elever:</p>
+                            <ol>
+                                <li><strong>Verbalaspekt (A2-B1):</strong> Skelnen mellem perfektiv og imperfektiv verber. Det findes ikke på dansk og kræver en helt ny tankegang.</li>
+                                <li><strong>Kasus (A1-A2):</strong> At huske hvilken kasus hvilken præposition kræver, og at bøje ordene korrekt.</li>
+                                <li><strong>Udtale (A0-A1):</strong> Forskellen mellem hårde og bløde konsonanter, og vokalreduktion (akanje).</li>
+                                <li><strong>Ordstilling (B1+):</strong> At forstå, at russisk ordfølge er fleksibel og informationsbaseret, ikke fast.</li>
+                            </ol>
+                            <p>Det gode er: Alle disse udfordringer kan mestres med systematisk øvelse!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Hvordan husker jeg alle kasus?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Strategi: Lær dem to ad gangen, ikke alle seks på én gang:</p>
+                            <ol>
+                                <li><strong>Nominativ + Akkusativ:</strong> Start her. Nominativ er "standard" (hvem?), akkusativ er objektet (hvem?).</li>
+                                <li><strong>Præpositionalis:</strong> Kun én præposition (om/på/i), nem at genkende.</li>
+                                <li><strong>Genitiv:</strong> Ejerskab og "ikke noget" (negation).</li>
+                                <li><strong>Dativ + Instrumentalis:</strong> De sværeste — gem dem til sidst.</li>
+                            </ol>
+                            <p>Brug vores <a href="cases.html">Kasus-konstruktør</a> til at øve dagligt. 10 minutter om dagen slår 2 timer en gang om ugen.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Skal jeg lære alfabetet først?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Ja, og det er nemmere end du tror! Kyrilliske alfabet har kun 33 bogstaver, og mange ligner latinske:</p>
+                            <ul>
+                                <li><strong>Ligner dansk:</strong> А, Е, К, М, О, Т (udtales næsten ens)</li>
+                                <li><strong>Ligner, men lyder anderledes:</strong> В (v), Н (n), Р (r), С (s), Х (kh)</li>
+                                <li><strong>Nye:</strong> Ж, Ц, Ч, Ш, Щ, Ы, Э, Ю, Я...</li>
+                            </ul>
+                            <p>Du kan lære alfabetet på en weekend. Start med <a href="beginner/lessons/02-alphabet-v2.html">Lektion 2</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-category">
+                <h2>👥 Fællesskab og hjælp</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Kan jeg få hjælp hvis jeg sidder fast?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Ja! Der er flere måder at få hjælp:</p>
+                            <ul>
+                                <li><strong>Telegram-gruppe:</strong> <a href="https://t.me/samovar_dk" target="_blank">@samovar_dk</a> — spørg andre elever og få hurtige svar</li>
+                                <li><strong>Kontakt os:</strong> <a href="kontakt.html">Skriv en besked</a> — vi svarer inden for 24 timer</li>
+                                <li><strong>FAQ:</strong> Du er her nu! Søg efter dit spørgsmål øverst på siden</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Kan jeg bidrage til projektet?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Ja, vi elsker bidrag! Du kan:</p>
+                            <ul>
+                                <li>Rapportere fejl eller forslag til forbedringer</li>
+                                <li>Dele kurset med andre danskere, der vil lære russisk</li>
+                                <li>Deltage i Telegram-gruppen og hjælpe andre elever</li>
+                                <li>Foreslå nye ord til <a href="dictionary.html">Ordbogen</a></li>
+                            </ul>
+                            <p><a href="kontakt.html">Skriv til os</a> hvis du vil bidrage aktivt.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-cta">
+                <h2>Har du flere spørgsmål?</h2>
+                <p>Vi er her for at hjælpe. Skriv til os, så vender vi tilbage inden for 24 timer.</p>
+                <a href="kontakt.html" class="btn">Kontakt os</a>
+            </div>
+        </section>
+    </main>
+    
+    <samovar-footer></samovar-footer>
+    
+    <script>
+        function toggleFAQ(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+        
+        function searchFAQ() {
+            const input = document.getElementById('faqSearch');
+            const filter = input.value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+            
+            items.forEach(item => {
+                const question = item.querySelector('.faq-question').textContent;
+                const answer = item.querySelector('.faq-answer-content').textContent;
+                
+                if (question.toLowerCase().includes(filter) || answer.toLowerCase().includes(filter)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+<script src="/js/cookie-consent.js"></script>
+</body>
+</html>

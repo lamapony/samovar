@@ -14,9 +14,11 @@ class SamovarFooter extends HTMLElement {
                 <div class="footer-content">
                     <div class="footer-copyright">&copy; ${year} Samovar. Akademisk russisk sprogkursus.</div>
                     <div class="footer-links">
-                        <a href="#">Metodologi</a>
-                        <a href="#">Bibliotek</a>
-                        <a href="#">Kontakt</a>
+                        <a href="bibliotek.html">Bibliotek</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="kontakt.html">Kontakt</a>
+                        <a href="privatlivspolitik.html">Privatlivspolitik</a>
+                        <a href="brugervilkår.html">Brugervilkår</a>
                     </div>
                 </div>
             </footer>

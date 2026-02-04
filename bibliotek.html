@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliotek | Samovar</title>
+    <meta name="description" content="Samovar Bibliotek - Gratis ressourcer til at lære russisk. Grammatikguides, ordbøger, øvelser og læsemateriale.">
+    <link rel="canonical" href="https://samovar.netlify.app/bibliotek.html">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/advanced.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    
+    <style>
+        .library-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-xl) var(--space-m);
+        }
+        
+        .library-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .library-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .library-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-l);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .resource-card {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--line-color);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        
+        .resource-icon {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #1a3a4a 100%);
+            color: white;
+        }
+        
+        .resource-card.grammar .resource-icon {
+            background: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
+        }
+        
+        .resource-card.audio .resource-icon {
+            background: linear-gradient(135deg, #27ae60 0%, #16a085 100%);
+        }
+        
+        .resource-card.reading .resource-icon {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+        
+        .resource-card.tools .resource-icon {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        }
+        
+        .resource-content {
+            padding: var(--space-l);
+        }
+        
+        .resource-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-s);
+        }
+        
+        .resource-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: var(--space-m);
+            line-height: 1.5;
+        }
+        
+        .resource-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .resource-links li {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .resource-links a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .resource-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .resource-links a::before {
+            content: "→";
+            opacity: 0.6;
+        }
+        
+        .level-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: auto;
+        }
+        
+        .level-a1 { background: #e8f5e9; color: #2e7d32; }
+        .level-a2 { background: #e3f2fd; color: #1565c0; }
+        .level-b1 { background: #fff3e0; color: #e65100; }
+        .level-b2 { background: #f3e5f5; color: #7b1fa2; }
+        .level-all { background: #eceff1; color: #455a64; }
+        
+        .category-section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: var(--space-l);
+            padding-bottom: var(--space-s);
+            border-bottom: 2px solid var(--line-color);
+        }
+        
+        .external-resources {
+            background: var(--bg-secondary);
+            padding: var(--space-xl);
+            border-radius: 8px;
+            border: 1px solid var(--line-color);
+        }
+        
+        .external-resources h2 {
+            margin-bottom: var(--space-l);
+        }
+        
+        .external-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .external-list li {
+            padding: var(--space-m) 0;
+            border-bottom: 1px solid var(--line-color);
+        }
+        
+        .external-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .external-list a {
+            color: var(--accent-blue);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .external-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .external-list p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: var(--space-xs);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="om-kursus.html">Om</a>
+                <a href="bibliotek.html" class="active">Bibliotek</a>
+                <a href="cases.html">Kasus</a>
+                <a href="phonetics.html">Fonetik</a>
+                <a href="dictionary.html">Ordbog</a>
+                <a href="faq.html">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="margin-top: 2rem;">
+        <section class="library-section">
+            <div class="library-header">
+                <h1>Bibliotek</h1>
+                <p>Et kurateret arkiv af ressourcer til at lære russisk. Alt fra grammatikguides til lydøvelser og læsemateriale.</p>
+            </div>
+            
+            <div class="category-section">
+                <h2 class="category-title">📚 Kerne-materialer</h2>
+                <div class="resource-grid">
+                    <div class="resource-card grammar">
+                        <div class="resource-icon">📖</div>
+                        <div class="resource-content">
+                            <h3>Grammatikguides</h3>
+                            <p>Dybdegående forklaringer af russisk grammatik med fokus på sammenligning med dansk.</p>
+                            <ul class="resource-links">
+                                <li><a href="lessons/nouns.html">Substantiver og køn <span class="level-tag level-a1">A1</span></a></li>
+                                <li><a href="lessons/cases.html">Kasussystemet <span class="level-tag level-a2">A2</span></a></li>
+                                <li><a href="lessons/verbs.html">Verber og aspekt <span class="level-tag level-a2">A2</span></a></li>
+                                <li><a href="lessons/adjectives.html">Adjektiver <span class="level-tag level-a1">A1</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card audio">
+                        <div class="resource-icon">🎧</div>
+                        <div class="resource-content">
+                            <h3>Fonetik &amp; Udtale</h3>
+                            <p>Lydøvelser, reduktionsregler og intonationstræning for at få din udtale på plads.</p>
+                            <ul class="resource-links">
+                                <li><a href="phonetics.html">Fonetisk oversigt <span class="level-tag level-a1">A1</span></a></li>
+                                <li><a href="lessons/reading.html">Læseregler <span class="level-tag level-a1">A1</span></a></li>
+                                <li><a href="beginner/lessons/02-alphabet-v2.html">Alfabetet <span class="level-tag level-a1">A0</span></a></li>
+                                <li><a href="beginner/lessons/03-numbers-v2.html">Tal og talord <span class="level-tag level-a1">A1</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card tools">
+                        <div class="resource-icon">🛠️</div>
+                        <div class="resource-content">
+                            <h3>Interaktive værktøjer & Test</h3>
+                            <p>Digitale værktøjer til at øve og teste dine færdigheder.</p>
+                            <ul class="resource-links">
+                                <li><a href="cases.html">Kasus-konstruktør <span class="level-tag level-all">Alle</span></a></li>
+                                <li><a href="tests/begynder-test.html">Begyndertest <span class="level-tag level-a1">A0-A1</span></a></li>
+                                <li><a href="tests/kasus-test.html">Kasus-test <span class="level-tag level-a2">A1-A2</span></a></li>
+                                <li><a href="dictionary.html">Kulturel ordbog <span class="level-tag level-all">Alle</span></a></li>
+                                <li><a href="articles/index.html">Værksted (artikler) <span class="level-tag level-b1">B1+</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card reading">
+                        <div class="resource-icon">📰</div>
+                        <div class="resource-content">
+                            <h3>Læsemateriale</h3>
+                            <p>Tekster tilpasset forskellige niveauer med fokus på autentisk indhold.</p>
+                            <ul class="resource-links">
+                                <li><a href="beginner/">Nybegynderkursus <span class="level-tag level-a1">A0-A1</span></a></li>
+                                <li><a href="articles/index.html">Artikler og analyser <span class="level-tag level-b1">B1+</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="category-section">
+                <h2 class="category-title">📖 Begynderkursus (12 lektioner)</h2>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-content">
+                            <h3>Modul 1: Grundlæggende</h3>
+                            <ul class="resource-links">
+                                <li><a href="beginner/lessons/01-intro-v2.html">Lektion 1: Introduktion <span class="level-tag level-a1">A0</span></a></li>
+                                <li><a href="beginner/lessons/02-alphabet-v2.html">Lektion 2: Alfabetet <span class="level-tag level-a1">A0</span></a></li>
+                                <li><a href="beginner/lessons/03-numbers-v2.html">Lektion 3: Tal <span class="level-tag level-a1">A1</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-content">
+                            <h3>Modul 2: Kommunikation</h3>
+                            <ul class="resource-links">
+                                <li><a href="beginner/lessons/04-about-me-v2.html">Lektion 4: Om mig <span class="level-tag level-a1">A1</span></a></li>
+                                <li><a href="beginner/lessons/05-family-v2.html">Lektion 5: Familien <span class="level-tag level-a1">A1</span></a></li>
+                                <li><a href="beginner/lessons/06-food-v2.html">Lektion 6: Mad <span class="level-tag level-a1">A1</span></a></li>
+                                <li><a href="beginner/lessons/07-cafe-v2.html">Lektion 7: På café <span class="level-tag level-a1">A1</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <p style="text-align: center; margin-top: var(--space-m);">
+                    <a href="beginner/" class="btn btn-primary">Se alle 12 lektioner</a>
+                </p>
+            </div>
+            
+            <div class="external-resources">
+                <h2>🌐 Eksterne ressourcer</h2>
+                <ul class="external-list">
+                    <li>
+                        <a href="https://en.openrussian.org/" target="_blank" rel="noopener">OpenRussian</a>
+                        <p>Gratis ordbog med eksempler, bøjninger og udtale.</p>
+                    </li>
+                    <li>
+                        <a href="https://russiangram.com/" target="_blank" rel="noopener">RussianGram</a>
+                        <p>Online værktøj til at se bøjninger af russiske ord.</p>
+                    </li>
+                    <li>
+                        <a href="https://forvo.com/languages/ru/" target="_blank" rel="noopener">Forvo — Russisk udtale</a>
+                        <p>Platform hvor native speakers indtaler ord.</p>
+                    </li>
+                    <li>
+                        <a href="https://www.russianforeveryone.com/" target="_blank" rel="noopener">Russian for Everyone</a>
+                        <p>Gratis online russiskkursus med øvelser.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    
+    <samovar-footer></samovar-footer>
+<script src="/js/cookie-consent.js"></script>
+</body>
+</html>
