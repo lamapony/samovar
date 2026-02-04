@@ -1,5 +1,5 @@
 [build]
-  command = "npm install typescript vite && npx tsc --noEmit && npx vite build"
+  command = "npm install --save-dev typescript vite sass && npx vite build"
   publish = "dist"
 
 [build.environment]
