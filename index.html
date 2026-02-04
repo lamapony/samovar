@@ -19,25 +19,42 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="css/tooltips.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
     <script type="module" src="/js/header.ts"></script>
     <script type="module" src="/js/footer.ts"></script>
 </head>
 
 <body>
 
-    <div class="container">
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/" class="active">Kursus</a>
+                <a href="cases.html">Kasus</a>
+                <a href="phonetics.html">Fonetik</a>
+                <a href="dictionary.html">Ordbog</a>
+            </nav>
+        </div>
+    </header>
 
-        <samovar-header></samovar-header>
-
-        <main>
-            <h1>Grammatik som tankens arkitektur</h1>
-            <p class="lead">
-                Dette kursus <span class="tooltip-word">dekonstruerer<span class="tooltip-popup">analyserer
-                        grundigt</span></span> det russiske sprog og viser logikken bag det tilsyneladende kaos af
-                undtagelser. Vi bruger en komparativ metode, der bygger på dit kendskab til det danske grammatiske
-                undtagelser. Vi bruger en komparativ metode, der bygger på dit kendskab til det danske grammatiske
-                system.
-            </p>
+    <main class="container" style="margin-top: 2rem;">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Grammatik som tankens arkitektur</h1>
+                <p class="lead">
+                    Dette kursus <span class="tooltip-word">dekonstruerer<span class="tooltip-popup">analyserer
+                            grundigt</span></span> det russiske sprog og viser logikken bag det tilsyneladende kaos af
+                    undtagelser. Vi bruger en komparativ metode, der bygger på dit kendskab til det danske grammatiske
+                    system.
+                </p>
+                <a href="#beginner" class="btn btn-primary">Start læringen</a>
+                <a href="beginner/" class="btn btn-secondary" style="margin-left: 0.5rem;">Nybegynderkursus</a>
+            </div>
+        </div>
 
             <!-- Progress Board -->
             <div id="user-progress-board" style="margin-bottom: var(--space-xl);"></div>

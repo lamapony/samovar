@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Samovar: Падежная система</title>
+    <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
+    <link rel="stylesheet" href="css/identity.css">
     <style>
       :root {
         --bg-paper: #f9f9f7;
@@ -210,9 +212,22 @@
     </style>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <a href="index.html" class="logo">Samovar.</a>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="cases.html" class="active">Kasus</a>
+                <a href="phonetics.html">Fonetik</a>
+                <a href="dictionary.html">Ordbog</a>
+            </nav>
+        </div>
+    </header>
+    <div class="container" style="margin-top: 2rem;">
+      <header style="background: none; padding: 0; margin-bottom: 2rem;">
+        <a href="index.html" style="font-family: var(--font-display); font-size: 1.5rem; color: var(--color-text); text-decoration: none;">Samovar.</a>
         <nav>
           <a href="index.html">Главная</a>
           <a href="phonetics.html">Фонетика</a>

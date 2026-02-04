@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" fill="none">
+  <!-- Samovar silhouette -->
+  <path d="M20 8h8v4h-8zM18 12h12v2H18zM16 14h16v12H16z" fill="#1a1a1a"/>
+  <!-- Spout -->
+  <path d="M32 16h4v2h-4zM36 14h2v6h-2z" fill="#1a1a1a"/>
+  <!-- Handle -->
+  <path d="M14 16h2v6h-2zM12 14h2v10h-2z" fill="#1a1a1a"/>
+  <!-- Base -->
+  <path d="M18 26h12v2H18zM20 28h8v4h-8z" fill="#1a1a1a"/>
+  <!-- Steam (subtle) -->
+  <path d="M22 4c0 1 1 2 1 3s-1 1-1 0" stroke="#8B4513" stroke-width="1" opacity="0.6"/>
+  <path d="M26 3c0 1 1 2 1 3s-1 1-1 0" stroke="#8B4513" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Text: Samovar -->
+  <text x="44" y="24" font-family="Georgia, serif" font-size="16" font-weight="400" fill="#1a1a1a" letter-spacing="0.02em">Samovar</text>
+  <!-- Tagline -->
+  <text x="44" y="30" font-family="Inter, sans-serif" font-size="7" font-weight="400" fill="#666" letter-spacing="0.05em">RUSSISK SPROGKURSUS</text>
+</svg>
