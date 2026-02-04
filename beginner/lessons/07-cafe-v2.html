@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 7: På Café | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #8b4513;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Menu Card === */
+    .menu-card {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      max-width: 400px;
+      margin: 3rem auto;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 1.5rem;
+      border-bottom: 2px solid var(--editorial-accent);
+    }
+
+    .menu-header h3 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      margin: 0;
+      letter-spacing: 0.1em;
+    }
+
+    .menu-category {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .menu-category:last-child {
+      border-bottom: none;
+    }
+
+    .menu-category-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-gray);
+      margin-bottom: 1rem;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px dotted var(--editorial-line);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item:hover {
+      background: var(--editorial-light);
+      margin: 0 -1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .menu-item-name {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+    }
+
+    .menu-item-price {
+      color: var(--editorial-accent);
+      font-weight: 500;
+    }
+
+    /* === Dialogue === */
+    .dialogue-container {
+      margin: 3rem 0;
+    }
+
+    .dialogue-line {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .dialogue-line:last-child {
+      border-bottom: none;
+    }
+
+    .dialogue-speaker {
+      width: 80px;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+      padding-top: 0.25rem;
+    }
+
+    .dialogue-content {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .dialogue-content:hover .dialogue-russian {
+      color: var(--editorial-accent);
+    }
+
+    .dialogue-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .dialogue-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+      font-style: italic;
+    }
+
+    /* === Phrase Grid === */
+    .phrase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .phrase-item {
+      padding: 2rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .phrase-item:nth-child(odd) {
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .phrase-item:nth-last-child(-n + 2) {
+      border-bottom: none;
+    }
+
+    .phrase-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .phrase-russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.5rem;
+    }
+
+    .phrase-danish {
+      font-size: 0.9rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Grammar Block === */
+    .grammar-block {
+      border: 1px solid var(--editorial-line);
+      margin: 3rem 0;
+    }
+
+    .grammar-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+      background: var(--editorial-light);
+    }
+
+    .grammar-header h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-gray);
+      margin: 0;
+    }
+
+    .grammar-content {
+      padding: 2rem;
+    }
+
+    .grammar-example {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .grammar-example:last-child {
+      margin-bottom: 0;
+    }
+
+    .grammar-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+      width: 80px;
+      flex-shrink: 0;
+      padding-top: 0.25rem;
+    }
+
+    .grammar-text {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--editorial-black);
+    }
+
+    /* === Coworking Section === */
+    .coworking-section {
+      background: var(--editorial-light);
+    }
+
+    /* ============================================
+           EXERCISE SECTIONS - Full Screen, One at a Time
+           ============================================ */
+
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(3n) {
+      border-right: none;
+    }
+
+    .summary-item:nth-last-child(-n + 3) {
+      border-bottom: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-item .danish {
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .phrase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phrase-item:nth-child(odd) {
+        border-right: none;
+      }
+
+      .phrase-item {
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .phrase-item:last-child {
+        border-bottom: none;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .summary-item:last-child {
+        border-bottom: none;
+      }
+
+      .dialogue-line {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .dialogue-speaker {
+        width: auto;
+      }
+
+      .grammar-example {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .grammar-label {
+        width: auto;
+      }
+
+      .floating-nav {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="floating-nav">
+    <a href="../index-v2.html" class="floating-btn">Tilbage</a>
+  </nav>
+
+  <div class="container">
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 7</div>
+        <h1>På Café</h1>
+        <p class="lead">
+          Anna er i Moskva for første gang. Hun finder en hyggelig café og skal bestille sin
+          første kaffe på russisk.
+        </p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: SETTING
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Cafeen</h2>
+        </div>
+
+        <p class="narrative">
+          Det er en kold vinterdag i Moskva. Anna går ind på en lille café i centrum. Det dufter
+          af friskbrygget kaffe og varme croissanter. Hun finder et bord ved vinduet og venter på
+          tjeneren.
+        </p>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Kultur</div>
+          <p>
+            I russiske caféer er det helt normalt at sidde i timevis med én kop kaffe. Mange
+            bruger caféer som arbejdsplads — det er accepteret og forventet.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             MODERN: QR CODES & TRENDS
+             ============================================ -->
+    <section class="editorial-section"
+      style="background: #fafafa; border-top: 1px solid var(--editorial-line); border-bottom: 1px solid var(--editorial-line);">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2" />
+          </svg>
+          Den moderne café
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Menu på telefonen</h2>
+        </div>
+        <p class="narrative">
+          Mange steder i dag ser du ingen trykte menukort. I stedet scanner du en QR-kode på bordet:
+        </p>
+
+        <div style="text-align: center; margin: 3rem 0;">
+          <div
+            style="border: 2px solid var(--editorial-line); display: inline-block; padding: 2rem; background: white;">
+            <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="1.5">
+              <path
+                d="M3 3h6v6H3V3zM3 15h6v6H3v-6zM15 3h6v6h-6V3zM15 15h2v2h-2v-2zM19 19h2v2h-2v-2zM15 19h2v2h-2v-2zM19 15h2v2h-2v-2zM17 17h2v2h-2v-2z" />
+            </svg>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Hurtig tip</div>
+          <p>
+            Hvis du ikke ser en tjener, så kig efter et lille skilt med teksten
+            <strong>"Меню по QR-коду"</strong>. Det er fremtiden!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: THE ORDER
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">Bestillingen</h2>
+        </div>
+
+        <p class="narrative">
+          Tjeneren kommer hen til Annas bord. Nu skal hun bestille på russisk for første gang.
+          Klik på replikken for at høre den.
+        </p>
+
+        <div class="dialogue-container" id="main-dialogue"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             GRAMMAR INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Grammatik</h2>
+        <p>Bemærk hvordan Anna bestiller. Der er en høflig og en direkte måde.</p>
+      </div>
+    </section>
+
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="grammar-block">
+          <div class="grammar-header">
+            <h3>At bestille høfligt</h3>
+          </div>
+          <div class="grammar-content">
+            <div class="grammar-example">
+              <div class="grammar-label">Høflig</div>
+              <div class="grammar-text">Мне, пожалуйста, кофе.</div>
+            </div>
+            <div class="grammar-example">
+              <div class="grammar-label">Direkte</div>
+              <div class="grammar-text">Я хочу кофе.</div>
+            </div>
+          </div>
+        </div>
+
+        <p class="narrative">
+          <strong>Мне, пожалуйста...</strong> betyder bogstaveligt "Til mig, tak..." Det er den
+          foretrukne måde at bestille på i Rusland.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 4: MILK OPTIONS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 4</div>
+          <h2 class="chapter-title">Med mælk?</h2>
+        </div>
+
+        <p class="narrative">
+          Tjeneren spørger: <strong>С молоком?</strong> (Med mælk?). I moderne russiske caféer er
+          der mange muligheder.
+        </p>
+
+        <div class="phrase-grid">
+          <div class="phrase-item" onclick="TTS.speak('Да, пожалуйста.')">
+            <div class="phrase-russian">Да, пожалуйста.</div>
+            <div class="phrase-danish">Ja tak.</div>
+          </div>
+          <div class="phrase-item" onclick="TTS.speak('Нет, спасибо.')">
+            <div class="phrase-russian">Нет, спасибо.</div>
+            <div class="phrase-danish">Nej tak.</div>
+          </div>
+          <div class="phrase-item" onclick="TTS.speak('С овсяным, пожалуйста.')">
+            <div class="phrase-russian">С овсяным, пожалуйста.</div>
+            <div class="phrase-danish">Med havremælk, tak.</div>
+          </div>
+          <div class="phrase-item" onclick="TTS.speak('Без молока.')">
+            <div class="phrase-russian">Без молока.</div>
+            <div class="phrase-danish">Uden mælk.</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Moderne trend</div>
+          <p>
+            Овсяное молоко (havremælk) er blevet meget populært i russiske caféer. Du kan også
+            finde соевое (soja) og миндальное (mandel) mælk.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 5: COWORKING
+             ============================================ -->
+    <section class="editorial-section coworking-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 5</div>
+          <h2 class="chapter-title">Arbejde i cafeen</h2>
+        </div>
+
+        <p class="narrative">
+          Anna tager sin laptop frem. Hun skal arbejde lidt, mens hun nyder sin kaffe. Men først
+          har hun brug for Wi-Fi-koden.
+        </p>
+
+        <div class="phrase-grid">
+          <div class="phrase-item" onclick="TTS.speak('Можно пароль от Wi-Fi?')">
+            <div class="phrase-russian">Можно пароль от Wi-Fi?</div>
+            <div class="phrase-danish">Må jeg få Wi-Fi-koden?</div>
+          </div>
+          <div class="phrase-item" onclick="TTS.speak('Здесь можно посидеть с ноутбуком?')">
+            <div class="phrase-russian">Здесь можно посидеть с ноутбуком?</div>
+            <div class="phrase-danish">Kan jeg sidde her med min laptop?</div>
+          </div>
+          <div class="phrase-item" onclick="TTS.speak('Есть розетка?')">
+            <div class="phrase-russian">Есть розетка?</div>
+            <div class="phrase-danish">Er der en stikkontakt?</div>
+          </div>
+          <div class="phrase-item" onclick="TTS.speak('Мне ещё один кофе, пожалуйста.')">
+            <div class="phrase-russian">Мне ещё один кофе, пожалуйста.</div>
+            <div class="phrase-danish">Endnu en kaffe, tak.</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Observation</div>
+          <p>
+            Я закажу ещё один кофе, потому что работаю здесь уже два часа. — Jeg bestiller endnu
+            en kaffe, fordi jeg har arbejdet her i to timer allerede.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 6: PAYMENT
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 6</div>
+          <h2 class="chapter-title">Regningen</h2>
+        </div>
+
+        <p class="narrative">
+          Anna har nydt sin kaffe og croissant. Nu er det tid til at betale.
+        </p>
+
+        <div class="dialogue-container" id="payment-dialogue"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Betaling i dag</div>
+          <p>
+            I storbyer betaler næsten alle med kort (<strong>картой</strong>) eller telefon.
+            Mange steder kan du også betale via <strong>СБП</strong> (hurtig bankoverførsel) ved
+            at scanne en QR-kode ved kassen. Kontanter er mest til drikkepenge eller markeder.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 1
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Anna klarede det.</h2>
+        <p>Nu er det din tur. Kan du huske hvad hun sagde?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Lyt og vælg</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Godt.</h2>
+        <p>Nu skal du selv skrive de manglende ord.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: FILL BLANK
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Udfyld tomme pladser</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="fill-blank-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 3
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Næsten færdig.</h2>
+        <p>Forbind ordene med deres betydning.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Par ordene</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 4
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Hurtig quiz</h2>
+        <p>Test din viden. Jo hurtigere du svarer, jo bedre.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 4: QUICK QUIZ
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 4</div>
+            <h3 class="exercise-title">Hurtig quiz</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 5
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Rollespil</h2>
+        <p>Nu er du kunden. Bestil noget på cafeen.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 5: ROLEPLAY
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 5</div>
+            <h3 class="exercise-title">Bestil på cafeen</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-roleplay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Hvad du har lært</h2>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item" onclick="TTS.speak('Мне, пожалуйста...')">
+            <div class="russian">Мне, пожалуйста...</div>
+            <div class="danish">Jeg vil gerne have...</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('Можно счёт?')">
+            <div class="russian">Можно счёт?</div>
+            <div class="danish">Må jeg få regningen?</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('Сколько это стоит?')">
+            <div class="russian">Сколько это стоит?</div>
+            <div class="danish">Hvor meget koster det?</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('Можно пароль от Wi-Fi?')">
+            <div class="russian">Можно пароль от Wi-Fi?</div>
+            <div class="danish">Må jeg få Wi-Fi-koden?</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('Есть розетка?')">
+            <div class="russian">Есть розетка?</div>
+            <div class="danish">Er der en stikkontakt?</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('Спасибо, очень вкусно!')">
+            <div class="russian">Спасибо, очень вкусно!</div>
+            <div class="danish">Tak, det var lækkert!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Lektion Færdig?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Har du gennemgået alle øvelser og føler dig klar til næste lektion?
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="06-food-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">Mad og Drikke</span>
+          </a>
+          <a href="08-time-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">Hvad Er Klokken?</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // DIALOGUE DATA
+    // ============================================
+    const mainDialogueData = [
+      {
+        speaker: 'Tjener',
+        russian: 'Здравствуйте! Что будете заказывать?',
+        danish: 'Goddag! Hvad vil De bestille?',
+      },
+      {
+        speaker: 'Anna',
+        russian: 'Здравствуйте! Мне, пожалуйста, капучино.',
+        danish: 'Goddag! Jeg vil gerne have en cappuccino, tak.',
+      },
+      { speaker: 'Tjener', russian: 'Большой или маленький?', danish: 'Stor eller lille?' },
+      { speaker: 'Anna', russian: 'Большой, пожалуйста.', danish: 'Stor, tak.' },
+      { speaker: 'Tjener', russian: 'Что-нибудь ещё?', danish: 'Noget andet?' },
+      { speaker: 'Anna', russian: 'Да, круассан, пожалуйста.', danish: 'Ja, en croissant, tak.' },
+      {
+        speaker: 'Tjener',
+        russian: 'Хорошо. Триста двадцать рублей.',
+        danish: 'OK. Tre hundrede og tyve rubler.',
+      },
+      { speaker: 'Anna', russian: 'Вот, пожалуйста. Спасибо!', danish: 'Værsgo. Tak!' },
+    ];
+
+    const paymentDialogueData = [
+      {
+        speaker: 'Anna',
+        russian: 'Можно счёт, пожалуйста?',
+        danish: 'Må jeg få regningen, tak?',
+      },
+      {
+        speaker: 'Tjener',
+        russian: 'Конечно. Триста двадцать рублей.',
+        danish: 'Selvfølgelig. Tre hundrede og tyve rubler.',
+      },
+      { speaker: 'Anna', russian: 'Можно картой?', danish: 'Kan jeg betale med kort?' },
+      { speaker: 'Tjener', russian: 'Да, конечно.', danish: 'Ja, selvfølgelig.' },
+      { speaker: 'Anna', russian: 'Спасибо! До свидания!', danish: 'Tak! Farvel!' },
+      { speaker: 'Tjener', russian: 'До свидания! Приходите ещё!', danish: 'Farvel! Kom igen!' },
+    ];
+
+    // ============================================
+    // RENDER DIALOGUE
+    // ============================================
+    function renderDialogue(containerId, data) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+
+      data.forEach((line) => {
+        const div = document.createElement('div');
+        div.className = 'dialogue-line';
+        div.innerHTML = `
+                    <div class="dialogue-speaker">${line.speaker}</div>
+                    <div class="dialogue-content" onclick="TTS.speak('${line.russian.replace(/'/g, "\\'")}')">
+                        <div class="dialogue-russian">${line.russian}</div>
+                        <div class="dialogue-danish">${line.danish}</div>
+                    </div>
+                `;
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // VOCABULARY DATA
+    // ============================================
+    const vocabularyData = [
+      { russian: 'кофе', danish: 'kaffe' },
+      { russian: 'чай', danish: 'te' },
+      { russian: 'вода', danish: 'vand' },
+      { russian: 'счёт', danish: 'regning' },
+      { russian: 'меню', danish: 'menu' },
+      { russian: 'пожалуйста', danish: 'tak/venligst' },
+      { russian: 'вкусно', danish: 'lækker' },
+      { russian: 'большой', danish: 'stor' },
+      { russian: 'маленький', danish: 'lille' },
+    ];
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      {
+        audio: 'Можно меню?',
+        options: ['Må jeg se menuen?', 'Må jeg få regningen?', 'Hvad koster det?'],
+        correct: 0,
+      },
+      {
+        audio: 'Сколько это стоит?',
+        options: ['Hvad anbefaler De?', 'Hvor er toilettet?', 'Hvor meget koster det?'],
+        correct: 2,
+      },
+      {
+        audio: 'Счёт, пожалуйста',
+        options: ['Menuen, tak', 'Regningen, tak', 'Kaffe, tak'],
+        correct: 1,
+      },
+      {
+        audio: 'Мне кофе',
+        options: ['Jeg vil have kaffe', 'Jeg kan lide kaffe', 'Har du kaffe?'],
+        correct: 0,
+      },
+    ];
+
+    const fillBlankData = [
+      {
+        text: 'Мне, ___, кофе.',
+        answer: 'пожалуйста',
+        hint: 'tak',
+        danish: 'Jeg vil gerne have kaffe, tak.',
+      },
+      { text: 'Можно ___?', answer: 'счёт', hint: 'regningen', danish: 'Må jeg få regningen?' },
+      {
+        text: 'Сколько это ___?',
+        answer: 'стоит',
+        hint: 'koster',
+        danish: 'Hvor meget koster det?',
+      },
+    ];
+
+    const matchingData = [
+      { russian: 'счёт', danish: 'regningen' },
+      { russian: 'меню', danish: 'menuen' },
+      { russian: 'вкусно', danish: 'lækker' },
+      { russian: 'большой', danish: 'stor' },
+      { russian: 'маленький', danish: 'lille' },
+    ];
+
+    // AI ROLE PLAY CONFIG
+    const aiRolePlayConfig = {
+      scenario: 'Du sidder på en hyggelig russisk café og vil bestille.',
+      yourRole: 'En kunde',
+      aiRole: 'Tjener',
+      vocabulary: vocabularyData,
+      goals: ['Bestil en drik', 'Spørg om prisen', 'Bed om regningen'],
+    };
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    const LESSON_ID = '07-cafe';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initLessonProgress(LESSON_ID);
+
+      renderDialogue('main-dialogue', mainDialogueData);
+      renderDialogue('payment-dialogue', paymentDialogueData);
+
+      new ListeningExercise('listening-exercise', listeningData);
+      new FillBlankExercise('fill-blank-exercise', fillBlankData);
+      new MatchingExercise('matching-exercise', matchingData);
+
+      // AI exercises
+      new AIQuickQuiz('ai-quiz', {
+        vocabulary: vocabularyData,
+        maxRounds: 8,
+      });
+      new AIRolePlay('ai-roleplay', aiRolePlayConfig);
+
+      initScrollAnimations();
+      initProgressBar();
+
+      // Complete lesson button
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      const lessonStatus = Progress.getLessonStatus(LESSON_ID);
+
+      if (lessonStatus === 'completed') {
+        completeBtn.textContent = '✓ Allerede gennemført';
+        completeBtn.classList.add('completed');
+      }
+
+      completeBtn.addEventListener('click', () => {
+        if (lessonStatus !== 'completed') {
+          completeLessonWithModal(LESSON_ID);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

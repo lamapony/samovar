@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 4: Jeg Hedder... | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      .profile-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-l);
+        margin: var(--space-m) 0;
+        display: flex;
+        gap: var(--space-l);
+        align-items: center;
+      }
+
+      .profile-avatar {
+        width: 80px;
+        height: 80px;
+        background: var(--accent-blue);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        flex-shrink: 0;
+      }
+
+      .profile-info {
+        flex: 1;
+      }
+
+      .profile-name {
+        font-size: 1.5rem;
+        font-family: var(--font-serif);
+        margin-bottom: var(--space-xs);
+      }
+
+      .profile-details {
+        color: var(--text-faded);
+      }
+
+      .countries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: var(--space-s);
+        margin: var(--space-m) 0;
+      }
+
+      .country-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .country-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+
+      .country-flag {
+        font-size: 2rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      .country-russian {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+      }
+
+      .country-danish {
+        color: var(--text-light);
+        font-size: 0.9rem;
+      }
+
+      .profession-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: var(--space-s);
+        margin: var(--space-m) 0;
+      }
+
+      .profession-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .profession-card:hover {
+        border-color: var(--accent-blue);
+      }
+
+      .profession-icon {
+        font-size: 2rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      .conversation-box {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        border-radius: 12px;
+        padding: var(--space-l);
+        margin: var(--space-m) 0;
+      }
+
+      .scenario-title {
+        font-weight: 600;
+        color: var(--accent-blue);
+        margin-bottom: var(--space-m);
+      }
+
+      /* === Modern Work Badge === */
+      .modern-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-left: var(--space-xs);
+        vertical-align: middle;
+      }
+
+      /* === Humor Note === */
+      .humor-note {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+        font-size: 0.9rem;
+      }
+      .humor-note strong {
+        color: #f57c00;
+      }
+
+      /* === Work Location Cards === */
+      .work-location-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: var(--space-s);
+        margin: var(--space-m) 0;
+      }
+      .work-location-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        border-radius: 8px;
+      }
+      .work-location-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+      .work-location-icon {
+        font-size: 2rem;
+        margin-bottom: var(--space-xs);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 4 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 50 min</span>
+          </div>
+          <h1>Jeg Hedder...</h1>
+          <p class="lead">
+            I denne lektion laerer du at praesentere dig selv pa russisk: dit navn, hvor du kommer
+            fra, og hvad du laver.
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <!-- PART 1: KEY PHRASES -->
+            <h2>
+              <span>Del 1: Noglefraserne</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <p>Her er de vigtigste saetninger til at praesentere dig selv:</p>
+
+            <div id="vocabulary-section" class="vocab-grid"></div>
+
+            <div class="theory-block">
+              <h3>Grammatik: "Mig hedder" vs "Jeg hedder"</h3>
+              <p>Pa russisk siger man bogstaveligt "Mig kalder (de) Anna":</p>
+              <div class="example-box">
+                <div class="example-russian">Меня зовут Анна</div>
+                <div class="example-danish">Mig kalder-de Anna = Jeg hedder Anna</div>
+              </div>
+              <p>Dette er en fast konstruktion - laer den som en hel frase!</p>
+            </div>
+
+            <!-- PART 2: COUNTRIES -->
+            <h2>
+              <span>Del 2: Lande og Nationaliteter</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <p>Klik pa et land for at hore navnet pa russisk:</p>
+
+            <div id="countries-grid" class="countries-grid"></div>
+
+            <div class="theory-block">
+              <h3>Grammatik: "Jeg er fra..."</h3>
+              <p>For at sige hvor du kommer fra:</p>
+              <div class="example-box">
+                <div class="example-russian">Я из Дании</div>
+                <div class="example-danish">Jeg er fra Danmark</div>
+              </div>
+              <p><strong>из</strong> (iz) = fra. Bemærk: Landenavnet andrer form (kasus)!</p>
+            </div>
+
+            <div id="countries-exercise" class="exercise-container"></div>
+
+            <!-- PART 3: PROFESSIONS -->
+            <h2>
+              <span>Del 3: Erhverv</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <p>Almindelige erhverv pa russisk:</p>
+
+            <div id="professions-grid" class="profession-grid"></div>
+
+            <div class="theory-block">
+              <h3>Grammatik: "Jeg er (erhverv)"</h3>
+              <p>Pa russisk siger man ofte bare:</p>
+              <div class="example-box">
+                <div class="example-russian">Я студент</div>
+                <div class="example-danish">Jeg (er) studerende</div>
+              </div>
+              <p>Verbet "er" (быть) udelades i nutid pa russisk!</p>
+            </div>
+
+            <div class="tip-box">
+              <strong>Kon:</strong> Nogle erhverv har forskellige former for maend og kvinder:
+              <ul>
+                <li><strong>студент</strong> (mand) / <strong>студентка</strong> (kvinde)</li>
+                <li><strong>врач</strong> (laege) - bruges til begge kon</li>
+              </ul>
+            </div>
+
+            <div id="professions-exercise" class="exercise-container"></div>
+
+            <!-- PART 3b: MODERN PROFESSIONS -->
+            <h2>
+              <span>Del 3b: Moderne Erhverv</span>
+              <span class="chapter-num">Moderne</span>
+            </h2>
+
+            <p>Mange unge russere arbejder i IT, kreative brancher eller som freelancere:</p>
+
+            <div id="modern-professions-grid" class="profession-grid"></div>
+
+            <div class="theory-block">
+              <h3>Hvor arbejder du?</h3>
+              <p>Moderne arbejdsliv har mange former:</p>
+              <div id="work-locations" class="work-location-grid"></div>
+            </div>
+
+            <div class="humor-note">
+              <strong>😅 Sjov fakta:</strong> «Я фрилансер. Я работаю везде... и нигде.» (Jeg er
+              freelancer. Jeg arbejder overalt... og ingen steder.)
+            </div>
+
+            <!-- PART 4: DIALOGUE -->
+            <h2>
+              <span>Del 4: Dialog - Forste Mode</span>
+              <span class="chapter-num">Samtale</span>
+            </h2>
+
+            <div class="conversation-box">
+              <div class="scenario-title">
+                Situation: To mennesker moder hinanden for forste gang
+              </div>
+            </div>
+
+            <div id="dialogue-section"></div>
+
+            <!-- PART 5: LISTENING -->
+            <h2>
+              <span>Del 5: Lytteovelse</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <p>Lyt og valg den rigtige oversaettelse:</p>
+
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <!-- PART 6: FILL IN BLANKS -->
+            <h2>
+              <span>Del 6: Udfyld Tomme Pladser</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <p>Fuldfor saetningerne:</p>
+
+            <div id="fill-blank-exercise" class="exercise-container"></div>
+
+            <!-- PART 7: SENTENCE BUILDER -->
+            <h2>
+              <span>Del 7: Byg Saetninger</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <p>Saet ordene i den rigtige raekkefølge:</p>
+
+            <div id="sentence-builder" class="exercise-container"></div>
+
+            <!-- PART 8: ABOUT YOU -->
+            <h2>
+              <span>Del 8: Om Dig</span>
+              <span class="chapter-num">Produktion</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Din tur!</h3>
+              <p>Prov at sige disse saetninger om dig selv (hojt!):</p>
+              <ol>
+                <li><strong class="cyrillic">Привет!</strong> - Hej!</li>
+                <li><strong class="cyrillic">Меня зовут ___.</strong> - Jeg hedder ___.</li>
+                <li><strong class="cyrillic">Я из Дании.</strong> - Jeg er fra Danmark.</li>
+                <li><strong class="cyrillic">Я ___.</strong> - Jeg er ___ (erhverv).</li>
+                <li><strong class="cyrillic">Очень приятно!</strong> - Glæder mig!</li>
+              </ol>
+            </div>
+
+            <!-- PART 10: AI CONVERSATION -->
+            <h2>
+              <span>Del 10: Præsenter dig for AI</span>
+              <span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>👋 Mød en ny ven</h3>
+              <p>
+                Øv dig i at præsentere dig selv! AI-tutoren vil stille dig spørgsmål om dit navn,
+                hvor du er fra, og hvad du laver.
+              </p>
+            </div>
+
+            <div id="ai-conversation" class="exercise-container"></div>
+
+            <!-- AI QUICK QUIZ -->
+            <h2>
+              <span>Del 11: Hurtig Quiz</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>⚡ Test din viden!</h3>
+              <p>Spørgsmål om lande, erhverv og præsentation.</p>
+            </div>
+
+            <div id="ai-quiz" class="exercise-container"></div>
+
+            <!-- AI SENTENCE AUCTION -->
+            <h2>
+              <span>Del 12: Sætnings-Auktion</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🏛️ Find den rigtige præsentation!</h3>
+              <p>Hvilken sætning er grammatisk korrekt?</p>
+            </div>
+
+            <div id="ai-auction" class="exercise-container"></div>
+
+            <!-- SUMMARY -->
+            <h2>
+              <span>Opsummering</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Hvad Du Har Laert</h3>
+              <ul>
+                <li><strong class="cyrillic">Меня зовут...</strong> - Jeg hedder...</li>
+                <li><strong class="cyrillic">Я из...</strong> - Jeg er fra...</li>
+                <li><strong class="cyrillic">Я + erhverv</strong> - Jeg er (erhverv)</li>
+                <li>
+                  <strong class="cyrillic">Как вас зовут?</strong> - Hvad hedder du? (formelt)
+                </li>
+                <li><strong class="cyrillic">Очень приятно!</strong> - Glæder mig!</li>
+                <li>Lande: Danmark, Rusland, Tyskland, USA, Sverige osv.</li>
+                <li>Erhverv: studerende, laerer, laege, ingenior osv.</li>
+                <li><strong>Moderne:</strong> фрилансер, дизайнер, разработчик</li>
+                <li><strong>Arbejdssted:</strong> в офисе, из дома, в коворкинге</li>
+              </ul>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="lesson-nav">
+              <a href="03-numbers.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">Tal fra 1 til 10</span>
+              </a>
+              <a href="05-family.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Naeste lektion</span>
+                <span class="lesson-nav-title">Min Familie</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Kultur</strong>
+              Russere bruger ofte patronym (fadersnavn) i formelle situationer: «Ivan Petrovich» =
+              Ivan, son af Peter.
+            </div>
+            <div class="margin-note">
+              <strong>Navne</strong>
+              Russiske navne har koseformer: Александр → Саша, Екатерина → Катя, Дмитрий → Дима.
+            </div>
+            <div class="margin-note">
+              <strong>Moderne arbejdsliv</strong>
+              Mange unge i storbyer arbejder ikke «9–18 i kontoret». Fjernarbejde (удалёнка) og
+              freelance er meget udbredt.
+            </div>
+            <div class="margin-note">
+              <strong>Tip</strong>
+              Ov din praesentation foran spejlet. Sag det hojt mange gange!
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <samovar-footer></samovar-footer>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      // VOCABULARY DATA
+      const vocabularyData = [
+        {
+          russian: 'Меня зовут...',
+          danish: 'Jeg hedder...',
+          transcription: 'min-JA za-VUT',
+          example: 'Меня зовут Мария.',
+          exampleDanish: 'Jeg hedder Maria.',
+        },
+        {
+          russian: 'Как вас зовут?',
+          danish: 'Hvad hedder De?',
+          transcription: 'kak vas za-VUT',
+          example: 'Здравствуйте! Как вас зовут?',
+          exampleDanish: 'Goddag! Hvad hedder De?',
+        },
+        {
+          russian: 'Как тебя зовут?',
+          danish: 'Hvad hedder du?',
+          transcription: 'kak tib-JA za-VUT',
+          example: 'Привет! Как тебя зовут?',
+          exampleDanish: 'Hej! Hvad hedder du?',
+        },
+        {
+          russian: 'Я из...',
+          danish: 'Jeg er fra...',
+          transcription: 'ja iz',
+          example: 'Я из Копенгагена.',
+          exampleDanish: 'Jeg er fra København.',
+        },
+        {
+          russian: 'Очень приятно!',
+          danish: 'Glæder mig!',
+          transcription: 'O-tchen pri-JAT-na',
+          example: 'Меня зовут Иван. - Очень приятно!',
+          exampleDanish: 'Jeg hedder Ivan. - Glæder mig!',
+        },
+        {
+          russian: 'Кто вы по профессии?',
+          danish: 'Hvad arbejder du med?',
+          transcription: 'kto vy pa pra-FJES-si-i',
+          example: 'Кто вы по профессии? - Я врач.',
+          exampleDanish: 'Hvad arbejder du med? - Jeg er laege.',
+        },
+      ];
+
+      // COUNTRIES DATA
+      const countriesData = [
+        { flag: 'DK', russian: 'Дания', danish: 'Danmark', from: 'из Дании' },
+        { flag: 'RU', russian: 'Россия', danish: 'Rusland', from: 'из России' },
+        { flag: 'DE', russian: 'Германия', danish: 'Tyskland', from: 'из Германии' },
+        { flag: 'US', russian: 'США', danish: 'USA', from: 'из США' },
+        { flag: 'SE', russian: 'Швеция', danish: 'Sverige', from: 'из Швеции' },
+        { flag: 'NO', russian: 'Норвегия', danish: 'Norge', from: 'из Норвегии' },
+        { flag: 'GB', russian: 'Англия', danish: 'England', from: 'из Англии' },
+        { flag: 'FR', russian: 'Франция', danish: 'Frankrig', from: 'из Франции' },
+      ];
+
+      // PROFESSIONS DATA
+      const professionsData = [
+        { russian: 'студент', danish: 'studerende', female: 'студентка' },
+        { russian: 'учитель', danish: 'laerer', female: 'учительница' },
+        { russian: 'врач', danish: 'laege', female: 'врач' },
+        { russian: 'инженер', danish: 'ingenior', female: 'инженер' },
+        { russian: 'программист', danish: 'programmor', female: 'программист' },
+        { russian: 'бизнесмен', danish: 'forretningsmand', female: 'бизнесвумен' },
+        { russian: 'журналист', danish: 'journalist', female: 'журналистка' },
+        { russian: 'музыкант', danish: 'musiker', female: 'музыкант' },
+      ];
+
+      // MODERN PROFESSIONS DATA
+      const modernProfessionsData = [
+        { russian: 'фрилансер', danish: 'freelancer', icon: '💻' },
+        { russian: 'дизайнер', danish: 'designer', icon: '🎨' },
+        { russian: 'разработчик', danish: 'udvikler', icon: '👨‍💻' },
+        { russian: 'маркетолог', danish: 'marketingspecialist', icon: '📊' },
+        { russian: 'преподаватель онлайн', danish: 'online-laerer', icon: '🎓' },
+        { russian: 'блогер', danish: 'blogger', icon: '📱' },
+      ];
+
+      // WORK LOCATIONS DATA
+      const workLocationsData = [
+        { russian: 'Я работаю в офисе.', danish: 'Jeg arbejder pa kontoret.', icon: '🏢' },
+        { russian: 'Я работаю из дома.', danish: 'Jeg arbejder hjemmefra.', icon: '🏠' },
+        {
+          russian: 'Я работаю в коворкинге.',
+          danish: 'Jeg arbejder i et coworking-space.',
+          icon: '☕',
+        },
+      ];
+
+      // Render countries grid
+      function renderCountries() {
+        const container = document.getElementById('countries-grid');
+        countriesData.forEach((country) => {
+          const card = document.createElement('div');
+          card.className = 'country-card';
+          card.innerHTML = `
+                    <div class="country-flag">${country.flag}</div>
+                    <div class="country-russian">${country.russian}</div>
+                    <div class="country-danish">${country.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(country.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render professions grid
+      function renderProfessions() {
+        const container = document.getElementById('professions-grid');
+        professionsData.forEach((prof) => {
+          const card = document.createElement('div');
+          card.className = 'profession-card';
+          card.innerHTML = `
+                    <div class="country-russian">${prof.russian}</div>
+                    <div class="country-danish">${prof.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(prof.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render modern professions grid
+      function renderModernProfessions() {
+        const container = document.getElementById('modern-professions-grid');
+        modernProfessionsData.forEach((prof) => {
+          const card = document.createElement('div');
+          card.className = 'profession-card';
+          card.innerHTML = `
+                    <div class="profession-icon">${prof.icon}</div>
+                    <div class="country-russian">${prof.russian}</div>
+                    <div class="country-danish">${prof.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(prof.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render work locations
+      function renderWorkLocations() {
+        const container = document.getElementById('work-locations');
+        workLocationsData.forEach((loc) => {
+          const card = document.createElement('div');
+          card.className = 'work-location-card';
+          card.innerHTML = `
+                    <div class="work-location-icon">${loc.icon}</div>
+                    <div class="country-russian">${loc.russian}</div>
+                    <div class="country-danish">${loc.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(loc.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // DIALOGUE DATA
+      const dialogueData = [
+        { speaker: 'A', russian: 'Здравствуйте!', danish: 'Goddag!' },
+        { speaker: 'B', russian: 'Здравствуйте!', danish: 'Goddag!' },
+        { speaker: 'A', russian: 'Меня зовут Анна. А вас?', danish: 'Jeg hedder Anna. Og De?' },
+        { speaker: 'B', russian: 'Меня зовут Михаил.', danish: 'Jeg hedder Mikhail.' },
+        {
+          speaker: 'A',
+          russian: 'Очень приятно! Вы из России?',
+          danish: 'Glæder mig! Er De fra Rusland?',
+        },
+        {
+          speaker: 'B',
+          russian: 'Да, я из Москвы. А вы?',
+          danish: 'Ja, jeg er fra Moskva. Og De?',
+        },
+        {
+          speaker: 'A',
+          russian: 'Я из Дании, из Копенгагена.',
+          danish: 'Jeg er fra Danmark, fra Kobenhavn.',
+        },
+        { speaker: 'B', russian: 'Кто вы по профессии?', danish: 'Hvad arbejder De med?' },
+        { speaker: 'A', russian: 'Я студентка.', danish: 'Jeg er studerende.' },
+      ];
+
+      // LISTENING DATA
+      const listeningData = [
+        {
+          audio: 'Меня зовут Анна',
+          options: ['Jeg hedder Anna', 'Hun hedder Anna', 'Hvad hedder du?'],
+          correct: 0,
+        },
+        {
+          audio: 'Я из Дании',
+          options: ['Jeg er i Danmark', 'Jeg er fra Danmark', 'Danmark er stort'],
+          correct: 1,
+        },
+        {
+          audio: 'Очень приятно',
+          options: ['Meget godt', 'Glaeder mig', 'Tak skal du have'],
+          correct: 1,
+        },
+        {
+          audio: 'Я студент',
+          options: ['Jeg er laerer', 'Jeg er studerende', 'Jeg studerer'],
+          correct: 1,
+        },
+        {
+          audio: 'Как вас зовут?',
+          options: ['Hvor bor du?', 'Hvad hedder du?', 'Hvordan har du det?'],
+          correct: 1,
+        },
+      ];
+
+      // FILL BLANK DATA
+      const fillBlankData = [
+        {
+          text: '___ зовут Мария.',
+          answer: 'Меня',
+          hint: 'Jeg',
+          danish: 'Jeg hedder Maria.',
+          alternatives: ['меня'],
+        },
+        { text: 'Я ___ Дании.', answer: 'из', hint: 'fra', danish: 'Jeg er fra Danmark.' },
+        {
+          text: 'Как ___ зовут?',
+          answer: 'вас',
+          hint: 'De (formelt)',
+          danish: 'Hvad hedder De?',
+          alternatives: ['тебя'],
+        },
+        { text: 'Очень ___!', answer: 'приятно', hint: 'glaeder mig', danish: 'Glaeder mig!' },
+        {
+          text: 'Я ___.',
+          answer: 'студент',
+          hint: 'studerende',
+          danish: 'Jeg er studerende.',
+          alternatives: ['студентка', 'врач', 'учитель'],
+        },
+      ];
+
+      // COUNTRIES MATCHING
+      const countriesMatchingData = [
+        { russian: 'Дания', danish: 'Danmark' },
+        { russian: 'Россия', danish: 'Rusland' },
+        { russian: 'Германия', danish: 'Tyskland' },
+        { russian: 'Швеция', danish: 'Sverige' },
+        { russian: 'Англия', danish: 'England' },
+      ];
+
+      // PROFESSIONS MATCHING
+      const professionsMatchingData = [
+        { russian: 'студент', danish: 'studerende' },
+        { russian: 'врач', danish: 'laege' },
+        { russian: 'учитель', danish: 'laerer' },
+        { russian: 'инженер', danish: 'ingenior' },
+        { russian: 'программист', danish: 'programmor' },
+      ];
+
+      // SENTENCE BUILDER DATA
+      const sentenceBuilderData = [
+        { words: ['Меня', 'зовут', 'Анна'], danish: 'Jeg hedder Anna' },
+        { words: ['Я', 'из', 'Дании'], danish: 'Jeg er fra Danmark' },
+        { words: ['Очень', 'приятно', '!'], danish: 'Glaeder mig!' },
+        { words: ['Как', 'вас', 'зовут', '?'], danish: 'Hvad hedder De?' },
+        { words: ['Я', 'студент'], danish: 'Jeg er studerende' },
+      ];
+
+      // AI CONVERSATION CONFIG
+      const aiConversationConfig = {
+        topic: 'Præsentation og bekendtskab',
+        level: 'A1',
+        vocabulary: vocabularyData,
+        starterPrompts: [
+          { russian: 'Привет!', danish: 'Sig hej' },
+          { russian: 'Меня зовут...', danish: 'Sig dit navn' },
+          { russian: 'Я из Дании.', danish: 'Sig hvor du er fra' },
+          { russian: 'Очень приятно!', danish: 'Sig glæder mig' },
+        ],
+        systemPrompt:
+          'Fokuser på præsentation: navn, land, erhverv. Stil spørgsmål som Как вас зовут?, Откуда вы?, Кто вы по профессии?',
+      };
+
+      // INITIALIZE
+      document.addEventListener('DOMContentLoaded', function () {
+        new VocabularyList('vocabulary-section', vocabularyData);
+        renderCountries();
+        renderProfessions();
+        renderModernProfessions();
+        renderWorkLocations();
+        new MatchingExercise('countries-exercise', countriesMatchingData);
+        new MatchingExercise('professions-exercise', professionsMatchingData);
+        new Dialogue('dialogue-section', dialogueData);
+        new ListeningExercise('listening-exercise', listeningData);
+        new FillBlankExercise('fill-blank-exercise', fillBlankData);
+        new SentenceBuilder('sentence-builder', sentenceBuilderData);
+
+        // AI Conversation
+        new AIConversation('ai-conversation', aiConversationConfig);
+
+        // AI Quick Quiz
+        new AIQuickQuiz('ai-quiz', {
+          vocabulary: vocabularyData,
+          maxRounds: 8,
+        });
+
+        // AI Sentence Auction
+        new AISentenceAuction('ai-auction', {
+          vocabulary: vocabularyData,
+          maxRounds: 6,
+        });
+      });
+    </script>
+  </body>
+</html>

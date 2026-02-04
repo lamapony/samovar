@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samovar: Akademisk russisk sprogkursus</title>
+    <meta name="description"
+        content="Samovar: En akademisk og struktureret tilgang til at lære russisk for dansktalende. Fokus på grammatik, fonetik og kulturel forståelse.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://samovar.dk/">
+    <meta property="og:title" content="Samovar: Akademisk russisk sprogkursus">
+    <meta property="og:description"
+        content="Lær russisk gennem logik og struktur. Skræddersyet til dansktalende med fokus på komparativ grammatik.">
+    <meta property="og:image" content="images/og-image.jpg">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/advanced.css">
+    <link rel="stylesheet" href="css/tooltips.css">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <samovar-header></samovar-header>
+
+        <main>
+            <h1>Grammatik som tankens arkitektur</h1>
+            <p class="lead">
+                Dette kursus <span class="tooltip-word">dekonstruerer<span class="tooltip-popup">analyserer
+                        grundigt</span></span> det russiske sprog og viser logikken bag det tilsyneladende kaos af
+                undtagelser. Vi bruger en komparativ metode, der bygger på dit kendskab til det danske grammatiske
+                undtagelser. Vi bruger en komparativ metode, der bygger på dit kendskab til det danske grammatiske
+                system.
+            </p>
+
+            <!-- Progress Board -->
+            <div id="user-progress-board" style="margin-bottom: var(--space-xl);"></div>
+
+            <section id="beginner" class="content-block"
+                style="background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); margin: 0 calc(-1 * var(--space-m)); padding: var(--space-xl) var(--space-m); margin-bottom: var(--space-xl);">
+                <div class="content-main">
+                    <h2 style="color: white; border-bottom-color: rgba(255,255,255,0.2);">
+                        <span>Nybegynderkursus</span>
+                        <span class="chapter-num" style="color: rgba(255,255,255,0.7);">A0-A1</span>
+                    </h2>
+                    <p style="color: rgba(255,255,255,0.85); font-size: 1.1rem; margin-bottom: var(--space-m);">
+                        Starter du fra bunden? Dette kursus er designet til dig, der aldrig har lært russisk.
+                        Vi begynder med alfabetet, enkle ord og fraser. Alt på dansk.
+                    </p>
+                    <a href="beginner/index-v2.html" class="btn"
+                        style="background: white; color: var(--accent-blue); position: relative;">
+                        Start Nybegynderkurset
+                        <span
+                            style="position: absolute; top: -10px; right: -10px; background: var(--accent-red); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; font-weight: 600; letter-spacing: 0.05em;">V2
+                            EDITORIAL</span>
+                    </a>
+                </div>
+                <aside class="content-note" style="padding-top: 0;">
+                    <div class="margin-note"
+                        style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.9);">
+                        <strong style="color: white;">12 Lektioner</strong>
+                        Fra "Hej" til at kunne præsentere dig selv, bestille kaffe og navigere i byen.
+                    </div>
+                </aside>
+            </section>
+
+            <section id="phonetics" class="content-block">
+                <div class="content-main">
+                    <h2>
+                        <span>Fonetisk og Rytme</span>
+                        <span class="chapter-num">Sektion I</span>
+                    </h2>
+
+                    <div class="visual-concept">
+                        <div id="intonation-game"></div>
+                    </div>
+
+                    <ul class="module-list">
+                        <li class="module-item">
+                            <a href="phonetics.html" class="module-link">
+                                <h3><span class="tag active">A1</span> <span class="tooltip-word">Reduktion<span
+                                            class="tooltip-popup">svækkelse af vokaler</span></span> og Intonation</h3>
+                                <span class="module-meta">Hvorfor "moloko" lyder som "malako". Hemmeligheden bag
+                                    "akanje" og 7
+                                    måder at stille et spørgsmål på.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="reading.html" class="module-link">
+                                <h3><span class="tag active">A1</span> Læseregler</h3>
+                                <span class="module-meta">Hårdt (Ъ) og blødt (Ь) tegn. Svækkelse af konsonanter. Hvad vi
+                                    hører, og hvad vi skriver.</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <aside class="content-note">
+                    <div class="margin-note">
+                        <strong>Инсайт</strong>
+                        Русское ударение — "подвижное" и смыслоразличительное (зАмок vs замОк). В отличие от датского,
+                        где нет свободного ударения, но есть система толчков (stød).
+                    </div>
+                </aside>
+            </section>
+
+            <section id="morphology" class="content-block">
+                <div class="content-main">
+                    <h2>
+                        <span>Morfologi</span>
+                        <span class="chapter-num">Sektion II</span>
+                    </h2>
+
+                    <ul class="module-list">
+                        <li class="module-item">
+                            <a href="lessons/nouns.html" class="module-link">
+                                <h3><span class="tag active">A1</span> Substantiver og Køn</h3>
+                                <span class="module-meta">Hvorfor er et bord "han", og en lampe "hun"? Logikken bag
+                                    endelser og
+                                    undtagelser (kofé, papa).</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/cases.html" class="module-link">
+                                <h3><span class="tag active">A2</span> <span class="tooltip-word">Kasussystemet<span
+                                            class="tooltip-popup">kasus-systemet</span></span>: Sætningens skelet</h3>
+                                <span class="module-meta">6 <span class="tooltip-word">kasus<span
+                                            class="tooltip-popup">kasus</span></span> som navigationsværktøj. Fra
+                                    Nominativ (Hvem?) til
+                                    Præpositionalis (Om hvem?).</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/verbs.html" class="module-link">
+                                <h3><span class="tag active">A2</span> Verber og <span class="tooltip-word">Aspekt<span
+                                            class="tooltip-popup">aspekt</span></span></h3>
+                                <span class="module-meta">Proces eller Resultat? Den største udfordring for udlændinge:
+                                    <span class="tooltip-word">perfektiv<span class="tooltip-popup">perfektiv
+                                            aspekt</span></span> og <span class="tooltip-word">несовершенный<span
+                                            class="tooltip-popup">imperfektiv aspekt</span></span> aspekt.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/adjectives.html" class="module-link">
+                                <h3><span class="tag active">A1</span> Adjektiver</h3>
+                                <span class="module-meta">Kongruens i køn, tal og kasus. Det russiske sprogs kameleon,
+                                    der skifter endelser.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/spelling-n-nn.html" class="module-link">
+                                <h3><span class="tag active">B1-B2</span> N og NN i suffikser</h3>
+                                <span class="module-meta">Regler og undtagelser for dobbelt-N i tillægsord.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/prefixes-pre-pri.html" class="module-link">
+                                <h3><span class="tag active">B2</span> Præfikserne PRE- og PRI-</h3>
+                                <span class="module-meta">Omfang eller Nærhed? Et ortografisk detektivarbejde.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/particle-ne.html" class="module-link">
+                                <h3><span class="tag active">A2-B1</span> Partiklen NE</h3>
+                                <span class="module-meta">Sammen eller hver for sig? Logikken bag benægtelse for
+                                    forskellige ordklasser.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/pronouns.html" class="module-link">
+                                <h3><span class="tag active">A1</span> Pronominer</h3>
+                                <span class="module-meta">Personlige, possessive og demonstrative pronominer. Bøjning af
+                                    pronominer — nøglen til flydende tale.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/numbers.html" class="module-link">
+                                <h3><span class="tag active">A2</span> Talord</h3>
+                                <span class="module-meta">Et mareridt for udlændinge: bøjning af talord. "En"
+                                    bøjes, mens "to-tre-fire" kræver en særlig kasus.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/adverbs.html" class="module-link">
+                                <h3><span class="tag active">A2</span> Adverbier</h3>
+                                <span class="module-meta">Hvordan, hvor, hvornår? Beskrivelse af handlingen. En af de få
+                                    ubøjelige ordklasser på russisk.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/prepositions.html" class="module-link">
+                                <h3><span class="tag active">A2</span> Præpositioner</h3>
+                                <span class="module-meta">V vs NA — et evigt problem. Præpositioner kræver bestemte
+                                    kasus. Nøglen til korrekt sætningsopbygning.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/tenses.html" class="module-link">
+                                <h3><span class="tag active">A2-B1</span> Verbaltider</h3>
+                                <span class="module-meta">Kun tre tider: Fortid, Nutid og Fremtid. Men verbeaspektet
+                                    ændrer alt.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/imperative.html" class="module-link">
+                                <h3><span class="tag active">A2</span> Imperativ (Bydemåde)</h3>
+                                <span class="module-meta">Hvordan man beder om noget eller giver en ordre høfligt?
+                                    "Tjitaj!" vs "Tjitajte!" —
+                                    forskellen mellem "du" og "I/De".</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/comparison.html" class="module-link">
+                                <h3><span class="tag active">A2</span> Sammenligningsgrader</h3>
+                                <span class="module-meta">Større, størst. Komparativ og superlativ for adjektiver og
+                                    adverbier.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/participier.html" class="module-link">
+                                <h3><span class="tag active">B1</span> <span class="tooltip-word">Participier<span
+                                            class="tooltip-popup">participier</span></span> og <span
+                                        class="tooltip-word">Gerundier<span
+                                            class="tooltip-popup">gerundier</span></span></h3>
+                                <span class="module-meta">Kompression af betydning: hvordan man forvandler to sætninger
+                                    til én. Fuld
+                                    neddykning i skriftsprogets syntaks.</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <aside class="content-note">
+                    <div class="margin-note">
+                        <strong>Parallel</strong>
+                        I det danske sprog bestemmes kønnet af artiklen (en/et), der står <em>separat</em> eller i
+                        <em>slutningen</em> af ordet. På russisk er kønnet "indbygget" i selve ordets endelse.
+                    </div>
+                    <div class="margin-note">
+                        <strong>Tip</strong>
+                        Forsøg ikke at lære alle kasus på én gang. Start med Akkusativ (handlingens objekt) og
+                        Præpositionalis
+                        (beliggenhed). De dækker 60% af de grundlæggende kommunikative behov.
+                    </div>
+                </aside>
+            </section>
+
+            <section id="syntax" class="content-block">
+                <div class="content-main">
+                    <h2>
+                        <span>Syntaks</span>
+                        <span class="chapter-num">Sektion III</span>
+                    </h2>
+                    <ul class="module-list">
+                        <li class="module-item">
+                            <a href="lessons/syntax.html" class="module-link">
+                                <h3><span class="tag active">B2</span> Ordstilling</h3>
+                                <span class="module-meta">Tema og Rema. Hvorfor "Jeg elsker dig" og "Dig elsker jeg" er
+                                    to forskellige budskaber.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/punctuation-dash.html" class="module-link">
+                                <h3><span class="tag active">B1</span> Tankestreg mellem subjekt og prædikat</h3>
+                                <span class="module-meta">Moskva — hovedstad. Hvornår bruger man
+                                    "tavshedstegnet"?</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/complex-sentences.html" class="module-link">
+                                <h3><span class="tag active">B1-B2</span> Sammensatte sætninger</h3>
+                                <span class="module-meta">Sideordnede og underordnede konjunktioner. Hvordan man
+                                    forbinder tanker:
+                                    "og", "men", "fordi", "når".</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/conditionals.html" class="module-link">
+                                <h3><span class="tag active">B2</span> Betingelsessætninger</h3>
+                                <span class="module-meta">"Hvis og hvis..." — reelle og irreelle betingelser. Partiklen
+                                    "by" som markør for det hypotetiske.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/colon.html" class="module-link">
+                                <h3><span class="tag active">B1</span> Kolon</h3>
+                                <span class="module-meta">Tegnet "Giv agt!". Før opremsning, forklaring og direkte
+                                    tale.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/comma-homogeneous.html" class="module-link">
+                                <h3><span class="tag active">B1</span> Komma ved sideordnede led</h3>
+                                <span class="module-meta">OG, MEN. Hvornår er kommaet nødvendigt, og hvornår er det
+                                    ikke?</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/isolated-members.html" class="module-link">
+                                <h3><span class="tag active">B2</span> Isolerede led</h3>
+                                <span class="module-meta">Participial- og gerundialkonstruktioner. Intonationsmæssig
+                                    fremhævning.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/introductory-words.html" class="module-link">
+                                <h3><span class="tag active">B2</span> Indskudte ord</h3>
+                                <span class="module-meta">Talens dirigenter. Udtryk for sikkerhed, følelser og kilde til
+                                    information.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/direct-speech.html" class="module-link">
+                                <h3><span class="tag active">B2</span> Direkte tale</h3>
+                                <span class="module-meta">Regler med citationstegn, tankestreg og kolon. Formatering af
+                                    dialoger.</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <aside class="content-note">
+                    <div class="margin-note">
+                        <strong>Frihed</strong>
+                        Russisk syntaks er som et Lego-sæt. Delene er de samme, men man kan samle hvad som helst.
+                    </div>
+                </aside>
+            </section>
+
+            <section id="advanced" class="content-block section-advanced">
+                <div class="content-main">
+                    <h2>
+                        <span>Mesterskab (Advanced)</span>
+                        <span class="chapter-num">Sektion IV</span>
+                    </h2>
+                    <p class="lead">
+                        For dem, der ikke bare vil lyde korrekt, men smukt og dybt. Stilistik, metaforer og
+                        avancerede sprogværktøjer på C1-niveau.
+                    </p>
+                    <ul class="module-list">
+                        <li class="module-item">
+                            <a href="lessons/advanced-motion-verbs.html" class="module-link">
+                                <h3><span class="tag">C1</span> Bevægelsesverber: Metafysik</h3>
+                                <span class="module-meta">Tiden flyver, tålmodigheden brister. Metaforisk brug af
+                                    bevægelse og idiomer.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/advanced-business.html" class="module-link">
+                                <h3><span class="tag">C1</span> Forretningsrussisk</h3>
+                                <span class="module-meta">Officiel stil, et "nej" der betyder "måske", og
+                                    kunsten at skrive forretningsbreve.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/scientific.html" class="module-link">
+                                <h3><span class="tag">C1</span> Videnskabelig stil</h3>
+                                <span class="module-meta">Passiv, gerundialkonstruktioner og ordforråd til
+                                    akademiske diskussioner.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/slang.html" class="module-link">
+                                <h3><span class="tag">C1</span> Slang og Levende sprog</h3>
+                                <span class="module-meta">Hvordan rigtige mennesker taler. Fra "hype" til "zasjkvár".
+                                    Hvornår
+                                    det er i orden, og hvornår det ikke er.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/precision.html" class="module-link">
+                                <h3><span class="tag">C1</span> Præcisionens Værktøj</h3>
+                                <span class="module-meta">Udóbnyj vs Komfórtnyj. Resját' vs Resjít'. Hvordan man vælger
+                                    det
+                                    perfekte ord.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/context.html" class="module-link">
+                                <h3><span class="tag">C1</span> Kontekstens Værktøj</h3>
+                                <span class="module-meta">Formelt vs Uformelt. Hvordan man undgår at lyde grov eller
+                                    komisk.</span>
+                            </a>
+                        </li>
+                        <li class="module-item">
+                            <a href="lessons/paronyms.html" class="module-link">
+                                <h3><span class="tag">B2-C1</span> Paronymer (Rosenthal)</h3>
+                                <span class="module-meta">Tage tøj på eller give tøj på? Effektiv eller effektfuld?
+                                    Falske
+                                    tvillinger.</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <aside class="content-note">
+                    <div class="margin-note">
+                        <strong>Udfordring</strong>
+                        På dette niveau stopper reglerne, og kunsten begynder. Her er intuition og
+                        litterært kendskab afgørende.
+                    </div>
+                </aside>
+            </section>
+
+            </section>
+
+            <section id="workshop" class="content-block">
+                <div class="content-main">
+                    <h2>
+                        <span>Værksted</span>
+                        <span class="chapter-num">Praksis</span>
+                    </h2>
+                    <p class="lead">
+                        Dybdegående artikler og tests til at finpudse sproglige værktøjer.
+                    </p>
+                    <a href="articles/index.html" class="btn">Gå til Værkstedet</a>
+                </div>
+            </section>
+
+        </main>
+
+        <samovar-footer></samovar-footer>
+
+        <script src="beginner/js/progress-system.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const board = document.getElementById('user-progress-board');
+                if (board) {
+                    // The Progress and ProgressUIHelper globals are already initialized by progress-system.js
+                    const stats = Progress.getStats();
+                    if (stats.completedLessons > 0) {
+                        board.appendChild(ProgressUIHelper.createProgressBar());
+                        board.appendChild(ProgressUIHelper.createStatsPanel());
+                        board.style.display = 'block';
+                    } else {
+                        board.style.display = 'none';
+                    }
+                }
+            });
+        </script>
+
+    </div>
+
+
+    <script src="js/intonation-game.js"></script>
+    <script src="js/tooltips.js"></script>
+</body>
+
+</html>

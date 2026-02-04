@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kulturel Ordbog | Samovar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/dictionary.css" />
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+  </head>
+
+  <body>
+    <header class="dict-header">
+      <a href="index.html" class="back-link">← Samovar</a>
+      <h1 class="dict-logo">Dictionary.</h1>
+    </header>
+
+    <main class="horizontal-scroll-container">
+      <!-- Intro Slide -->
+      <section class="slide intro-slide">
+        <div class="slide-content">
+          <h2 class="huge-text">Ord,<br />der ikke<br />findes.</h2>
+          <p class="intro-desc">En samling af uoversættelige betydninger.<br />Scroll til højre.</p>
+          <div class="scroll-indicator">→</div>
+        </div>
+      </section>
+
+      <!-- Hygge -->
+      <section class="slide word-slide" id="hygge">
+        <div class="word-visual">
+          <span class="sign">DK</span>
+          <h2 class="word-title">Hygge</h2>
+          <div class="pronunciation">/ˈhyɡə/</div>
+        </div>
+        <div class="word-meaning">
+          <p class="definition">Kunsten at skabe sjælelig hygge.</p>
+          <p class="context">
+            Det er ikke bare "hygge". Det er kakao ved levende lys, mens det stormer udenfor. Det er
+            uldsokker og fravær af politik i samtalen. Sikkerhed, varme og lighed.
+          </p>
+        </div>
+      </section>
+
+      <!-- Toska -->
+      <section class="slide word-slide dark-mode" id="toska">
+        <div class="word-visual">
+          <span class="sign">RU</span>
+          <h2 class="word-title">Тоска</h2>
+          <div class="pronunciation">/tɐˈska/</div>
+        </div>
+        <div class="word-meaning">
+          <p class="definition">Sjælesmerte uden en konkret årsag.</p>
+          <p class="context">
+            Nabokov skrev: "Intet ord på engelsk formidler alle nuancer af toska. Det er både en
+            stor åndelig kval, en dump murrende smerte i sjælen, en vag uro, kedsomhed og længsel".
+          </p>
+        </div>
+      </section>
+
+      <!-- Janteloven -->
+      <section class="slide word-slide" id="janteloven">
+        <div class="word-visual">
+          <span class="sign">DK</span>
+          <h2 class="word-title">Jante<br />loven</h2>
+          <div class="pronunciation">/ˈjan.təˌlɔwˀən/</div>
+        </div>
+        <div class="word-meaning">
+          <p class="definition">Du er ikke bedre end andre.</p>
+          <p class="context">
+            Skandinaviens uskrevne lov. 1. Tro ikke, du er speciel. 2. Tro ikke, du er klogere end
+            os. Beskedenhed som social lim.
+          </p>
+        </div>
+      </section>
+
+      <!-- Slide 4: Ustal (Yeltsin) -->
+      <section class="slide word-slide" id="ustal">
+        <div class="slide-content">
+          <div class="word-header">
+            <span class="sign">RU</span>
+            <h2 class="word-title glitch-text" data-text="Устал">Устал</h2>
+            <span class="pronunciation">[u-stal]</span>
+          </div>
+          <div class="definition-block">
+            <p class="definition">"Jeg er træt."</p>
+            <p class="sub-definition">En sætning, der markerede afslutningen på en æra.</p>
+          </div>
+          <div class="context-block">
+            <div class="tv-container">
+              <div class="tv-screen">
+                <div class="crt-overlay"></div>
+                <!-- Placeholder for the video. In a real scenario, a <video> tag would go here. -->
+                <div class="video-placeholder">▶ PLAY ARCHIVE<br />31.12.1999</div>
+              </div>
+            </div>
+            <p class="context-text">
+              Mere end blot fysisk træthed. Det er udmattelsen af en historisk periode. Da Boris
+              Jeltsin sagde "Jeg er træt, jeg går" (en udbredt fejlcitat af "Jeg går..."), blev det
+              et symbol på 90'ernes afslutning og begyndelsen på et nyt, usikkert kapitel.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outro -->
+      <section class="slide outro-slide">
+        <div class="slide-content">
+          <h2 class="huge-text">To be<br />continued.</h2>
+          <p>Ordbogen opdateres løbende.</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const container = document.querySelector('.horizontal-scroll-container');
+
+      // --- Enhanced Mouse Wheel Scroll ---
+      container.addEventListener('wheel', (evt) => {
+        evt.preventDefault();
+        // Significantly increased multiplier for faster navigation
+        container.scrollLeft += evt.deltaY * 5;
+      });
+
+      // --- Keyboard Navigation (Arrows) ---
+      document.addEventListener('keydown', (e) => {
+        const scrollAmount = window.innerWidth * 0.8; // Scroll almost a full screen
+        if (e.key === 'ArrowRight') {
+          container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        } else if (e.key === 'ArrowLeft') {
+          container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        }
+      });
+
+      // --- Drag to Scroll (Desktop) ---
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      container.addEventListener('mousedown', (e) => {
+        isDown = true;
+        container.classList.add('active'); // Optional: change cursor style
+        startX = e.pageX - container.offsetLeft;
+        scrollLeft = container.scrollLeft;
+        container.style.cursor = 'grabbing';
+      });
+
+      container.addEventListener('mouseleave', () => {
+        isDown = false;
+        container.style.cursor = 'default';
+      });
+
+      container.addEventListener('mouseup', () => {
+        isDown = false;
+        container.style.cursor = 'default';
+      });
+
+      container.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - container.offsetLeft;
+        const walk = (x - startX) * 2; // Scroll-fast multiplier
+        container.scrollLeft = scrollLeft - walk;
+      });
+
+      // --- Touch Handling (Native is usually best, but ensure it's smooth) ---
+      // The CSS -webkit-overflow-scrolling: touch; handles this well.
+    </script>
+  </body>
+</html>

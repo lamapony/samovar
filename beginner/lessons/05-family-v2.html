@@ -1,0 +1,1210 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 5: Min Familie | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #d4a574;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Family Tree === */
+    .family-tree {
+      text-align: center;
+      padding: 3rem 0;
+      margin: 2rem 0;
+    }
+
+    .family-row {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .family-member {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .family-member:hover {
+      transform: scale(1.05);
+    }
+
+    .family-avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--editorial-light);
+      border: 2px solid var(--editorial-line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 0.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .family-member:hover .family-avatar {
+      border-color: var(--editorial-accent);
+    }
+
+    .family-russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .family-danish {
+      font-size: 0.85rem;
+      color: var(--editorial-gray);
+    }
+
+    .family-connector {
+      width: 2px;
+      height: 30px;
+      background: var(--editorial-line);
+      margin: 0 auto;
+    }
+
+    /* === Family Grid === */
+    .family-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .family-card {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .family-card:nth-child(3n) {
+      border-right: none;
+    }
+
+    .family-card:nth-last-child(-n + 3) {
+      border-bottom: none;
+    }
+
+    .family-card:hover {
+      background: var(--editorial-light);
+    }
+
+    .family-card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .family-card-russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .family-card-danish {
+      font-size: 0.85rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Possessive Grid === */
+    .possessive-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .possessive-item {
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .possessive-item:nth-child(odd) {
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .possessive-item:nth-last-child(-n + 2) {
+      border-bottom: none;
+    }
+
+    .possessive-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .possessive-pronoun {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--editorial-accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .possessive-danish {
+      font-size: 0.9rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Phrase Display === */
+    .phrase-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .phrase-russian {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .phrase-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    .phrase-phonetic {
+      font-family: 'SF Mono', 'Monaco', monospace;
+      font-size: 1rem;
+      color: var(--editorial-gray);
+      margin-top: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .phrase-translation {
+      font-size: 1.5rem;
+      color: var(--editorial-gray);
+      margin-top: 1rem;
+      font-weight: 300;
+    }
+
+    /* === Dialogue === */
+    .dialogue-container {
+      margin: 3rem 0;
+    }
+
+    .dialogue-line {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .dialogue-line:last-child {
+      border-bottom: none;
+    }
+
+    .dialogue-speaker {
+      width: 60px;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+      padding-top: 0.25rem;
+    }
+
+    .dialogue-content {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .dialogue-content:hover .dialogue-russian {
+      color: var(--editorial-accent);
+    }
+
+    .dialogue-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .dialogue-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+      font-style: italic;
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Exercise Sections === */
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(3n) {
+      border-right: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-item .danish {
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .family-row {
+        flex-wrap: wrap;
+      }
+
+      .family-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .family-card:nth-child(3n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .family-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .possessive-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .possessive-item:nth-child(odd) {
+        border-right: none;
+      }
+
+      .possessive-item {
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .possessive-item:last-child {
+        border-bottom: none;
+      }
+
+      .dialogue-line {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .dialogue-speaker {
+        width: auto;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-item:nth-child(3n) {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .summary-item:nth-child(2n) {
+        border-right: none;
+      }
+
+      .floating-nav {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="floating-nav">
+    <a href="../index-v2.html" class="floating-btn">Tilbage</a>
+  </nav>
+
+  <div class="container">
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 5</div>
+        <h1>Min Familie</h1>
+        <p class="lead">Familie er vigtigt i russisk kultur. Lær at tale om dine nærmeste.</p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: CORE FAMILY
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Kernefamilien</h2>
+        </div>
+
+        <p class="narrative">
+          Lad os starte med de nærmeste. Klik på et familiemedlem for at høre ordet.
+        </p>
+
+        <div class="family-tree">
+          <div class="family-row">
+            <div class="family-member" onclick="TTS.speak('дедушка')">
+              <div class="family-avatar">👴</div>
+              <div class="family-russian">дедушка</div>
+              <div class="family-danish">bedstefar</div>
+            </div>
+            <div class="family-member" onclick="TTS.speak('бабушка')">
+              <div class="family-avatar">👵</div>
+              <div class="family-russian">бабушка</div>
+              <div class="family-danish">bedstemor</div>
+            </div>
+          </div>
+          <div class="family-connector"></div>
+          <div class="family-row">
+            <div class="family-member" onclick="TTS.speak('папа')">
+              <div class="family-avatar">👨</div>
+              <div class="family-russian">папа</div>
+              <div class="family-danish">far</div>
+            </div>
+            <div class="family-member" onclick="TTS.speak('мама')">
+              <div class="family-avatar">👩</div>
+              <div class="family-russian">мама</div>
+              <div class="family-danish">mor</div>
+            </div>
+          </div>
+          <div class="family-connector"></div>
+          <div class="family-row">
+            <div class="family-member" onclick="TTS.speak('брат')">
+              <div class="family-avatar">👦</div>
+              <div class="family-russian">брат</div>
+              <div class="family-danish">bror</div>
+            </div>
+            <div class="family-member" onclick="TTS.speak('я')">
+              <div class="family-avatar" style="border-color: var(--editorial-accent)">🙋</div>
+              <div class="family-russian">я</div>
+              <div class="family-danish">jeg</div>
+            </div>
+            <div class="family-member" onclick="TTS.speak('сестра')">
+              <div class="family-avatar">👧</div>
+              <div class="family-russian">сестра</div>
+              <div class="family-danish">søster</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             MODERN: PETS & DISTANCE
+             ============================================ -->
+    <section class="editorial-section"
+      style="background: #fafafa; border-top: 1px solid var(--editorial-line); border-bottom: 1px solid var(--editorial-line);">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+          Den moderne familie
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Kæledyr og Videoopkald</h2>
+        </div>
+        <p class="narrative">
+          For mange russere er kæledyr fuldgyldige familiemedlemmer. Og da Rusland er verdens
+          største land, bor familien ofte langt væk.
+        </p>
+
+        <!-- This section will be populated dynamically by renderFamilyGrid() -->
+        <div class="family-grid" id="family-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Livet i forskellige byer</div>
+          <p>
+            Det er helt normalt at sige: <strong>"Моя сестра живёт в Москве, а я живу в Дании"</strong>
+            (Min søster bor i Moskva, og jeg bor i Danmark). Vi ses på Telegram eller Zoom.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Jeg har...</h2>
+        <p>Hvordan fortæller man om sin familie?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: I HAVE
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">У меня есть</h2>
+        </div>
+
+        <p class="narrative">
+          På russisk siger man bogstaveligt "Ved mig er der..." Det er sådan man udtrykker "Jeg
+          har..."
+        </p>
+
+        <div class="phrase-display">
+          <span class="phrase-russian" onclick="TTS.speak('У меня есть брат')">У меня есть брат</span>
+          <div class="phrase-phonetic">u min-JA jest' brat</div>
+          <div class="phrase-translation">Jeg har en bror</div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Grammatik</div>
+          <p>
+            <strong>У меня</strong> = Ved mig (jeg har)<br />
+            <strong>У тебя</strong> = Ved dig (du har)<br />
+            <strong>У него</strong> = Ved ham (han har)<br />
+            <strong>У неё</strong> = Ved hende (hun har)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 4: POSSESSIVES
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 4</div>
+          <h2 class="chapter-title">Min, din, hans...</h2>
+        </div>
+
+        <p class="narrative">Ejestedord på russisk ændrer sig efter køn. Her er de vigtigste.</p>
+
+        <div class="possessive-grid" id="possessives-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Eksempler</div>
+          <p>
+            <strong>мой брат</strong> — min bror (hankøn)<br />
+            <strong>моя сестра</strong> — min søster (hunkøn)<br />
+            <strong>моё имя</strong> — mit navn (intetkøn)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 5: DIALOGUE
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 5</div>
+          <h2 class="chapter-title">Samtale om familie</h2>
+        </div>
+
+        <p class="narrative">Sådan kan en samtale om familie se ud. Klik for at høre.</p>
+
+        <div class="dialogue-container" id="main-dialogue"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Nu er det din tur</h2>
+        <p>Test din viden om familie.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Lyt og vælg</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Godt klaret.</h2>
+        <p>Nu skal du forbinde ordene.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Par ordene</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 3
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Udfyld hullerne.</h2>
+        <p>Kan du fuldføre sætningerne?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: FILL BLANK
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Udfyld tomme pladser</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="fill-blank-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 4
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Hurtig quiz</h2>
+        <p>Test dig selv. Jo hurtigere du svarer, jo bedre.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 4: QUICK QUIZ (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 4</div>
+            <h3 class="exercise-title">Hurtig quiz</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 5
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Samtale</h2>
+        <p>Fortæl AI-tutoren om din familie.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 5: CONVERSATION (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 5</div>
+            <h3 class="exercise-title">Øv samtale</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-conversation"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Hvad du har lært</h2>
+        </div>
+
+        <div class="summary-grid" id="summary-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Lektion Færdig?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Har du gennemgået alle øvelser og føler dig klar til næste lektion?
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="04-about-me-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">Jeg Hedder...</span>
+          </a>
+          <a href="06-food-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">Mad og Drikke</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // FAMILY DATA
+    // ============================================
+    const familyData = [
+      { icon: '👨', russian: 'папа', danish: 'far' },
+      { icon: '👩', russian: 'мама', danish: 'mor' },
+      { icon: '👦', russian: 'брат', danish: 'bror' },
+      { icon: '👧', russian: 'сестра', danish: 'søster' },
+      { icon: '👴', russian: 'дедушка', danish: 'bedstefar' },
+      { icon: '👵', russian: 'бабушка', danish: 'bedstemor' },
+      { icon: '👨‍👩‍👧', russian: 'семья', danish: 'familie' },
+      { icon: '👶', russian: 'ребёнок', danish: 'barn' },
+      { icon: '🧒', russian: 'сын', danish: 'søn' },
+      { icon: '👧', russian: 'дочь', danish: 'datter' },
+      { icon: '👫', russian: 'муж', danish: 'mand (ægtefælle)' },
+      { icon: '👫', russian: 'жена', danish: 'kone' },
+    ];
+
+    // Render family grid
+    function renderFamilyGrid() {
+      const container = document.getElementById('family-grid');
+      if (!container) return;
+      familyData.forEach((member) => {
+        const card = document.createElement('div');
+        card.className = 'family-card';
+        card.innerHTML = `
+                    <div class="family-card-icon">${member.icon}</div>
+                    <div class="family-card-russian">${member.russian}</div>
+                    <div class="family-card-danish">${member.danish}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(member.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // POSSESSIVES DATA
+    // ============================================
+    const possessivesData = [
+      { russian: 'мой / моя / моё', danish: 'min (m/f/n)' },
+      { russian: 'твой / твоя / твоё', danish: 'din (m/f/n)' },
+      { russian: 'его', danish: 'hans' },
+      { russian: 'её', danish: 'hendes' },
+      { russian: 'наш / наша / наше', danish: 'vores (m/f/n)' },
+      { russian: 'ваш / ваша / ваше', danish: 'jeres/Deres (m/f/n)' },
+    ];
+
+    // Render possessives grid
+    function renderPossessives() {
+      const container = document.getElementById('possessives-grid');
+      if (!container) return;
+      possessivesData.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = 'possessive-item';
+        div.innerHTML = `
+                    <div class="possessive-pronoun">${item.russian}</div>
+                    <div class="possessive-danish">${item.danish}</div>
+                `;
+        div.addEventListener('click', () => TTS.speak(item.russian.split(' / ')[0]));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // DIALOGUE DATA
+    // ============================================
+    const dialogueData = [
+      {
+        speaker: 'A',
+        russian: 'У тебя есть брат или сестра?',
+        danish: 'Har du en bror eller søster?',
+      },
+      { speaker: 'B', russian: 'Да, у меня есть брат.', danish: 'Ja, jeg har en bror.' },
+      { speaker: 'A', russian: 'Как его зовут?', danish: 'Hvad hedder han?' },
+      { speaker: 'B', russian: 'Его зовут Антон.', danish: 'Han hedder Anton.' },
+      {
+        speaker: 'A',
+        russian: 'А родители? Где они живут?',
+        danish: 'Og forældrene? Hvor bor de?',
+      },
+      {
+        speaker: 'B',
+        russian: 'Мои родители живут в Москве.',
+        danish: 'Mine forældre bor i Moskva.',
+      },
+    ];
+
+    // Render dialogue
+    function renderDialogue() {
+      const container = document.getElementById('main-dialogue');
+      if (!container) return;
+      dialogueData.forEach((line) => {
+        const div = document.createElement('div');
+        div.className = 'dialogue-line';
+        div.innerHTML = `
+                    <div class="dialogue-speaker">${line.speaker}</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-russian">${line.russian}</div>
+                        <div class="dialogue-danish">${line.danish}</div>
+                    </div>
+                `;
+        div
+          .querySelector('.dialogue-content')
+          .addEventListener('click', () => TTS.speak(line.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // SUMMARY DATA
+    // ============================================
+    const summaryData = [
+      { icon: '👨', russian: 'папа', danish: 'far' },
+      { icon: '👩', russian: 'мама', danish: 'mor' },
+      { icon: '👦', russian: 'брат', danish: 'bror' },
+      { icon: '👧', russian: 'сестра', danish: 'søster' },
+      { icon: '👴', russian: 'дедушка', danish: 'bedstefar' },
+      { icon: '👵', russian: 'бабушка', danish: 'bedstemor' },
+    ];
+
+    // Render summary
+    function renderSummary() {
+      const container = document.getElementById('summary-grid');
+      if (!container) return;
+      summaryData.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = 'summary-item';
+        div.innerHTML = `
+                    <div class="icon">${item.icon}</div>
+                    <div class="russian">${item.russian}</div>
+                    <div class="danish">${item.danish}</div>
+                `;
+        div.addEventListener('click', () => TTS.speak(item.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      { audio: 'мама', options: ['mor', 'far', 'bror'], correct: 0 },
+      { audio: 'брат', options: ['søster', 'bror', 'bedstefar'], correct: 1 },
+      {
+        audio: 'У меня есть сестра',
+        options: ['Jeg har en bror', 'Jeg har en søster', 'Jeg har en mor'],
+        correct: 1,
+      },
+      { audio: 'бабушка', options: ['bedstefar', 'bedstemor', 'mor'], correct: 1 },
+      {
+        audio: 'Моя семья большая',
+        options: ['Min familie er lille', 'Min familie er stor', 'Jeg har familie'],
+        correct: 1,
+      },
+    ];
+
+    const matchingData = [
+      { russian: 'мама', danish: 'mor' },
+      { russian: 'папа', danish: 'far' },
+      { russian: 'брат', danish: 'bror' },
+      { russian: 'сестра', danish: 'søster' },
+      { russian: 'семья', danish: 'familie' },
+    ];
+
+    const fillBlankData = [
+      { text: 'У меня ___ брат.', answer: 'есть', hint: 'har/er', danish: 'Jeg har en bror.' },
+      {
+        text: '___ зовут Анна.',
+        answer: 'Её',
+        hint: 'Hendes',
+        danish: 'Hun hedder Anna.',
+        alternatives: ['её'],
+      },
+      {
+        text: 'Мой ___ живёт в Москве.',
+        answer: 'папа',
+        hint: 'far',
+        danish: 'Min far bor i Moskva.',
+        alternatives: ['брат', 'дедушка'],
+      },
+      {
+        text: 'У тебя есть ___?',
+        answer: 'сестра',
+        hint: 'søster',
+        danish: 'Har du en søster?',
+        alternatives: ['брат'],
+      },
+    ];
+
+    const vocabularyData = [
+      ...familyData.map((f) => ({ russian: f.russian, danish: f.danish })),
+      { russian: 'У меня есть', danish: 'Jeg har' },
+      { russian: 'мой/моя', danish: 'min' },
+      { russian: 'твой/твоя', danish: 'din' },
+    ];
+
+    // AI CONVERSATION CONFIG
+    const aiConversationConfig = {
+      topic: 'Familie',
+      level: 'A1',
+      vocabulary: vocabularyData,
+      starterPrompts: [
+        { russian: 'У меня есть брат.', danish: 'Sig du har en bror' },
+        { russian: 'Моя семья большая.', danish: 'Sig din familie er stor' },
+        { russian: 'Мою маму зовут...', danish: 'Sig hvad din mor hedder' },
+        { russian: 'У тебя есть сестра?', danish: 'Spørg om søster' },
+      ],
+      systemPrompt:
+        'Fokuser på familie. Stil spørgsmål som У тебя есть...?, Как зовут твою маму?, Где живут твои родители?',
+    };
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    const LESSON_ID = '05-family';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initLessonProgress(LESSON_ID);
+
+      renderFamilyGrid();
+      renderPossessives();
+      renderDialogue();
+      renderSummary();
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+      new FillBlankExercise('fill-blank-exercise', fillBlankData);
+
+      // AI exercises
+      new AIQuickQuiz('ai-quiz', {
+        vocabulary: vocabularyData,
+        maxRounds: 8,
+      });
+      new AIConversation('ai-conversation', aiConversationConfig);
+
+      initScrollAnimations();
+      initProgressBar();
+
+      // Complete lesson button
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      const lessonStatus = Progress.getLessonStatus(LESSON_ID);
+
+      if (lessonStatus === 'completed') {
+        completeBtn.textContent = '✓ Allerede gennemført';
+        completeBtn.classList.add('completed');
+      }
+
+      completeBtn.addEventListener('click', () => {
+        if (lessonStatus !== 'completed') {
+          completeLessonWithModal(LESSON_ID);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

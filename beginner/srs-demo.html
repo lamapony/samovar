@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRS Demo - Интервальное Повторение | Samovar</title>
+    <link rel="stylesheet" href="css/beginner.css" />
+    <link rel="stylesheet" href="css/srs.css" />
+  </head>
+  <body>
+    <header class="lesson-header">
+      <div class="container">
+        <a href="index-v2.html" class="back-link">← Tilbage til oversigt</a>
+        <h1>🧠 Spaced Repetition System</h1>
+        <p class="lesson-subtitle">Adaptiv læring med SM-2 algoritme</p>
+      </div>
+    </header>
+
+    <main class="lesson-content">
+      <div class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard-section" class="srs-dashboard">
+          <div class="srs-dashboard-header">
+            <h1>Din Læringsstatistik</h1>
+            <p>Intelligent gentagelse baseret på din hukommelse</p>
+          </div>
+
+          <div class="srs-stats-grid" id="stats-grid">
+            <!-- Stats will be populated by JS -->
+          </div>
+
+          <div class="srs-action-buttons">
+            <button class="btn srs-action-btn srs-action-btn-primary" id="start-review-btn">
+              🎯 Start Gennemgang
+            </button>
+            <button class="btn srs-action-btn" id="import-lesson-btn">
+              📚 Importer fra Lektion
+            </button>
+            <button class="btn srs-action-btn" id="view-stats-btn">📊 Detaljeret Statistik</button>
+          </div>
+
+          <!-- Import Modal -->
+          <div id="import-modal" style="display: none">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+              <h3>Importer Ord fra Lektion</h3>
+              <p>Vælg en lektion for at tilføje dens ord til dit SRS-system:</p>
+              <div id="lesson-list" style="margin: 1.5rem 0">
+                <!-- Lesson buttons will be populated -->
+              </div>
+              <button class="btn btn-secondary" id="close-import-modal">Luk</button>
+            </div>
+          </div>
+
+          <!-- Detailed Stats Modal -->
+          <div id="stats-modal" style="display: none">
+            <div class="modal-overlay"></div>
+            <div class="modal-content">
+              <h3>Detaljeret Statistik</h3>
+              <div id="detailed-stats">
+                <!-- Detailed stats will be populated -->
+              </div>
+              <div style="margin-top: 2rem">
+                <button class="btn btn-outline" id="export-data-btn">📥 Eksporter Data</button>
+                <button class="btn btn-outline" id="reset-progress-btn" style="color: #e74c3c">
+                  🔄 Nulstil Alt
+                </button>
+              </div>
+              <button class="btn btn-secondary" id="close-stats-modal" style="margin-top: 1rem">
+                Luk
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Review Session Section -->
+        <section id="review-section" style="display: none">
+          <div id="srs-container"></div>
+          <div style="text-align: center; margin-top: 2rem">
+            <button class="btn btn-secondary" id="back-to-dashboard">
+              ← Tilbage til Dashboard
+            </button>
+          </div>
+        </section>
+
+        <!-- Info Section -->
+        <section
+          class="info-section"
+          style="margin-top: 4rem; background: #f8f9fa; padding: 2rem; border-radius: 16px"
+        >
+          <h2>🎓 Om Spaced Repetition System</h2>
+          <div style="max-width: 800px; margin: 0 auto">
+            <p style="margin-bottom: 1rem">
+              <strong>Spaced Repetition</strong> er en videnskabeligt bevist læringsmetode, der
+              optimerer gentagelse af information baseret på din individuelle hukommelse.
+            </p>
+
+            <h3 style="margin-top: 2rem; color: #2c3e50">Sådan virker det:</h3>
+            <ul style="line-height: 1.8; color: #555">
+              <li>
+                <strong>SM-2 Algoritme:</strong> Bruger SuperMemo 2-algoritmen til at beregne
+                optimale gentagelsesintervaller
+              </li>
+              <li>
+                <strong>Adaptiv Læring:</strong> Justerer intervaller baseret på hvor godt du husker
+                hvert ord
+              </li>
+              <li><strong>Prioritetskø:</strong> Viser først de ord, du er ved at glemme</li>
+              <li>
+                <strong>Personlig Statistik:</strong> Sporer din fremgang og nøjagtighed for hvert
+                ord
+              </li>
+            </ul>
+
+            <h3 style="margin-top: 2rem; color: #2c3e50">Bedømmelsessystem:</h3>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                margin-top: 1rem;
+              "
+            >
+              <div
+                style="
+                  background: white;
+                  padding: 1rem;
+                  border-radius: 8px;
+                  border-left: 4px solid #e74c3c;
+                "
+              >
+                <strong>Igen (0-2):</strong> Nulstiller fremgang, vises igen snart
+              </div>
+              <div
+                style="
+                  background: white;
+                  padding: 1rem;
+                  border-radius: 8px;
+                  border-left: 4px solid #f39c12;
+                "
+              >
+                <strong>Svært (3):</strong> Kortere interval, mere øvelse nødvendig
+              </div>
+              <div
+                style="
+                  background: white;
+                  padding: 1rem;
+                  border-radius: 8px;
+                  border-left: 4px solid #2ecc71;
+                "
+              >
+                <strong>Godt (4):</strong> Standard interval, normal fremgang
+              </div>
+              <div
+                style="
+                  background: white;
+                  padding: 1rem;
+                  border-radius: 8px;
+                  border-left: 4px solid #3498db;
+                "
+              >
+                <strong>Let (5):</strong> Længere interval, du mestrer ordet
+              </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 1rem; background: #e3f2fd; border-radius: 8px">
+              <strong>💡 Tip:</strong> Brug systemet dagligt for bedste resultater. Selv 5-10
+              minutter om dagen kan dramatisk forbedre din ordforråd!
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer style="text-align: center; padding: 2rem; color: #666; margin-top: 4rem">
+      <p>Samovar - Spaced Repetition System v1.0</p>
+      <p style="font-size: 0.9rem">Baseret på SuperMemo 2 algoritme</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/lesson-engine.js"></script>
+    <script src="js/spaced-repetition.js"></script>
+    <script>
+      // Initialize SRS Manager
+      const srsManager = new SRSManager();
+
+      // Sample vocabulary data for demo
+      const sampleLessons = {
+        '01-intro': [
+          {
+            russian: 'Привет',
+            danish: 'Hej',
+            transcription: 'privʲet',
+            lessonId: '01-intro',
+            tags: ['greeting'],
+          },
+          {
+            russian: 'Пока',
+            danish: 'Farvel',
+            transcription: 'paka',
+            lessonId: '01-intro',
+            tags: ['greeting'],
+          },
+          {
+            russian: 'Спасибо',
+            danish: 'Tak',
+            transcription: 'spasʲiba',
+            lessonId: '01-intro',
+            tags: ['politeness'],
+          },
+          {
+            russian: 'Да',
+            danish: 'Ja',
+            transcription: 'da',
+            lessonId: '01-intro',
+            tags: ['basic'],
+          },
+          {
+            russian: 'Нет',
+            danish: 'Nej',
+            transcription: 'nʲet',
+            lessonId: '01-intro',
+            tags: ['basic'],
+          },
+        ],
+        '03-numbers': [
+          {
+            russian: 'Один',
+            danish: 'En',
+            transcription: 'adʲin',
+            lessonId: '03-numbers',
+            tags: ['numbers'],
+          },
+          {
+            russian: 'Два',
+            danish: 'To',
+            transcription: 'dva',
+            lessonId: '03-numbers',
+            tags: ['numbers'],
+          },
+          {
+            russian: 'Три',
+            danish: 'Tre',
+            transcription: 'trʲi',
+            lessonId: '03-numbers',
+            tags: ['numbers'],
+          },
+          {
+            russian: 'Четыре',
+            danish: 'Fire',
+            transcription: 'tɕitɨrʲe',
+            lessonId: '03-numbers',
+            tags: ['numbers'],
+          },
+          {
+            russian: 'Пять',
+            danish: 'Fem',
+            transcription: 'pʲatʲ',
+            lessonId: '03-numbers',
+            tags: ['numbers'],
+          },
+        ],
+        '06-food': [
+          {
+            russian: 'Хлеб',
+            danish: 'Brød',
+            transcription: 'xlʲep',
+            lessonId: '06-food',
+            tags: ['food'],
+          },
+          {
+            russian: 'Вода',
+            danish: 'Vand',
+            transcription: 'vada',
+            lessonId: '06-food',
+            tags: ['drinks'],
+          },
+          {
+            russian: 'Кофе',
+            danish: 'Kaffe',
+            transcription: 'kofʲe',
+            lessonId: '06-food',
+            tags: ['drinks'],
+          },
+          {
+            russian: 'Чай',
+            danish: 'Te',
+            transcription: 'tɕaj',
+            lessonId: '06-food',
+            tags: ['drinks'],
+          },
+          {
+            russian: 'Молоко',
+            danish: 'Mælk',
+            transcription: 'malako',
+            lessonId: '06-food',
+            tags: ['drinks'],
+          },
+        ],
+      };
+
+      // UI State
+      let currentSession = null;
+
+      // Initialize Dashboard
+      function initDashboard() {
+        updateStatsDisplay();
+        setupEventListeners();
+      }
+
+      function updateStatsDisplay() {
+        const stats = srsManager.getStats();
+        const statsGrid = document.getElementById('stats-grid');
+
+        statsGrid.innerHTML = `
+                <div class="srs-stat-card">
+                    <div class="srs-stat-card-icon">📚</div>
+                    <div class="srs-stat-card-value">${stats.total}</div>
+                    <div class="srs-stat-card-label">Totale Kort</div>
+                </div>
+                <div class="srs-stat-card">
+                    <div class="srs-stat-card-icon">⏰</div>
+                    <div class="srs-stat-card-value">${stats.due}</div>
+                    <div class="srs-stat-card-label">Forfaldne Kort</div>
+                </div>
+                <div class="srs-stat-card">
+                    <div class="srs-stat-card-icon">🆕</div>
+                    <div class="srs-stat-card-value">${stats.new}</div>
+                    <div class="srs-stat-card-label">Nye Kort</div>
+                </div>
+                <div class="srs-stat-card">
+                    <div class="srs-stat-card-icon">🎯</div>
+                    <div class="srs-stat-card-value">${stats.overallAccuracy}%</div>
+                    <div class="srs-stat-card-label">Nøjagtighed</div>
+                </div>
+                <div class="srs-stat-card">
+                    <div class="srs-stat-card-icon">📈</div>
+                    <div class="srs-stat-card-value">${stats.reviewing}</div>
+                    <div class="srs-stat-card-label">I Gennemgang</div>
+                </div>
+                <div class="srs-stat-card">
+                    <div class="srs-stat-card-icon">✅</div>
+                    <div class="srs-stat-card-value">${stats.dailyStats.reviews}</div>
+                    <div class="srs-stat-card-label">I dag</div>
+                </div>
+            `;
+      }
+
+      function setupEventListeners() {
+        // Start Review Button
+        document.getElementById('start-review-btn').addEventListener('click', () => {
+          startReviewSession();
+        });
+
+        // Import Button
+        document.getElementById('import-lesson-btn').addEventListener('click', () => {
+          showImportModal();
+        });
+
+        // View Stats Button
+        document.getElementById('view-stats-btn').addEventListener('click', () => {
+          showStatsModal();
+        });
+
+        // Back to Dashboard
+        document.getElementById('back-to-dashboard').addEventListener('click', () => {
+          showDashboard();
+        });
+
+        // Modal Close Buttons
+        document.getElementById('close-import-modal').addEventListener('click', () => {
+          hideImportModal();
+        });
+
+        document.getElementById('close-stats-modal').addEventListener('click', () => {
+          hideStatsModal();
+        });
+
+        // Export Data
+        document.getElementById('export-data-btn').addEventListener('click', () => {
+          exportData();
+        });
+
+        // Reset Progress
+        document.getElementById('reset-progress-btn').addEventListener('click', () => {
+          if (
+            confirm('Er du sikker på, at du vil nulstille al fremgang? Dette kan ikke fortrydes.')
+          ) {
+            srsManager.resetAllProgress();
+            updateStatsDisplay();
+            hideStatsModal();
+            alert('Al fremgang er blevet nulstillet.');
+          }
+        });
+      }
+
+      function startReviewSession() {
+        const stats = srsManager.getStats();
+
+        if (stats.due === 0 && stats.new === 0) {
+          alert('Ingen kort at gennemgå! Importer nogle ord fra en lektion først.');
+          return;
+        }
+
+        document.getElementById('dashboard-section').style.display = 'none';
+        document.getElementById('review-section').style.display = 'block';
+
+        currentSession = new SRSReviewSession('srs-container', srsManager, {
+          sessionSize: 20,
+          showProgress: true,
+          autoSpeak: true,
+        });
+      }
+
+      function showDashboard() {
+        document.getElementById('review-section').style.display = 'none';
+        document.getElementById('dashboard-section').style.display = 'block';
+        updateStatsDisplay();
+      }
+
+      function showImportModal() {
+        const modal = document.getElementById('import-modal');
+        const lessonList = document.getElementById('lesson-list');
+
+        lessonList.innerHTML = Object.keys(sampleLessons)
+          .map((lessonId) => {
+            const count = sampleLessons[lessonId].length;
+            return `
+                    <button class="btn" style="margin: 0.5rem;" data-lesson="${lessonId}">
+                        Lektion ${lessonId.split('-')[0]} (${count} ord)
+                    </button>
+                `;
+          })
+          .join('');
+
+        lessonList.querySelectorAll('button').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            importLesson(btn.dataset.lesson);
+          });
+        });
+
+        modal.style.display = 'block';
+      }
+
+      function hideImportModal() {
+        document.getElementById('import-modal').style.display = 'none';
+      }
+
+      function importLesson(lessonId) {
+        const words = sampleLessons[lessonId];
+        if (!words) return;
+
+        const imported = srsManager.importFromLesson(lessonId, words);
+        alert(`Importeret ${imported.length} ord fra lektion ${lessonId}!`);
+        hideImportModal();
+        updateStatsDisplay();
+      }
+
+      function showStatsModal() {
+        const modal = document.getElementById('stats-modal');
+        const stats = srsManager.getStats();
+        const detailedStats = document.getElementById('detailed-stats');
+
+        const retention7d = srsManager.getRetentionRate(7);
+        const retention30d = srsManager.getRetentionRate(30);
+
+        detailedStats.innerHTML = `
+                <div style="display: grid; gap: 1.5rem;">
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="margin-bottom: 1rem; color: #2c3e50;">Generel Statistik</h4>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                            <div><strong>Totale kort:</strong> ${stats.total}</div>
+                            <div><strong>Totale gennemgange:</strong> ${stats.totalReviews}</div>
+                            <div><strong>Samlet nøjagtighed:</strong> ${stats.overallAccuracy}%</div>
+                            <div><strong>Gennemsnitlig lethed:</strong> ${stats.avgEasiness}</div>
+                        </div>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="margin-bottom: 1rem; color: #2c3e50;">Fastholdelse</h4>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                            <div><strong>7 dage:</strong> ${retention7d}%</div>
+                            <div><strong>30 dage:</strong> ${retention30d}%</div>
+                        </div>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="margin-bottom: 1rem; color: #2c3e50;">I dag</h4>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                            <div><strong>Nye kort:</strong> ${stats.dailyStats.newCards}</div>
+                            <div><strong>Gennemgange:</strong> ${stats.dailyStats.reviews}</div>
+                            <div><strong>Korrekte:</strong> ${stats.dailyStats.correctReviews}</div>
+                            <div><strong>Nøjagtighed:</strong> ${stats.dailyStats.reviews > 0 ? Math.round((stats.dailyStats.correctReviews / stats.dailyStats.reviews) * 100) : 0}%</div>
+                        </div>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 12px;">
+                        <h4 style="margin-bottom: 1rem; color: #2c3e50;">Indstillinger</h4>
+                        <div style="display: grid; gap: 0.5rem;">
+                            <div><strong>Nye kort per dag:</strong> ${stats.settings.newCardsPerDay}</div>
+                            <div><strong>Gennemgange per dag:</strong> ${stats.settings.reviewsPerDay}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        modal.style.display = 'block';
+      }
+
+      function hideStatsModal() {
+        document.getElementById('stats-modal').style.display = 'none';
+      }
+
+      function exportData() {
+        const data = srsManager.exportData();
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `ruslaering-srs-export-${Date.now()}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+
+      // Initialize on page load
+      document.addEventListener('DOMContentLoaded', () => {
+        initDashboard();
+      });
+    </script>
+
+    <style>
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      .modal-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        z-index: 1000;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .modal-content h3 {
+        margin-bottom: 1rem;
+        color: #2c3e50;
+      }
+
+      .info-section h2 {
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .info-section h3 {
+        color: #2c3e50;
+        font-size: 1.3rem;
+      }
+
+      .info-section ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .info-section li {
+        padding-left: 1.5rem;
+        position: relative;
+        margin-bottom: 0.75rem;
+      }
+
+      .info-section li:before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: #2ecc71;
+        font-weight: bold;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,1202 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 2: Det Kyrilliske Alfabet | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #2c5aa0;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Brand Grid === */
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .brand-card {
+      background: #fdfdfd;
+      border: 1px solid var(--editorial-line);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .brand-card:hover {
+      border-color: var(--editorial-accent);
+      background: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .brand-logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .brand-name {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--editorial-black);
+    }
+
+    .brand-desc {
+      font-size: 0.8rem;
+      color: var(--editorial-gray);
+      text-align: center;
+    }
+
+    /* === Letter Display === */
+    .letter-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .letter-big {
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      display: block;
+      line-height: 1;
+    }
+
+    .letter-big:hover {
+      color: var(--editorial-accent);
+    }
+
+    .letter-small {
+      font-size: clamp(4rem, 12vw, 8rem);
+      font-family: var(--font-serif);
+      color: var(--editorial-gray);
+      margin-left: 2rem;
+    }
+
+    .letter-sound {
+      font-family: 'SF Mono', 'Monaco', monospace;
+      font-size: 1rem;
+      color: var(--editorial-gray);
+      margin-top: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* === Letter Grid === */
+    .letter-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .letter-card {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .letter-card:nth-child(6n) {
+      border-right: none;
+    }
+
+    .letter-card:hover {
+      background: var(--editorial-light);
+    }
+
+    .letter-card.familiar {
+      background: #e8f5e9;
+    }
+
+    .letter-card.similar {
+      background: #fff3cd;
+    }
+
+    .letter-card.new {
+      background: #ffebee;
+    }
+
+    .letter-card-russian {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .letter-card-sound {
+      font-size: 0.75rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Comparison Grid === */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .comparison-item {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .comparison-item:last-child {
+      border-right: none;
+    }
+
+    .comparison-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .comparison-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-gray);
+      margin-bottom: 1rem;
+    }
+
+    .comparison-letter {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.5rem;
+    }
+
+    .comparison-note {
+      font-size: 0.9rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Word Examples === */
+    .word-examples {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .word-example {
+      padding: 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .word-example:nth-child(odd) {
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .word-example:nth-last-child(-n + 2) {
+      border-bottom: none;
+    }
+
+    .word-example:hover {
+      background: var(--editorial-light);
+    }
+
+    .word-russian {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .word-transcription {
+      font-family: 'SF Mono', 'Monaco', monospace;
+      font-size: 0.8rem;
+      color: var(--editorial-gray);
+      margin-bottom: 0.25rem;
+    }
+
+    .word-danish {
+      font-size: 0.9rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Exercise Sections === */
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 1.5rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(6n) {
+      border-right: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-item .sound {
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
+    /* === Legend === */
+    .legend {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 2px;
+    }
+
+    .legend-color.familiar {
+      background: #e8f5e9;
+      border: 1px solid #4caf50;
+    }
+
+    .legend-color.similar {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+    }
+
+    .legend-color.new {
+      background: #ffebee;
+      border: 1px solid #f44336;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .letter-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .letter-card:nth-child(6n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .letter-card:nth-child(4n) {
+        border-right: none;
+      }
+
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-item {
+        border-right: none;
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .comparison-item:last-child {
+        border-bottom: none;
+      }
+
+      .word-examples {
+        grid-template-columns: 1fr;
+      }
+
+      .word-example:nth-child(odd) {
+        border-right: none;
+      }
+
+      .word-example {
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .word-example:last-child {
+        border-bottom: none;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .summary-item:nth-child(6n) {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .summary-item:nth-child(4n) {
+        border-right: none;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+  <script type="module" src="/js/header.ts"></script>
+  <script type="module" src="/js/footer.ts"></script>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <div class="container">
+    <samovar-header></samovar-header>
+
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 2</div>
+        <h1>Det Kyrilliske Alfabet</h1>
+        <p class="lead">
+          33 bogstaver. Mange ligner dem, du kender. Nogle er fælder. Lad os knække koden.
+        </p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: THE GOOD NEWS
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Den gode nyhed</h2>
+        </div>
+
+        <p class="narrative">
+          Mange tror, at det kyrilliske alfabet er helt fremmed. Men
+          <strong>6 bogstaver</strong> ser ud og lyder præcis som på dansk.
+        </p>
+
+        <div class="letter-display">
+          <span class="letter-big" onclick="TTS.speak('А')">А</span>
+          <span class="letter-small">а</span>
+          <div class="letter-sound">som A i "abe"</div>
+        </div>
+
+        <p class="narrative" style="text-align: center; font-size: 1rem">
+          Klik på bogstavet for at høre det.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 2: FAMILIAR LETTERS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 2</div>
+          <h2 class="chapter-title">Gamle venner</h2>
+        </div>
+
+        <p class="narrative">
+          Disse seks bogstaver kender du allerede. De ser ud og lyder som på dansk.
+        </p>
+
+        <div class="letter-grid" style="grid-template-columns: repeat(6, 1fr)">
+          <div class="letter-card familiar" onclick="TTS.speak('А')">
+            <div class="letter-card-russian">А а</div>
+            <div class="letter-card-sound">[a]</div>
+          </div>
+          <div class="letter-card familiar" onclick="TTS.speak('Е')">
+            <div class="letter-card-russian">Е е</div>
+            <div class="letter-card-sound">[je]</div>
+          </div>
+          <div class="letter-card familiar" onclick="TTS.speak('К')">
+            <div class="letter-card-russian">К к</div>
+            <div class="letter-card-sound">[k]</div>
+          </div>
+          <div class="letter-card familiar" onclick="TTS.speak('М')">
+            <div class="letter-card-russian">М м</div>
+            <div class="letter-card-sound">[m]</div>
+          </div>
+          <div class="letter-card familiar" onclick="TTS.speak('О')">
+            <div class="letter-card-russian">О о</div>
+            <div class="letter-card-sound">[o]</div>
+          </div>
+          <div class="letter-card familiar" onclick="TTS.speak('Т')">
+            <div class="letter-card-russian">Т т</div>
+            <div class="letter-card-sound">[t]</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Prøv selv</div>
+          <p>
+            Med disse 6 bogstaver kan du allerede læse:
+            <strong>МАМА</strong> (mor), <strong>КОТ</strong> (kat), <strong>ТОМ</strong> (bind).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             MODERN: RUSSIAN IN THE WILD
+             ============================================ -->
+    <section class="editorial-section" style="background: #fafafa;">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          Russisk i det fri
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Apps du vil se overalt</h2>
+        </div>
+        <p class="narrative">
+          Hvis du lander i Moskva eller Skt. Petersborg i dag, vil du se disse navne på hver
+          eneste gade og telefon. Kan du læse dem?
+        </p>
+
+        <div class="brand-grid">
+          <div class="brand-card" onclick="TTS.speak('Яндекс')">
+            <div class="brand-logo" style="color: #ff0000;">Яндекс</div>
+            <div class="brand-name">Yandex</div>
+            <div class="brand-desc">Søgemaskine, taxi, madlevering. Russlands Google.</div>
+          </div>
+          <div class="brand-card" onclick="TTS.speak('В Контакте')">
+            <div class="brand-logo" style="color: #0077ff;">vk</div>
+            <div class="brand-name">ВКонтакте</div>
+            <div class="brand-desc">Det største sociale medie. Russlands Facebook.</div>
+          </div>
+          <div class="brand-card" onclick="TTS.speak('Озон')">
+            <div class="brand-logo" style="color: #005bff;">OZON</div>
+            <div class="brand-name">Ozon</div>
+            <div class="brand-desc">Online shopping. Russlands Amazon.</div>
+          </div>
+          <div class="brand-card" onclick="TTS.speak('Сбер')">
+            <div class="brand-logo" style="color: #21a038;">СБЕР</div>
+            <div class="brand-name">Sber</div>
+            <div class="brand-desc">Den største bank og tech-økosystem.</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Hvorfor lære det?</div>
+          <p>
+            At lære alfabetet handler ikke kun om litteratur. Det handler om at kunne bestille
+            en taxi, finde mad eller logge på Wi-Fi.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: FALSE FRIENDS
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">Falske venner</h2>
+        </div>
+
+        <p class="narrative">
+          Disse bogstaver er fælder. De <strong>ligner</strong> latinske bogstaver, men har
+          <strong>helt andre lyde</strong>.
+        </p>
+
+        <div class="comparison-grid">
+          <div class="comparison-item" onclick="TTS.speak('В')">
+            <div class="comparison-label">Ligner B</div>
+            <div class="comparison-letter">В в</div>
+            <div class="comparison-note">Men lyder som V</div>
+          </div>
+          <div class="comparison-item" onclick="TTS.speak('Н')">
+            <div class="comparison-label">Ligner H</div>
+            <div class="comparison-letter">Н н</div>
+            <div class="comparison-note">Men lyder som N</div>
+          </div>
+          <div class="comparison-item" onclick="TTS.speak('Р')">
+            <div class="comparison-label">Ligner P</div>
+            <div class="comparison-letter">Р р</div>
+            <div class="comparison-note">Men lyder som R</div>
+          </div>
+        </div>
+
+        <div class="comparison-grid">
+          <div class="comparison-item" onclick="TTS.speak('С')">
+            <div class="comparison-label">Ligner C</div>
+            <div class="comparison-letter">С с</div>
+            <div class="comparison-note">Men lyder som S</div>
+          </div>
+          <div class="comparison-item" onclick="TTS.speak('У')">
+            <div class="comparison-label">Ligner Y</div>
+            <div class="comparison-letter">У у</div>
+            <div class="comparison-note">Men lyder som U</div>
+          </div>
+          <div class="comparison-item" onclick="TTS.speak('Х')">
+            <div class="comparison-label">Ligner X</div>
+            <div class="comparison-letter">Х х</div>
+            <div class="comparison-note">Men lyder som CH</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Den store fælde</div>
+          <p>
+            <strong>РЕСТОРАН</strong> læses ikke "PESTOPAH" — det er "RESTORAN" (restaurant)!
+          </p>
+          <p style="margin-top: 0.5rem; font-style: italic;">
+            Husk: Р = R, С = S, Н = N. Det er lidt ligesom at lære et hemmeligt kodesprog.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 4: NEW LETTERS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 4</div>
+          <h2 class="chapter-title">Nye bekendtskaber</h2>
+        </div>
+
+        <p class="narrative">
+          Disse bogstaver findes ikke i det latinske alfabet. De er helt nye — men ikke svære at
+          lære.
+        </p>
+
+        <div class="letter-grid">
+          <div class="letter-card new" onclick="TTS.speak('Б')">
+            <div class="letter-card-russian">Б б</div>
+            <div class="letter-card-sound">[b]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Г')">
+            <div class="letter-card-russian">Г г</div>
+            <div class="letter-card-sound">[g]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Д')">
+            <div class="letter-card-russian">Д д</div>
+            <div class="letter-card-sound">[d]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Ж')">
+            <div class="letter-card-russian">Ж ж</div>
+            <div class="letter-card-sound">[zh]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('З')">
+            <div class="letter-card-russian">З з</div>
+            <div class="letter-card-sound">[z]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('И')">
+            <div class="letter-card-russian">И и</div>
+            <div class="letter-card-sound">[i]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Й')">
+            <div class="letter-card-russian">Й й</div>
+            <div class="letter-card-sound">[j]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Л')">
+            <div class="letter-card-russian">Л л</div>
+            <div class="letter-card-sound">[l]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('П')">
+            <div class="letter-card-russian">П п</div>
+            <div class="letter-card-sound">[p]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Ф')">
+            <div class="letter-card-russian">Ф ф</div>
+            <div class="letter-card-sound">[f]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Ц')">
+            <div class="letter-card-russian">Ц ц</div>
+            <div class="letter-card-sound">[ts]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Ч')">
+            <div class="letter-card-russian">Ч ч</div>
+            <div class="letter-card-sound">[tch]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Ш')">
+            <div class="letter-card-russian">Ш ш</div>
+            <div class="letter-card-sound">[sh]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Щ')">
+            <div class="letter-card-russian">Щ щ</div>
+            <div class="letter-card-sound">[shch]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Ы')">
+            <div class="letter-card-russian">Ы ы</div>
+            <div class="letter-card-sound">[y]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Э')">
+            <div class="letter-card-russian">Э э</div>
+            <div class="letter-card-sound">[e]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Ю')">
+            <div class="letter-card-russian">Ю ю</div>
+            <div class="letter-card-sound">[ju]</div>
+          </div>
+          <div class="letter-card new" onclick="TTS.speak('Я')">
+            <div class="letter-card-russian">Я я</div>
+            <div class="letter-card-sound">[ja]</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 5: SPECIAL SIGNS
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 5</div>
+          <h2 class="chapter-title">De tavse tegn</h2>
+        </div>
+
+        <p class="narrative">
+          To bogstaver har ingen egen lyd. De påvirker bogstaverne omkring dem.
+        </p>
+
+        <div class="comparison-grid" style="grid-template-columns: repeat(2, 1fr)">
+          <div class="comparison-item">
+            <div class="comparison-label">Blødt tegn</div>
+            <div class="comparison-letter">Ь ь</div>
+            <div class="comparison-note">Gør konsonanten blød</div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-label">Hårdt tegn</div>
+            <div class="comparison-letter">Ъ ъ</div>
+            <div class="comparison-note">Skaber en kort pause</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Eksempel</div>
+          <p>
+            <strong>мать</strong> [mat'] — mor (blødt T)<br />
+            <strong>объект</strong> [ob-jekt] — objekt (pause mellem Б og Е)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Lad os læse.</h2>
+        <p>Du kender nu alle 33 bogstaver. Tid til at sætte dem sammen til ord.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 6: READING PRACTICE
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 6</div>
+          <h2 class="chapter-title">Læsetræning</h2>
+        </div>
+
+        <div class="word-examples">
+          <div class="word-example" onclick="TTS.speak('Россия')">
+            <div class="word-russian">Россия</div>
+            <div class="word-transcription">Ras-si-ja</div>
+            <div class="word-danish">Rusland</div>
+          </div>
+          <div class="word-example" onclick="TTS.speak('Москва')">
+            <div class="word-russian">Москва</div>
+            <div class="word-transcription">Mas-kva</div>
+            <div class="word-danish">Moskva</div>
+          </div>
+          <div class="word-example" onclick="TTS.speak('Борщ')">
+            <div class="word-russian">Борщ</div>
+            <div class="word-transcription">Borshch</div>
+            <div class="word-danish">Borsjtj (rødbedesuppe)</div>
+          </div>
+          <div class="word-example" onclick="TTS.speak('Матрешка')">
+            <div class="word-russian">Матрешка</div>
+            <div class="word-transcription">Ma-trjosh-ka</div>
+            <div class="word-danish">Matrjosjka (dukke)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Hvilket bogstav hører du?</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Kombiner bogstav og lyd</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: WRITING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Skriv bogstavet</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="writing-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Det fulde alfabet</h2>
+        </div>
+
+        <div class="summary-grid" id="alphabet-summary"></div>
+
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-color familiar"></div>
+            <span>Gamle venner (ligner og lyder ens)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color similar"></div>
+            <span>Falske venner (ligner men lyder anderledes)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-color new"></div>
+            <span>Nye lyde</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Klar til næste skridt?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Du har nu snuset til alle 33 bogstaver. Vi ses i næste lektion, hvor vi lærer tal!
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="01-intro-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">Dit første ord</span>
+          </a>
+          <a href="03-numbers-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">Tal fra 1 til 10</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+
+    <samovar-footer></samovar-footer>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // ALPHABET DATA
+    // ============================================
+    const alphabetData = [
+      { char: 'А', sound: '[a]', type: 'familiar' },
+      { char: 'Б', sound: '[b]', type: 'new' },
+      { char: 'В', sound: '[v]', type: 'similar' },
+      { char: 'Г', sound: '[g]', type: 'new' },
+      { char: 'Д', sound: '[d]', type: 'new' },
+      { char: 'Е', sound: '[je]', type: 'familiar' },
+      { char: 'Ё', sound: '[jo]', type: 'new' },
+      { char: 'Ж', sound: '[zh]', type: 'new' },
+      { char: 'З', sound: '[z]', type: 'new' },
+      { char: 'И', sound: '[i]', type: 'new' },
+      { char: 'Й', sound: '[j]', type: 'new' },
+      { char: 'К', sound: '[k]', type: 'familiar' },
+      { char: 'Л', sound: '[l]', type: 'new' },
+      { char: 'М', sound: '[m]', type: 'familiar' },
+      { char: 'Н', sound: '[n]', type: 'similar' },
+      { char: 'О', sound: '[o]', type: 'familiar' },
+      { char: 'П', sound: '[p]', type: 'new' },
+      { char: 'Р', sound: '[r]', type: 'similar' },
+      { char: 'С', sound: '[s]', type: 'similar' },
+      { char: 'Т', sound: '[t]', type: 'familiar' },
+      { char: 'У', sound: '[u]', type: 'similar' },
+      { char: 'Ф', sound: '[f]', type: 'new' },
+      { char: 'Х', sound: '[ch]', type: 'similar' },
+      { char: 'Ц', sound: '[ts]', type: 'new' },
+      { char: 'Ч', sound: '[tch]', type: 'new' },
+      { char: 'Ш', sound: '[sh]', type: 'new' },
+      { char: 'Щ', sound: '[shch]', type: 'new' },
+      { char: 'Ъ', sound: '[-]', type: 'new' },
+      { char: 'Ы', sound: '[y]', type: 'new' },
+      { char: 'Ь', sound: "[']", type: 'new' },
+      { char: 'Э', sound: '[e]', type: 'new' },
+      { char: 'Ю', sound: '[ju]', type: 'new' },
+      { char: 'Я', sound: '[ja]', type: 'new' },
+    ];
+
+    function renderAlphabetSummary() {
+      const container = document.getElementById('alphabet-summary');
+      if (!container) return;
+
+      alphabetData.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = `summary-item ${item.type}`;
+        div.innerHTML = `
+                    <div class="russian">${item.char}</div>
+                    <div class="sound">${item.sound}</div>
+                `;
+        div.addEventListener('click', () => TTS.speak(item.char));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      { audio: 'Б', options: ['Б', 'В', 'П'], correct: 0 },
+      { audio: 'Р', options: ['Р', 'П', 'В'], correct: 0 },
+      { audio: 'Ш', options: ['Ш', 'Щ', 'Ч'], correct: 0 },
+      { audio: 'Ы', options: ['И', 'Ы', 'Э'], correct: 1 },
+    ];
+
+    const matchingData = [
+      { russian: 'Б', danish: '[b]' },
+      { russian: 'Г', danish: '[g]' },
+      { russian: 'Д', danish: '[d]' },
+      { russian: 'Ж', danish: '[zh]' },
+      { russian: 'З', danish: '[z]' },
+    ];
+
+    const writingData = [
+      { russian: 'А', danish: 'Som A i abe', hint: '1 bogstav' },
+      { russian: 'К', danish: 'Som K i kage', hint: '1 bogstav' },
+      { russian: 'М', danish: 'Som M i mad', hint: '1 bogstav' },
+    ];
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // INITIALIZE
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAlphabetSummary();
+      initScrollAnimations();
+      initProgressBar();
+
+      // Initialize lesson engine components
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+      new WritingExercise('writing-exercise', writingData);
+
+      // Complete lesson logic
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      if (completeBtn) {
+        completeBtn.addEventListener('click', () => {
+          Progress.markLessonComplete('02-alphabet');
+          completeBtn.textContent = '✓ Færdig!';
+          completeBtn.style.background = '#2ecc71';
+          completeBtn.disabled = true;
+        });
+
+        if (Progress.isLessonComplete('02-alphabet')) {
+          completeBtn.textContent = '✓ Færdig!';
+          completeBtn.style.background = '#2ecc71';
+          completeBtn.disabled = true;
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

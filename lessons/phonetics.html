@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Фонетика и Ритм | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .phonetic-card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        margin-bottom: 40px;
+      }
+
+      .letter-box {
+        display: inline-block;
+        border: 2px solid #eee;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-family: monospace;
+        font-size: 1.2rem;
+        margin: 0 5px;
+      }
+
+      .arrow-right {
+        color: var(--text-faded);
+        margin: 0 10px;
+      }
+
+      /* Intonation Visualization */
+      .intonation-graph {
+        height: 100px;
+        position: relative;
+        border-bottom: 2px solid #eee;
+        margin: 20px 0;
+      }
+
+      .curve-ik1 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M0,25 Q60,25 80,45" fill="none" stroke="%232c3e50" stroke-width="2"/></svg>');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+
+      .curve-ik3 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M0,25 Q40,25 50,5 Q60,25 100,25" fill="none" stroke="%23e74c3c" stroke-width="2"/></svg>');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+      }
+
+      .example-word {
+        font-size: 1.5rem;
+        margin: 20px 0;
+      }
+
+      .stress-mark {
+        color: var(--accent-red);
+        font-weight: bold;
+      }
+
+      .transcription {
+        color: #888;
+        font-family: monospace;
+        font-size: 1rem;
+      }
+
+      /* Exercise */
+      .stress-target {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin: 30px 0;
+      }
+
+      .char-tile {
+        width: 40px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        background: white;
+        color: var(--text-ink);
+        transition: all 0.2s;
+        cursor: default;
+      }
+
+      .char-tile.clickable-vowel {
+        cursor: pointer;
+        border-color: var(--accent-blue);
+        background: #f0f8ff;
+        color: var(--accent-blue);
+        font-weight: bold;
+      }
+
+      .char-tile.clickable-vowel:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .char-tile.correct-stress {
+        background: var(--success-color);
+        color: white;
+        border-color: var(--success-color);
+      }
+
+      .char-tile.wrong-stress {
+        background: var(--error-color);
+        color: white;
+        border-color: var(--error-color);
+        animation: shake 0.4s;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        75% {
+          transform: translateX(5px);
+        }
+      }
+
+      .ik-btn {
+        padding: 15px;
+        border: 2px solid #eee;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        margin-bottom: 10px;
+        text-align: left;
+        transition: all 0.2s;
+      }
+
+      .ik-btn:hover {
+        border-color: var(--accent-blue);
+      }
+
+      .ik-btn.selected {
+        border-color: var(--accent-blue);
+        background: #e3f2fd;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="cases.html">Падежи</a>
+          <a
+            href="phonetics.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Фонетика</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Фонетика и Интонация</h1>
+          <p class="lead">
+            Русский язык — это музыка ударных и безударных слогов. Главный секрет хорошего акцента:
+            не произносите все буквы четко. Русский язык любит лень в безударных позициях.
+          </p>
+
+          <section id="reduction">
+            <h2>1. Редукция: Искусство "проглатывать" звуки</h2>
+            <p>
+              В датском языке гласные четкие. В русском гласная буква <strong>О</strong> звучит как
+              "О" только под ударением. Без ударения она превращается в "А".
+            </p>
+
+            <div class="phonetic-card">
+              <h3>Золотое правило "Аканья"</h3>
+              <div style="text-align: center; margin: 30px 0">
+                <span class="letter-box">О</span>
+                <span style="font-size: 0.9rem; display: inline-block; vertical-align: middle"
+                  >под ударением</span
+                >
+                <span class="arrow-right">→</span>
+                <span
+                  class="letter-box"
+                  style="border-color: var(--accent-blue); color: var(--accent-blue)"
+                  >[О]</span
+                >
+              </div>
+              <div style="text-align: center; margin: 30px 0">
+                <span class="letter-box">О</span>
+                <span style="font-size: 0.9rem; display: inline-block; vertical-align: middle"
+                  >без ударения</span
+                >
+                <span class="arrow-right">→</span>
+                <span
+                  class="letter-box"
+                  style="border-color: var(--accent-red); color: var(--accent-red)"
+                  >[А]</span
+                >
+              </div>
+
+              <div class="example-word" style="text-align: center">
+                М<span class="stress-mark">о</span>локо
+                <div class="transcription">[м а л а к ó]</div>
+                <div style="font-size: 0.9rem; color: #999; margin-top: 5px">(mælk)</div>
+              </div>
+              <div class="example-word" style="text-align: center">
+                Хор<span class="stress-mark">о</span>шо
+                <div class="transcription">[х а р а ш ó]</div>
+                <div style="font-size: 0.9rem; color: #999; margin-top: 5px">(godt)</div>
+              </div>
+            </div>
+
+            <!-- MICRO PRACTICE: Reduction -->
+            <div class="inline-quiz">
+              <span class="inline-question">Как вы прочитаете слово "Окно" (Vindue)?</span>
+              <div class="inline-options">
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, false, 'Нет. Первая О без ударения.')"
+                >
+                  [Окно]
+                </button>
+                <button class="inline-btn" onclick="checkInline(this, true, 'Верно! Ак-но.')">
+                  [Акно]
+                </button>
+              </div>
+              <div class="inline-feedback"></div>
+            </div>
+          </section>
+
+          <section id="intonation">
+            <h2>2. Интонация (Мелодика речи)</h2>
+            <p>Как задать вопрос без вопросительного слова? Интонация делает всю работу.</p>
+
+            <div class="phonetic-card">
+              <h3>ИК-1: Утверждение (Точка)</h3>
+              <p>Голос спокойно идет вниз в конце фразы.</p>
+              <div class="intonation-graph">
+                <div class="curve-ik1"></div>
+              </div>
+              <div style="text-align: center"><strong>Это Антон.</strong> ↘</div>
+            </div>
+
+            <div class="phonetic-card">
+              <h3>ИК-3: Вопрос (Знак вопроса)</h3>
+              <p>Резкий скачок голоса вверх на главном слове.</p>
+              <div class="intonation-graph">
+                <div class="curve-ik3"></div>
+              </div>
+              <div style="text-align: center"><strong>Это Антон?</strong> ↗</div>
+            </div>
+
+            <!-- MICRO PRACTICE: Intonation -->
+            <div class="inline-quiz">
+              <span class="inline-question">Вы слышите резкий подъем голоса. Что это?</span>
+              <div class="inline-options">
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, true, 'Да! Вопрос требует резкого подъема.')"
+                >
+                  Вопрос (?)
+                </button>
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, false, 'Нет. Утверждение идет плавно вниз.')"
+                >
+                  Утверждение (.)
+                </button>
+              </div>
+              <div class="inline-feedback"></div>
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Тренажер ритма</h2>
+            <p>Нажмите на ударную гласную. (Помните: в слове только одно ударение!).</p>
+
+            <div class="game-container" style="text-align: center; padding: 50px 20px">
+              <div id="word-display" class="stress-target">
+                <!-- Words -->
+              </div>
+              <div
+                id="feedback"
+                class="feedback"
+                style="margin-top: 20px; text-align: center"
+              ></div>
+              <button
+                class="btn"
+                id="next-btn"
+                style="margin-top: 20px; display: none"
+                onclick="nextWord()"
+              >
+                Дальше →
+              </button>
+            </div>
+
+            <h3 style="margin-top: 40px">Тест на слух (Интонация)</h3>
+            <p>Прочитайте фразу с разной интонацией. Какая из них вопрос?</p>
+            <div class="game-container">
+              <div style="margin-bottom: 20px; font-size: 1.2rem">
+                Фраза: <strong>Ты дома</strong>
+              </div>
+              <div id="ik-options">
+                <button class="ik-btn" onclick="checkIK(this, false)">
+                  ↘ Ты дома. (Спокойно вниз)
+                </button>
+                <button class="ik-btn" onclick="checkIK(this, true)">
+                  ↗ Ты дома? (Резко вверх)
+                </button>
+              </div>
+              <div id="ik-feedback" class="feedback"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Совет</strong>
+            Чтобы звучать по-русски, говорите безударные слоги очень быстро и нечетко, а ударный
+            слог тяните долго.
+            <em>"Ма-ла-кОООО"</em>.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar.</div>
+      </footer>
+    </div>
+
+    <script>
+      // Inline Quiz Logic
+      function checkInline(btn, isCorrect, msg) {
+        const container = btn.closest('.inline-quiz');
+        const feedback = container.querySelector('.inline-feedback');
+
+        // Reset buttons style in this group
+        container.querySelectorAll('.inline-btn').forEach((b) => {
+          b.style.background = 'white';
+          b.style.color = 'var(--text-faded)';
+          b.style.borderColor = '#ccc';
+        });
+
+        if (isCorrect) {
+          btn.style.background = 'var(--success-color)';
+          btn.style.color = 'white';
+          btn.style.borderColor = 'var(--success-color)';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback correct';
+        } else {
+          btn.style.background = 'var(--error-color)';
+          btn.style.color = 'white';
+          btn.style.borderColor = 'var(--error-color)';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback incorrect';
+        }
+      }
+
+      // Stress Game
+      const words = [
+        { text: 'Собака', stressIdx: 3 }, // С о б [а] к а
+        { text: 'Молоко', stressIdx: 5 }, // м о л о к [о]
+        { text: 'Природа', stressIdx: 4 }, // п р и р [о] д а
+        { text: 'Хорошо', stressIdx: 5 }, // х о р о ш [о]
+        { text: 'Бабушка', stressIdx: 1 }, // б [а] б у ш к а
+      ];
+
+      let currentWord = 0;
+      const display = document.getElementById('word-display');
+      const nextBtn = document.getElementById('next-btn');
+      const feedback = document.getElementById('feedback');
+
+      function renderWord() {
+        const w = words[currentWord];
+        display.innerHTML = '';
+        feedback.style.display = 'none';
+        nextBtn.style.display = 'none';
+
+        w.text.split('').forEach((char, i) => {
+          const tile = document.createElement('div');
+          tile.innerText = char;
+          tile.className = 'char-tile';
+
+          if ('аеёиоуыэюяАЕЁИОУЫЭЮЯ'.includes(char)) {
+            tile.classList.add('clickable-vowel');
+            tile.onclick = () => checkStress(i, tile, w.stressIdx);
+          }
+          display.appendChild(tile);
+        });
+      }
+
+      function checkStress(idx, tile, correctIdx) {
+        if (document.querySelector('.correct-stress')) return; // already solved
+
+        if (idx === correctIdx) {
+          tile.classList.add('correct-stress');
+          feedback.innerText = 'Верно! Ударный слог сильный.';
+          feedback.className = 'feedback correct';
+          nextBtn.style.display = 'inline-block';
+        } else {
+          tile.classList.add('wrong-stress');
+          feedback.innerText = 'Нет. Послушайте ритм еще раз.';
+          feedback.className = 'feedback incorrect';
+          setTimeout(() => tile.classList.remove('wrong-stress'), 500);
+        }
+      }
+
+      function nextWord() {
+        currentWord = (currentWord + 1) % words.length;
+        renderWord();
+      }
+
+      // Intonation Check
+      function checkIK(btn, isQuestion) {
+        if (isQuestion) {
+          btn.style.backgroundColor = '#d4edda';
+          btn.style.borderColor = 'green';
+          document.getElementById('ik-feedback').innerText =
+            'Правильно! Интонация идет резко вверх.';
+          document.getElementById('ik-feedback').className = 'feedback correct';
+        } else {
+          btn.style.backgroundColor = '#f8d7da';
+          btn.style.borderColor = 'red';
+          document.getElementById('ik-feedback').innerText = 'Нет, это утверждение (точка).';
+          document.getElementById('ik-feedback').className = 'feedback incorrect';
+        }
+      }
+
+      renderWord();
+    </script>
+  </body>
+</html>

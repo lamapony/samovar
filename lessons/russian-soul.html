@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Русская Душа (C1) | Samovar</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/advanced.css" />
+  <style>
+    .soul-card {
+      background: #fff;
+      border-left: 4px solid var(--accent-gold);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .soul-word {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--text-ink);
+      margin-bottom: 5px;
+    }
+
+    .soul-trans {
+      color: var(--text-faded);
+      font-style: italic;
+      margin-bottom: 15px;
+      display: block;
+    }
+  </style>
+  <script type="module" src="/js/header.ts"></script>
+  <script type="module" src="/js/footer.ts"></script>
+</head>
+
+<body>
+  <div class="container">
+    <samovar-header></samovar-header>
+
+    <main>
+      <article class="content-block section-advanced">
+        <div class="content-main">
+          <span class="tag active">Культура</span>
+          <h1>Русская Душа: Словарь Эмоций</h1>
+          <p class="lead">
+            Есть слова, которые невозможно перевести одним словом. Они описывают состояния души,
+            которые являются ключом к пониманию русского менталитета.
+          </p>
+
+          <div class="visual-concept" style="text-align: center; margin: 30px 0">
+            <img src="../images/russian_soul_landscape_1763982135372.png" alt="Russian Soul Landscape" style="
+                  max-width: 100%;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                " />
+            <p style="font-size: 0.9rem; color: #aaa; margin-top: 10px">
+              "Над вечным покоем" (атмосфера)
+            </p>
+          </div>
+
+          <h2>Непереводимое</h2>
+
+          <div class="style-topographic">
+            <div class="soul-word">Тоска</div>
+            <span class="soul-trans">~ Melankoli, længsel, kedsomhed, angst (men dybere)</span>
+            <p>
+              Набоков писал: "Ни одно слово в английском не передает всех оттенков тоски. Это
+              чувство великой духовной боли без какой-либо особой причины. Это смутная боль души,
+              страстное желание чего-то отсутствующего."
+            </p>
+          </div>
+
+          <div class="style-topographic">
+            <div class="soul-word">Пошлость</div>
+            <span class="soul-trans">~ Vulgaritet, banalitet, falskhed</span>
+            <p>
+              Это не просто "вульгарность". Это ложная значительность, фальшивая красота,
+              мещанство. Пластиковые цветы, золотые унитазы и пафосные речи — это пошлость.
+            </p>
+          </div>
+
+          <div class="style-topographic">
+            <div class="soul-word">Авось</div>
+            <span class="soul-trans">~ Blind tillid til heldet</span>
+            <p>
+              Надежда на удачу, на то, что "само решится". "Сделать на авось" — сделать плохо,
+              надеясь, что пронесет. Но "русский авось" — это еще и вера в чудо.
+            </p>
+          </div>
+
+          <div class="style-topographic">
+            <div class="soul-word">Бытие</div>
+            <span class="soul-trans">~ Væren (eksistens med dybere mening)</span>
+            <p>
+              Не просто "жизнь" (liv), а существование в философском смысле. "Быт" (hverdagsliv)
+              убивает "бытие".
+            </p>
+          </div>
+
+          <h3>Практика: Карта Эмоций</h3>
+          <p>Выберите правильное слово для описания ситуации.</p>
+          <div id="soul-quiz" class="quiz-container"></div>
+        </div>
+      </article>
+    </main>
+
+    <samovar-footer></samovar-footer>
+  </div>
+
+  <script src="../js/quiz-engine.js"></script>
+  <script>
+    const questions = [
+      {
+        text: 'Вы сидите у окна, идет дождь, вам грустно, но вы не знаете почему. Вам чего-то хочется, но вы не знаете чего. Что это?',
+        options: [{ text: 'Скука' }, { text: 'Тоска' }, { text: 'Горе' }],
+        correctIndex: 1,
+        explanation: "Это классическая 'тоска' — беспричинная, глубокая меланхолия.",
+      },
+      {
+        text: 'Человек купил золотой телефон с бриллиантами, чтобы показать всем, какой он богатый. Как это назвать?',
+        options: [{ text: 'Роскошь' }, { text: 'Красота' }, { text: 'Пошлость' }],
+        correctIndex: 2,
+        explanation:
+          "Демонстративное богатство без вкуса, фальшивая значительность — это 'пошлость'.",
+      },
+      {
+        text: 'Студент не готовился к экзамену, но надеется, что вытянет легкий билет. На что он надеется?',
+        options: [{ text: 'На удачу' }, { text: 'На авось' }, { text: 'На знания' }],
+        correctIndex: 1,
+        explanation:
+          "Надежда на слепой случай, когда ты ничего не сделал для успеха — это 'на авось'.",
+      },
+    ];
+
+    new QuizEngine('soul-quiz', questions);
+  </script>
+</body>
+
+</html>

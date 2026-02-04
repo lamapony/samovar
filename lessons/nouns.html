@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Substantiver og Køn | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .gender-card {
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border-left: 5px solid transparent;
+      }
+
+      .gender-m {
+        background: #e3f2fd;
+        border-left-color: #2196f3;
+      }
+
+      .gender-f {
+        background: #fce4ec;
+        border-left-color: #e91e63;
+      }
+
+      .gender-n {
+        background: #f1f8e9;
+        border-left-color: #8bc34a;
+      }
+
+      .ending-highlight {
+        font-weight: bold;
+        color: var(--accent-red);
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+      }
+
+      .comparison-table th {
+        background: #f9f9f9;
+        font-family: var(--font-serif);
+      }
+
+      /* Drag and Drop improvements */
+      .drop-column {
+        transition:
+          background-color 0.3s,
+          transform 0.2s;
+      }
+
+      .drop-column.drag-over {
+        background-color: rgba(0, 0, 0, 0.05);
+        transform: scale(1.02);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .word-card {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 5px;
+        background: white;
+        border: 1px solid var(--accent-blue);
+        border-radius: 20px;
+        cursor: grab;
+        user-select: none;
+        font-weight: 500;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s;
+      }
+
+      .word-card:active {
+        cursor: grabbing;
+        transform: scale(0.95);
+      }
+
+      .word-card.correct {
+        background: var(--success-color);
+        color: white;
+        border-color: var(--success-color);
+        cursor: default;
+      }
+
+      .word-card.wrong {
+        background: var(--error-color);
+        color: white;
+        border-color: var(--error-color);
+        animation: shake 0.5s;
+      }
+
+      .hint-box {
+        background: #fff3cd;
+        color: #856404;
+        padding: 10px;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        min-height: 40px;
+        font-style: italic;
+        display: none;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        50% {
+          transform: translateX(5px);
+        }
+
+        75% {
+          transform: translateX(-5px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      /* Mobile Optimizations */
+      @media (max-width: 768px) {
+        .gender-card {
+          padding: 15px;
+          margin-bottom: 12px;
+        }
+
+        .comparison-table {
+          font-size: 0.85rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+          padding: 10px 8px;
+        }
+
+        /* Gender game mobile layout */
+        #word-bank {
+          padding: 8px !important;
+          gap: 8px !important;
+        }
+
+        .word-card {
+          padding: 10px 14px;
+          font-size: 0.95rem;
+          margin: 4px;
+        }
+
+        .drop-column {
+          min-height: 180px;
+          padding: 8px;
+        }
+
+        .drop-column h3 {
+          font-size: 1rem;
+          margin-bottom: 8px;
+        }
+
+        .hint-box {
+          font-size: 0.85rem;
+          padding: 8px;
+          min-height: 35px;
+        }
+
+        /* Stack gender columns on very small screens */
+        @media (max-width: 480px) {
+          #word-bank + div {
+            grid-template-columns: 1fr !important;
+          }
+
+          .drop-column {
+            min-height: 120px;
+          }
+        }
+      }
+
+      /* Touch device enhancements */
+      @media (hover: none) and (pointer: coarse) {
+        .word-card {
+          min-height: 44px;
+          min-width: 44px;
+        }
+      }
+    </style>
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Substantiver og Køn</h1>
+          <p class="lead">
+            I det russiske sprog er verden delt i tre dele: Han, Hun og Det. Det er ikke biologi,
+            men arkitektur. At forstå et ords køn er at finde nøglen til det, da kønnet bestemmer
+            formen på adjektiver, pronominer og verber.
+          </p>
+
+          <section id="theory">
+            <h2>Systemets logik</h2>
+            <p>
+              På dansk er du vant til to køn: <em>Fælleskøn</em> (en) og <em>Intetkøn</em> (et). Det
+              russiske sprog går et skridt videre og tilbyder tre muligheder. Den gode nyhed er, at
+              kønnet i russisk næsten altid er "skrevet" i slutningen af ordet.
+            </p>
+
+            <div class="visual-concept">
+              <div class="visual-desc">
+                <strong>Analogi</strong>
+                Forestil dig, at hvert ord bærer en uniform. <br />
+                Ord uden endelse (konsonant) — de strikse "mænd". <br />
+                Ord med endelserne -a/-ja — de åbne "kvinder". <br />
+                Ord med de runde -o/-e — de neutrale "væsener".
+              </div>
+            </div>
+
+            <table class="comparison-table" style="margin-top: 30px">
+              <thead>
+                <tr>
+                  <th>Køn</th>
+                  <th>Endelser</th>
+                  <th>Eksempler</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight: bold">Maskulinum (Han) — ON</td>
+                  <td>Konsonant, <strong>-j</strong>, <strong>-ь</strong> (blødt tegn)</td>
+                  <td>
+                    <strong>Дом</strong> (Hus) — на "м"<br />
+                    <strong>Чай</strong> (Te) — на "й"<br />
+                    <strong>Компьютер</strong> (Computer) — на "р"
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold">Femininum (Hun) — ONA</td>
+                  <td>
+                    <strong>-a</strong>, <strong>-ja</strong>, <strong>-ь</strong> (blødt tegn)
+                  </td>
+                  <td>
+                    <strong>Лампа</strong> (Lampe) — на "а"<br />
+                    <strong>Книга</strong> (Bog) — на "а"<br />
+                    <strong>Дверь</strong> (Dør) — мягкий знак
+                  </td>
+                </tr>
+                <tr>
+                  <td style="font-weight: bold">Neutrum (Intet) — ONO</td>
+                  <td><strong>-o</strong>, <strong>-e</strong>, <strong>-mja</strong></td>
+                  <td>
+                    <strong>Окно</strong> (Vindue) — на "о"<br />
+                    <strong>Море</strong> (Hav) — на "е"<br />
+                    <strong>Вино</strong> (Vin) — на "о"
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>⚠️ Vigtige undtagelser</h3>
+            <p>Nogle gange er det biologiske køn stærkere end grammatikken.</p>
+            <table class="comparison-table">
+              <tr>
+                <th>Ord</th>
+                <th>Oversættelse</th>
+                <th>Hvorfor undtagelse?</th>
+              </tr>
+              <tr>
+                <td><strong>Papa, Dedusjka, Djadja</strong></td>
+                <td>Far, Bedstefar, Onkel</td>
+                <td>
+                  Slutter på <strong>-a</strong>, men betegner mænd → <strong>Maskulinum</strong>.
+                  (Moj papa).
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Kofe</strong></td>
+                <td>Kaffe</td>
+                <td>Husk det! Det er <strong>Han</strong> (Maskulinum). "Odin tjornyj kofe".</td>
+              </tr>
+              <tr>
+                <td><strong>Imja, Vremja</strong></td>
+                <td>Navn, Tid</td>
+                <td>
+                  Ord på <strong>-mja</strong> er altid <strong>Neutrum</strong>. (Moje imja).
+                </td>
+              </tr>
+            </table>
+          </section>
+
+          <section id="practice-section">
+            <h2>Praksis</h2>
+            <p>Træk ordene til den rigtige kategori. Klik på ordet for at se en ledetråd.</p>
+
+            <div class="game-container">
+              <div id="hint-display" class="hint-box">Ledetråden vises her...</div>
+
+              <div
+                id="word-bank"
+                style="
+                  min-height: 60px;
+                  padding: 10px;
+                  background: #fff;
+                  border-bottom: 1px solid #eee;
+                  margin-bottom: 20px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 10px;
+                  justify-content: center;
+                "
+              >
+                <!-- Words will be generated here -->
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px">
+                <div
+                  class="drop-column gender-m"
+                  data-target="m"
+                  style="min-height: 200px; border-radius: 8px; padding: 10px; text-align: center"
+                >
+                  <h3>ОН (Han)</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+                <div
+                  class="drop-column gender-f"
+                  data-target="f"
+                  style="min-height: 200px; border-radius: 8px; padding: 10px; text-align: center"
+                >
+                  <h3>ОНА (Hun)</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+                <div
+                  class="drop-column gender-n"
+                  data-target="n"
+                  style="min-height: 200px; border-radius: 8px; padding: 10px; text-align: center"
+                >
+                  <h3>ОНО (Intet)</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+              </div>
+              <div id="feedback" class="feedback"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Blødt tegn (Ь)</strong>
+            Det sværeste punkt. Ord på -ь kan være Han eller Hun. <br /><br />
+            <em>90% reglen:</em><br />
+            Hvis det betegner en <strong>profession</strong> (Utjitel - lærer) → HAN.<br />
+            Hvis det er et abstrakt begreb på <strong>-ost'</strong> (Radost' - glæde, Skorost' -
+            fart) → HUN.
+          </div>
+          <div class="margin-note">
+            <strong>Tip til danskere</strong>
+            Led ikke efter logik i kønnet på livløse genstande. Hvorfor er "stol" en "han", mens
+            "seng" er en "hun"? Det skal man bare acceptere. Ligesom <em>en stol</em> og
+            <em>et bord</em>.
+          </div>
+        </aside>
+      </main>
+
+      <samovar-footer></samovar-footer>
+    </div>
+
+    <script>
+      const words = [
+        { t: 'Музей', g: 'm', dk: 'Museum (m)' },
+        { t: 'Семья', g: 'f', dk: 'Familie (f)' },
+        { t: 'Письмо', g: 'n', dk: 'Brev (n)' },
+        { t: 'Словарь', g: 'm', dk: 'Ordbog (m - slutter på blødt tegn)' },
+        { t: 'Ночь', g: 'f', dk: 'Nat (f - slutter på blødt tegn)' },
+        { t: 'Проблема', g: 'f', dk: "Problem (f - slutter på 'a')" },
+        { t: 'Центр', g: 'm', dk: 'Center (m - konsonant)' },
+        { t: 'Здание', g: 'n', dk: 'Bygning (n)' },
+        { t: 'Папа', g: 'm', dk: 'Far (m - undtagelse)' },
+        { t: 'Время', g: 'n', dk: "Tid (n - slutter på 'mja')" },
+        { t: 'Природа', g: 'f', dk: 'Natur (f)' },
+        { t: 'Брат', g: 'm', dk: 'Bror (m)' },
+      ];
+
+      const bank = document.getElementById('word-bank');
+      const columns = document.querySelectorAll('.drop-column');
+      const feedback = document.getElementById('feedback');
+      const hintBox = document.getElementById('hint-display');
+      let solved = 0;
+
+      // Initialize Game
+      function initGame() {
+        words.sort(() => Math.random() - 0.5); // Shuffle
+        words.forEach((w) => {
+          const el = document.createElement('div');
+          el.className = 'word-card';
+          el.innerText = w.t;
+          el.draggable = true;
+          el.dataset.gender = w.g;
+          el.dataset.hint = w.dk;
+
+          el.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', JSON.stringify(w));
+            e.dataTransfer.effectAllowed = 'move';
+            setTimeout(() => (el.style.opacity = '0.5'), 0);
+            showHint(w.dk);
+          });
+
+          el.addEventListener('dragend', () => {
+            el.style.opacity = '1';
+          });
+
+          // Simple Click fallback for mobile if drag is tricky
+          el.addEventListener('click', () => {
+            if (el.classList.contains('correct')) return;
+
+            showHint(w.dk);
+
+            if (document.querySelector('.selected-word')) {
+              document
+                .querySelector('.selected-word')
+                .classList.remove('selected-word', 'btn-outline');
+            }
+            el.classList.add('selected-word');
+            el.style.borderColor = 'var(--accent-red)';
+          });
+
+          // Hover for desktop
+          el.addEventListener('mouseenter', () => {
+            if (!el.classList.contains('correct')) {
+              showHint(w.dk);
+            }
+          });
+
+          bank.appendChild(el);
+        });
+      }
+
+      function showHint(text) {
+        hintBox.style.display = 'block';
+        hintBox.innerText = text;
+      }
+
+      // Drop Logic
+      columns.forEach((col) => {
+        col.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          col.classList.add('drag-over');
+        });
+
+        col.addEventListener('dragleave', () => {
+          col.classList.remove('drag-over');
+        });
+
+        col.addEventListener('drop', (e) => {
+          e.preventDefault();
+          col.classList.remove('drag-over');
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          const draggedEl = [...bank.children].find(
+            (c) => c.innerText === data.t && c.style.display !== 'none',
+          );
+
+          handleMove(data, draggedEl, col);
+        });
+
+        // Click to deposit (if a word is selected)
+        col.addEventListener('click', () => {
+          const selected = document.querySelector('.selected-word');
+          if (selected) {
+            const gender = selected.dataset.gender;
+            // Reconstruct simple object for logic
+            const data = { t: selected.innerText, g: gender };
+            handleMove(data, selected, col);
+          }
+        });
+      });
+
+      function handleMove(data, element, col) {
+        if (col.dataset.target === data.g) {
+          // Correct
+          const successEl = document.createElement('div');
+          successEl.className = 'word-card correct';
+          successEl.innerText = data.t;
+          successEl.style.display = 'block';
+          successEl.style.width = '100%';
+          successEl.style.marginBottom = '5px';
+          successEl.draggable = false;
+
+          col.querySelector('.drop-zone-content').appendChild(successEl);
+          if (element) element.remove();
+
+          solved++;
+          checkWin();
+          hintBox.style.display = 'none';
+        } else {
+          // Wrong
+          if (element) {
+            element.classList.add('wrong');
+            setTimeout(() => element.classList.remove('wrong'), 500);
+            hintBox.innerText = 'Fejl! Prøv igen. (Ошибка! Попробуй еще раз)';
+          }
+        }
+      }
+
+      function checkWin() {
+        if (solved === words.length) {
+          feedback.innerHTML = '<strong>Flot!</strong> Du har placeret alle ordene korrekt.';
+          feedback.className = 'feedback correct';
+        }
+      }
+
+      initGame();
+    </script>
+  </body>
+</html>

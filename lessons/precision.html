@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Инструмент Точности | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Præcision i ordvalg</h1>
+          <p class="lead">
+            В русском языке есть много слов, которые переводятся на датский одинаково, но имеют
+            разные оттенки значения. Давайте разберем самые частые случаи.
+          </p>
+
+          <section class="lesson-section">
+            <h2>1. Удобный vs Комфортный</h2>
+            <p>
+              Оба слова переводятся как <em>behagelig</em> или <em>praktisk</em>, но используются
+              по-разному.
+            </p>
+
+            <div class="comparison-card">
+              <div class="vocab-item">
+                <span class="word">Удобный</span>
+                <span class="ru-text">Удобный график, удобная обувь, мне удобно в 5 часов.</span>
+                <span class="dk-text">Fokus på funktion og praktisk anvendelse.</span>
+              </div>
+              <div class="vocab-item">
+                <span class="word">Комфортный</span>
+                <span class="ru-text"
+                  >Комфортный отель, комфортная атмосфера, комфортный климат.</span
+                >
+                <span class="dk-text">Fokus på fysisk velvære og luksus.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="lesson-section">
+            <h2>2. Решать vs Решить</h2>
+            <p>Датский глагол <em>at beslutte</em> или <em>at løse</em>.</p>
+            <div class="comparison-card">
+              <div class="vocab-item">
+                <span class="word">Решать (НСВ)</span>
+                <span class="ru-text">Я решаю задачу. Мы решаем, куда поехать.</span>
+                <span class="dk-text"
+                  >Processen: "Jeg sidder og løser..." eller "Vi er ved at beslutte..."</span
+                >
+              </div>
+              <div class="vocab-item">
+                <span class="word">Решить (СВ)</span>
+                <span class="ru-text">Я решил задачу. Мы решили поехать в Прагу.</span>
+                <span class="dk-text"
+                  >Resultatet: "Jeg har løst..." eller "Vi har besluttet..."</span
+                >
+              </div>
+            </div>
+          </section>
+
+          <!-- Quiz Component -->
+          <div id="quiz-container"></div>
+        </div>
+      </main>
+
+      <samovar-footer></samovar-footer>
+    </div>
+
+    <!-- Lesson specific engine -->
+    <script src="../js/quiz-engine.js"></script>
+    <script>
+      const quizData = [
+        {
+          question: 'Vælg det rigtige ord: Эти кроссовки очень ...',
+          options: ['удобные', 'комфортные'],
+          correct: 0,
+          hint: 'Fokus på funktion/praktik (fodtøj).',
+        },
+        {
+          question: 'Vælg det rigtige ord: В этом отеле очень ... номера.',
+          options: ['удобные', 'комфортные'],
+          correct: 1,
+          hint: 'Fokus på luksus og velvære.',
+        },
+        {
+          question: 'Vælg det rigtige ord: Мы уже ... этот вопрос.',
+          options: ['решали', 'решили'],
+          correct: 1,
+          hint: 'Handlingen er afsluttet (resultat).',
+        },
+      ];
+
+      // Initialize quiz
+      if (typeof initQuiz === 'function') {
+        initQuiz(quizData);
+      } else {
+        console.error('initQuiz function not found. Make sure quiz-engine.js is loaded correctly.');
+      }
+    </script>
+  </body>
+</html>

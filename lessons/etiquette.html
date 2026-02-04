@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Этикет и Обращение | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .decision-node {
+        border: 2px solid var(--accent-blue);
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px;
+        text-align: center;
+        background: white;
+        position: relative;
+      }
+
+      .decision-arrow {
+        text-align: center;
+        color: var(--text-faded);
+        font-size: 1.5rem;
+      }
+
+      .etiquette-card {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+        border-left: 4px solid transparent;
+      }
+
+      .card-formal {
+        border-left-color: var(--accent-blue);
+      }
+      .card-informal {
+        border-left-color: #e67e22;
+      }
+
+      .phrase-pair {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+      }
+
+      .phrase-ru {
+        font-weight: bold;
+        color: var(--text-ink);
+      }
+      .phrase-dk {
+        color: var(--text-faded);
+        font-style: italic;
+      }
+
+      /* Chat Quiz */
+      .chat-container {
+        background: #f0f2f5;
+        border-radius: 12px;
+        padding: 20px;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .chat-bubble {
+        max-width: 80%;
+        padding: 12px 18px;
+        border-radius: 18px;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        position: relative;
+      }
+
+      .bubble-left {
+        align-self: flex-start;
+        background: white;
+        border-bottom-left-radius: 4px;
+        color: #333;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .bubble-right {
+        align-self: flex-end;
+        background: var(--accent-blue);
+        color: white;
+        border-bottom-right-radius: 4px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .bubble-right:hover {
+        transform: scale(1.02);
+      }
+
+      .bubble-choice {
+        align-self: flex-end;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .chat-feedback {
+        align-self: center;
+        font-size: 0.85rem;
+        color: #666;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 5px 12px;
+        border-radius: 10px;
+        display: none;
+      }
+
+      .patronymic-input-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        align-items: center;
+      }
+
+      .p-input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        flex-grow: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="nouns.html">Род</a>
+          <a
+            href="etiquette.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Этикет</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Обращение и Этикет</h1>
+          <p class="lead">
+            Русский этикет — это система кодов "свой/чужой". Неправильный выбор местоимения может
+            обидеть сильнее, чем грубое слово.
+          </p>
+
+          <section id="ty-vy">
+            <h2>Ты или Вы? (Du eller De)</h2>
+            <p>
+              В датском языке "De" почти исчезло. В России оно живет и процветает. Это не просто
+              вежливость, это дистанция.
+            </p>
+
+            <table
+              style="
+                width: 100%;
+                border-collapse: collapse;
+                margin: 30px 0;
+                background: white;
+                border: 1px solid var(--line-color);
+              "
+            >
+              <thead>
+                <tr style="background: #f9f9f9">
+                  <th
+                    style="
+                      padding: 15px;
+                      text-align: left;
+                      border-bottom: 2px solid var(--line-color);
+                      width: 50%;
+                    "
+                  >
+                    Ты (Du)
+                  </th>
+                  <th
+                    style="
+                      padding: 15px;
+                      text-align: left;
+                      border-bottom: 2px solid var(--line-color);
+                      width: 50%;
+                    "
+                  >
+                    Вы (De)
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    style="
+                      padding: 20px;
+                      vertical-align: top;
+                      border-right: 1px solid var(--line-color);
+                    "
+                  >
+                    <p style="margin-top: 0; color: var(--text-faded); font-size: 0.9rem">
+                      Зона близость. Используем с:
+                    </p>
+                    <ul class="module-list" style="margin-top: 10px">
+                      <li style="padding: 8px 0; border-bottom: none">Друзьями</li>
+                      <li style="padding: 8px 0; border-bottom: none">Семьей</li>
+                      <li style="padding: 8px 0; border-bottom: none">Детьми</li>
+                      <li style="padding: 8px 0; border-bottom: none">Богом (в молитве)</li>
+                    </ul>
+                  </td>
+                  <td style="padding: 20px; vertical-align: top">
+                    <p style="margin-top: 0; color: var(--text-faded); font-size: 0.9rem">
+                      Зона уважения/дистанции. Используем с:
+                    </p>
+                    <ul class="module-list" style="margin-top: 10px">
+                      <li style="padding: 8px 0; border-bottom: none">Незнакомцами</li>
+                      <li style="padding: 8px 0; border-bottom: none">Коллегами/Боссом</li>
+                      <li style="padding: 8px 0; border-bottom: none">Учителями/Врачами</li>
+                      <li style="padding: 8px 0; border-bottom: none">Пожилыми людьми</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- MICRO PRACTICE: Ty vs Vy -->
+            <div class="inline-quiz">
+              <span class="inline-question">Как вы обратитесь к: Ребенок 5 лет?</span>
+              <div class="inline-options">
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, true, 'Верно! Дети — всегда Ты.')"
+                >
+                  Ты (Du)
+                </button>
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, false, 'Нет. Вы — слишком официально для ребенка.')"
+                >
+                  Вы (De)
+                </button>
+              </div>
+              <div class="inline-feedback"></div>
+            </div>
+
+            <div class="inline-quiz">
+              <span class="inline-question">Как вы обратитесь к: Ваш новый начальник?</span>
+              <div class="inline-options">
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, false, 'Рискованно! Лучше начать с Вы.')"
+                >
+                  Ты (Du)
+                </button>
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, true, 'Правильно. Субординация требует Вы.')"
+                >
+                  Вы (De)
+                </button>
+              </div>
+              <div class="inline-feedback"></div>
+            </div>
+
+            <h3>Алгоритм выбора</h3>
+            <div style="text-align: center; margin: 20px 0">
+              <div class="decision-node">Вы знаете этого человека хорошо?</div>
+              <div
+                style="display: flex; justify-content: space-between; width: 200px; margin: 0 auto"
+              >
+                <span class="decision-arrow">↙ Нет</span>
+                <span class="decision-arrow">Да ↘</span>
+              </div>
+              <div style="display: flex; justify-content: space-between">
+                <div class="decision-node" style="border-color: var(--accent-blue)">ВЫ</div>
+                <div class="decision-node" style="border-color: #e67e22">Это ребенок?</div>
+              </div>
+            </div>
+
+            <h3>Приветствия (Hilsner)</h3>
+            <div class="etiquette-card">
+              <div class="phrase-pair">
+                <span class="phrase-ru">Привет!</span>
+                <span class="phrase-dk">Hej! (Только "Ты")</span>
+              </div>
+              <div class="phrase-pair">
+                <span class="phrase-ru">Здравствуй(те)!</span>
+                <span class="phrase-dk">Goddag! ("те" добавляется для "Вы")</span>
+              </div>
+              <div class="phrase-pair">
+                <span class="phrase-ru">Добрый день!</span>
+                <span class="phrase-dk">God eftermiddag! (Нейтрально)</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="patronymics">
+            <h2>Имя и Отчество (Navn og Fronym)</h2>
+            <p>
+              У русских три имени: <em>Иван Иванович Иванов</em>. Второе имя — это имя отца +
+              суффикс. Это знак уважения к роду.
+            </p>
+
+            <div class="visual-concept">
+              <div class="visual-desc">
+                <strong>Формула создания</strong><br />
+                Отец (Far) + Суффикс (Suffix)<br /><br />
+                Для сына: <strong>-ович / -евич</strong> (Son of)<br />
+                Для дочери: <strong>-овна / -евна</strong> (Daughter of)
+              </div>
+            </div>
+
+            <div class="game-container">
+              <h3>Генератор Отчеств</h3>
+              <p>Впишите правильное отчество. Следите за регистром (первая буква большая).</p>
+
+              <div class="patronymic-input-group">
+                <div style="width: 100px; font-weight: bold">Отец: Антон</div>
+                <input type="text" class="p-input" data-ans="Антонович" placeholder="Сын..." />
+                <input type="text" class="p-input" data-ans="Антоновна" placeholder="Дочь..." />
+              </div>
+
+              <div class="patronymic-input-group">
+                <div style="width: 100px; font-weight: bold">Отец: Игорь</div>
+                <input
+                  type="text"
+                  class="p-input"
+                  data-ans="Игоревич"
+                  placeholder="Сын (мягкий)..."
+                />
+                <input
+                  type="text"
+                  class="p-input"
+                  data-ans="Игоревна"
+                  placeholder="Дочь (мягкий)..."
+                />
+              </div>
+
+              <button class="btn" onclick="checkPatronymics()">Проверить</button>
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Симуляция диалога (Dialog)</h2>
+
+            <div class="chat-container" id="chat-1">
+              <div style="text-align: center; font-size: 0.8rem; color: #999; margin-bottom: 10px">
+                Сценарий 1: Кафе. Официант (молодой парень).
+              </div>
+
+              <div class="chat-bubble bubble-left">Добрый день! Что будете заказывать?</div>
+
+              <div class="bubble-choice">
+                <div class="chat-bubble bubble-right" onclick="replyChat(this, true, 'fb-1')">
+                  Вы: Извините, можно меню?
+                </div>
+                <div
+                  class="chat-bubble bubble-right"
+                  onclick="replyChat(this, false, 'fb-1')"
+                  style="background: white; color: black; border: 1px solid #ccc"
+                >
+                  Ты: Привет, дай меню!
+                </div>
+              </div>
+
+              <div class="chat-feedback" id="fb-1"></div>
+            </div>
+
+            <div class="chat-container" id="chat-2">
+              <div style="text-align: center; font-size: 0.8rem; color: #999; margin-bottom: 10px">
+                Сценарий 2: Вы встретили маму друга (Анна Петровна).
+              </div>
+
+              <div class="chat-bubble bubble-left">О, привет! Давно не виделись.</div>
+
+              <div class="bubble-choice">
+                <div
+                  class="chat-bubble bubble-right"
+                  onclick="replyChat(this, false, 'fb-2')"
+                  style="background: white; color: black; border: 1px solid #ccc"
+                >
+                  Вы: Привет, Анна!
+                </div>
+                <div class="chat-bubble bubble-right" onclick="replyChat(this, true, 'fb-2')">
+                  Вы: Здравствуйте, Анна Петровна!
+                </div>
+              </div>
+
+              <div class="chat-feedback" id="fb-2"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Брудершафт</strong>
+            Ритуал перехода с "Вы" на "Ты". Обычно старший (или женщина) предлагает: "Давай на ты?"
+            (Skal vi sige du?). После этого чокаются бокалами и пьют до дна.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar.</div>
+      </footer>
+    </div>
+
+    <script>
+      // Inline Quiz
+      function checkInline(btn, isCorrect, msg) {
+        const container = btn.closest('.inline-quiz');
+        const feedback = container.querySelector('.inline-feedback');
+
+        container.querySelectorAll('.inline-btn').forEach((b) => {
+          b.style.background = 'white';
+          b.style.color = 'var(--text-faded)';
+          b.style.borderColor = '#ccc';
+        });
+
+        if (isCorrect) {
+          btn.style.background = 'var(--success-color)';
+          btn.style.color = 'white';
+          btn.style.borderColor = 'var(--success-color)';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback correct';
+        } else {
+          btn.style.background = 'var(--error-color)';
+          btn.style.color = 'white';
+          btn.style.borderColor = 'var(--error-color)';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback incorrect';
+        }
+      }
+
+      function checkPatronymics() {
+        const inputs = document.querySelectorAll('.p-input');
+        inputs.forEach((inp) => {
+          if (inp.value.trim() === inp.dataset.ans) {
+            inp.style.borderColor = 'var(--success-color)';
+            inp.style.backgroundColor = '#e8f5e9';
+          } else {
+            inp.style.borderColor = 'var(--error-color)';
+            inp.style.backgroundColor = '#ffebee';
+          }
+        });
+      }
+
+      function replyChat(bubble, isCorrect, fbId) {
+        const fb = document.getElementById(fbId);
+        const parent = bubble.parentElement;
+
+        // Reset sibs
+        // (Optional: visually disable other option)
+
+        if (isCorrect) {
+          fb.innerHTML = "<span style='color:green'>✓ Верно!</span> Это вежливая форма.";
+          bubble.style.background = 'var(--success-color)';
+          bubble.style.color = 'white';
+          bubble.style.border = 'none';
+        } else {
+          fb.innerHTML = "<span style='color:red'>✗ Грубо!</span> Соблюдайте дистанцию.";
+          bubble.style.background = 'var(--error-color)';
+          bubble.style.color = 'white';
+          bubble.style.border = 'none';
+        }
+        fb.style.display = 'block';
+      }
+    </script>
+  </body>
+</html>

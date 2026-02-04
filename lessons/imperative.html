@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Повелительное наклонение | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Commander Game */
+      .command-scene {
+        background: #f0f4f8;
+        padding: 30px;
+        border-radius: 12px;
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .scene-context {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        color: var(--accent-blue);
+        font-weight: bold;
+      }
+
+      .scene-img {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      .command-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      .cmd-btn {
+        padding: 15px;
+        border: 2px solid #ddd;
+        background: white;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .cmd-btn:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+
+      /* Formation Visualizer */
+      .formation-card {
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 10px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .stem {
+        color: #666;
+      }
+
+      .suffix {
+        color: var(--accent-red);
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="verbs.html">Глагол</a>
+          <a
+            href="imperative.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Повелительное</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Повелительное наклонение</h1>
+          <p class="lead">
+            Как вежливо попросить или приказать? Повелительное наклонение — это способ выразить
+            просьбу, приказ или совет.
+          </p>
+
+          <section id="formation">
+            <h2>Образование (Dannelse)</h2>
+            <p>Берем основу настоящего времени (3 л. мн.ч - они) и убираем окончание.</p>
+
+            <div class="game-container" style="background: white">
+              <h3>Три типа окончаний</h3>
+
+              <div class="formation-card">
+                <div><strong>1. На гласную:</strong> Читают → <span class="stem">Чита-</span></div>
+                <div class="suffix">+ Й</div>
+                <div>= Читай!</div>
+              </div>
+
+              <div class="formation-card">
+                <div><strong>2. На согласную:</strong> Пишут → <span class="stem">Пиш-</span></div>
+                <div class="suffix">+ И</div>
+                <div>= Пиши!</div>
+              </div>
+
+              <div class="formation-card">
+                <div>
+                  <strong>3. Если основа на согл.:</strong> Встанут →
+                  <span class="stem">Встан-</span>
+                </div>
+                <div class="suffix">+ Ь</div>
+                <div>= Встань!</div>
+              </div>
+            </div>
+
+            <!-- Micro Practice -->
+            <div class="inline-quiz">
+              <span class="inline-question">Они <strong>думают</strong>. Какое повелительное?</span>
+              <div class="inline-options">
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, true, 'Верно! Основа на гласную (дума-) + Й.')"
+                >
+                  Думай!
+                </button>
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, false, 'Нет. Основа на гласную, поэтому Й.')"
+                >
+                  Думи!
+                </button>
+              </div>
+              <div class="inline-feedback"></div>
+            </div>
+          </section>
+
+          <section id="polite-form">
+            <h2>Вежливость: Ты или Вы?</h2>
+            <p>В русском выбор формы критически важен.</p>
+
+            <ul class="module-list">
+              <li class="module-item">
+                <strong>Ты (Du)</strong> — Друзья, дети, семья. <br />
+                <em>Читай! (Læs!)</em>
+              </li>
+              <li class="module-item">
+                <strong>Вы (De/I)</strong> — Незнакомцы, старшие, множественное число. <br />
+                <em>Читайте! (Læs!)</em> (Просто добавьте <strong>-те</strong>)
+              </li>
+            </ul>
+          </section>
+
+          <section id="practice">
+            <h2>Практика: Командир</h2>
+            <p>Дайте правильную команду в зависимости от ситуации.</p>
+
+            <div class="command-scene">
+              <span class="scene-img">🚪</span>
+              <div class="scene-context" id="cmd-context">
+                Ситуация: Вы просите <strong>друга</strong> закрыть дверь.
+              </div>
+              <div class="command-options" id="cmd-opts">
+                <button class="cmd-btn" onclick="checkCmd('Закрой')">Закрой!</button>
+                <button class="cmd-btn" onclick="checkCmd('Закройте')">Закройте!</button>
+              </div>
+              <div id="cmd-feedback" class="feedback" style="margin-top: 20px"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Исключения</strong>
+            Есть → Ешь! <br />
+            Дать → Дай! <br />
+            Пить → Пей!
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar</div>
+      </footer>
+    </div>
+
+    <script>
+      // Inline Quiz
+      function checkInline(btn, isCorrect, msg) {
+        const container = btn.closest('.inline-quiz');
+        const feedback = container.querySelector('.inline-feedback');
+        container.querySelectorAll('.inline-btn').forEach((b) => {
+          b.style.background = 'white';
+          b.style.color = 'var(--text-faded)';
+          b.style.borderColor = '#ccc';
+        });
+        if (isCorrect) {
+          btn.style.background = 'var(--success-color)';
+          btn.style.color = 'white';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback correct';
+        } else {
+          btn.style.background = 'var(--error-color)';
+          btn.style.color = 'white';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback incorrect';
+        }
+      }
+
+      // Commander Game
+      const scenarios = [
+        {
+          ctx: 'Вы просите <strong>друга</strong> закрыть дверь.',
+          correct: 'Закрой',
+          opts: ['Закрой', 'Закройте'],
+        },
+        {
+          ctx: 'Вы просите <strong>учителя</strong> повторить.',
+          correct: 'Повторите',
+          opts: ['Повтори', 'Повторите'],
+        },
+        {
+          ctx: 'Вы говорите <strong>детям</strong> (мн.ч) сесть.',
+          correct: 'Садитесь',
+          opts: ['Сядь', 'Садитесь'],
+        },
+        {
+          ctx: 'Вы просите <strong>маму</strong> позвонить.',
+          correct: 'Позвони',
+          opts: ['Позвони', 'Позвоните'],
+        },
+      ];
+
+      let currentScene = 0;
+
+      function renderScene() {
+        const s = scenarios[currentScene];
+        document.getElementById('cmd-context').innerHTML = 'Ситуация: ' + s.ctx;
+
+        const container = document.getElementById('cmd-opts');
+        container.innerHTML = '';
+
+        s.opts.forEach((opt) => {
+          const btn = document.createElement('button');
+          btn.className = 'cmd-btn';
+          btn.innerText = opt + '!';
+          btn.onclick = () => checkCmd(opt);
+          container.appendChild(btn);
+        });
+
+        document.getElementById('cmd-feedback').style.display = 'none';
+      }
+
+      function checkCmd(ans) {
+        const s = scenarios[currentScene];
+        const fb = document.getElementById('cmd-feedback');
+
+        if (ans === s.correct) {
+          fb.innerText = 'Правильно! Это уместная форма.';
+          fb.className = 'feedback correct';
+          setTimeout(() => {
+            currentScene = (currentScene + 1) % scenarios.length;
+            renderScene();
+          }, 1500);
+        } else {
+          fb.innerText = 'Неверно. Подумайте о вежливости и числе.';
+          fb.className = 'feedback incorrect';
+        }
+        fb.style.display = 'block';
+      }
+
+      renderScene();
+    </script>
+  </body>
+</html>

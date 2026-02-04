@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 6: Mad og Drikke | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--space-m);
+        margin: var(--space-m) 0;
+      }
+
+      .food-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        border-radius: 8px;
+      }
+
+      .food-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        border-color: var(--accent-blue);
+      }
+
+      .food-icon {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      .food-russian {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+      }
+
+      .food-danish {
+        font-size: 0.85rem;
+        color: var(--text-light);
+      }
+
+      .category-title {
+        color: var(--accent-blue);
+        border-bottom: 2px solid var(--accent-blue);
+        padding-bottom: var(--space-xs);
+        margin: var(--space-l) 0 var(--space-m);
+      }
+
+      .like-dislike {
+        display: flex;
+        gap: var(--space-l);
+        margin: var(--space-m) 0;
+      }
+
+      .like-box,
+      .dislike-box {
+        flex: 1;
+        padding: var(--space-m);
+        border-radius: 8px;
+      }
+
+      .like-box {
+        background: #e8f5e9;
+        border: 1px solid var(--color-success);
+      }
+
+      .dislike-box {
+        background: #ffebee;
+        border: 1px solid var(--color-error);
+      }
+
+      /* === Delivery Section === */
+      .delivery-scene {
+        background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+        color: white;
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+      .delivery-scene h3 {
+        color: white;
+        margin-top: 0;
+      }
+      .delivery-phrases {
+        display: grid;
+        gap: var(--space-s);
+        margin-top: var(--space-m);
+      }
+      .delivery-phrase {
+        background: rgba(255, 255, 255, 0.15);
+        padding: var(--space-s) var(--space-m);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .delivery-phrase:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .delivery-russian {
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      .delivery-danish {
+        font-size: 0.85rem;
+        opacity: 0.8;
+      }
+
+      /* === Coffee Section === */
+      .coffee-options {
+        display: flex;
+        gap: var(--space-m);
+        flex-wrap: wrap;
+        margin: var(--space-m) 0;
+      }
+      .coffee-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        min-width: 120px;
+      }
+      .coffee-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+      .coffee-icon {
+        font-size: 2rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      /* === Eco Tip === */
+      .eco-tip {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-s);
+        background: #e8f5e9;
+        border-left: 3px solid #4caf50;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+      }
+      .eco-tip-icon {
+        font-size: 1.5rem;
+      }
+      .eco-tip-text {
+        font-size: 0.9rem;
+      }
+      .eco-tip-text strong {
+        color: #2e7d32;
+      }
+
+      /* === Humor Note === */
+      .humor-note {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+        font-size: 0.9rem;
+      }
+      .humor-note strong {
+        color: #f57c00;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 6 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 50 min</span>
+          </div>
+          <h1>Mad og Drikke</h1>
+          <p class="lead">
+            Russisk koekken er rigt og varieret. I denne lektion laerer du navnene pa almindelige
+            madvarer og drikkevarer, og hvordan du udtrykker hvad du kan lide.
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <!-- PART 1: FOOD -->
+            <h2>
+              <span>Del 1: Mad</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <h3 class="category-title">Basale Fodevarer</h3>
+            <div class="food-grid" id="basic-food"></div>
+
+            <h3 class="category-title">Drikke</h3>
+            <div class="food-grid" id="drinks"></div>
+
+            <h3 class="category-title">Russiske Retter</h3>
+            <div class="food-grid" id="russian-food"></div>
+
+            <!-- PART 2: LIKE/DISLIKE -->
+            <h2>
+              <span>Del 2: Jeg kan lide / Jeg kan ikke lide</span>
+              <span class="chapter-num">Grammatik</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Verbet "любить" (at elske/holde af)</h3>
+              <p>Pa russisk bruger man "любить" til at sige man kan lide noget:</p>
+            </div>
+
+            <div class="like-dislike">
+              <div class="like-box">
+                <strong>Kan lide:</strong>
+                <div class="example-russian">Я люблю кофе.</div>
+                <div class="example-danish">Jeg kan lide kaffe.</div>
+              </div>
+              <div class="dislike-box">
+                <strong>Kan ikke lide:</strong>
+                <div class="example-russian">Я не люблю чай.</div>
+                <div class="example-danish">Jeg kan ikke lide te.</div>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h3>Bojning af "любить"</h3>
+              <table class="possession-table">
+                <tr>
+                  <td>Я</td>
+                  <td class="cyrillic">люблю</td>
+                </tr>
+                <tr>
+                  <td>Ты</td>
+                  <td class="cyrillic">любишь</td>
+                </tr>
+                <tr>
+                  <td>Он/Она</td>
+                  <td class="cyrillic">любит</td>
+                </tr>
+                <tr>
+                  <td>Мы</td>
+                  <td class="cyrillic">любим</td>
+                </tr>
+                <tr>
+                  <td>Вы</td>
+                  <td class="cyrillic">любите</td>
+                </tr>
+                <tr>
+                  <td>Они</td>
+                  <td class="cyrillic">любят</td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- PART 3: WANT -->
+            <h2>
+              <span>Del 3: Jeg vil gerne have...</span>
+              <span class="chapter-num">Grammatik</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Verbet "хотеть" (at ville)</h3>
+              <div class="example-box">
+                <div class="example-russian">Я хочу кофе.</div>
+                <div class="example-danish">Jeg vil gerne have kaffe.</div>
+              </div>
+              <div class="example-box">
+                <div class="example-russian">Я хочу пить.</div>
+                <div class="example-danish">Jeg er torstig. (Bogstaveligt: Jeg vil drikke)</div>
+              </div>
+              <div class="example-box">
+                <div class="example-russian">Я хочу есть.</div>
+                <div class="example-danish">Jeg er sulten. (Bogstaveligt: Jeg vil spise)</div>
+              </div>
+            </div>
+
+            <!-- PART 4: LISTENING -->
+            <h2>
+              <span>Del 4: Lytteovelse</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <!-- PART 5: MATCHING -->
+            <h2>
+              <span>Del 5: Par Ordene</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="matching-exercise" class="exercise-container"></div>
+
+            <!-- PART 6: DIALOGUE -->
+            <h2>
+              <span>Del 6: Dialog - I Kokkenet</span>
+              <span class="chapter-num">Samtale</span>
+            </h2>
+
+            <div id="dialogue-section"></div>
+
+            <!-- PART 6b: MODERN FOOD CULTURE -->
+            <h2>
+              <span>Del 6b: Kaffe og Levering</span>
+              <span class="chapter-num">Moderne</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>☕ Kaffe med på farten</h3>
+              <p>I russiske storbyer er «kaffe med» (takeaway) meget populært:</p>
+              <div class="coffee-options" id="coffee-options"></div>
+            </div>
+
+            <div class="delivery-scene">
+              <h3>🛕 Madlevering</h3>
+              <p>Mange russere bestiller mad via apps. Her er nyttige fraser:</p>
+              <div class="delivery-phrases" id="delivery-phrases"></div>
+            </div>
+
+            <div class="eco-tip">
+              <span class="eco-tip-icon">🌱</span>
+              <div class="eco-tip-text">
+                <strong>Øko-tip:</strong> Mange siger nu «Без пакетика» (uden pose) eller «У меня
+                свой стакан» (jeg har mit eget krus).
+              </div>
+            </div>
+
+            <div class="humor-note">
+              <strong>😅 Sjov fakta:</strong> I russiske cafeer kan du høre: «Латте на овсяном, без
+              сиропа, но очень сладкий» (Latte med havre, uden sirup, men meget sød).
+            </div>
+
+            <!-- PART 7: FILL BLANK -->
+            <h2>
+              <span>Del 7: Udfyld Tomme Pladser</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="fill-blank-exercise" class="exercise-container"></div>
+
+            <!-- PART 8: SENTENCE BUILDER -->
+            <h2>
+              <span>Del 8: Byg Saetninger</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="sentence-builder" class="exercise-container"></div>
+
+            <!-- PART 9: AI CONVERSATION -->
+            <h2>
+              <span>Del 9: Tal om Mad med AI</span>
+              <span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🍽️ Hvad kan du lide?</h3>
+              <p>
+                Øv dig i at tale om mad og drikke! AI-tutoren vil spørge dig om dine madpræferencer
+                og anbefale russiske retter.
+              </p>
+            </div>
+
+            <div id="ai-conversation" class="exercise-container"></div>
+
+            <!-- AI WORD DETECTIVE -->
+            <h2>
+              <span>Del 10: Ord-Detektiv</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🔍 Gæt maden!</h3>
+              <p>AI'en beskriver en mad eller drik - kan du gætte hvad det er på russisk?</p>
+            </div>
+
+            <div id="ai-detective" class="exercise-container"></div>
+
+            <!-- AI EMOJI TRANSLATOR -->
+            <h2>
+              <span>Del 11: Emoji Mad</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🍕 Hvad spiser vi?</h3>
+              <p>Se emoji'erne og skriv sætningen på russisk!</p>
+            </div>
+
+            <div id="ai-emoji" class="exercise-container"></div>
+
+            <!-- SUMMARY -->
+            <h2>
+              <span>Opsummering</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Hvad Du Har Laert</h3>
+              <ul>
+                <li><strong>Madvarer:</strong> хлеб, сыр, мясо, рыба, суп...</li>
+                <li><strong>Drikkevarer:</strong> вода, чай, кофе, молоко, сок...</li>
+                <li><strong>Russiske retter:</strong> борщ, блины, пельмени...</li>
+                <li><strong>Udtryk:</strong> Я люблю..., Я не люблю..., Я хочу...</li>
+                <li><strong>Kaffe:</strong> кофе с собой, овсяное молоко, стаканчик</li>
+                <li><strong>Levering:</strong> доставка, курьер, заказ</li>
+              </ul>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="lesson-nav">
+              <a href="05-family.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">Min Familie</span>
+              </a>
+              <a href="07-cafe.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Naeste lektion</span>
+                <span class="lesson-nav-title">Pa Cafe</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Kultur</strong>
+              Borsjtj (борщ) er den mest berømte russiske ret — en rød bederoesuppe. Den serveres
+              ofte med smetana (creme fraiche).
+            </div>
+            <div class="margin-note">
+              <strong>Vidste du?</strong>
+              Russere drikker te fra et «samovar» — en traditionel tekande. Te er mere populært end
+              kaffe i Rusland.
+            </div>
+            <div class="margin-note">
+              <strong>Moderne kaffe</strong>
+              «Кофе с собой» (kaffe med) er blevet en fast del af bylivet. Mange cafeer tilbyder nu
+              også «овсяное молоко» (havremaelk).
+            </div>
+            <div class="margin-note">
+              <strong>Madlevering</strong>
+              Apps som Yandex Eda og Delivery Club er meget populære. Kuréren ringer ofte: «Я у
+              двери» (Jeg er ved døren).
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <samovar-footer></samovar-footer>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      // FOOD DATA
+      const basicFood = [
+        { icon: '🍞', russian: 'хлеб', danish: 'brod' },
+        { icon: '🧀', russian: 'сыр', danish: 'ost' },
+        { icon: '🥩', russian: 'мясо', danish: 'kod' },
+        { icon: '🐟', russian: 'рыба', danish: 'fisk' },
+        { icon: '🥚', russian: 'яйцо', danish: 'aeg' },
+        { icon: '🍚', russian: 'рис', danish: 'ris' },
+        { icon: '🍝', russian: 'макароны', danish: 'pasta' },
+        { icon: '🥗', russian: 'салат', danish: 'salat' },
+        { icon: '🍎', russian: 'яблоко', danish: 'aeble' },
+        { icon: '🍌', russian: 'банан', danish: 'banan' },
+      ];
+
+      const drinks = [
+        { icon: '💧', russian: 'вода', danish: 'vand' },
+        { icon: '🍵', russian: 'чай', danish: 'te' },
+        { icon: '☕', russian: 'кофе', danish: 'kaffe' },
+        { icon: '🥛', russian: 'молоко', danish: 'maelk' },
+        { icon: '🧃', russian: 'сок', danish: 'juice' },
+        { icon: '🍺', russian: 'пиво', danish: 'ol' },
+        { icon: '🍷', russian: 'вино', danish: 'vin' },
+      ];
+
+      // COFFEE OPTIONS DATA
+      const coffeeOptionsData = [
+        { icon: '☕', russian: 'кофе с собой', danish: 'kaffe med (takeaway)' },
+        { icon: '🥛', russian: 'овсяное молоко', danish: 'havremaelk' },
+        { icon: '🥤', russian: 'стаканчик', danish: 'krus/bager' },
+      ];
+
+      // DELIVERY PHRASES DATA
+      const deliveryPhrasesData = [
+        { russian: 'Я заказал еду.', danish: 'Jeg har bestilt mad.' },
+        { russian: 'Курьер в пути.', danish: 'Kuréren er på vej.' },
+        { russian: 'Я у двери.', danish: 'Jeg er ved døren.' },
+        { russian: 'Спасибо, сейчас спущусь.', danish: 'Tak, jeg kommer ned nu.' },
+      ];
+
+      const russianFood = [
+        { icon: '🍲', russian: 'борщ', danish: 'borsjtj (rodbedesuppe)' },
+        { icon: '🥟', russian: 'пельмени', danish: 'pelmeni (dumplings)' },
+        { icon: '🥞', russian: 'блины', danish: 'blini (pandekager)' },
+        { icon: '🥣', russian: 'каша', danish: 'grod' },
+        { icon: '🍜', russian: 'щи', danish: 'sjtji (kalsuppe)' },
+      ];
+
+      // Render food grids
+      function renderFoodGrid(containerId, items) {
+        const container = document.getElementById(containerId);
+        items.forEach((item) => {
+          const card = document.createElement('div');
+          card.className = 'food-card';
+          card.innerHTML = `
+                    <div class="food-icon">${item.icon}</div>
+                    <div class="food-russian">${item.russian}</div>
+                    <div class="food-danish">${item.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(item.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render coffee options
+      function renderCoffeeOptions() {
+        const container = document.getElementById('coffee-options');
+        coffeeOptionsData.forEach((item) => {
+          const card = document.createElement('div');
+          card.className = 'coffee-card';
+          card.innerHTML = `
+                    <div class="coffee-icon">${item.icon}</div>
+                    <div class="food-russian">${item.russian}</div>
+                    <div class="food-danish">${item.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(item.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render delivery phrases
+      function renderDeliveryPhrases() {
+        const container = document.getElementById('delivery-phrases');
+        deliveryPhrasesData.forEach((phrase) => {
+          const div = document.createElement('div');
+          div.className = 'delivery-phrase';
+          div.innerHTML = `
+                    <div class="delivery-russian">${phrase.russian}</div>
+                    <div class="delivery-danish">${phrase.danish}</div>
+                `;
+          div.addEventListener('click', () => TTS.speak(phrase.russian));
+          container.appendChild(div);
+        });
+      }
+
+      // LISTENING DATA
+      const listeningData = [
+        { audio: 'хлеб', options: ['brod', 'ost', 'kod'], correct: 0 },
+        { audio: 'кофе', options: ['te', 'kaffe', 'maelk'], correct: 1 },
+        {
+          audio: 'Я люблю чай',
+          options: ['Jeg drikker te', 'Jeg kan lide te', 'Jeg vil have te'],
+          correct: 1,
+        },
+        { audio: 'вода', options: ['vand', 'vin', 'ol'], correct: 0 },
+        {
+          audio: 'Я хочу есть',
+          options: ['Jeg er torstig', 'Jeg er sulten', 'Jeg er traet'],
+          correct: 1,
+        },
+        { audio: 'борщ', options: ['suppe', 'borsjtj', 'grod'], correct: 1 },
+      ];
+
+      // MATCHING DATA
+      const matchingData = [
+        { russian: 'хлеб', danish: 'brod' },
+        { russian: 'вода', danish: 'vand' },
+        { russian: 'кофе', danish: 'kaffe' },
+        { russian: 'молоко', danish: 'maelk' },
+        { russian: 'мясо', danish: 'kod' },
+      ];
+
+      // DIALOGUE DATA
+      const dialogueData = [
+        { speaker: 'A', russian: 'Ты хочешь есть?', danish: 'Er du sulten?' },
+        { speaker: 'B', russian: 'Да, очень!', danish: 'Ja, meget!' },
+        { speaker: 'A', russian: 'Что ты любишь?', danish: 'Hvad kan du lide?' },
+        { speaker: 'B', russian: 'Я люблю борщ и хлеб.', danish: 'Jeg kan lide borsjtj og brod.' },
+        { speaker: 'A', russian: 'А пить? Чай или кофе?', danish: 'Og at drikke? Te eller kaffe?' },
+        { speaker: 'B', russian: 'Кофе, пожалуйста.', danish: 'Kaffe, tak.' },
+      ];
+
+      // FILL BLANK DATA
+      const fillBlankData = [
+        { text: 'Я ___ кофе.', answer: 'люблю', hint: 'kan lide', danish: 'Jeg kan lide kaffe.' },
+        { text: 'Я хочу ___.', answer: 'есть', hint: 'spise', danish: 'Jeg er sulten.' },
+        { text: 'Ты ___ чай?', answer: 'любишь', hint: 'kan lide (du)', danish: 'Kan du lide te?' },
+        {
+          text: 'Я не люблю ___.',
+          answer: 'рыбу',
+          hint: 'fisk',
+          danish: 'Jeg kan ikke lide fisk.',
+          alternatives: ['мясо', 'сыр'],
+        },
+        {
+          text: '___, пожалуйста.',
+          answer: 'Воду',
+          hint: 'Vand',
+          danish: 'Vand, tak.',
+          alternatives: ['Кофе', 'Чай'],
+        },
+      ];
+
+      // SENTENCE BUILDER DATA
+      const sentenceBuilderData = [
+        { words: ['Я', 'люблю', 'кофе'], danish: 'Jeg kan lide kaffe' },
+        { words: ['Я', 'хочу', 'пить'], danish: 'Jeg er torstig' },
+        { words: ['Ты', 'любишь', 'чай', '?'], danish: 'Kan du lide te?' },
+        { words: ['Я', 'не', 'люблю', 'рыбу'], danish: 'Jeg kan ikke lide fisk' },
+      ];
+
+      // AI CONVERSATION CONFIG
+      const aiConversationConfig = {
+        topic: 'Mad og drikke',
+        level: 'A1',
+        vocabulary: [
+          ...basicFood.map((f) => ({ russian: f.russian, danish: f.danish })),
+          ...drinks.map((d) => ({ russian: d.russian, danish: d.danish })),
+          { russian: 'Я люблю', danish: 'Jeg kan lide' },
+          { russian: 'Я не люблю', danish: 'Jeg kan ikke lide' },
+          { russian: 'Я хочу', danish: 'Jeg vil have' },
+        ],
+        starterPrompts: [
+          { russian: 'Я люблю кофе.', danish: 'Sig hvad du kan lide' },
+          { russian: 'Я не люблю рыбу.', danish: 'Sig hvad du ikke kan lide' },
+          { russian: 'Я хочу есть.', danish: 'Sig du er sulten' },
+          { russian: 'Что ты любишь?', danish: 'Spørg hvad de kan lide' },
+        ],
+        systemPrompt:
+          'Fokuser på mad og drikke. Spørg om præferencer: Что ты любишь?, Ты любишь...?, Хочешь...? Anbefal russiske retter.',
+      };
+
+      // INITIALIZE
+      document.addEventListener('DOMContentLoaded', function () {
+        renderFoodGrid('basic-food', basicFood);
+        renderFoodGrid('drinks', drinks);
+        renderFoodGrid('russian-food', russianFood);
+        renderCoffeeOptions();
+        renderDeliveryPhrases();
+
+        new ListeningExercise('listening-exercise', listeningData);
+        new MatchingExercise('matching-exercise', matchingData);
+        new Dialogue('dialogue-section', dialogueData);
+        new FillBlankExercise('fill-blank-exercise', fillBlankData);
+        new SentenceBuilder('sentence-builder', sentenceBuilderData);
+
+        // AI Conversation
+        new AIConversation('ai-conversation', aiConversationConfig);
+
+        // AI Word Detective
+        new AIWordDetective('ai-detective', {
+          words: [
+            ...basicFood.map((f) => ({ russian: f.russian, danish: f.danish })),
+            ...drinks.map((d) => ({ russian: d.russian, danish: d.danish })),
+          ],
+          category: 'Mad og drikke',
+          maxRounds: 6,
+        });
+
+        // AI Emoji Translator
+        new AIEmojiTranslator('ai-emoji', {
+          vocabulary: [
+            { russian: 'я', danish: 'jeg' },
+            { russian: 'люблю', danish: 'elsker' },
+            { russian: 'хочу', danish: 'vil have' },
+            { russian: 'есть', danish: 'spise' },
+            { russian: 'пить', danish: 'drikke' },
+            ...basicFood.map((f) => ({ russian: f.russian, danish: f.danish })),
+            ...drinks.map((d) => ({ russian: d.russian, danish: d.danish })),
+          ],
+          maxRounds: 5,
+        });
+      });
+    </script>
+  </body>
+</html>

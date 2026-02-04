@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вводные слова | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .conductor-visual {
+        background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .conductor-title {
+        font-family: var(--font-serif);
+        font-size: 2rem;
+        margin-bottom: 10px;
+      }
+
+      .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .intro-tag {
+        background: rgba(255, 255, 255, 0.2);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        backdrop-filter: blur(5px);
+      }
+
+      .category-section {
+        margin-bottom: 30px;
+      }
+
+      .category-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 5px;
+      }
+
+      .cat-icon {
+        font-size: 1.5rem;
+      }
+
+      .cat-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: var(--accent-blue);
+      }
+
+      .word-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+      }
+
+      .word-card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+        transition: transform 0.2s;
+      }
+
+      .word-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+
+      .word-ru {
+        font-weight: bold;
+        display: block;
+      }
+      .word-dk {
+        font-size: 0.8rem;
+        color: #888;
+        font-style: italic;
+      }
+
+      /* Constructor */
+      .constructor-area {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+
+      .slot-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        min-height: 60px;
+        margin-bottom: 20px;
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+
+      .sentence-part {
+        padding: 8px 15px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .drop-slot {
+        width: 120px;
+        height: 40px;
+        border: 2px dashed #bbb;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.02);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+
+      .drop-slot.active {
+        background: #e3f2fd;
+        border-color: var(--accent-blue);
+      }
+
+      .draggable-word {
+        padding: 8px 15px;
+        background: var(--accent-gold);
+        color: white;
+        border-radius: 20px;
+        cursor: grab;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .draggable-word.placed {
+        margin: 0;
+        box-shadow: none;
+      }
+
+      .comma-box {
+        width: 20px;
+        text-align: center;
+        font-weight: bold;
+        color: var(--accent-red);
+        font-size: 1.5rem;
+        display: none; /* Hidden by default until word dropped */
+      }
+
+      .drop-slot:has(.draggable-word) + .comma-box,
+      .comma-box:has(+ .drop-slot > .draggable-word) {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="isolated-members.html">Обособленные</a>
+          <a
+            href="introductory-words.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 2px solid var(--accent-red)"
+            >Вводные</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <div class="conductor-visual">
+            <div class="conductor-title">Дирижеры речи</div>
+            <p>Вводные слова не несут информации, но управляют настроением предложения.</p>
+            <div class="tag-cloud">
+              <span class="intro-tag">Конечно</span>
+              <span class="intro-tag">Кажется</span>
+              <span class="intro-tag">К счастью</span>
+              <span class="intro-tag">Во-первых</span>
+            </div>
+          </div>
+
+          <section id="categories">
+            <div class="category-section">
+              <div class="category-header">
+                <span class="cat-icon">🎯</span>
+                <span class="cat-title">Уверенность</span>
+              </div>
+              <div class="word-grid">
+                <div class="word-card">
+                  <span class="word-ru">Конечно</span><span class="word-dk">Selvfølgelig</span>
+                </div>
+                <div class="word-card">
+                  <span class="word-ru">Безусловно</span><span class="word-dk">Uden tvivl</span>
+                </div>
+                <div class="word-card">
+                  <span class="word-ru">Разумеется</span><span class="word-dk">Naturligvis</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <div class="category-header">
+                <span class="cat-icon">🎲</span>
+                <span class="cat-title">Вероятность</span>
+              </div>
+              <div class="word-grid">
+                <div class="word-card">
+                  <span class="word-ru">Кажется</span><span class="word-dk">Det lader til</span>
+                </div>
+                <div class="word-card">
+                  <span class="word-ru">Возможно</span><span class="word-dk">Muligvis</span>
+                </div>
+                <div class="word-card">
+                  <span class="word-ru">Может быть</span><span class="word-dk">Måske</span>
+                </div>
+                <div class="word-card">
+                  <span class="word-ru">Вероятно</span><span class="word-dk">Sandsynligvis</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="category-section">
+              <div class="category-header">
+                <span class="cat-icon">❤️</span>
+                <span class="cat-title">Чувства</span>
+              </div>
+              <div class="word-grid">
+                <div class="word-card">
+                  <span class="word-ru">К счастью</span><span class="word-dk">Heldigvis</span>
+                </div>
+                <div class="word-card">
+                  <span class="word-ru">К сожалению</span><span class="word-dk">Desværre</span>
+                </div>
+                <div class="word-card">
+                  <span class="word-ru">К удивлению</span
+                  ><span class="word-dk">Til overraskelse</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Конструктор: Найди место</h2>
+            <p>Перетащите вводное слово в подходящий слот. Запятые появятся автоматически!</p>
+
+            <div class="constructor-area" id="constructorArea">
+              <!-- JS Generated -->
+            </div>
+            <div id="feedback" style="margin-top: 20px; font-weight: bold"></div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Правило</strong>
+            Вводные слова всегда выделяются запятыми. Если стоят в середине — с двух сторон.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      const tasks = [
+        {
+          parts: ['Он', 'придет', 'завтра'],
+          word: 'конечно',
+          correctSlot: 1, // 0: Start, 1: After 'Он', 2: After 'придет'
+        },
+        {
+          parts: ['Мы', 'опоздали', 'на поезд'],
+          word: 'к сожалению',
+          correctSlot: 0, // Start
+        },
+      ];
+
+      const area = document.getElementById('constructorArea');
+      const feedback = document.getElementById('feedback');
+
+      tasks.forEach((task, i) => {
+        const row = document.createElement('div');
+        row.className = 'slot-row';
+
+        // Create slots and parts
+        // Logic: Slot - Part - Slot - Part ...
+
+        const createSlot = (idx) => {
+          const slot = document.createElement('div');
+          slot.className = 'drop-slot';
+          slot.dataset.idx = idx;
+          slot.dataset.task = i;
+
+          slot.ondragover = (e) => {
+            e.preventDefault();
+            slot.classList.add('active');
+          };
+          slot.ondragleave = () => slot.classList.remove('active');
+          slot.ondrop = (e) => handleDrop(e, slot, task);
+          return slot;
+        };
+
+        // Initial slot
+        const s0 = createSlot(0);
+        const c0 = document.createElement('span');
+        c0.className = 'comma-box';
+        c0.innerText = ',';
+        row.appendChild(s0);
+        row.appendChild(c0);
+
+        task.parts.forEach((part, pIdx) => {
+          const p = document.createElement('div');
+          p.className = 'sentence-part';
+          p.innerText = part;
+          row.appendChild(p);
+
+          // Slot after part
+          const c = document.createElement('span');
+          c.className = 'comma-box';
+          c.innerText = ',';
+          const s = createSlot(pIdx + 1);
+
+          if (pIdx < task.parts.length - 1) {
+            row.appendChild(c); // Comma before next slot? No, logic is tricky visually.
+            // Simplified visual: Just Part | Comma | Slot | Comma | Part
+            // Let's stick to simple: Part [Slot] Part
+          }
+          // Actually, let's just put slots between parts.
+        });
+
+        // Clear row and rebuild simpler
+        row.innerHTML = '';
+
+        // Slot 0
+        row.appendChild(createSlot(0));
+        const comma1 = document.createElement('span');
+        comma1.className = 'comma-box';
+        comma1.innerText = ', ';
+        row.appendChild(comma1);
+
+        task.parts.forEach((part, pIdx) => {
+          const pDiv = document.createElement('div');
+          pDiv.className = 'sentence-part';
+          pDiv.innerText = part;
+          row.appendChild(pDiv);
+
+          if (pIdx < task.parts.length) {
+            const cLeft = document.createElement('span');
+            cLeft.className = 'comma-box';
+            cLeft.innerText = ', ';
+            const s = createSlot(pIdx + 1);
+            const cRight = document.createElement('span');
+            cRight.className = 'comma-box';
+            cRight.innerText = ', ';
+
+            row.appendChild(cLeft);
+            row.appendChild(s);
+            row.appendChild(cRight);
+          }
+        });
+
+        // Draggable Word
+        const wordContainer = document.createElement('div');
+        wordContainer.style.marginTop = '10px';
+        const dragWord = document.createElement('div');
+        dragWord.className = 'draggable-word';
+        dragWord.draggable = true;
+        dragWord.innerText = task.word;
+        dragWord.id = `drag-${i}`;
+
+        dragWord.ondragstart = (e) => {
+          e.dataTransfer.setData('text', e.target.id);
+        };
+
+        wordContainer.appendChild(dragWord);
+
+        area.appendChild(row);
+        area.appendChild(wordContainer);
+        area.appendChild(document.createElement('hr'));
+      });
+
+      function handleDrop(e, slot, task) {
+        e.preventDefault();
+        slot.classList.remove('active');
+        const id = e.dataTransfer.getData('text');
+        const el = document.getElementById(id);
+
+        // Move element
+        slot.appendChild(el);
+        el.classList.add('placed');
+
+        // Check logic? For now just visual feedback of commas appearing via CSS
+        // CSS :has selector handles commas.
+
+        // Simple validation
+        const slotIdx = parseInt(slot.dataset.idx);
+        // Logic check would go here
+      }
+    </script>
+  </body>
+</html>

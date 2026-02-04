@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 12: Stor Repetition | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      .achievement-banner {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: var(--space-xl);
+        border-radius: 12px;
+        text-align: center;
+        margin: var(--space-l) 0;
+      }
+      .achievement-banner h2 {
+        color: white;
+        border: none;
+        margin-bottom: var(--space-s);
+      }
+      .achievement-stars {
+        font-size: 2.5rem;
+        margin: var(--space-m) 0;
+        animation: star-pulse 2s infinite;
+      }
+      @keyframes star-pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+      .topic-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        border-radius: 8px;
+        margin: var(--space-s) 0;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .topic-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateX(5px);
+      }
+      .topic-card h4 {
+        margin: 0 0 var(--space-xs);
+        color: var(--accent-blue);
+      }
+      .topic-words {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+      }
+      .topic-word {
+        background: var(--bg-paper);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+      .topic-word:hover {
+        background: var(--accent-blue);
+        color: white;
+      }
+      .final-test-section {
+        background: var(--bg-paper);
+        padding: var(--space-l);
+        border-radius: 12px;
+        border: 2px solid var(--accent-blue);
+      }
+      .final-test-section h3 {
+        color: var(--accent-blue);
+      }
+      .progress-overview {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: var(--space-s);
+        margin: var(--space-m) 0;
+      }
+      .progress-item {
+        text-align: center;
+        padding: var(--space-s);
+        background: var(--bg-card);
+        border-radius: 8px;
+      }
+      .progress-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--accent-blue);
+      }
+      .certificate-preview {
+        background: white;
+        border: 3px solid gold;
+        padding: var(--space-xl);
+        text-align: center;
+        margin: var(--space-l) 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      .certificate-preview h3 {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      /* === My Day Template === */
+      .my-day-template {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        padding: var(--space-l);
+        border-radius: 12px;
+        margin: var(--space-m) 0;
+      }
+      .my-day-template h3 {
+        margin-top: 0;
+      }
+      .day-sentence {
+        background: white;
+        padding: var(--space-m);
+        border-radius: 8px;
+        margin: var(--space-s) 0;
+        display: flex;
+        align-items: center;
+        gap: var(--space-m);
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .day-sentence:hover {
+        transform: translateX(5px);
+      }
+      .day-time {
+        font-size: 1.5rem;
+      }
+      .day-russian {
+        font-weight: 500;
+      }
+      .day-danish {
+        font-size: 0.85rem;
+        color: var(--text-light);
+      }
+
+      /* === Final Quote === */
+      .final-quote {
+        background: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: var(--space-l);
+        border-radius: 0 12px 12px 0;
+        margin: var(--space-l) 0;
+        font-size: 1.1rem;
+      }
+      .final-quote .russian {
+        font-family: var(--font-serif);
+        font-size: 1.3rem;
+        margin-bottom: var(--space-s);
+      }
+      .final-quote .danish {
+        color: var(--text-light);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 12 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 60 min</span>
+          </div>
+          <h1>Stor Repetition</h1>
+          <p class="lead">
+            Tillykke! Du er naet til den sidste lektion. Tid til at teste alt, hvad du har laert!
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <div class="achievement-banner">
+              <div class="achievement-stars">⭐⭐⭐</div>
+              <h2>Fantastisk Arbejde!</h2>
+              <p>Du har gennemfort 11 lektioner og laert over 200 russiske ord og fraser!</p>
+            </div>
+
+            <h2><span>Del 1: Hvad Du Har Laert</span><span class="chapter-num">Overblik</span></h2>
+
+            <div class="progress-overview">
+              <div class="progress-item">
+                <div class="progress-number">33</div>
+                <div>Bogstaver</div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-number">10</div>
+                <div>Tal</div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-number">200+</div>
+                <div>Ord</div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-number">50+</div>
+                <div>Fraser</div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-number">11</div>
+                <div>Emner</div>
+              </div>
+            </div>
+
+            <h2><span>Del 2: Emner</span><span class="chapter-num">Repetition</span></h2>
+
+            <div class="topic-card">
+              <h4>Lektion 1-2: Hilsner & Alfabet</h4>
+              <div class="topic-words">
+                <span class="topic-word" onclick="TTS.speak('Привет')">Привет</span>
+                <span class="topic-word" onclick="TTS.speak('До свидания')">До свидания</span>
+                <span class="topic-word" onclick="TTS.speak('Спасибо')">Спасибо</span>
+                <span class="topic-word" onclick="TTS.speak('Пожалуйста')">Пожалуйста</span>
+              </div>
+            </div>
+
+            <div class="topic-card">
+              <h4>Lektion 3: Tal</h4>
+              <div class="topic-words">
+                <span class="topic-word" onclick="TTS.speak('один')">один</span>
+                <span class="topic-word" onclick="TTS.speak('два')">два</span>
+                <span class="topic-word" onclick="TTS.speak('три')">три</span>
+                <span class="topic-word" onclick="TTS.speak('десять')">десять</span>
+              </div>
+            </div>
+
+            <div class="topic-card">
+              <h4>Lektion 4: Praesentation</h4>
+              <div class="topic-words">
+                <span class="topic-word" onclick="TTS.speak('Меня зовут')">Меня зовут...</span>
+                <span class="topic-word" onclick="TTS.speak('Я из Дании')">Я из Дании</span>
+                <span class="topic-word" onclick="TTS.speak('Очень приятно')">Очень приятно</span>
+              </div>
+            </div>
+
+            <div class="topic-card">
+              <h4>Lektion 5: Familie</h4>
+              <div class="topic-words">
+                <span class="topic-word" onclick="TTS.speak('мама')">мама</span>
+                <span class="topic-word" onclick="TTS.speak('папа')">папа</span>
+                <span class="topic-word" onclick="TTS.speak('брат')">брат</span>
+                <span class="topic-word" onclick="TTS.speak('сестра')">сестра</span>
+              </div>
+            </div>
+
+            <div class="topic-card">
+              <h4>Lektion 6-7: Mad & Cafe</h4>
+              <div class="topic-words">
+                <span class="topic-word" onclick="TTS.speak('кофе')">кофе</span>
+                <span class="topic-word" onclick="TTS.speak('чай')">чай</span>
+                <span class="topic-word" onclick="TTS.speak('Сколько стоит')">Сколько стоит?</span>
+                <span class="topic-word" onclick="TTS.speak('Счёт пожалуйста')"
+                  >Счёт, пожалуйста</span
+                >
+              </div>
+            </div>
+
+            <h2><span>Del 3: Mega Hukommelsesspil</span><span class="chapter-num">Spil</span></h2>
+            <p>Test din hukommelse med ord fra alle lektioner!</p>
+            <div id="mega-memory" class="exercise-container"></div>
+
+            <h2><span>Del 4: Hurtighedstest</span><span class="chapter-num">Spil</span></h2>
+            <p>60 sekunder - alle emner - hvor mange kan du na?</p>
+            <div id="mega-speed" class="exercise-container"></div>
+
+            <h2><span>Del 5: Lyttetest</span><span class="chapter-num">Ovelse</span></h2>
+            <p>Fraser fra alle lektioner:</p>
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <h2><span>Del 6: Skrivetest</span><span class="chapter-num">Ovelse</span></h2>
+            <p>Skriv ordene korrekt - kan du fa en lang streak?</p>
+            <div id="typing-exercise" class="exercise-container"></div>
+
+            <h2><span>Del 7: Bogstavpuslespil</span><span class="chapter-num">Ovelse</span></h2>
+            <div id="scramble-exercise" class="exercise-container"></div>
+
+            <h2><span>Del 8: Final Dialog</span><span class="chapter-num">Samtale</span></h2>
+            <p>En komplet samtale der bruger alt hvad du har lært:</p>
+            <div id="dialogue-section"></div>
+
+            <h2>
+              <span>Del 9: Min Dag i Rusland</span><span class="chapter-num">Produktion</span>
+            </h2>
+            <p>Forestil dig en dag i en russisk by. Klik på sætningerne for at høre dem:</p>
+
+            <div class="my-day-template" id="my-day-template"></div>
+
+            <!-- AI ROLE PLAY: FINAL -->
+            <h2>
+              <span>Del 10: Afsluttende Rollespil</span
+              ><span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🎭 Vis hvad du kan!</h3>
+              <p>
+                Du er i Rusland! Brug alt hvad du har lært til at klare denne situation. AI'en
+                spiller en venlig russer, der hjælper dig.
+              </p>
+            </div>
+
+            <div id="ai-roleplay-final" class="exercise-container"></div>
+
+            <!-- AI CONVERSATION: FREE -->
+            <h2><span>Del 11: Fri Samtale</span><span class="chapter-num">🤖 AI Praksis</span></h2>
+
+            <div class="ai-section-intro">
+              <h3>💬 Tal frit med AI</h3>
+              <p>
+                Øv dig i at tale om hvad som helst! AI-tutoren tilpasser sig dit niveau og hjælper
+                dig med at bruge alt det ordforråd, du har lært.
+              </p>
+            </div>
+
+            <div id="ai-conversation" class="exercise-container"></div>
+
+            <!-- AI MEGA QUIZ -->
+            <h2><span>Del 12: Mega Quiz</span><span class="chapter-num">🎮 AI Spil</span></h2>
+
+            <div class="ai-section-intro">
+              <h3>⚡ Den ultimative test!</h3>
+              <p>15 spørgsmål fra alle lektioner. Kan du slå rekorden?</p>
+            </div>
+
+            <div id="ai-mega-quiz" class="exercise-container"></div>
+
+            <!-- AI SENTENCE AUCTION -->
+            <h2><span>Del 13: Final Auktion</span><span class="chapter-num">🎮 AI Spil</span></h2>
+
+            <div class="ai-section-intro">
+              <h3>🏛️ Sidste chance!</h3>
+              <p>Brug alt hvad du har lært til at vælge de rigtige sætninger.</p>
+            </div>
+
+            <div id="ai-auction" class="exercise-container"></div>
+
+            <!-- AI EMOJI TRANSLATOR -->
+            <h2><span>Del 14: Emoji Mester</span><span class="chapter-num">🎮 AI Spil</span></h2>
+
+            <div class="ai-section-intro">
+              <h3>🎭 Oversæt emoji-historierne!</h3>
+              <p>Den sværeste emoji-udfordring - brug alt dit ordforråd!</p>
+            </div>
+
+            <div id="ai-emoji" class="exercise-container"></div>
+
+            <div class="final-quote">
+              <div class="russian">
+                «Теперь ты знаешь достаточно, чтобы заказать кофе, найти метро и пожаловаться на
+                погоду. Добро пожаловать!»
+              </div>
+              <div class="danish">
+                Nu ved du nok til at bestille kaffe, finde metroen og klage over vejret. Velkommen!
+              </div>
+            </div>
+
+            <div class="certificate-preview">
+              <h3>CERTIFIKAT</h3>
+              <p>Hermed bekraeftes at</p>
+              <p style="font-size: 1.3rem; font-weight: bold; margin: var(--space-m) 0">
+                _______________
+              </p>
+              <p>har gennemfort</p>
+              <p style="font-size: 1.2rem; font-weight: bold; color: var(--accent-blue)">
+                RusLaering Begynderkursus
+              </p>
+              <p>Niveau A0-A1</p>
+              <p style="margin-top: var(--space-m)">Молодец! (Godt klaret!)</p>
+            </div>
+
+            <h2><span>Hvad Nu?</span></h2>
+            <div class="theory-block">
+              <h3>Naeste Skridt</h3>
+              <ul>
+                <li>
+                  <strong>Ov dagligt:</strong> 15 minutter om dagen er bedre end 2 timer om ugen
+                </li>
+                <li><strong>Lyt til russisk:</strong> Musik, podcasts, YouTube</li>
+                <li><strong>Laes enkle tekster:</strong> Bornehistorier, nyheder for laerende</li>
+                <li><strong>Find en sprogpartner:</strong> Ov samtale med en russer</li>
+                <li><strong>Fortsaet til A2:</strong> Det naeste niveau venter!</li>
+              </ul>
+            </div>
+
+            <div
+              class="achievement-banner"
+              style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%)"
+            >
+              <div class="achievement-stars">🎉🎊🎉</div>
+              <h2>Поздравляю!</h2>
+              <p>
+                Du har klaret begynderkurset! Du kan nu praesentere dig selv, bestille mad, sporge
+                om vej, og meget mere pa russisk!
+              </p>
+            </div>
+
+            <nav class="lesson-nav">
+              <a href="11-weather.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">Vejret</span>
+              </a>
+              <a href="../index.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Afslut</span>
+                <span class="lesson-nav-title">Tilbage til kursoversigt</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Godt klaret!</strong>
+              Du har taget det første store skridt i at lære russisk. Fortsæt med at øve hver dag!
+            </div>
+            <div class="margin-note">
+              <strong>Tip</strong>
+              Gem denne side som bogmærke og kom tilbage for at genopfriske dine færdigheder
+              regelmæssigt.
+            </div>
+            <div class="margin-note">
+              <strong>Moderne ressourcer</strong>
+              Prøv at følge russiske bloggere på YouTube eller Instagram. Det er en god måde at høre
+              hverdagsrussisk!
+            </div>
+            <div class="margin-note">
+              <strong>Sprogpartner</strong>
+              Find en russisk sprogpartner via apps som Tandem eller HelloTalk. Øv det du har lært i
+              rigtige samtaler!
+            </div>
+          </aside>
+        </section>
+      </main>
+      <samovar-footer></samovar-footer>
+    </div>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      // MEGA MEMORY - words from all lessons
+      const megaMemoryPairs = [
+        { russian: 'Привет', danish: 'Hej' },
+        { russian: 'Спасибо', danish: 'Tak' },
+        { russian: 'мама', danish: 'mor' },
+        { russian: 'брат', danish: 'bror' },
+        { russian: 'кофе', danish: 'kaffe' },
+        { russian: 'вода', danish: 'vand' },
+        { russian: 'красный', danish: 'rod' },
+        { russian: 'холодно', danish: 'koldt' },
+      ];
+
+      // MEGA SPEED - all topics
+      const megaSpeedWords = [
+        { russian: 'Привет', danish: 'Hej' },
+        { russian: 'До свидания', danish: 'Farvel' },
+        { russian: 'Спасибо', danish: 'Tak' },
+        { russian: 'один', danish: 'en' },
+        { russian: 'два', danish: 'to' },
+        { russian: 'три', danish: 'tre' },
+        { russian: 'мама', danish: 'mor' },
+        { russian: 'папа', danish: 'far' },
+        { russian: 'брат', danish: 'bror' },
+        { russian: 'сестра', danish: 'soster' },
+        { russian: 'кофе', danish: 'kaffe' },
+        { russian: 'чай', danish: 'te' },
+        { russian: 'вода', danish: 'vand' },
+        { russian: 'хлеб', danish: 'brod' },
+        { russian: 'метро', danish: 'metro' },
+        { russian: 'рубашка', danish: 'skjorte' },
+        { russian: 'красный', danish: 'rod' },
+        { russian: 'синий', danish: 'bla' },
+        { russian: 'солнце', danish: 'sol' },
+        { russian: 'дождь', danish: 'regn' },
+      ];
+
+      // LISTENING - mixed phrases
+      const listeningData = [
+        {
+          audio: 'Меня зовут Анна',
+          options: ['Mit navn er Anna', 'Jeg hedder Anna', 'Hun hedder Anna'],
+          correct: 1,
+        },
+        {
+          audio: 'Сколько это стоит?',
+          options: ['Hvad er klokken?', 'Hvor meget koster det?', 'Hvor er det?'],
+          correct: 1,
+        },
+        {
+          audio: 'У меня есть брат',
+          options: ['Jeg har en soster', 'Jeg har en bror', 'Han har en bror'],
+          correct: 1,
+        },
+        { audio: 'Идёт дождь', options: ['Det sner', 'Solen skinner', 'Det regner'], correct: 2 },
+        {
+          audio: 'Можно меню?',
+          options: ['Ma jeg se menuen?', 'Ma jeg betale?', 'Hvor er toilettet?'],
+          correct: 0,
+        },
+        {
+          audio: 'Где метро?',
+          options: ['Hvad er metroen?', 'Hvor er metroen?', 'Nar gar metroen?'],
+          correct: 1,
+        },
+        { audio: 'Очень приятно', danish: ['Jeg forstår', 'Glæder mig', 'Undskyld'], correct: 1 },
+        {
+          audio: 'Сегодня холодно',
+          options: ['Det er varmt', 'Det er koldt i dag', 'Det sner'],
+          correct: 1,
+        },
+      ];
+
+      // TYPING - important words
+      const typingWords = [
+        { russian: 'Привет', danish: 'Hej' },
+        { russian: 'Спасибо', danish: 'Tak' },
+        { russian: 'кофе', danish: 'kaffe' },
+        { russian: 'мама', danish: 'mor' },
+        { russian: 'брат', danish: 'bror' },
+        { russian: 'метро', danish: 'metro' },
+        { russian: 'красный', danish: 'rod' },
+        { russian: 'солнце', danish: 'sol' },
+        { russian: 'вода', danish: 'vand' },
+        { russian: 'дождь', danish: 'regn' },
+      ];
+
+      // SCRAMBLE - key words
+      const scrambleWords = [
+        { russian: 'Привет', danish: 'Hej' },
+        { russian: 'Спасибо', danish: 'Tak' },
+        { russian: 'семья', danish: 'familie' },
+        { russian: 'погода', danish: 'vejr' },
+        { russian: 'магазин', danish: 'butik' },
+      ];
+
+      // FINAL DIALOGUE - complete conversation
+      const dialogueData = [
+        { speaker: 'A', russian: 'Здравствуйте!', danish: 'Goddag!' },
+        {
+          speaker: 'B',
+          russian: 'Здравствуйте! Как вас зовут?',
+          danish: 'Goddag! Hvad hedder De?',
+        },
+        { speaker: 'A', russian: 'Меня зовут Мария. А вас?', danish: 'Jeg hedder Maria. Og De?' },
+        {
+          speaker: 'B',
+          russian: 'Иван. Очень приятно! Вы из Дании?',
+          danish: 'Ivan. Glaeder mig! Er De fra Danmark?',
+        },
+        {
+          speaker: 'A',
+          russian: 'Да, я из Копенгагена. А вы из Москвы?',
+          danish: 'Ja, jeg er fra Kobenhavn. Er De fra Moskva?',
+        },
+        {
+          speaker: 'B',
+          russian: 'Да. Какая сегодня погода в Дании?',
+          danish: 'Ja. Hvordan er vejret i Danmark i dag?',
+        },
+        {
+          speaker: 'A',
+          russian: 'Сегодня холодно и идёт дождь.',
+          danish: 'Det er koldt i dag og det regner.',
+        },
+        {
+          speaker: 'B',
+          russian: 'В Москве тоже холодно. Хотите кофе?',
+          danish: 'I Moskva er det ogsa koldt. Vil De have kaffe?',
+        },
+        { speaker: 'A', russian: 'Да, пожалуйста! Спасибо!', danish: 'Ja tak! Tak!' },
+        { speaker: 'B', russian: 'Пожалуйста. До свидания!', danish: 'Selv tak. Farvel!' },
+      ];
+
+      // MY DAY TEMPLATE
+      const myDayData = [
+        { time: '☀️', russian: 'Утром я пью кофе.', danish: 'Om morgenen drikker jeg kaffe.' },
+        { time: '🏢', russian: 'Днём я работаю.', danish: 'Om dagen arbejder jeg.' },
+        { time: '🍔', russian: 'Я обедаю в кафе.', danish: 'Jeg spiser frokost på en cafe.' },
+        { time: '🌙', russian: 'Вечером я дома.', danish: 'Om aftenen er jeg hjemme.' },
+        {
+          time: '❤️',
+          russian: 'Я люблю гулять по городу.',
+          danish: 'Jeg elsker at gå tur i byen.',
+        },
+        {
+          time: '😴',
+          russian: 'Я не люблю рано вставать.',
+          danish: 'Jeg kan ikke lide at stå tidligt op.',
+        },
+      ];
+
+      // Render My Day template
+      function renderMyDay() {
+        const container = document.getElementById('my-day-template');
+        container.innerHTML = '<h3>📅 Min dag i Moskva</h3>';
+        myDayData.forEach((item) => {
+          const div = document.createElement('div');
+          div.className = 'day-sentence';
+          div.innerHTML = `
+                    <span class="day-time">${item.time}</span>
+                    <div>
+                        <div class="day-russian">${item.russian}</div>
+                        <div class="day-danish">${item.danish}</div>
+                    </div>
+                `;
+          div.addEventListener('click', () => TTS.speak(item.russian));
+          container.appendChild(div);
+        });
+      }
+
+      // AI ROLE PLAY: FINAL CONFIG
+      const aiRolePlayFinalConfig = {
+        scenario:
+          'Du ankommer til Moskva og skal finde dit hotel. Du møder en venlig russer på gaden.',
+        yourRole: 'En turist fra Danmark',
+        aiRole: 'En venlig moskovit (Москвич)',
+        vocabulary: [
+          { russian: 'Здравствуйте', danish: 'Goddag' },
+          { russian: 'Извините', danish: 'Undskyld' },
+          { russian: 'Где', danish: 'Hvor' },
+          { russian: 'гостиница', danish: 'hotel' },
+          { russian: 'метро', danish: 'metro' },
+          { russian: 'прямо', danish: 'ligeud' },
+          { russian: 'налево', danish: 'til venstre' },
+          { russian: 'Спасибо', danish: 'Tak' },
+        ],
+        goals: [
+          'Sig hej og præsenter dig',
+          'Spørg om vej til hotellet',
+          'Forstå retningsanvisningen',
+          'Sig tak og farvel',
+        ],
+      };
+
+      // AI CONVERSATION: FREE CONFIG
+      const aiConversationConfig = {
+        topic: 'Fri samtale - brug alt hvad du har lært',
+        level: 'A1',
+        vocabulary: megaSpeedWords.map((w) => ({ russian: w.russian, danish: w.danish })),
+        starterPrompts: [
+          { russian: 'Привет! Как дела?', danish: 'Sig hej og spørg hvordan det går' },
+          { russian: 'Меня зовут...', danish: 'Præsenter dig selv' },
+          { russian: 'Я из Дании.', danish: 'Fortæl hvor du er fra' },
+          { russian: 'Какая сегодня погода?', danish: 'Tal om vejret' },
+        ],
+        systemPrompt:
+          'Dette er en fri samtale. Eleven har gennemført A1-kurset. Brug alle emner: præsentation, familie, mad, tid, vejr, shopping, by. Vær opmuntrende og hjælpsom.',
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        new MemoryGame('mega-memory', megaMemoryPairs);
+        new SpeedChallenge('mega-speed', megaSpeedWords, 60);
+        new ListeningExercise('listening-exercise', listeningData);
+        new TypingPractice('typing-exercise', typingWords);
+        new WordScramble('scramble-exercise', scrambleWords);
+        new AnimatedDialogue('dialogue-section', dialogueData);
+        renderMyDay();
+
+        // AI Role Play: Final
+        new AIRolePlay('ai-roleplay-final', aiRolePlayFinalConfig);
+
+        // AI Conversation: Free
+        new AIConversation('ai-conversation', aiConversationConfig);
+
+        // AI Mega Quiz
+        new AIQuickQuiz('ai-mega-quiz', {
+          vocabulary: megaSpeedWords,
+          maxRounds: 15,
+        });
+
+        // AI Sentence Auction
+        new AISentenceAuction('ai-auction', {
+          vocabulary: megaSpeedWords,
+          maxRounds: 10,
+        });
+
+        // AI Emoji Translator
+        new AIEmojiTranslator('ai-emoji', {
+          vocabulary: megaSpeedWords,
+          maxRounds: 8,
+        });
+      });
+    </script>
+  </body>
+</html>

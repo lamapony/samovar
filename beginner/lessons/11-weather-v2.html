@@ -1,0 +1,1208 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 11: Vejret | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #f39c12;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Weather Grid === */
+    .weather-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .weather-card {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .weather-card:nth-child(4n) {
+      border-right: none;
+    }
+
+    .weather-card:hover {
+      background: var(--editorial-light);
+      transform: translateY(-3px);
+    }
+
+    .weather-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .weather-russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .weather-danish {
+      font-size: 0.85rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Seasons Grid === */
+    .seasons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .season-card {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .season-card:nth-child(1) {
+      background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+    }
+
+    .season-card:nth-child(2) {
+      background: linear-gradient(135deg, #ffd3b6 0%, #ffaaa5 100%);
+    }
+
+    .season-card:nth-child(3) {
+      background: linear-gradient(135deg, #fff1c1 0%, #f7dc6f 100%);
+    }
+
+    .season-card:nth-child(4) {
+      background: linear-gradient(135deg, #f5b041 0%, #dc7633 100%);
+      color: white;
+    }
+
+    .season-card:hover {
+      transform: scale(1.02);
+    }
+
+    .season-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .season-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .season-danish {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    /* === Temperature Display === */
+    .temp-display {
+      text-align: center;
+      padding: 3rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .temp-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .temp-number {
+      font-size: 3rem;
+      font-weight: 700;
+      font-family: 'SF Mono', 'Monaco', monospace;
+    }
+
+    .temp-number.hot {
+      color: #e74c3c;
+    }
+
+    .temp-number.cold {
+      color: #3498db;
+    }
+
+    .temp-equals {
+      font-size: 2rem;
+      color: var(--editorial-gray);
+    }
+
+    .temp-russian {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--editorial-black);
+      cursor: pointer;
+    }
+
+    .temp-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    /* === Phrase Display === */
+    .phrase-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .phrase-russian {
+      font-size: clamp(1.5rem, 6vw, 2.5rem);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      display: block;
+      line-height: 1.3;
+    }
+
+    .phrase-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    .phrase-translation {
+      font-size: 1.25rem;
+      color: var(--editorial-gray);
+      margin-top: 1rem;
+      font-weight: 300;
+    }
+
+    /* === Expressions Grid === */
+    .expressions-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .expression-item {
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .expression-item:last-child {
+      border-bottom: none;
+    }
+
+    .expression-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .expression-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .expression-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Dialogue === */
+    .dialogue-container {
+      margin: 3rem 0;
+    }
+
+    .dialogue-line {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .dialogue-line:last-child {
+      border-bottom: none;
+    }
+
+    .dialogue-speaker {
+      width: 60px;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+      padding-top: 0.25rem;
+    }
+
+    .dialogue-content {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .dialogue-content:hover .dialogue-russian {
+      color: var(--editorial-accent);
+    }
+
+    .dialogue-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .dialogue-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+      font-style: italic;
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Exercise Sections === */
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(4n) {
+      border-right: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-item .danish {
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .weather-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .weather-card:nth-child(4n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .weather-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .seasons-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .temp-row {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .temp-equals {
+        display: none;
+      }
+
+      .dialogue-line {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .dialogue-speaker {
+        width: auto;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-item:nth-child(4n) {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .summary-item:nth-child(2n) {
+        border-right: none;
+      }
+
+      .floating-nav {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="floating-nav">
+    <a href="../index-v2.html" class="floating-btn">Tilbage</a>
+  </nav>
+
+  <div class="container">
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 11</div>
+        <h1>Vejret</h1>
+        <p class="lead">
+          Smalltalk om vejret er universel. Lær at beskrive vejret og årstiderne på russisk.
+        </p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             MODERN: HYPER-LOCAL WEATHER
+             ============================================ -->
+    <section class="editorial-section"
+      style="background: #fafafa; border-top: 1px solid var(--editorial-line); border-bottom: 1px solid var(--editorial-line);">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z" />
+          </svg>
+          Digitalt vejr
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Præcis som uret</h2>
+        </div>
+        <p class="narrative">
+          Glem de store overskrifter. I Rusland bruger alle <strong>Яндекс Погода</strong> for
+          at se præcis hvornår regnen starter og slutter — helt ned på minut-basis!
+        </p>
+
+        <div class="weather-grid">
+          <div class="weather-card" onclick="TTS.speak('Прогноз на сегодня')">
+            <div class="weather-icon">📱</div>
+            <div class="weather-russian">Прогноз</div>
+            <div class="weather-danish">Prognose</div>
+          </div>
+          <div class="weather-card" onclick="TTS.speak('Карта осадков')">
+            <div class="weather-icon">🗺️</div>
+            <div class="weather-russian">Карта осадков</div>
+            <div class="weather-danish">Regnkort</div>
+          </div>
+          <div class="weather-card" onclick="TTS.speak('Где дождь?')">
+            <div class="weather-icon">❓</div>
+            <div class="weather-russian">Где дождь?</div>
+            <div class="weather-danish">Hvor regner det?</div>
+          </div>
+          <div class="weather-card" onclick="TTS.speak('Скоро солнце')">
+            <div class="weather-icon">☀️</div>
+            <div class="weather-russian">Скоро солнце</div>
+            <div class="weather-danish">Snart sol</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Hyper-lokalt</div>
+          <p>
+            Appen kan fortælle dig: <strong>"Дождь начнётся через 10 минут"</strong>
+            (Regnen starter om 10 minutter). Det gør det nemmere at planlægge turen til supermarkedet!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: WEATHER TYPES
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Vejrtyper</h2>
+        </div>
+
+        <p class="narrative">Lær de vigtigste vejrord på russisk. Klik for at høre.</p>
+
+        <div class="weather-grid" id="weather-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 2: SEASONS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 2</div>
+          <h2 class="chapter-title">Årstider</h2>
+        </div>
+
+        <p class="narrative">Rusland har fire tydelige årstider — med ekstreme temperaturer.</p>
+
+        <div class="seasons-grid" id="seasons-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Vidste du?</div>
+          <p>
+            I Moskva kan vinteren være -20°C, mens sommeren kan nå +30°C. I Sibirien kan det blive
+            helt ned til -50°C!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Temperatur.</h2>
+        <p>Plus og minus — sådan siger man det.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: TEMPERATURE
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">Temperatur</h2>
+        </div>
+
+        <p class="narrative">Russere bruger Celsius og siger "plus" eller "minus" før tallet.</p>
+
+        <div class="temp-display">
+          <div class="temp-row">
+            <span class="temp-number hot">+25°C</span>
+            <span class="temp-equals">=</span>
+            <span class="temp-russian" onclick="TTS.speak('плюс двадцать пять')">плюс двадцать пять</span>
+          </div>
+          <div class="temp-row">
+            <span class="temp-number cold">-10°C</span>
+            <span class="temp-equals">=</span>
+            <span class="temp-russian" onclick="TTS.speak('минус десять')">минус десять</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 4: EXPRESSIONS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 4</div>
+          <h2 class="chapter-title">Nyttige udtryk</h2>
+        </div>
+
+        <p class="narrative">Sådan taler du om vejret.</p>
+
+        <div class="expressions-grid" id="expressions-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 5: DIALOGUE
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 5</div>
+          <h2 class="chapter-title">Samtale om vejret</h2>
+        </div>
+
+        <p class="narrative">En typisk smalltalk om vejret. Klik for at høre.</p>
+
+        <div class="dialogue-container" id="main-dialogue"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Nu er det din tur</h2>
+        <p>Test din viden om vejret.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Lyt og vælg</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Godt klaret.</h2>
+        <p>Nu skal du forbinde ordene.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Par ordene</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 3
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Udfyld hullerne.</h2>
+        <p>Kan du fuldføre sætningerne?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: FILL BLANK
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Udfyld tomme pladser</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="fill-blank-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 4
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Samtale</h2>
+        <p>Øv dig i at tale om vejret.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 4: CONVERSATION (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 4</div>
+            <h3 class="exercise-title">Smalltalk om vejret</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-conversation"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Hvad du har lært</h2>
+        </div>
+
+        <div class="summary-grid" id="summary-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Lektion Færdig?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Har du gennemgået alle øvelser og føler dig klar til næste lektion?
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="10-shopping-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">Shopping</span>
+          </a>
+          <a href="12-review-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">Stor Repetition</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // WEATHER DATA
+    // ============================================
+    const weatherData = [
+      { icon: '☀️', russian: 'солнце', danish: 'sol' },
+      { icon: '🌧️', russian: 'дождь', danish: 'regn' },
+      { icon: '❄️', russian: 'снег', danish: 'sne' },
+      { icon: '💨', russian: 'ветер', danish: 'vind' },
+      { icon: '☁️', russian: 'облачно', danish: 'overskyet' },
+      { icon: '🌡️', russian: 'жарко', danish: 'varmt' },
+      { icon: '🥶', russian: 'холодно', danish: 'koldt' },
+      { icon: '🌤️', russian: 'тепло', danish: 'lunt' },
+    ];
+
+    // Render weather grid
+    function renderWeather() {
+      const container = document.getElementById('weather-grid');
+      if (!container) return;
+      weatherData.forEach((w) => {
+        const card = document.createElement('div');
+        card.className = 'weather-card';
+        card.innerHTML = `
+                    <div class="weather-icon">${w.icon}</div>
+                    <div class="weather-russian">${w.russian}</div>
+                    <div class="weather-danish">${w.danish}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(w.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // SEASONS DATA
+    // ============================================
+    const seasonsData = [
+      { icon: '❄️', russian: 'зима', danish: 'vinter' },
+      { icon: '🌸', russian: 'весна', danish: 'forår' },
+      { icon: '☀️', russian: 'лето', danish: 'sommer' },
+      { icon: '🍂', russian: 'осень', danish: 'efterår' },
+    ];
+
+    // Render seasons grid
+    function renderSeasons() {
+      const container = document.getElementById('seasons-grid');
+      if (!container) return;
+      seasonsData.forEach((s) => {
+        const card = document.createElement('div');
+        card.className = 'season-card';
+        card.innerHTML = `
+                    <div class="season-icon">${s.icon}</div>
+                    <div class="season-russian">${s.russian}</div>
+                    <div class="season-danish">${s.danish}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(s.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // EXPRESSIONS DATA
+    // ============================================
+    const expressionsData = [
+      { russian: 'Какая сегодня погода?', danish: 'Hvordan er vejret i dag?' },
+      { russian: 'Сегодня холодно.', danish: 'Det er koldt i dag.' },
+      { russian: 'Сегодня жарко.', danish: 'Det er varmt i dag.' },
+      { russian: 'Идёт дождь.', danish: 'Det regner.' },
+      { russian: 'Идёт снег.', danish: 'Det sner.' },
+    ];
+
+    // Render expressions grid
+    function renderExpressions() {
+      const container = document.getElementById('expressions-grid');
+      if (!container) return;
+      expressionsData.forEach((expr) => {
+        const item = document.createElement('div');
+        item.className = 'expression-item';
+        item.innerHTML = `
+                    <div class="expression-russian">${expr.russian}</div>
+                    <div class="expression-danish">${expr.danish}</div>
+                `;
+        item.addEventListener('click', () => TTS.speak(expr.russian));
+        container.appendChild(item);
+      });
+    }
+
+    // ============================================
+    // DIALOGUE DATA
+    // ============================================
+    const dialogueData = [
+      {
+        speaker: 'A',
+        russian: 'Привет! Какая сегодня погода?',
+        danish: 'Hej! Hvordan er vejret i dag?',
+      },
+      {
+        speaker: 'B',
+        russian: 'Сегодня холодно и идёт снег.',
+        danish: 'Det er koldt i dag og det sner.',
+      },
+      { speaker: 'A', russian: 'Какая температура?', danish: 'Hvad er temperaturen?' },
+      { speaker: 'B', russian: 'Минус десять градусов.', danish: 'Minus ti grader.' },
+      {
+        speaker: 'A',
+        russian: 'Ого! Настоящая русская зима!',
+        danish: 'Wow! En rigtig russisk vinter!',
+      },
+      {
+        speaker: 'B',
+        russian: 'Да, нужно тепло одеваться.',
+        danish: 'Ja, man skal klæde sig varmt på.',
+      },
+    ];
+
+    // Render dialogue
+    function renderDialogue() {
+      const container = document.getElementById('main-dialogue');
+      if (!container) return;
+      dialogueData.forEach((line) => {
+        const div = document.createElement('div');
+        div.className = 'dialogue-line';
+        div.innerHTML = `
+                    <div class="dialogue-speaker">${line.speaker}</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-russian">${line.russian}</div>
+                        <div class="dialogue-danish">${line.danish}</div>
+                    </div>
+                `;
+        div
+          .querySelector('.dialogue-content')
+          .addEventListener('click', () => TTS.speak(line.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // SUMMARY DATA
+    // ============================================
+    const summaryData = [
+      { icon: '☀️', russian: 'солнце', danish: 'sol' },
+      { icon: '🌧️', russian: 'дождь', danish: 'regn' },
+      { icon: '❄️', russian: 'снег', danish: 'sne' },
+      { icon: '🥶', russian: 'холодно', danish: 'koldt' },
+      { icon: '🌡️', russian: 'жарко', danish: 'varmt' },
+      { icon: '❄️', russian: 'зима', danish: 'vinter' },
+      { icon: '☀️', russian: 'лето', danish: 'sommer' },
+      { icon: '🌤️', russian: 'погода', danish: 'vejr' },
+    ];
+
+    // Render summary
+    function renderSummary() {
+      const container = document.getElementById('summary-grid');
+      if (!container) return;
+      summaryData.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = 'summary-item';
+        div.innerHTML = `
+                    <div class="icon">${item.icon}</div>
+                    <div class="russian">${item.russian}</div>
+                    <div class="danish">${item.danish}</div>
+                `;
+        div.addEventListener('click', () => TTS.speak(item.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      {
+        audio: 'Сегодня холодно',
+        options: ['Det er varmt i dag', 'Det er koldt i dag', 'Det regner i dag'],
+        correct: 1,
+      },
+      { audio: 'Идёт дождь', options: ['Det sner', 'Det regner', 'Solen skinner'], correct: 1 },
+      { audio: 'зима', options: ['sommer', 'vinter', 'forår'], correct: 1 },
+      { audio: 'солнце', options: ['regn', 'vind', 'sol'], correct: 2 },
+      {
+        audio: 'Какая сегодня погода?',
+        options: ['Hvad er klokken?', 'Hvordan er vejret i dag?', 'Hvor bor du?'],
+        correct: 1,
+      },
+    ];
+
+    const matchingData = [
+      { russian: 'солнце', danish: 'sol' },
+      { russian: 'дождь', danish: 'regn' },
+      { russian: 'снег', danish: 'sne' },
+      { russian: 'холодно', danish: 'koldt' },
+      { russian: 'жарко', danish: 'varmt' },
+    ];
+
+    const fillBlankData = [
+      {
+        text: 'Сегодня ___. Мне нужна куртка.',
+        answer: 'холодно',
+        hint: 'koldt',
+        danish: 'Det er koldt i dag. Jeg har brug for en jakke.',
+      },
+      {
+        text: 'Идёт ___. Возьми зонтик!',
+        answer: 'дождь',
+        hint: 'regn',
+        danish: 'Det regner. Tag en paraply!',
+      },
+      {
+        text: 'Летом в России ___.',
+        answer: 'жарко',
+        hint: 'varmt',
+        danish: 'Om sommeren i Rusland er det varmt.',
+      },
+      { text: 'Зимой идёт ___.', answer: 'снег', hint: 'sne', danish: 'Om vinteren sner det.' },
+    ];
+
+    const vocabularyData = [
+      ...weatherData.map((w) => ({ russian: w.russian, danish: w.danish })),
+      ...seasonsData.map((s) => ({ russian: s.russian, danish: s.danish })),
+      { russian: 'Какая погода?', danish: 'Hvordan er vejret?' },
+      { russian: 'Идёт дождь', danish: 'Det regner' },
+      { russian: 'Идёт снег', danish: 'Det sner' },
+    ];
+
+    // AI CONVERSATION CONFIG
+    const aiConversationConfig = {
+      topic: 'Vejr og årstider',
+      level: 'A1',
+      vocabulary: vocabularyData,
+      starterPrompts: [
+        { russian: 'Какая сегодня погода?', danish: 'Spørg om vejret' },
+        { russian: 'Сегодня холодно.', danish: 'Sig det er koldt' },
+        { russian: 'Идёт дождь.', danish: 'Sig det regner' },
+        { russian: 'Я люблю лето.', danish: 'Sig du elsker sommer' },
+      ],
+      systemPrompt:
+        'Fokuser på vejr og årstider. Spørg: Какая погода?, Какое время года ты любишь? Tal om vejret i forskellige byer.',
+    };
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    const LESSON_ID = '11-weather';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initLessonProgress(LESSON_ID);
+
+      renderWeather();
+      renderSeasons();
+      renderExpressions();
+      renderDialogue();
+      renderSummary();
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+      new FillBlankExercise('fill-blank-exercise', fillBlankData);
+
+      // AI exercises
+      new AIConversation('ai-conversation', aiConversationConfig);
+
+      initScrollAnimations();
+      initProgressBar();
+
+      // Complete lesson button
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      const lessonStatus = Progress.getLessonStatus(LESSON_ID);
+
+      if (lessonStatus === 'completed') {
+        completeBtn.textContent = '✓ Allerede gennemført';
+        completeBtn.classList.add('completed');
+      }
+
+      completeBtn.addEventListener('click', () => {
+        if (lessonStatus !== 'completed') {
+          completeLessonWithModal(LESSON_ID);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

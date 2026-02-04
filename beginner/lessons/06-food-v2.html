@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 6: Mad og Drikke | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #c0392b;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Food Grid === */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .food-card {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .food-card:nth-child(4n) {
+      border-right: none;
+    }
+
+    .food-card:hover {
+      background: var(--editorial-light);
+    }
+
+    .food-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .food-russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .food-danish {
+      font-size: 0.8rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Phrase Display === */
+    .phrase-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .phrase-russian {
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .phrase-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    .phrase-phonetic {
+      font-family: 'SF Mono', 'Monaco', monospace;
+      font-size: 1rem;
+      color: var(--editorial-gray);
+      margin-top: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .phrase-translation {
+      font-size: 1.5rem;
+      color: var(--editorial-gray);
+      margin-top: 1rem;
+      font-weight: 300;
+    }
+
+    /* === Like/Dislike Comparison === */
+    .comparison-boxes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .comparison-box {
+      padding: 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .comparison-box:first-child {
+      border-right: 1px solid var(--editorial-line);
+      background: #e8f5e9;
+    }
+
+    .comparison-box:last-child {
+      background: #ffebee;
+    }
+
+    .comparison-box:hover {
+      opacity: 0.9;
+    }
+
+    .comparison-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-gray);
+      margin-bottom: 1rem;
+    }
+
+    .comparison-russian {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.5rem;
+    }
+
+    .comparison-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Conjugation Table === */
+    .conjugation-table {
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .conjugation-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .conjugation-row:last-child {
+      border-bottom: none;
+    }
+
+    .conjugation-pronoun {
+      padding: 1rem 1.5rem;
+      background: var(--editorial-light);
+      font-family: var(--font-serif);
+      color: var(--editorial-gray);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .conjugation-verb {
+      padding: 1rem 1.5rem;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .conjugation-verb:hover {
+      background: var(--editorial-light);
+    }
+
+    /* === Russian Dishes === */
+    .dish-card {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem;
+      border: 1px solid var(--editorial-line);
+      margin: 2rem 0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .dish-card:hover {
+      background: var(--editorial-light);
+    }
+
+    .dish-icon {
+      font-size: 4rem;
+      flex-shrink: 0;
+    }
+
+    .dish-content {
+      flex: 1;
+    }
+
+    .dish-russian {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.5rem;
+    }
+
+    .dish-danish {
+      font-size: 1rem;
+      color: var(--editorial-gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .dish-description {
+      font-size: 0.9rem;
+      color: var(--editorial-gray);
+      line-height: 1.6;
+    }
+
+    /* === Dialogue === */
+    .dialogue-container {
+      margin: 3rem 0;
+    }
+
+    .dialogue-line {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .dialogue-line:last-child {
+      border-bottom: none;
+    }
+
+    .dialogue-speaker {
+      width: 60px;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+      padding-top: 0.25rem;
+    }
+
+    .dialogue-content {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .dialogue-content:hover .dialogue-russian {
+      color: var(--editorial-accent);
+    }
+
+    .dialogue-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .dialogue-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+      font-style: italic;
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Exercise Sections === */
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(4n) {
+      border-right: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-item .danish {
+      font-size: 0.75rem;
+      opacity: 0.6;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .food-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .food-card:nth-child(4n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .food-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .comparison-boxes {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-box:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .dish-card {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .dialogue-line {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .dialogue-speaker {
+        width: auto;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-item:nth-child(4n) {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .summary-item:nth-child(2n) {
+        border-right: none;
+      }
+
+      .floating-nav {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="floating-nav">
+    <a href="../index-v2.html" class="floating-btn">Tilbage</a>
+  </nav>
+
+  <div class="container">
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 6</div>
+        <h1>Mad og Drikke</h1>
+        <p class="lead">
+          Russisk køkken er rigt og varieret. Lær at tale om mad, drikke og hvad du kan lide.
+        </p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: BASIC FOOD
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Basale fødevarer</h2>
+        </div>
+
+        <p class="narrative">Lad os starte med de mest almindelige madvarer. Klik for at høre.</p>
+
+        <div class="food-grid" id="basic-food-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             MODERN: GLOBAL KITCHEN
+             ============================================ -->
+    <section class="editorial-section"
+      style="background: #fafafa; border-top: 1px solid var(--editorial-line); border-bottom: 1px solid var(--editorial-line);">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+          Den globale tallerken
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Hvad spiser de unge?</h2>
+        </div>
+        <p class="narrative">
+          Selvom borstj er klassisk, spiser man i storbyerne ligeså meget sushi, pizza og burgere.
+          Faktisk er Moskva kendt for at have sushi-steder på hvert gadehjørne!
+        </p>
+
+        <div class="food-grid">
+          <div class="food-card" onclick="TTS.speak('Суши')">
+            <div class="food-icon">🍣</div>
+            <div class="food-russian">Суши</div>
+            <div class="food-danish">Sushi</div>
+          </div>
+          <div class="food-card" onclick="TTS.speak('Пицца')">
+            <div class="food-icon">🍕</div>
+            <div class="food-russian">Пицца</div>
+            <div class="food-danish">Pizza</div>
+          </div>
+          <div class="food-card" onclick="TTS.speak('Бургер')">
+            <div class="food-icon">🍔</div>
+            <div class="food-russian">Бургер</div>
+            <div class="food-danish">Burger</div>
+          </div>
+          <div class="food-card" onclick="TTS.speak('Авокадо')">
+            <div class="food-icon">🥑</div>
+            <div class="food-russian">Авокадо</div>
+            <div class="food-danish">Avocado</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Madlevering</div>
+          <p>
+            I dag bruger de fleste <strong>Яндекс Еда</strong> (Yandex Mad) eller
+            <strong>Самокат</strong> (Løbehjul) til at få mad leveret på under 15 minutter.
+            Det er hurtigere end at gå ned i supermarkedet!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Jeg kan lide...</h2>
+        <p>Hvordan udtrykker man præferencer på russisk?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: LIKE / DISLIKE
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">Kan lide / Kan ikke lide</h2>
+        </div>
+
+        <p class="narrative">
+          På russisk bruger man verbet <strong>любить</strong> (at elske/holde af) til at udtrykke
+          hvad man kan lide.
+        </p>
+
+        <div class="comparison-boxes">
+          <div class="comparison-box" onclick="TTS.speak('Я люблю кофе')">
+            <div class="comparison-label">Kan lide</div>
+            <div class="comparison-russian">Я люблю кофе.</div>
+            <div class="comparison-danish">Jeg kan lide kaffe.</div>
+          </div>
+          <div class="comparison-box" onclick="TTS.speak('Я не люблю чай')">
+            <div class="comparison-label">Kan ikke lide</div>
+            <div class="comparison-russian">Я не люблю чай.</div>
+            <div class="comparison-danish">Jeg kan ikke lide te.</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Bøjning af любить</div>
+          <p>
+            <strong>Я люблю</strong> — Jeg elsker<br />
+            <strong>Ты любишь</strong> — Du elsker<br />
+            <strong>Он/Она любит</strong> — Han/Hun elsker
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 4: I WANT
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 4</div>
+          <h2 class="chapter-title">Jeg vil gerne have...</h2>
+        </div>
+
+        <p class="narrative">
+          Verbet <strong>хотеть</strong> (at ville) bruges til at udtrykke ønsker.
+        </p>
+
+        <div class="phrase-display">
+          <span class="phrase-russian" onclick="TTS.speak('Я хочу кофе')">Я хочу кофе</span>
+          <div class="phrase-phonetic">ja ha-TCHU KO-fje</div>
+          <div class="phrase-translation">Jeg vil gerne have kaffe</div>
+        </div>
+
+        <div class="comparison-boxes" style="margin-top: 3rem">
+          <div class="comparison-box" style="background: #fff3e0" onclick="TTS.speak('Я хочу есть')">
+            <div class="comparison-label">Sulten</div>
+            <div class="comparison-russian">Я хочу есть.</div>
+            <div class="comparison-danish">Jeg er sulten. (Bogst.: Jeg vil spise)</div>
+          </div>
+          <div class="comparison-box" style="background: #e3f2fd" onclick="TTS.speak('Я хочу пить')">
+            <div class="comparison-label">Tørstig</div>
+            <div class="comparison-russian">Я хочу пить.</div>
+            <div class="comparison-danish">Jeg er tørstig. (Bogst.: Jeg vil drikke)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 5: RUSSIAN DISHES
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 5</div>
+          <h2 class="chapter-title">Russiske retter</h2>
+        </div>
+
+        <p class="narrative">Russisk køkken har mange unikke retter. Her er de mest berømte.</p>
+
+        <div class="dish-card" onclick="TTS.speak('борщ')">
+          <div class="dish-icon">🍲</div>
+          <div class="dish-content">
+            <div class="dish-russian">борщ</div>
+            <div class="dish-danish">borsjtj</div>
+            <div class="dish-description">
+              En rød rødbede-suppe. Serveres med сметана (creme fraiche).
+            </div>
+          </div>
+        </div>
+
+        <div class="dish-card" onclick="TTS.speak('пельмени')">
+          <div class="dish-icon">🥟</div>
+          <div class="dish-content">
+            <div class="dish-russian">пельмени</div>
+            <div class="dish-danish">pelmeni</div>
+            <div class="dish-description">
+              Russiske dumplings med kødfyld. Serveres med сметана eller eddike.
+            </div>
+          </div>
+        </div>
+
+        <div class="dish-card" onclick="TTS.speak('блины')">
+          <div class="dish-icon">🥞</div>
+          <div class="dish-content">
+            <div class="dish-russian">блины</div>
+            <div class="dish-danish">blini</div>
+            <div class="dish-description">
+              Tynde pandekager. Spises med сметана, kaviar eller syltetøj.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 6: DIALOGUE
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 6</div>
+          <h2 class="chapter-title">I køkkenet</h2>
+        </div>
+
+        <p class="narrative">En typisk samtale om mad. Klik for at høre.</p>
+
+        <div class="dialogue-container" id="main-dialogue"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Nu er det din tur</h2>
+        <p>Test din viden om mad og drikke.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Lyt og vælg</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Godt klaret.</h2>
+        <p>Nu skal du forbinde ordene.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Par ordene</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 3
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Udfyld hullerne.</h2>
+        <p>Kan du fuldføre sætningerne?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: FILL BLANK
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Udfyld tomme pladser</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="fill-blank-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 4
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Hurtig quiz</h2>
+        <p>Test dig selv. Jo hurtigere du svarer, jo bedre.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 4: QUICK QUIZ (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 4</div>
+            <h3 class="exercise-title">Hurtig quiz</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 5
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Samtale</h2>
+        <p>Tal om mad med AI-tutoren.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 5: CONVERSATION (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 5</div>
+            <h3 class="exercise-title">Øv samtale</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-conversation"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Hvad du har lært</h2>
+        </div>
+
+        <div class="summary-grid" id="summary-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Lektion Færdig?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Har du gennemgået alle øvelser og føler dig klar til næste lektion?
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="05-family-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">Min Familie</span>
+          </a>
+          <a href="07-cafe-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">På Café</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // FOOD DATA
+    // ============================================
+    const basicFoodData = [
+      { icon: '🍞', russian: 'хлеб', danish: 'brød' },
+      { icon: '🧀', russian: 'сыр', danish: 'ost' },
+      { icon: '🥩', russian: 'мясо', danish: 'kød' },
+      { icon: '🐟', russian: 'рыба', danish: 'fisk' },
+      { icon: '🥚', russian: 'яйцо', danish: 'æg' },
+      { icon: '🍚', russian: 'рис', danish: 'ris' },
+      { icon: '🥗', russian: 'салат', danish: 'salat' },
+      { icon: '🍎', russian: 'яблоко', danish: 'æble' },
+    ];
+
+    const drinksData = [
+      { icon: '💧', russian: 'вода', danish: 'vand' },
+      { icon: '🍵', russian: 'чай', danish: 'te' },
+      { icon: '☕', russian: 'кофе', danish: 'kaffe' },
+      { icon: '🥛', russian: 'молоко', danish: 'mælk' },
+      { icon: '🧃', russian: 'сок', danish: 'juice' },
+      { icon: '🍺', russian: 'пиво', danish: 'øl' },
+      { icon: '🍷', russian: 'вино', danish: 'vin' },
+      { icon: '🥤', russian: 'лимонад', danish: 'sodavand' },
+    ];
+
+    // Render food grids
+    function renderFoodGrid(containerId, data) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      data.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'food-card';
+        card.innerHTML = `
+                    <div class="food-icon">${item.icon}</div>
+                    <div class="food-russian">${item.russian}</div>
+                    <div class="food-danish">${item.danish}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(item.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // DIALOGUE DATA
+    // ============================================
+    const dialogueData = [
+      { speaker: 'A', russian: 'Ты хочешь есть?', danish: 'Er du sulten?' },
+      { speaker: 'B', russian: 'Да, очень!', danish: 'Ja, meget!' },
+      { speaker: 'A', russian: 'Что ты любишь?', danish: 'Hvad kan du lide?' },
+      { speaker: 'B', russian: 'Я люблю борщ и хлеб.', danish: 'Jeg kan lide borsjtj og brød.' },
+      { speaker: 'A', russian: 'А пить? Чай или кофе?', danish: 'Og at drikke? Te eller kaffe?' },
+      { speaker: 'B', russian: 'Кофе, пожалуйста.', danish: 'Kaffe, tak.' },
+    ];
+
+    // Render dialogue
+    function renderDialogue() {
+      const container = document.getElementById('main-dialogue');
+      if (!container) return;
+      dialogueData.forEach((line) => {
+        const div = document.createElement('div');
+        div.className = 'dialogue-line';
+        div.innerHTML = `
+                    <div class="dialogue-speaker">${line.speaker}</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-russian">${line.russian}</div>
+                        <div class="dialogue-danish">${line.danish}</div>
+                    </div>
+                `;
+        div
+          .querySelector('.dialogue-content')
+          .addEventListener('click', () => TTS.speak(line.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // SUMMARY DATA
+    // ============================================
+    const summaryData = [
+      { icon: '🍞', russian: 'хлеб', danish: 'brød' },
+      { icon: '☕', russian: 'кофе', danish: 'kaffe' },
+      { icon: '🍵', russian: 'чай', danish: 'te' },
+      { icon: '💧', russian: 'вода', danish: 'vand' },
+      { icon: '🍲', russian: 'борщ', danish: 'borsjtj' },
+      { icon: '🥟', russian: 'пельмени', danish: 'pelmeni' },
+      { icon: '❤️', russian: 'Я люблю', danish: 'Jeg kan lide' },
+      { icon: '🍽️', russian: 'Я хочу', danish: 'Jeg vil have' },
+    ];
+
+    // Render summary
+    function renderSummary() {
+      const container = document.getElementById('summary-grid');
+      if (!container) return;
+      summaryData.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = 'summary-item';
+        div.innerHTML = `
+                    <div class="icon">${item.icon}</div>
+                    <div class="russian">${item.russian}</div>
+                    <div class="danish">${item.danish}</div>
+                `;
+        div.addEventListener('click', () => TTS.speak(item.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      { audio: 'хлеб', options: ['brød', 'ost', 'kød'], correct: 0 },
+      { audio: 'кофе', options: ['te', 'kaffe', 'mælk'], correct: 1 },
+      {
+        audio: 'Я люблю чай',
+        options: ['Jeg drikker te', 'Jeg kan lide te', 'Jeg vil have te'],
+        correct: 1,
+      },
+      { audio: 'вода', options: ['vand', 'vin', 'øl'], correct: 0 },
+      {
+        audio: 'Я хочу есть',
+        options: ['Jeg er tørstig', 'Jeg er sulten', 'Jeg er træt'],
+        correct: 1,
+      },
+    ];
+
+    const matchingData = [
+      { russian: 'хлеб', danish: 'brød' },
+      { russian: 'вода', danish: 'vand' },
+      { russian: 'кофе', danish: 'kaffe' },
+      { russian: 'молоко', danish: 'mælk' },
+      { russian: 'мясо', danish: 'kød' },
+    ];
+
+    const fillBlankData = [
+      { text: 'Я ___ кофе.', answer: 'люблю', hint: 'kan lide', danish: 'Jeg kan lide kaffe.' },
+      { text: 'Я хочу ___.', answer: 'есть', hint: 'spise', danish: 'Jeg er sulten.' },
+      { text: 'Ты ___ чай?', answer: 'любишь', hint: 'kan lide (du)', danish: 'Kan du lide te?' },
+      {
+        text: 'Я не люблю ___.',
+        answer: 'рыбу',
+        hint: 'fisk',
+        danish: 'Jeg kan ikke lide fisk.',
+        alternatives: ['мясо', 'сыр'],
+      },
+    ];
+
+    const vocabularyData = [
+      ...basicFoodData.map((f) => ({ russian: f.russian, danish: f.danish })),
+      ...drinksData.map((d) => ({ russian: d.russian, danish: d.danish })),
+      { russian: 'Я люблю', danish: 'Jeg kan lide' },
+      { russian: 'Я не люблю', danish: 'Jeg kan ikke lide' },
+      { russian: 'Я хочу', danish: 'Jeg vil have' },
+    ];
+
+    // AI CONVERSATION CONFIG
+    const aiConversationConfig = {
+      topic: 'Mad og drikke',
+      level: 'A1',
+      vocabulary: vocabularyData,
+      starterPrompts: [
+        { russian: 'Я люблю кофе.', danish: 'Sig hvad du kan lide' },
+        { russian: 'Я не люблю рыбу.', danish: 'Sig hvad du ikke kan lide' },
+        { russian: 'Я хочу есть.', danish: 'Sig du er sulten' },
+        { russian: 'Что ты любишь?', danish: 'Spørg hvad de kan lide' },
+      ],
+      systemPrompt:
+        'Fokuser på mad og drikke. Spørg om præferencer: Что ты любишь?, Ты любишь...?, Хочешь...? Anbefal russiske retter.',
+    };
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    const LESSON_ID = '06-food';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initLessonProgress(LESSON_ID);
+
+      renderFoodGrid('basic-food-grid', basicFoodData);
+      renderFoodGrid('drinks-grid', drinksData);
+      renderDialogue();
+      renderSummary();
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+      new FillBlankExercise('fill-blank-exercise', fillBlankData);
+
+      // AI exercises
+      new AIQuickQuiz('ai-quiz', {
+        vocabulary: vocabularyData,
+        maxRounds: 8,
+      });
+      new AIConversation('ai-conversation', aiConversationConfig);
+
+      initScrollAnimations();
+      initProgressBar();
+
+      // Complete lesson button
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      const lessonStatus = Progress.getLessonStatus(LESSON_ID);
+
+      if (lessonStatus === 'completed') {
+        completeBtn.textContent = '✓ Allerede gennemført';
+        completeBtn.classList.add('completed');
+      }
+
+      completeBtn.addEventListener('click', () => {
+        if (lessonStatus !== 'completed') {
+          completeLessonWithModal(LESSON_ID);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

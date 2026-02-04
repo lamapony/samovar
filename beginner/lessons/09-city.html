@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 9: I Byen | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      .place-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: var(--space-m);
+        margin: var(--space-m) 0;
+      }
+
+      .place-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        border-radius: 8px;
+      }
+
+      .place-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+        border-color: var(--accent-blue);
+      }
+
+      .place-icon {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      .place-russian {
+        font-family: var(--font-serif);
+        font-size: 1rem;
+      }
+
+      .place-danish {
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+
+      .direction-arrows {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-l);
+        margin: var(--space-l) 0;
+        flex-wrap: wrap;
+      }
+
+      .direction-item {
+        text-align: center;
+        cursor: pointer;
+        padding: var(--space-m);
+        border: 1px solid var(--line-color);
+        border-radius: 8px;
+        transition: all 0.2s;
+      }
+
+      .direction-item:hover {
+        background: var(--accent-blue);
+        color: white;
+      }
+
+      .direction-arrow {
+        font-size: 2rem;
+        display: block;
+      }
+
+      .map-scenario {
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+
+      .transport-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--space-s);
+        margin: var(--space-m) 0;
+      }
+
+      .transport-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-s);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+
+      .transport-card:hover {
+        border-color: var(--accent-blue);
+      }
+
+      /* === Phone Navigation Section === */
+      .phone-nav-scene {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+      .phone-nav-scene h3 {
+        color: white;
+        margin-top: 0;
+      }
+      .phone-phrases {
+        display: grid;
+        gap: var(--space-s);
+        margin-top: var(--space-m);
+      }
+      .phone-phrase {
+        background: rgba(255, 255, 255, 0.15);
+        padding: var(--space-s) var(--space-m);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .phone-phrase:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .phone-russian {
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      .phone-danish {
+        font-size: 0.85rem;
+        opacity: 0.8;
+      }
+
+      /* === Modern Transport Grid === */
+      .modern-transport-grid {
+        display: flex;
+        gap: var(--space-m);
+        flex-wrap: wrap;
+        margin: var(--space-m) 0;
+      }
+      .modern-transport-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 8px;
+        min-width: 120px;
+        transition: all 0.2s;
+      }
+      .modern-transport-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+      .modern-transport-icon {
+        font-size: 2rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      /* === Humor Note === */
+      .humor-note {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+        font-size: 0.9rem;
+      }
+      .humor-note strong {
+        color: #f57c00;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 9 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 50 min</span>
+          </div>
+          <h1>I Byen</h1>
+          <p class="lead">
+            At finde vej i en russisk by kraever ordforrad om steder, retninger og transport. I
+            denne lektion laerer du det hele.
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <!-- PART 1: PLACES -->
+            <h2>
+              <span>Del 1: Steder i Byen</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <p>Klik pa et sted for at hore det pa russisk:</p>
+
+            <div class="place-grid" id="places-grid"></div>
+
+            <!-- PART 2: ASKING FOR DIRECTIONS -->
+            <h2>
+              <span>Del 2: Sporge om Vej</span>
+              <span class="chapter-num">Fraser</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Vigtige fraser</h3>
+              <div class="example-box">
+                <div class="example-russian">Извините, где метро?</div>
+                <div class="example-danish">Undskyld, hvor er metroen?</div>
+              </div>
+              <div class="example-box">
+                <div class="example-russian">Как пройти до музея?</div>
+                <div class="example-danish">Hvordan kommer jeg til museet?</div>
+              </div>
+              <div class="example-box">
+                <div class="example-russian">Это далеко?</div>
+                <div class="example-danish">Er det langt vaek?</div>
+              </div>
+            </div>
+
+            <!-- PART 3: DIRECTIONS -->
+            <h2>
+              <span>Del 3: Retninger</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <div class="direction-arrows" id="directions-grid"></div>
+
+            <div class="theory-block">
+              <h3>Give Retningsanvisninger</h3>
+              <table class="possession-table">
+                <tr>
+                  <td class="cyrillic">Идите прямо.</td>
+                  <td>Ga ligeud.</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Поверните налево.</td>
+                  <td>Drej til venstre.</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Поверните направо.</td>
+                  <td>Drej til hojre.</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Это рядом.</td>
+                  <td>Det er taet pa.</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Это далеко.</td>
+                  <td>Det er langt vaek.</td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- PART 4: TRANSPORT -->
+            <h2>
+              <span>Del 4: Transport</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <div class="transport-grid" id="transport-grid"></div>
+
+            <div class="theory-block">
+              <h3>At Tage Transport</h3>
+              <div class="example-box">
+                <div class="example-russian">Я еду на метро.</div>
+                <div class="example-danish">Jeg tager metroen.</div>
+              </div>
+              <div class="example-box">
+                <div class="example-russian">Я иду пешком.</div>
+                <div class="example-danish">Jeg gar til fods.</div>
+              </div>
+            </div>
+
+            <!-- PART 5: MAP SCENARIO -->
+            <h2>
+              <span>Del 5: Praktisk Situation</span>
+              <span class="chapter-num">Scenario</span>
+            </h2>
+
+            <div class="map-scenario">
+              <h3>Situation: Du er pa Krasnaja Plosjtjad</h3>
+              <p>Du vil finde vej til den naermeste metrostation. Her er dialogen:</p>
+            </div>
+
+            <div id="dialogue-section"></div>
+
+            <!-- PART 5b: PHONE NAVIGATION -->
+            <h2>
+              <span>Del 5b: Navigation med Telefon</span>
+              <span class="chapter-num">Moderne</span>
+            </h2>
+
+            <div class="phone-nav-scene">
+              <h3>📱 Yandex Maps & 2GIS</h3>
+              <p>I dag bruger de fleste russere apps til navigation. Her er nyttige fraser:</p>
+              <div class="phone-phrases" id="phone-phrases"></div>
+            </div>
+
+            <div class="theory-block">
+              <h3>Moderne Transport</h3>
+              <p>Udover metro og bus er der nu mange nye muligheder:</p>
+              <div class="modern-transport-grid" id="modern-transport-grid"></div>
+            </div>
+
+            <div class="humor-note">
+              <strong>😅 Sjov fakta:</strong> I Moskva kan «рядом» (tæt på) betyde 15 minutter til
+              fods. Men det er stadig ikke «далеко»!
+            </div>
+
+            <!-- PART 6: LISTENING -->
+            <h2>
+              <span>Del 6: Lytteovelse</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <!-- PART 7: MATCHING -->
+            <h2>
+              <span>Del 7: Par Ordene</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="matching-exercise" class="exercise-container"></div>
+
+            <!-- PART 8: FILL BLANK -->
+            <h2>
+              <span>Del 8: Udfyld Tomme Pladser</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="fill-blank-exercise" class="exercise-container"></div>
+
+            <!-- PART 9: SENTENCE BUILDER -->
+            <h2>
+              <span>Del 9: Byg Saetninger</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="sentence-builder" class="exercise-container"></div>
+
+            <!-- PART 10: AI ROLE PLAY -->
+            <h2>
+              <span>Del 10: Spørg om Vej</span>
+              <span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🗺️ Find vej i byen</h3>
+              <p>
+                Du er faret vild i en russisk by! AI'en spiller en venlig forbipasserende. Øv dig i
+                at spørge om vej og forstå retningsanvisninger.
+              </p>
+            </div>
+
+            <div id="ai-roleplay-city" class="exercise-container"></div>
+
+            <!-- AI SENTENCE AUCTION -->
+            <h2>
+              <span>Del 11: Sætnings-Auktion</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🏛️ Find den rigtige sætning!</h3>
+              <p>Brug dine mønter klogt - kun én sætning er grammatisk korrekt!</p>
+            </div>
+
+            <div id="ai-auction" class="exercise-container"></div>
+
+            <!-- AI STORY BUILDER -->
+            <h2>
+              <span>Del 12: Byg en Rejsehistorie</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>📖 En dag i Moskva!</h3>
+              <p>Byg en historie om at udforske en russisk by sammen med AI.</p>
+            </div>
+
+            <div id="ai-story" class="exercise-container"></div>
+
+            <!-- SUMMARY -->
+            <h2>
+              <span>Opsummering</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Hvad Du Har Laert</h3>
+              <ul>
+                <li><strong>Steder:</strong> метро, музей, магазин, аптека, банк...</li>
+                <li><strong>Retninger:</strong> прямо, налево, направо, рядом, далеко</li>
+                <li><strong>Transport:</strong> метро, автобус, такси, трамвай</li>
+                <li><strong>Fraser:</strong> Где...?, Как пройти до...?, Это далеко?</li>
+                <li><strong>Moderne:</strong> самокат, каршеринг, геолокация</li>
+              </ul>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="lesson-nav">
+              <a href="08-time.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">Hvad Er Klokken?</span>
+              </a>
+              <a href="10-shopping.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Naeste lektion</span>
+                <span class="lesson-nav-title">Shopping</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Metro</strong>
+              Moskvas metro er en af verdens smukkeste. Stationerne er dekoreret som palaeer med
+              marmor og lysekroner.
+            </div>
+            <div class="margin-note">
+              <strong>Tip</strong>
+              Download offline kort inden du rejser til Rusland. Google Maps virker, men Yandex Maps
+              er bedre lokalt.
+            </div>
+            <div class="margin-note">
+              <strong>Trafik</strong>
+              Moskva har enorme trafikpropper (пробки). Derfor er metro ofte hurtigere end bil eller
+              taxa.
+            </div>
+            <div class="margin-note">
+              <strong>Ellosparkcykler</strong>
+              Самокаты (ellosparkcykler) er overalt i russiske storbyer. Du lejer dem via app.
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <samovar-footer></samovar-footer>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      // PLACES DATA
+      const placesData = [
+        { icon: '🚇', russian: 'метро', danish: 'metro' },
+        { icon: '🏛️', russian: 'музей', danish: 'museum' },
+        { icon: '🏪', russian: 'магазин', danish: 'butik' },
+        { icon: '💊', russian: 'аптека', danish: 'apotek' },
+        { icon: '🏦', russian: 'банк', danish: 'bank' },
+        { icon: '🏨', russian: 'гостиница', danish: 'hotel' },
+        { icon: '🍽️', russian: 'ресторан', danish: 'restaurant' },
+        { icon: '☕', russian: 'кафе', danish: 'cafe' },
+        { icon: '🏥', russian: 'больница', danish: 'hospital' },
+        { icon: '📮', russian: 'почта', danish: 'posthus' },
+        { icon: '🏫', russian: 'школа', danish: 'skole' },
+        { icon: '🌳', russian: 'парк', danish: 'park' },
+        { icon: '⛪', russian: 'церковь', danish: 'kirke' },
+        { icon: '🚉', russian: 'вокзал', danish: 'banegard' },
+        { icon: '✈️', russian: 'аэропорт', danish: 'lufthavn' },
+      ];
+
+      // DIRECTIONS DATA
+      const directionsData = [
+        { arrow: '⬆️', russian: 'прямо', danish: 'ligeud' },
+        { arrow: '⬅️', russian: 'налево', danish: 'til venstre' },
+        { arrow: '➡️', russian: 'направо', danish: 'til hojre' },
+        { arrow: '🔙', russian: 'назад', danish: 'tilbage' },
+      ];
+
+      // TRANSPORT DATA
+      const transportData = [
+        { icon: '🚇', russian: 'метро', danish: 'metro' },
+        { icon: '🚌', russian: 'автобус', danish: 'bus' },
+        { icon: '🚕', russian: 'такси', danish: 'taxa' },
+        { icon: '🚃', russian: 'трамвай', danish: 'sporvogn' },
+        { icon: '🚶', russian: 'пешком', danish: 'til fods' },
+        { icon: '🚗', russian: 'машина', danish: 'bil' },
+      ];
+
+      // MODERN TRANSPORT DATA
+      const modernTransportData = [
+        { icon: '🛴', russian: 'самокат', danish: 'ellosparkcykel' },
+        { icon: '🚙', russian: 'каршеринг', danish: 'delebil' },
+        { icon: '🚲', russian: 'велосипед', danish: 'cykel' },
+      ];
+
+      // PHONE NAVIGATION PHRASES
+      const phoneNavPhrases = [
+        { russian: 'Скинь геолокацию.', danish: 'Send mig din placering.' },
+        { russian: 'Я смотрю в приложении.', danish: 'Jeg tjekker i appen.' },
+        { russian: 'Открой карту.', danish: 'Åbn kortet.' },
+        { russian: 'Метро рядом.', danish: 'Metroen er tæt på.' },
+      ];
+
+      // Render grids
+      function renderPlaces() {
+        const container = document.getElementById('places-grid');
+        placesData.forEach((place) => {
+          const card = document.createElement('div');
+          card.className = 'place-card';
+          card.innerHTML = `
+                    <div class="place-icon">${place.icon}</div>
+                    <div class="place-russian">${place.russian}</div>
+                    <div class="place-danish">${place.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(place.russian));
+          container.appendChild(card);
+        });
+      }
+
+      function renderDirections() {
+        const container = document.getElementById('directions-grid');
+        directionsData.forEach((dir) => {
+          const item = document.createElement('div');
+          item.className = 'direction-item';
+          item.innerHTML = `
+                    <span class="direction-arrow">${dir.arrow}</span>
+                    <div>${dir.russian}</div>
+                    <small>${dir.danish}</small>
+                `;
+          item.addEventListener('click', () => TTS.speak(dir.russian));
+          container.appendChild(item);
+        });
+      }
+
+      function renderTransport() {
+        const container = document.getElementById('transport-grid');
+        transportData.forEach((t) => {
+          const card = document.createElement('div');
+          card.className = 'transport-card';
+          card.innerHTML = `
+                    <div style="font-size: 1.5rem;">${t.icon}</div>
+                    <div>${t.russian}</div>
+                    <small>${t.danish}</small>
+                `;
+          card.addEventListener('click', () => TTS.speak(t.russian));
+          container.appendChild(card);
+        });
+      }
+
+      function renderModernTransport() {
+        const container = document.getElementById('modern-transport-grid');
+        modernTransportData.forEach((t) => {
+          const card = document.createElement('div');
+          card.className = 'modern-transport-card';
+          card.innerHTML = `
+                    <div class="modern-transport-icon">${t.icon}</div>
+                    <div class="place-russian">${t.russian}</div>
+                    <div class="place-danish">${t.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(t.russian));
+          container.appendChild(card);
+        });
+      }
+
+      function renderPhoneNavPhrases() {
+        const container = document.getElementById('phone-phrases');
+        phoneNavPhrases.forEach((phrase) => {
+          const div = document.createElement('div');
+          div.className = 'phone-phrase';
+          div.innerHTML = `
+                    <div class="phone-russian">${phrase.russian}</div>
+                    <div class="phone-danish">${phrase.danish}</div>
+                `;
+          div.addEventListener('click', () => TTS.speak(phrase.russian));
+          container.appendChild(div);
+        });
+      }
+
+      // DIALOGUE DATA
+      const dialogueData = [
+        { speaker: 'A', russian: 'Извините, где метро?', danish: 'Undskyld, hvor er metroen?' },
+        {
+          speaker: 'B',
+          russian: 'Идите прямо, потом направо.',
+          danish: 'Ga ligeud, derefter til hojre.',
+        },
+        { speaker: 'A', russian: 'Это далеко?', danish: 'Er det langt?' },
+        { speaker: 'B', russian: 'Нет, пять минут пешком.', danish: 'Nej, fem minutter til fods.' },
+        { speaker: 'A', russian: 'Спасибо большое!', danish: 'Mange tak!' },
+        { speaker: 'B', russian: 'Пожалуйста!', danish: 'Selv tak!' },
+      ];
+
+      // LISTENING DATA
+      const listeningData = [
+        {
+          audio: 'Где метро?',
+          options: ['Hvor er metroen?', 'Hvad er det?', 'Hvor langt?'],
+          correct: 0,
+        },
+        {
+          audio: 'Идите прямо',
+          options: ['Drej til venstre', 'Ga ligeud', 'Ga tilbage'],
+          correct: 1,
+        },
+        {
+          audio: 'Это далеко?',
+          options: ['Er det taet pa?', 'Er det langt?', 'Er det her?'],
+          correct: 1,
+        },
+        { audio: 'налево', options: ['til hojre', 'ligeud', 'til venstre'], correct: 2 },
+        { audio: 'аптека', options: ['bank', 'apotek', 'butik'], correct: 1 },
+      ];
+
+      // MATCHING DATA
+      const matchingData = [
+        { russian: 'метро', danish: 'metro' },
+        { russian: 'прямо', danish: 'ligeud' },
+        { russian: 'налево', danish: 'til venstre' },
+        { russian: 'далеко', danish: 'langt' },
+        { russian: 'рядом', danish: 'taet pa' },
+      ];
+
+      // FILL BLANK DATA
+      const fillBlankData = [
+        {
+          text: 'Извините, ___ метро?',
+          answer: 'где',
+          hint: 'hvor',
+          danish: 'Undskyld, hvor er metroen?',
+        },
+        { text: 'Идите ___.', answer: 'прямо', hint: 'ligeud', danish: 'Ga ligeud.' },
+        {
+          text: 'Поверните ___.',
+          answer: 'налево',
+          hint: 'til venstre',
+          danish: 'Drej til venstre.',
+          alternatives: ['направо'],
+        },
+        { text: 'Это ___?', answer: 'далеко', hint: 'langt', danish: 'Er det langt?' },
+        {
+          text: 'Я еду на ___.',
+          answer: 'метро',
+          hint: 'metro',
+          danish: 'Jeg tager metroen.',
+          alternatives: ['автобусе', 'такси'],
+        },
+      ];
+
+      // SENTENCE BUILDER DATA
+      const sentenceBuilderData = [
+        { words: ['Где', 'метро', '?'], danish: 'Hvor er metroen?' },
+        { words: ['Идите', 'прямо'], danish: 'Ga ligeud' },
+        { words: ['Поверните', 'налево'], danish: 'Drej til venstre' },
+        { words: ['Это', 'далеко', '?'], danish: 'Er det langt?' },
+        { words: ['Спасибо', 'большое', '!'], danish: 'Mange tak!' },
+      ];
+
+      // AI ROLE PLAY: CITY CONFIG
+      const aiRolePlayCityConfig = {
+        scenario: 'Du er i centrum af Moskva og leder efter metroen.',
+        yourRole: 'En turist',
+        aiRole: 'En venlig forbipasserende (Прохожий)',
+        vocabulary: [
+          { russian: 'метро', danish: 'metro' },
+          { russian: 'музей', danish: 'museum' },
+          { russian: 'магазин', danish: 'butik' },
+          { russian: 'прямо', danish: 'ligeud' },
+          { russian: 'налево', danish: 'til venstre' },
+          { russian: 'направо', danish: 'til højre' },
+          { russian: 'далеко', danish: 'langt' },
+          { russian: 'рядом', danish: 'tæt på' },
+          { russian: 'Где', danish: 'Hvor' },
+          { russian: 'Как пройти', danish: 'Hvordan kommer jeg til' },
+        ],
+        goals: ['Spørg hvor metroen er', 'Forstå retningsanvisning', 'Sig tak'],
+      };
+
+      // INITIALIZE
+      document.addEventListener('DOMContentLoaded', function () {
+        renderPlaces();
+        renderDirections();
+        renderTransport();
+        renderModernTransport();
+        renderPhoneNavPhrases();
+        new Dialogue('dialogue-section', dialogueData);
+        new ListeningExercise('listening-exercise', listeningData);
+        new MatchingExercise('matching-exercise', matchingData);
+        new FillBlankExercise('fill-blank-exercise', fillBlankData);
+        new SentenceBuilder('sentence-builder', sentenceBuilderData);
+
+        // AI Role Play: City
+        new AIRolePlay('ai-roleplay-city', aiRolePlayCityConfig);
+
+        // AI Sentence Auction
+        new AISentenceAuction('ai-auction', {
+          vocabulary: aiRolePlayCityConfig.vocabulary,
+          maxRounds: 6,
+        });
+
+        // AI Story Builder
+        new AIStoryBuilder('ai-story', {
+          theme: 'En dag i Moskva',
+          vocabulary: aiRolePlayCityConfig.vocabulary,
+          suggestions: ['Hvor går vi hen?', 'Hvad ser vi?', 'Hvem møder vi?'],
+        });
+      });
+    </script>
+  </body>
+</html>

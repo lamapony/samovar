@@ -1,0 +1,547 @@
+/**
+ * RusLæring - Editorial Base Styles
+ * Shared styles for all v2 lessons
+ * Each lesson only needs to override --editorial-accent
+ */
+
+/* ============================================
+   CSS VARIABLES (defaults)
+   ============================================ */
+
+:root {
+    --editorial-black: #1a1a1a;
+    --editorial-gray: #666;
+    --editorial-light: #f5f5f5;
+    --editorial-accent: #c41e3a;
+    --editorial-line: #e0e0e0;
+}
+
+/* ============================================
+   BASE RESET FOR LESSONS
+   ============================================ */
+
+body {
+    background: white;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: none;
+    padding: 0;
+}
+
+header,
+footer {
+    display: none;
+}
+
+/* ============================================
+   PROGRESS BAR (scroll indicator at top)
+   ============================================ */
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--editorial-accent);
+    z-index: 1000;
+    transition: width 0.1s;
+}
+
+/* ============================================
+   FLOATING NAVIGATION
+   ============================================ */
+
+.floating-nav {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 100;
+}
+
+.floating-btn {
+    display: inline-block;
+    background: white;
+    border: 1px solid var(--editorial-line);
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: var(--editorial-gray);
+    text-decoration: none;
+    transition: all 0.2s;
+    min-height: 44px;
+    min-width: 44px;
+    line-height: 1.5;
+}
+
+.floating-btn:hover {
+    border-color: var(--editorial-black);
+    color: var(--editorial-black);
+}
+
+.floating-btn:focus-visible {
+    outline: 2px solid var(--editorial-accent);
+    outline-offset: 2px;
+}
+
+/* ============================================
+   FULL-SCREEN SECTIONS
+   ============================================ */
+
+.editorial-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 2rem;
+    position: relative;
+}
+
+.editorial-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.editorial-hero {
+    background: var(--editorial-black);
+    color: white;
+    text-align: center;
+}
+
+.editorial-hero .lesson-number {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+}
+
+.editorial-hero h1 {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: white;
+}
+
+.editorial-hero .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.scroll-indicator::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 1rem auto 0;
+}
+
+/* ============================================
+   CHAPTER HEADERS
+   ============================================ */
+
+.chapter-header {
+    border-bottom: 1px solid var(--editorial-line);
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+}
+
+.chapter-number {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--editorial-accent);
+    margin-bottom: 0.5rem;
+}
+
+.chapter-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--editorial-black);
+    margin: 0;
+}
+
+/* ============================================
+   NARRATIVE TEXT
+   ============================================ */
+
+.narrative {
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: var(--editorial-gray);
+    margin-bottom: 3rem;
+}
+
+.narrative strong {
+    color: var(--editorial-black);
+    font-weight: 500;
+}
+
+/* ============================================
+   PHRASE / WORD DISPLAY
+   ============================================ */
+
+.phrase-display,
+.word-display {
+    text-align: center;
+    padding: 4rem 0;
+    margin: 2rem 0;
+    border-top: 1px solid var(--editorial-line);
+    border-bottom: 1px solid var(--editorial-line);
+}
+
+.phrase-russian,
+.word-russian {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--editorial-black);
+    cursor: pointer;
+    transition: color 0.2s;
+    display: block;
+    line-height: 1.3;
+}
+
+.phrase-russian:hover,
+.word-russian:hover {
+    color: var(--editorial-accent);
+}
+
+.phrase-translation,
+.word-translation {
+    font-size: 1.25rem;
+    color: var(--editorial-gray);
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+.word-phonetic {
+    font-family: 'SF Mono', 'Monaco', monospace;
+    font-size: 1rem;
+    color: var(--editorial-gray);
+    margin-top: 1.5rem;
+    letter-spacing: 0.1em;
+}
+
+/* ============================================
+   EDITORIAL ASIDE / NOTE
+   ============================================ */
+
+.editorial-aside {
+    background: var(--editorial-light);
+    padding: 2rem;
+    margin: 3rem 0;
+    border-left: 3px solid var(--editorial-accent);
+}
+
+.editorial-aside-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--editorial-accent);
+    margin-bottom: 1rem;
+}
+
+.editorial-aside p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--editorial-black);
+    margin: 0;
+}
+
+/* ============================================
+   INTERLUDE SECTION
+   ============================================ */
+
+.interlude {
+    background: var(--editorial-black);
+    color: white;
+    text-align: center;
+    min-height: 50vh;
+}
+
+.interlude h2 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.interlude p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   EXERCISE SECTIONS
+   ============================================ */
+
+.exercise-section {
+    background: var(--editorial-light);
+    border-top: 1px solid var(--editorial-line);
+    border-bottom: 1px solid var(--editorial-line);
+}
+
+.exercise-frame {
+    background: white;
+    border: 1px solid var(--editorial-line);
+    padding: 3rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.exercise-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--editorial-line);
+}
+
+.exercise-type {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--editorial-accent);
+    margin-bottom: 0.5rem;
+}
+
+.exercise-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--editorial-black);
+    margin: 0;
+}
+
+.exercise-body {
+    min-height: 300px;
+}
+
+/* ============================================
+   COMPLETION SECTION
+   ============================================ */
+
+.completion-section {
+    background: var(--editorial-light);
+    min-height: auto;
+    padding: 4rem 2rem;
+}
+
+.complete-lesson-btn {
+    background: var(--editorial-black);
+    color: white;
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.complete-lesson-btn:hover {
+    background: var(--editorial-accent);
+    transform: translateY(-2px);
+}
+
+.complete-lesson-btn:focus-visible {
+    outline: 2px solid var(--editorial-accent);
+    outline-offset: 2px;
+}
+
+.complete-lesson-btn.completed {
+    background: #2ecc71;
+    cursor: default;
+}
+
+.complete-lesson-btn.completed:hover {
+    transform: none;
+}
+
+/* Completion requirements checklist */
+.completion-requirements {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--editorial-gray);
+}
+
+.completion-req-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.completion-req-item.met {
+    color: #2ecc71;
+}
+
+.completion-req-item .req-icon {
+    font-size: 1rem;
+}
+
+/* ============================================
+   NAVIGATION SECTION
+   ============================================ */
+
+.nav-section {
+    background: white;
+    padding: 4rem 2rem;
+    min-height: auto;
+}
+
+.lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-m, 1rem) 0;
+    border-top: 1px solid var(--editorial-line);
+    margin-top: var(--space-xl, 2rem);
+}
+
+.lesson-nav-item {
+    text-decoration: none;
+    color: var(--editorial-gray);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    transition: color 0.2s;
+}
+
+.lesson-nav-item:hover {
+    color: var(--editorial-accent);
+}
+
+.lesson-nav-item:focus-visible {
+    outline: 2px solid var(--editorial-accent);
+    outline-offset: 4px;
+}
+
+.lesson-nav-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+}
+
+.lesson-nav-title {
+    font-weight: 600;
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+    /* Fallback: animate to visible after a delay in case JS fails */
+    animation: reveal-fallback 0.6s ease 2s forwards;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: none;
+    /* Cancel fallback if JS worked */
+}
+
+/* Fallback animation if IntersectionObserver doesn't fire */
+@keyframes reveal-fallback {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+        animation: none;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY: FOCUS STYLES
+   ============================================ */
+
+*:focus-visible {
+    outline: 2px solid var(--editorial-accent);
+    outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Interactive elements should be obvious */
+[onclick],
+[role="button"] {
+    cursor: pointer;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .editorial-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .floating-nav {
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .floating-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .exercise-frame {
+        padding: 2rem 1.5rem;
+    }
+
+    .completion-requirements {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+    }
+
+    .lesson-nav {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+}

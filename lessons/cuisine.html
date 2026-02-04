@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Русская Кухня | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .dish-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .dish-card {
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 25px;
+        transition: border-color 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .dish-card:hover {
+        border-color: var(--accent-blue);
+      }
+
+      .dish-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--accent-red);
+      }
+
+      .dish-title {
+        font-family: var(--font-serif);
+        font-size: 1.4rem;
+        margin: 0 0 10px 0;
+        color: var(--text-ink);
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 10px;
+      }
+
+      .dish-desc {
+        font-size: 0.95rem;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .ingredient-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .ingredient-pill {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        background: #f5f5f5;
+        border-radius: 4px;
+        color: #777;
+      }
+
+      .highlight-box {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        margin: 30px 0;
+        border: 1px solid #eee;
+      }
+
+      /* Cooking Game */
+      .cooking-area {
+        display: flex;
+        gap: 40px;
+        margin-top: 30px;
+        align-items: flex-start;
+      }
+
+      .pot-container {
+        width: 200px;
+        height: 200px;
+        border: 2px solid #333;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: white;
+        position: relative;
+      }
+
+      .pot-liquid {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        top: 60px;
+        background: #e0e0e0;
+        border-radius: 0 0 100px 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        font-size: 0.9rem;
+        transition: background 0.5s;
+      }
+
+      .shelf {
+        flex: 1;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+      }
+
+      .ingredient-btn {
+        padding: 10px;
+        background: white;
+        border: 1px solid #ccc;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.2s;
+      }
+
+      .ingredient-btn:hover {
+        background: #f0f0f0;
+        border-color: #999;
+      }
+
+      .ingredient-btn.added {
+        opacity: 0.5;
+        cursor: default;
+        background: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="etiquette.html">Этикет</a>
+          <a
+            href="cuisine.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Кухня</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Кухня и Гостеприимство</h1>
+          <p class="lead">
+            Русская кухня — это история выживания в холодном климате, превратившаяся в искусство
+            уюта. Это супы, соления и долгие чаепития.
+          </p>
+
+          <section id="holy-grail">
+            <div class="highlight-box">
+              <h3>Основа русской кухни</h3>
+              <p>Два продукта, которые вы найдете на любой русской кухне:</p>
+              <ul style="margin-top: 10px">
+                <li>
+                  <strong>Сметана (Smetana)</strong> — Жирный кисломолочный продукт (похож на Creme
+                  Fraiche, но нежнее). Добавляется в супы, к блинам и пельменям.
+                </li>
+                <li>
+                  <strong>Укроп (Dild)</strong> — Главная национальная зелень. Русские добавляют
+                  укроп почти везде: в картошку, салаты и супы.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="dishes">
+            <h2>Гастрономическая карта</h2>
+            <div class="dish-grid">
+              <div class="dish-card">
+                <h3 class="dish-title">Борщ (Borsjtj)</h3>
+                <div class="dish-desc">
+                  Знаменитый суп рубинового цвета. Баланс сладкого (свекла) и кислого (уксус/лимон).
+                  Подается горячим со сметаной.
+                </div>
+                <div class="ingredient-list">
+                  <span class="ingredient-pill">Свекла</span>
+                  <span class="ingredient-pill">Капуста</span>
+                  <span class="ingredient-pill">Говядина</span>
+                </div>
+              </div>
+
+              <div class="dish-card">
+                <h3 class="dish-title">Пельмени (Pelmeni)</h3>
+                <div class="dish-desc">
+                  Сибирский аналог равиоли. Тонкое тесто и сочная мясная начинка. Традиционно
+                  лепились всей семьей на зиму.
+                </div>
+                <div class="ingredient-list">
+                  <span class="ingredient-pill">Тесто</span>
+                  <span class="ingredient-pill">Фарш</span>
+                  <span class="ingredient-pill">Лук</span>
+                </div>
+              </div>
+
+              <div class="dish-card">
+                <h3 class="dish-title">Оливье (Olivier)</h3>
+                <div class="dish-desc">
+                  Главный новогодний салат. В СССР заменил буржуазные деликатесы доступными
+                  продуктами.
+                </div>
+                <div class="ingredient-list">
+                  <span class="ingredient-pill">Картофель</span>
+                  <span class="ingredient-pill">Майонез</span>
+                  <span class="ingredient-pill">Горошек</span>
+                </div>
+              </div>
+
+              <div class="dish-card">
+                <h3 class="dish-title">Блины (Blini)</h3>
+                <div class="dish-desc">
+                  Тонкие, кружевные панкейки. Символ солнца и весны. Едят руками, заворачивая
+                  начинку.
+                </div>
+                <div class="ingredient-list">
+                  <span class="ingredient-pill">Мука</span>
+                  <span class="ingredient-pill">Молоко</span>
+                  <span class="ingredient-pill">Икра/Мед</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Интерактив: Собери Борщ</h2>
+            <p>Выберите только те ингредиенты, которые традиционно идут в борщ.</p>
+
+            <div class="cooking-area">
+              <div class="shelf">
+                <div class="ingredient-btn" onclick="addIng(this, 'Свекла', true)">Свекла</div>
+                <div class="ingredient-btn" onclick="addIng(this, 'Макароны', false)">Макароны</div>
+                <div class="ingredient-btn" onclick="addIng(this, 'Капуста', true)">Капуста</div>
+                <div class="ingredient-btn" onclick="addIng(this, 'Банан', false)">Банан</div>
+                <div class="ingredient-btn" onclick="addIng(this, 'Картофель', true)">
+                  Картофель
+                </div>
+                <div class="ingredient-btn" onclick="addIng(this, 'Сыр', false)">Сыр</div>
+                <div class="ingredient-btn" onclick="addIng(this, 'Морковь', true)">Морковь</div>
+                <div class="ingredient-btn" onclick="addIng(this, 'Кетчуп', false)">Кетчуп</div>
+              </div>
+
+              <div class="pot-container">
+                <div style="z-index: 2; font-weight: bold; margin-bottom: 120px">Кастрюля</div>
+                <div class="pot-liquid" id="soup-liquid">Вода</div>
+              </div>
+            </div>
+            <div id="chef-msg" class="feedback" style="margin-top: 20px"></div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Правило чистой тарелки</strong>
+            Хозяйка будет предлагать добавку до тех пор, пока вы не откажетесь твердо (но вежливо).
+            Оставить еду на тарелке в гостях допустимо, если вы действительно сыты, но лучше съесть
+            всё — это лучший комплимент.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar.</div>
+      </footer>
+    </div>
+
+    <script>
+      let ingredients = [];
+
+      function addIng(btn, name, isCorrect) {
+        if (btn.classList.contains('added')) return;
+
+        btn.classList.add('added');
+        ingredients.push(name);
+
+        const liquid = document.getElementById('soup-liquid');
+        liquid.innerText = ingredients.join(', ');
+
+        const msg = document.getElementById('chef-msg');
+
+        if (!isCorrect) {
+          liquid.style.background = '#555'; // Bad color
+          liquid.style.color = 'white';
+          msg.innerText = 'Ой! ' + name + ' испортит борщ. Попробуйте заново (F5).';
+          msg.className = 'feedback incorrect';
+        } else {
+          // Check if we have main ones
+          if (ingredients.includes('Свекла')) {
+            liquid.style.background = '#d63031'; // Red
+            liquid.style.color = 'white';
+          }
+
+          if (
+            ingredients.includes('Свекла') &&
+            ingredients.includes('Капуста') &&
+            ingredients.includes('Картофель')
+          ) {
+            msg.innerHTML =
+              '<strong>Отлично!</strong> Основа для борща готова. Осталось сварить бульон.';
+            msg.className = 'feedback correct';
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

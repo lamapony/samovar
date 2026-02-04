@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verber og Aspekt | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .verb-pair-card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .verb-col {
+        text-align: center;
+      }
+
+      .verb-col h4 {
+        margin: 0 0 10px 0;
+        color: var(--text-faded);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+      }
+
+      .verb-word {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--accent-blue);
+        margin-bottom: 5px;
+      }
+
+      .verb-meaning {
+        font-size: 0.9rem;
+        color: #666;
+        font-style: italic;
+      }
+
+      .tense-grid {
+        display: grid;
+        grid-template-columns: auto 1fr 1fr;
+        gap: 1px;
+        background: #ccc;
+        border: 1px solid #ccc;
+        margin: 30px 0;
+      }
+
+      .tense-cell {
+        background: white;
+        padding: 15px;
+        text-align: center;
+      }
+
+      .tense-header {
+        background: #f9f9f9;
+        font-weight: bold;
+        color: var(--accent-blue);
+      }
+
+      /* Conjugation Exercise */
+      .conjugation-box {
+        background: #f4f4f4;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+
+      .conj-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        justify-content: center;
+      }
+
+      .conj-pronoun {
+        width: 80px;
+        font-weight: bold;
+        text-align: right;
+        margin-right: 10px;
+      }
+
+      .conj-input {
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 4px;
+        width: 150px;
+        font-size: 1rem;
+        margin-left: 10px;
+      }
+
+      .conj-input.correct {
+        border-color: var(--success-color);
+        background-color: #e8f5e9;
+        color: var(--success-color);
+      }
+
+      .conj-input.wrong {
+        border-color: var(--error-color);
+        background-color: #ffebee;
+      }
+
+      /* Aspect Game */
+      .aspect-game-area {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .aspect-bucket {
+        flex: 1;
+        border: 2px dashed #ccc;
+        border-radius: 12px;
+        padding: 20px;
+        min-height: 200px;
+        text-align: center;
+        transition: all 0.3s;
+        min-width: 300px;
+      }
+
+      .aspect-bucket.hovered {
+        background: #e3f2fd;
+        border-color: var(--accent-blue);
+      }
+
+      .sentence-card {
+        background: white;
+        border: 1px solid var(--accent-blue);
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 6px;
+        cursor: grab;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: left;
+      }
+
+      .dk-sub {
+        display: block;
+        font-size: 0.85rem;
+        color: #888;
+        font-style: italic;
+        margin-top: 5px;
+      }
+
+      .bucket-title {
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: var(--accent-blue);
+        font-size: 1.1rem;
+      }
+
+      .imp-color {
+        color: #e67e22;
+      }
+
+      .perf-color {
+        color: #27ae60;
+      }
+    </style>
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="nouns.html">Род</a>
+          <a href="cases.html">Падежи</a>
+          <a
+            href="verbs.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Глагол</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Verber og Aspekt</h1>
+          <p class="lead">
+            Hjertet i den russiske sætning. Det sværeste koncept for danskere er "Aspekt". Et
+            russisk verbum viser altid, om <em>processen</em> eller <em>resultatet</em> er vigtigst.
+          </p>
+
+          <section id="theory-aspect">
+            <h2>Handlingens to dimensioner</h2>
+            <p>
+              På dansk bruger du kontekst (førnutid, datid) eller hjælpeverber. På russisk bruger vi
+              <strong>to forskellige infinitiver</strong>.
+            </p>
+
+            <div class="visual-concept">
+              <div class="visual-desc">
+                <strong>Metafor: Video vs Fotografi</strong><br />
+                <span class="imp-color">Imperfektiv (NSV):</span> Videooptagelse. <br />
+                <em>Nøgleord:</em> Længe, hver dag, i gang med at.<br /><br />
+
+                <span class="perf-color">Perfektiv (SV):</span> Fotografi af resultatet.<br />
+                <em>Nøgleord:</em> Færdig med at, én gang, pludselig.
+              </div>
+            </div>
+
+            <div class="verb-pair-card">
+              <div class="verb-col" style="border-right: 1px solid #eee">
+                <h4>NSV (Imperfektiv)</h4>
+                <div class="verb-word imp-color">Delat'</div>
+                <div class="verb-meaning">at lave (processen)</div>
+                <p style="font-size: 0.85rem">Hvad laver man?</p>
+              </div>
+              <div class="verb-col">
+                <h4>SV (Perfektiv)</h4>
+                <div class="verb-word perf-color">Sdelat'</div>
+                <div class="verb-meaning">at få lavet / have lavet (resultatet)</div>
+                <p style="font-size: 0.85rem">Hvad har man opnået?</p>
+              </div>
+            </div>
+
+            <div class="verb-pair-card">
+              <div class="verb-col" style="border-right: 1px solid #eee">
+                <h4>NSV</h4>
+                <div class="verb-word imp-color">Tjitat'</div>
+                <div class="verb-meaning">at læse (sidde og læse)</div>
+              </div>
+              <div class="verb-col">
+                <h4>SV</h4>
+                <div class="verb-word perf-color">Protjitat'</div>
+                <div class="verb-meaning">at læse færdig / have læst</div>
+              </div>
+            </div>
+          </section>
+
+          <section id="practice" style="margin-top: 40px">
+            <h2>Praksis: Proces eller Resultat?</h2>
+            <p>Fordel sætningerne efter betydning. Se på den danske oversættelse!</p>
+
+            <div class="game-container">
+              <div
+                id="sentences-pool"
+                style="
+                  margin-bottom: 20px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 10px;
+                  justify-content: center;
+                "
+              >
+                <!-- Sentences injected via JS -->
+              </div>
+
+              <div class="aspect-game-area">
+                <div class="aspect-bucket" data-type="imp">
+                  <div class="bucket-title imp-color">NSV (Imperfektiv)</div>
+                  <p style="font-size: 0.85rem; color: #666">
+                    "I gang med...", "Hver dag", "Længe"
+                  </p>
+                  <div class="bucket-content"></div>
+                </div>
+                <div class="aspect-bucket" data-type="perf">
+                  <div class="bucket-title perf-color">SV (Perfektiv)</div>
+                  <p style="font-size: 0.85rem; color: #666">
+                    "Færdig med...", "Én gang", "Opnået"
+                  </p>
+                  <div class="bucket-content"></div>
+                </div>
+              </div>
+              <div id="feedback" class="feedback"></div>
+            </div>
+
+            <h3 style="margin-top: 60px">Bøjningstræner</h3>
+            <p>
+              Indsæt den rigtige endelse for verbet <strong>Rabotat'</strong> (At arbejde) - Type 1.
+            </p>
+            <div class="conjugation-box">
+              <div class="conj-row">
+                <span class="conj-pronoun">Я</span>
+                <span>Работа</span>
+                <input type="text" class="conj-input" data-ans="ю" placeholder="..." />
+                <span style="margin-left: 10px; font-size: 0.8rem; color: #888">(Jeg)</span>
+              </div>
+              <div class="conj-row">
+                <span class="conj-pronoun">Ты</span>
+                <span>Работа</span>
+                <input type="text" class="conj-input" data-ans="ешь" placeholder="..." />
+                <span style="margin-left: 10px; font-size: 0.8rem; color: #888">(Du)</span>
+              </div>
+              <div class="conj-row">
+                <span class="conj-pronoun">Он/Она</span>
+                <span>Работа</span>
+                <input type="text" class="conj-input" data-ans="ет" placeholder="..." />
+                <span style="margin-left: 10px; font-size: 0.8rem; color: #888">(Han/Hun)</span>
+              </div>
+              <div class="conj-row">
+                <span class="conj-pronoun">Мы</span>
+                <span>Работа</span>
+                <input type="text" class="conj-input" data-ans="ем" placeholder="..." />
+                <span style="margin-left: 10px; font-size: 0.8rem; color: #888">(Vi)</span>
+              </div>
+              <div class="conj-row">
+                <span class="conj-pronoun">Вы</span>
+                <span>Работа</span>
+                <input type="text" class="conj-input" data-ans="ете" placeholder="..." />
+                <span style="margin-left: 10px; font-size: 0.8rem; color: #888">(De/I)</span>
+              </div>
+              <div class="conj-row">
+                <span class="conj-pronoun">Они</span>
+                <span>Работа</span>
+                <input type="text" class="conj-input" data-ans="ют" placeholder="..." />
+                <span style="margin-left: 10px; font-size: 0.8rem; color: #888">(De)</span>
+              </div>
+              <div style="text-align: center; margin-top: 20px">
+                <button class="btn" onclick="checkConjugation()">Tjek (Проверить)</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <samovar-footer></samovar-footer>
+    </div>
+
+    <script>
+      // Aspect Sorting Game
+      const sentences = [
+        { text: 'Ja tjital knigu', dk: 'Jeg sad og læste bogen (process)', type: 'imp' },
+        { text: 'Ja protjital knigu', dk: 'Jeg fik læst bogen færdig (resultat)', type: 'perf' },
+        { text: 'On pisal pismo', dk: 'Han sad og skrev et brev', type: 'imp' },
+        { text: 'On napisal pismo', dk: 'Han har skrevet brevet (det er klart)', type: 'perf' },
+        { text: "My guljali kazjdyj den'", dk: 'Vi gik tur hver dag (gentagelse)', type: 'imp' },
+        { text: 'Ja kupil masjinu', dk: 'Jeg har købt en bil (faktum/resultat)', type: 'perf' },
+      ];
+
+      const pool = document.getElementById('sentences-pool');
+      const buckets = document.querySelectorAll('.aspect-bucket');
+      const feedback = document.getElementById('feedback');
+      let solved = 0;
+
+      // Initialize
+      sentences
+        .sort(() => Math.random() - 0.5)
+        .forEach((s, i) => {
+          const card = document.createElement('div');
+          card.className = 'sentence-card';
+          card.draggable = true;
+          card.innerHTML = `<strong>${s.text}</strong><span class="dk-sub">${s.dk}</span>`;
+          card.dataset.type = s.type;
+          card.id = 's-' + i;
+
+          card.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', s.text);
+            e.dataTransfer.setData('type', s.type);
+            e.dataTransfer.setData('id', card.id);
+            setTimeout(() => (card.style.opacity = '0.5'), 0);
+          });
+
+          card.addEventListener('dragend', () => {
+            card.style.opacity = '1';
+          });
+
+          // Mobile click fallback
+          card.addEventListener('click', () => {
+            document
+              .querySelectorAll('.sentence-card')
+              .forEach((c) => (c.style.borderColor = 'var(--accent-blue)'));
+            card.style.borderColor = 'orange';
+            card.classList.add('selected-card');
+          });
+
+          pool.appendChild(card);
+        });
+
+      buckets.forEach((bucket) => {
+        bucket.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          bucket.classList.add('hovered');
+        });
+
+        bucket.addEventListener('dragleave', () => {
+          bucket.classList.remove('hovered');
+        });
+
+        bucket.addEventListener('drop', (e) => {
+          e.preventDefault();
+          bucket.classList.remove('hovered');
+
+          const type = e.dataTransfer.getData('type');
+          const id = e.dataTransfer.getData('id');
+          const card = document.getElementById(id);
+
+          handleDrop(card, type, bucket);
+        });
+
+        // Click receiver
+        bucket.addEventListener('click', () => {
+          const selected = document.querySelector('.selected-card');
+          if (selected) {
+            handleDrop(selected, selected.dataset.type, bucket);
+            selected.classList.remove('selected-card');
+          }
+        });
+      });
+
+      function handleDrop(card, type, bucket) {
+        const targetType = bucket.dataset.type;
+
+        if (type === targetType) {
+          // Correct
+          bucket.querySelector('.bucket-content').appendChild(card);
+          card.style.borderColor = type === 'imp' ? '#e67e22' : '#27ae60';
+          card.style.backgroundColor = '#fff';
+          card.draggable = false;
+          card.style.cursor = 'default';
+
+          solved++;
+          if (solved === sentences.length) {
+            feedback.innerText = 'Perfekt! Du forstår forskellen.';
+            feedback.className = 'feedback correct';
+          }
+        } else {
+          // Wrong
+          card.style.backgroundColor = '#ffebee';
+          setTimeout(() => (card.style.backgroundColor = 'white'), 500);
+        }
+      }
+
+      // Conjugation Check
+      function checkConjugation() {
+        const inputs = document.querySelectorAll('.conj-input');
+        inputs.forEach((inp) => {
+          if (inp.value.trim().toLowerCase() === inp.dataset.ans) {
+            inp.classList.add('correct');
+            inp.classList.remove('wrong');
+          } else {
+            inp.classList.add('wrong');
+            inp.classList.remove('correct');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

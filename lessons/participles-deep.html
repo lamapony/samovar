@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Причастия и Деепричастия: Глубокий Разбор | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/advanced.css" />
+    <link rel="stylesheet" href="../css/tooltips.css" />
+    <style>
+      .theory-block {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 30px 0;
+      }
+
+      .comparison-item {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        padding: 20px;
+      }
+
+      .comparison-item h4 {
+        margin-top: 0;
+        color: var(--accent-blue);
+        border-bottom: 2px solid var(--accent-blue);
+        padding-bottom: 10px;
+      }
+
+      .example-sentence {
+        background: #fff;
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #e0e0e0;
+        font-size: 1.1rem;
+      }
+
+      .highlight-participle {
+        background: #e3f2fd;
+        padding: 2px 6px;
+        font-weight: bold;
+        color: #1976d2;
+        border-bottom: 2px solid #1976d2;
+      }
+
+      .highlight-gerund {
+        background: #fff3e0;
+        padding: 2px 6px;
+        font-weight: bold;
+        color: #f57c00;
+        border-bottom: 2px solid #f57c00;
+      }
+
+      .practice-container {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        padding: 30px;
+        margin: 40px 0;
+      }
+
+      .sentence-builder {
+        background: #f5f5f5;
+        padding: 20px;
+        margin: 20px 0;
+        min-height: 80px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .word-option {
+        display: inline-block;
+        padding: 10px 20px;
+        background: white;
+        border: 2px solid var(--accent-blue);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-weight: 500;
+      }
+
+      .word-option:hover {
+        background: var(--accent-blue);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .word-option.correct {
+        background: var(--color-success);
+        border-color: var(--color-success);
+        color: white;
+        cursor: default;
+      }
+
+      .word-option.wrong {
+        background: var(--color-error);
+        border-color: var(--color-error);
+        color: white;
+        animation: shake 0.5s;
+      }
+
+      .transformation-exercise {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        padding: 25px;
+        margin: 20px 0;
+      }
+
+      .input-field {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        font-size: 1.1rem;
+        margin: 10px 0;
+        font-family: var(--font-serif);
+      }
+
+      .input-field:focus {
+        outline: none;
+        border-color: var(--accent-blue);
+      }
+
+      .check-btn {
+        background: var(--accent-blue);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s;
+      }
+
+      .check-btn:hover {
+        background: var(--accent-blue-light);
+      }
+
+      .feedback-box {
+        margin-top: 15px;
+        padding: 15px;
+        display: none;
+      }
+
+      .feedback-box.show {
+        display: block;
+      }
+
+      .feedback-box.correct {
+        background: var(--color-success-bg);
+        border: 1px solid var(--color-success);
+        color: var(--color-success);
+      }
+
+      .feedback-box.incorrect {
+        background: var(--color-error-bg);
+        border: 1px solid var(--color-error);
+        color: var(--color-error);
+      }
+
+      .table-forms {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      .table-forms th,
+      .table-forms td {
+        padding: 12px;
+        border: 1px solid #e0e0e0;
+        text-align: left;
+      }
+
+      .table-forms th {
+        background: #f8f9fa;
+        font-weight: bold;
+        color: var(--accent-blue);
+      }
+
+      .table-forms tr:hover {
+        background: #f5f5f5;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        75% {
+          transform: translateX(5px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .comparison-grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Mobile Optimizations */
+        .theory-block {
+          padding: 20px;
+          margin-bottom: 20px;
+        }
+
+        .comparison-item {
+          padding: 15px;
+        }
+
+        .comparison-item h4 {
+          font-size: 1.1rem;
+        }
+
+        .example-sentence {
+          padding: 12px;
+          font-size: 1rem;
+        }
+
+        .table-forms {
+          font-size: 0.85rem;
+        }
+
+        .table-forms th,
+        .table-forms td {
+          padding: 8px;
+        }
+
+        /* Practice exercises mobile */
+        .practice-container {
+          padding: 20px;
+          margin: 30px 0;
+        }
+
+        .sentence-builder {
+          padding: 15px;
+          min-height: 70px;
+          gap: 8px;
+        }
+
+        .word-option {
+          padding: 10px 16px;
+          font-size: 0.95rem;
+        }
+
+        .transformation-exercise {
+          padding: 20px;
+          margin: 15px 0;
+        }
+
+        .input-field {
+          font-size: 16px;
+          /* Prevents iOS zoom */
+          padding: 14px;
+        }
+
+        .check-btn {
+          padding: 14px 24px;
+          font-size: 1rem;
+          width: 100%;
+          margin-top: 10px;
+        }
+
+        .feedback-box {
+          padding: 12px;
+          font-size: 0.9rem;
+        }
+
+        /* Better button layout on mobile */
+        #identify-game .transformation-exercise > div[style*='flex'] {
+          flex-direction: column !important;
+        }
+
+        #builder-game .transformation-exercise > div[style*='flex'] {
+          justify-content: center !important;
+        }
+      }
+
+      /* Touch device enhancements */
+      @media (hover: none) and (pointer: coarse) {
+        .word-option {
+          min-height: 48px;
+          min-width: 48px;
+        }
+
+        .check-btn {
+          min-height: 48px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a
+            href="#"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-gold)"
+            >Причастия</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Причастия и Деепричастия: Глубокий Разбор</h1>
+          <p class="lead">
+            Причастия и деепричастия — это
+            <span class="tooltip-word"
+              >гибридные формы<span class="tooltip-popup">hybride former</span></span
+            >, которые сжимают два предложения в одно. Это инструменты письменной речи, делающие
+            текст более плотным и академичным.
+          </p>
+
+          <!-- ТЕОРИЯ: Причастия -->
+          <section id="theory-participles">
+            <h2>Причастия (Participier)</h2>
+
+            <div class="theory-block">
+              <h3>Что такое причастие?</h3>
+              <p>Причастие = <strong>Прилагательное + Глагол</strong></p>
+              <p>Оно описывает предмет через действие:</p>
+
+              <div class="example-sentence">
+                Студент, <span class="highlight-participle">читающий</span> книгу, сидит в
+                библиотеке.<br />
+                <em style="color: #666"
+                  >(Den studerende, som læser en bog, sidder i biblioteket)</em
+                >
+              </div>
+
+              <p><strong>Вместо:</strong> "Студент читает книгу. Он сидит в библиотеке."</p>
+              <p><strong>Мы говорим:</strong> "Студент, читающий книгу, сидит в библиотеке."</p>
+            </div>
+
+            <div class="theory-block">
+              <h3>Четыре типа причастий</h3>
+
+              <table class="table-forms">
+                <thead>
+                  <tr>
+                    <th>Тип</th>
+                    <th>Время</th>
+                    <th>Залог</th>
+                    <th>Пример</th>
+                    <th>Dansk</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Действительное настоящее</strong></td>
+                    <td>Сейчас</td>
+                    <td>Активный</td>
+                    <td>читающий (-ющий/-ащий)</td>
+                    <td>som læser</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Действительное прошедшее</strong></td>
+                    <td>Было</td>
+                    <td>Активный</td>
+                    <td>читавший (-вший)</td>
+                    <td>som læste</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Страдательное настоящее</strong></td>
+                    <td>Сейчас</td>
+                    <td>Пассивный</td>
+                    <td>читаемый (-мый/-емый)</td>
+                    <td>som bliver læst</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Страдательное прошедшее</strong></td>
+                    <td>Было</td>
+                    <td>Пассивный</td>
+                    <td>прочитанный (-нный/-тый)</td>
+                    <td>som blev læst</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="comparison-grid">
+              <div class="comparison-item">
+                <h4>Действительные причастия</h4>
+                <p><strong>Предмет САМ делает</strong></p>
+                <div class="example-sentence">
+                  Девушка, <span class="highlight-participle">танцующая</span> на сцене, — моя
+                  сестра.<br />
+                  <em>(Pigen, der danser på scenen)</em>
+                </div>
+                <div class="example-sentence">
+                  Человек, <span class="highlight-participle">написавший</span> эту книгу, —
+                  гений.<br />
+                  <em>(Personen, der skrev denne bog)</em>
+                </div>
+              </div>
+
+              <div class="comparison-item">
+                <h4>Страдательные причастия</h4>
+                <p><strong>С предметом ЧТО-ТО делают</strong></p>
+                <div class="example-sentence">
+                  Книга, <span class="highlight-participle">читаемая</span> студентами, очень
+                  популярна.<br />
+                  <em>(Bogen, der læses af studerende)</em>
+                </div>
+                <div class="example-sentence">
+                  Письмо, <span class="highlight-participle">написанное</span> вчера, уже
+                  отправлено.<br />
+                  <em>(Brevet, der blev skrevet i går)</em>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ПРАКТИКА 1: Определение типа причастия -->
+          <section id="practice-identify">
+            <h2>Практика 1: Определите тип причастия</h2>
+
+            <div class="practice-container">
+              <p>
+                <strong>Инструкция:</strong> Прочитайте предложение и выберите правильный тип
+                причастия.
+              </p>
+
+              <div id="identify-game">
+                <!-- Динамически заполняется JS -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ТЕОРИЯ: Деепричастия -->
+          <section id="theory-gerunds">
+            <h2>Деепричастия (Gerundier)</h2>
+
+            <div class="theory-block">
+              <h3>Что такое деепричастие?</h3>
+              <p>Деепричастие = <strong>Наречие + Глагол</strong></p>
+              <p>
+                Оно описывает, <strong>КАК</strong> или <strong>КОГДА</strong> происходит основное
+                действие:
+              </p>
+
+              <div class="example-sentence">
+                <span class="highlight-gerund">Читая</span> книгу, он пил кофе.<br />
+                <em style="color: #666">(Mens han læste en bog, drak han kaffe)</em>
+              </div>
+
+              <p><strong>Вместо:</strong> "Он читал книгу. Он пил кофе."</p>
+              <p><strong>Мы говорим:</strong> "Читая книгу, он пил кофе."</p>
+            </div>
+
+            <div class="theory-block">
+              <h3>Два вида деепричастий</h3>
+
+              <table class="table-forms">
+                <thead>
+                  <tr>
+                    <th>Вид</th>
+                    <th>Суффикс</th>
+                    <th>Значение</th>
+                    <th>Пример</th>
+                    <th>Dansk</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Несовершенный вид</strong></td>
+                    <td>-я, -а</td>
+                    <td>Одновременность</td>
+                    <td>читая, говоря</td>
+                    <td>mens (samtidig)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Совершенный вид</strong></td>
+                    <td>-в, -вши</td>
+                    <td>Последовательность</td>
+                    <td>прочитав, сказав</td>
+                    <td>efter at have (bagefter)</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="example-sentence">
+                <span class="highlight-gerund">Слушая</span> музыку, она работала.<br />
+                <em>(Mens hun lyttede til musik, arbejdede hun) — одновременно</em>
+              </div>
+
+              <div class="example-sentence">
+                <span class="highlight-gerund">Прочитав</span> книгу, он вернул её в библиотеку.<br />
+                <em
+                  >(Efter at have læst bogen, returnerede han den) — сначала прочитал, потом
+                  вернул</em
+                >
+              </div>
+            </div>
+          </section>
+
+          <!-- ПРАКТИКА 2: Трансформация предложений -->
+          <section id="practice-transform">
+            <h2>Практика 2: Преобразуйте два предложения в одно</h2>
+
+            <div class="practice-container">
+              <p>
+                <strong>Инструкция:</strong> Используйте деепричастие, чтобы объединить два
+                предложения.
+              </p>
+
+              <div id="transform-exercises">
+                <!-- Динамически заполняется JS -->
+              </div>
+            </div>
+          </section>
+
+          <!-- ПРАКТИКА 3: Конструктор предложений -->
+          <section id="practice-builder">
+            <h2>Практика 3: Соберите предложение</h2>
+
+            <div class="practice-container">
+              <p>
+                <strong>Инструкция:</strong> Выберите правильную форму причастия или деепричастия.
+              </p>
+
+              <div id="builder-game">
+                <!-- Динамически заполняется JS -->
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Важно</strong>
+            Причастия и деепричастия — признак письменной, книжной речи. В разговорном русском их
+            почти не используют.
+          </div>
+          <div class="margin-note">
+            <strong>Совет</strong>
+            Начните с чтения. Найдите причастия в текстах, прежде чем пытаться использовать их сами.
+          </div>
+          <div class="margin-note">
+            <strong>Ошибка</strong>
+            Деепричастие должно относиться к подлежащему! Нельзя: "Читая книгу, у меня заболела
+            голова" ❌
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      // ПРАКТИКА 1: Определение типа причастия
+      const identifyData = [
+        {
+          sentence:
+            "Студент, <span class='highlight-participle'>читающий</span> книгу, сидит в библиотеке.",
+          question: 'Какой тип причастия?',
+          options: [
+            'Действительное настоящее',
+            'Действительное прошедшее',
+            'Страдательное настоящее',
+          ],
+          correct: 'Действительное настоящее',
+          explanation: 'Студент САМ читает СЕЙЧАС → Действительное настоящее',
+        },
+        {
+          sentence:
+            "Письмо, <span class='highlight-participle'>написанное</span> вчера, лежит на столе.",
+          question: 'Какой тип причастия?',
+          options: [
+            'Действительное прошедшее',
+            'Страдательное настоящее',
+            'Страдательное прошедшее',
+          ],
+          correct: 'Страдательное прошедшее',
+          explanation: 'Письмо БЫЛО написано (кем-то) → Страдательное прошедшее',
+        },
+        {
+          sentence:
+            "Задача, <span class='highlight-participle'>решаемая</span> студентами, очень сложная.",
+          question: 'Какой тип причастия?',
+          options: [
+            'Действительное настоящее',
+            'Страдательное настоящее',
+            'Страдательное прошедшее',
+          ],
+          correct: 'Страдательное настоящее',
+          explanation: 'Задачу решают СЕЙЧАС (студенты) → Страдательное настоящее',
+        },
+        {
+          sentence:
+            "Человек, <span class='highlight-participle'>написавший</span> эту книгу, — известный писатель.",
+          question: 'Какой тип причастия?',
+          options: [
+            'Действительное настоящее',
+            'Действительное прошедшее',
+            'Страдательное прошедшее',
+          ],
+          correct: 'Действительное прошедшее',
+          explanation: 'Человек САМ написал (в прошлом) → Действительное прошедшее',
+        },
+      ];
+
+      let currentIdentify = 0;
+      const identifyGame = document.getElementById('identify-game');
+
+      function renderIdentify() {
+        if (currentIdentify >= identifyData.length) {
+          identifyGame.innerHTML =
+            "<h3 style='text-align: center; color: var(--color-success);'>Отлично! Вы освоили типы причастий! 🎉</h3>";
+          return;
+        }
+
+        const data = identifyData[currentIdentify];
+        identifyGame.innerHTML = `
+            <div class="transformation-exercise">
+                <div class="example-sentence">${data.sentence}</div>
+                <p><strong>${data.question}</strong></p>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin: 20px 0;">
+                    ${data.options
+                      .map(
+                        (opt) => `
+                        <button class="word-option" onclick="checkIdentify('${opt}')">${opt}</button>
+                    `,
+                      )
+                      .join('')}
+                </div>
+                <div class="feedback-box" id="identify-feedback"></div>
+            </div>
+        `;
+      }
+
+      window.checkIdentify = function (answer) {
+        const data = identifyData[currentIdentify];
+        const feedback = document.getElementById('identify-feedback');
+
+        if (answer === data.correct) {
+          feedback.className = 'feedback-box show correct';
+          feedback.innerHTML = `<strong>Правильно!</strong> ${data.explanation}`;
+
+          setTimeout(() => {
+            currentIdentify++;
+            renderIdentify();
+          }, 2000);
+        } else {
+          feedback.className = 'feedback-box show incorrect';
+          feedback.innerHTML = `<strong>Неверно.</strong> Попробуйте еще раз.`;
+        }
+      };
+
+      renderIdentify();
+
+      // ПРАКТИКА 2: Трансформация предложений
+      const transformData = [
+        {
+          original: 'Он читал книгу. Он пил кофе.',
+          hint: 'Используйте деепричастие несовершенного вида (-я)',
+          correct: ['читая книгу, он пил кофе', 'читая книгу он пил кофе'],
+          explanation: 'Читая книгу, он пил кофе. (Одновременные действия)',
+        },
+        {
+          original: 'Она закончила работу. Она пошла домой.',
+          hint: 'Используйте деепричастие совершенного вида (-в)',
+          correct: ['закончив работу, она пошла домой', 'закончив работу она пошла домой'],
+          explanation: 'Закончив работу, она пошла домой. (Сначала закончила, потом пошла)',
+        },
+        {
+          original: 'Он слушал музыку. Он готовил ужин.',
+          hint: 'Используйте деепричастие несовершенного вида (-я)',
+          correct: ['слушая музыку, он готовил ужин', 'слушая музыку он готовил ужин'],
+          explanation: 'Слушая музыку, он готовил ужин. (Одновременные действия)',
+        },
+      ];
+
+      let currentTransform = 0;
+      const transformExercises = document.getElementById('transform-exercises');
+
+      function renderTransform() {
+        if (currentTransform >= transformData.length) {
+          transformExercises.innerHTML =
+            "<h3 style='text-align: center; color: var(--color-success);'>Превосходно! Вы мастер трансформации! 🎉</h3>";
+          return;
+        }
+
+        const data = transformData[currentTransform];
+        transformExercises.innerHTML = `
+            <div class="transformation-exercise">
+                <p><strong>Исходные предложения:</strong></p>
+                <div class="example-sentence">${data.original}</div>
+                <p style="color: #666; font-style: italic;">${data.hint}</p>
+                <input type="text" class="input-field" id="transform-input" placeholder="Введите объединенное предложение...">
+                <button class="check-btn" onclick="checkTransform()">Проверить</button>
+                <div class="feedback-box" id="transform-feedback"></div>
+            </div>
+        `;
+      }
+
+      window.checkTransform = function () {
+        const data = transformData[currentTransform];
+        const input = document.getElementById('transform-input').value.toLowerCase().trim();
+        const feedback = document.getElementById('transform-feedback');
+
+        const isCorrect = data.correct.some((ans) => input.includes(ans));
+
+        if (isCorrect) {
+          feedback.className = 'feedback-box show correct';
+          feedback.innerHTML = `<strong>Отлично!</strong> ${data.explanation}`;
+
+          setTimeout(() => {
+            currentTransform++;
+            renderTransform();
+          }, 2500);
+        } else {
+          feedback.className = 'feedback-box show incorrect';
+          feedback.innerHTML = `<strong>Не совсем.</strong> Подсказка: ${data.hint}`;
+        }
+      };
+
+      renderTransform();
+
+      // ПРАКТИКА 3: Конструктор предложений
+      const builderData = [
+        {
+          sentence: 'Девушка, ___ на сцене, — моя сестра.',
+          options: ['танцующая', 'танцевавшая', 'танцуемая'],
+          correct: 'танцующая',
+          explanation: 'Она танцует СЕЙЧАС → танцующая (действительное настоящее)',
+        },
+        {
+          sentence: '___ домашнее задание, он пошел гулять.',
+          options: ['делая', 'сделав', 'сделанный'],
+          correct: 'сделав',
+          explanation: 'Сначала сделал, потом пошел → сделав (совершенный вид)',
+        },
+        {
+          sentence: 'Книга, ___ студентами, очень интересная.',
+          options: ['читающая', 'читаемая', 'читавшая'],
+          correct: 'читаемая',
+          explanation: 'Книгу читают (студенты) → читаемая (страдательное настоящее)',
+        },
+      ];
+
+      let currentBuilder = 0;
+      const builderGame = document.getElementById('builder-game');
+
+      function renderBuilder() {
+        if (currentBuilder >= builderData.length) {
+          builderGame.innerHTML =
+            "<h3 style='text-align: center; color: var(--color-success);'>Великолепно! Вы готовы к академическим текстам! 🎉</h3>";
+          return;
+        }
+
+        const data = builderData[currentBuilder];
+        builderGame.innerHTML = `
+            <div class="transformation-exercise">
+                <div class="example-sentence">${data.sentence}</div>
+                <p><strong>Выберите правильную форму:</strong></p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0;">
+                    ${data.options
+                      .map(
+                        (opt) => `
+                        <button class="word-option" onclick="checkBuilder('${opt}')">${opt}</button>
+                    `,
+                      )
+                      .join('')}
+                </div>
+                <div class="feedback-box" id="builder-feedback"></div>
+            </div>
+        `;
+      }
+
+      window.checkBuilder = function (answer) {
+        const data = builderData[currentBuilder];
+        const feedback = document.getElementById('builder-feedback');
+        const buttons = document.querySelectorAll('#builder-game .word-option');
+
+        if (answer === data.correct) {
+          buttons.forEach((btn) => {
+            if (btn.textContent === answer) {
+              btn.classList.add('correct');
+            }
+          });
+
+          feedback.className = 'feedback-box show correct';
+          feedback.innerHTML = `<strong>Правильно!</strong> ${data.explanation}`;
+
+          setTimeout(() => {
+            currentBuilder++;
+            renderBuilder();
+          }, 2000);
+        } else {
+          buttons.forEach((btn) => {
+            if (btn.textContent === answer) {
+              btn.classList.add('wrong');
+              setTimeout(() => btn.classList.remove('wrong'), 500);
+            }
+          });
+
+          feedback.className = 'feedback-box show incorrect';
+          feedback.innerHTML = `<strong>Неверно.</strong> Подумайте о времени и залоге.`;
+        }
+      };
+
+      renderBuilder();
+    </script>
+    <script src="../js/tooltips.js"></script>
+  </body>
+</html>

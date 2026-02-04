@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 11: Vejret | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      .weather-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: var(--space-m);
+        margin: var(--space-m) 0;
+      }
+      .weather-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-l);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 12px;
+        transition: all 0.3s;
+      }
+      .weather-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .weather-icon {
+        font-size: 3rem;
+        margin-bottom: var(--space-s);
+        animation: float 3s ease-in-out infinite;
+      }
+      .weather-card:nth-child(2) .weather-icon {
+        animation-delay: 0.5s;
+      }
+      .weather-card:nth-child(3) .weather-icon {
+        animation-delay: 1s;
+      }
+      .weather-card:nth-child(4) .weather-icon {
+        animation-delay: 1.5s;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .weather-russian {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+      .weather-danish {
+        font-size: 0.85rem;
+        color: var(--text-light);
+      }
+      .season-section {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-s);
+        margin: var(--space-m) 0;
+      }
+      .season-card {
+        padding: var(--space-m);
+        text-align: center;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      .season-card:hover {
+        transform: scale(1.05);
+      }
+      .season-card.winter {
+        background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+      }
+      .season-card.spring {
+        background: linear-gradient(135deg, #ffd3b6 0%, #ffaaa5 100%);
+      }
+      .season-card.summer {
+        background: linear-gradient(135deg, #fff1c1 0%, #f7dc6f 100%);
+      }
+      .season-card.autumn {
+        background: linear-gradient(135deg, #f5b041 0%, #dc7633 100%);
+        color: white;
+      }
+      .temp-display {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-align: center;
+        margin: var(--space-m) 0;
+      }
+      .temp-display .plus {
+        color: var(--color-error);
+      }
+      .temp-display .minus {
+        color: var(--accent-blue);
+      }
+
+      /* === City Weather Grid === */
+      .city-weather-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: var(--space-m);
+        margin: var(--space-m) 0;
+      }
+      .city-weather-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .city-weather-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+      .city-name {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .city-weather-desc {
+        font-size: 0.85rem;
+        color: var(--text-light);
+      }
+
+      /* === Humor Note === */
+      .humor-note {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+        font-size: 0.9rem;
+      }
+      .humor-note strong {
+        color: #f57c00;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 11 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 45 min</span>
+          </div>
+          <h1>Vejret</h1>
+          <p class="lead">
+            Smalltalk om vejret er universel. I denne lektion laerer du at beskrive vejret og
+            arstierne pa russisk.
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <h2><span>Del 1: Vejrtyper</span><span class="chapter-num">Ordforrad</span></h2>
+            <p>Klik pa vejrikonet for at hore ordet:</p>
+            <div class="weather-grid" id="weather-grid"></div>
+
+            <h2><span>Del 2: Arstider</span><span class="chapter-num">Ordforrad</span></h2>
+            <div class="season-section">
+              <div class="season-card winter" onclick="TTS.speak('зима')">
+                <div style="font-size: 2rem">❄️</div>
+                <div class="weather-russian">зима</div>
+                <div class="weather-danish">vinter</div>
+              </div>
+              <div class="season-card spring" onclick="TTS.speak('весна')">
+                <div style="font-size: 2rem">🌸</div>
+                <div class="weather-russian">весна</div>
+                <div class="weather-danish">forar</div>
+              </div>
+              <div class="season-card summer" onclick="TTS.speak('лето')">
+                <div style="font-size: 2rem">☀️</div>
+                <div class="weather-russian">лето</div>
+                <div class="weather-danish">sommer</div>
+              </div>
+              <div class="season-card autumn" onclick="TTS.speak('осень')">
+                <div style="font-size: 2rem">🍂</div>
+                <div class="weather-russian">осень</div>
+                <div class="weather-danish">efterar</div>
+              </div>
+            </div>
+
+            <h2><span>Del 3: Temperatur</span><span class="chapter-num">Grammatik</span></h2>
+            <div class="theory-block">
+              <h3>At sige temperaturen</h3>
+              <div class="temp-display">
+                <span class="plus">+25°C</span> = <span class="cyrillic">плюс двадцать пять</span>
+              </div>
+              <div class="temp-display">
+                <span class="minus">-10°C</span> = <span class="cyrillic">минус десять</span>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h3>Nyttige udtryk</h3>
+              <table class="possession-table">
+                <tr>
+                  <td class="cyrillic">Какая сегодня погода?</td>
+                  <td>Hvordan er vejret i dag?</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Сегодня холодно.</td>
+                  <td>Det er koldt i dag.</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Сегодня жарко.</td>
+                  <td>Det er varmt i dag.</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Идёт дождь.</td>
+                  <td>Det regner.</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Идёт снег.</td>
+                  <td>Det sner.</td>
+                </tr>
+              </table>
+            </div>
+
+            <h2><span>Del 4: Hukommelsesspil</span><span class="chapter-num">Spil</span></h2>
+            <div id="memory-game" class="exercise-container"></div>
+
+            <h2><span>Del 5: Hurtighedsudfordring</span><span class="chapter-num">Spil</span></h2>
+            <div id="speed-challenge" class="exercise-container"></div>
+
+            <h2><span>Del 5b: Vejr og Byer</span><span class="chapter-num">Moderne</span></h2>
+
+            <div class="theory-block">
+              <h3>Rusland er stort!</h3>
+              <p>Vejret varierer meget fra by til by:</p>
+              <div class="city-weather-grid" id="city-weather-grid"></div>
+            </div>
+
+            <div class="humor-note">
+              <strong>😅 Sjov fakta:</strong> «Минус десять — это ещё не холодно.» (Minus ti — det
+              er endnu ikke koldt.) Sådan tænker mange russere!
+            </div>
+
+            <h2><span>Del 6: Lytteovelse</span><span class="chapter-num">Ovelse</span></h2>
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <h2><span>Del 7: Udfyld Hullerne</span><span class="chapter-num">Ovelse</span></h2>
+            <div id="fill-blank-exercise" class="exercise-container"></div>
+
+            <h2><span>Del 8: Saet Bogstaverne</span><span class="chapter-num">Ovelse</span></h2>
+            <div id="scramble-exercise" class="exercise-container"></div>
+
+            <h2><span>Del 9: Dialog</span><span class="chapter-num">Samtale</span></h2>
+            <div id="dialogue-section"></div>
+
+            <!-- AI CONVERSATION -->
+            <h2>
+              <span>Del 10: Smalltalk om Vejret</span><span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🌤️ Hvad er vejret i dag?</h3>
+              <p>
+                Øv dig i at tale om vejret — det perfekte smalltalk-emne! AI-tutoren vil spørge dig
+                om vejret og årstiderne.
+              </p>
+            </div>
+
+            <div id="ai-conversation" class="exercise-container"></div>
+
+            <!-- AI EMOJI TRANSLATOR -->
+            <h2><span>Del 11: Vejr-Emoji</span><span class="chapter-num">🎮 AI Spil</span></h2>
+
+            <div class="ai-section-intro">
+              <h3>🌤️ Hvad viser emoji'erne?</h3>
+              <p>Oversæt vejr-emoji'erne til russiske sætninger!</p>
+            </div>
+
+            <div id="ai-emoji" class="exercise-container"></div>
+
+            <!-- AI QUICK QUIZ -->
+            <h2><span>Del 12: Vejr-Quiz</span><span class="chapter-num">🎮 AI Spil</span></h2>
+
+            <div class="ai-section-intro">
+              <h3>⚡ Test din vejrviden!</h3>
+              <p>Hurtige spørgsmål om vejr og årstider.</p>
+            </div>
+
+            <div id="ai-quiz" class="exercise-container"></div>
+
+            <h2><span>Opsummering</span></h2>
+            <div class="theory-block">
+              <h3>Hvad Du Har Laert</h3>
+              <ul>
+                <li><strong>Vejr:</strong> солнце, дождь, снег, ветер, облачно</li>
+                <li><strong>Arstider:</strong> зима, весна, лето, осень</li>
+                <li><strong>Temperatur:</strong> жарко, тепло, холодно, плюс, минус</li>
+                <li><strong>Fraser:</strong> Какая погода?, Идёт дождь/снег</li>
+                <li><strong>Byer:</strong> В Петербурге часто дождь, В Сочи тепло</li>
+              </ul>
+            </div>
+
+            <nav class="lesson-nav">
+              <a href="10-shopping.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">Shopping</span>
+              </a>
+              <a href="12-review.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Naeste lektion</span>
+                <span class="lesson-nav-title">Repetition</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Russisk vinter</strong>
+              Vinteren i Rusland kan være ekstremt kold. I Moskva kan det blive -20°C, i Sibirien
+              endda -50°C!
+            </div>
+            <div class="margin-note">
+              <strong>Smalltalk</strong>
+              Vejret er et sikkert samtaleemne overalt. «Какая сегодня погода?» er en god isbryder.
+            </div>
+            <div class="margin-note">
+              <strong>Klimaforskelle</strong>
+              Rusland strækker sig over 11 tidszoner. Når det er vinter i Moskva, kan det være
+              forholdsvis mildt i Sochi ved Sortehavet.
+            </div>
+            <div class="margin-note">
+              <strong>Byliv og vejr</strong>
+              Om vinteren kan sne skabe trafikkaos (пробки из-за снега). Om sommeren kan det være
+              meget varmt i metroen!
+            </div>
+          </aside>
+        </section>
+      </main>
+      <samovar-footer></samovar-footer>
+    </div>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      const weatherData = [
+        { icon: '☀️', russian: 'солнце', danish: 'sol' },
+        { icon: '🌧️', russian: 'дождь', danish: 'regn' },
+        { icon: '❄️', russian: 'снег', danish: 'sne' },
+        { icon: '💨', russian: 'ветер', danish: 'vind' },
+        { icon: '☁️', russian: 'облачно', danish: 'overskyet' },
+        { icon: '🌡️', russian: 'жарко', danish: 'varmt' },
+        { icon: '🥶', russian: 'холодно', danish: 'koldt' },
+        { icon: '🌤️', russian: 'тепло', danish: 'lunt' },
+      ];
+
+      // CITY WEATHER DATA
+      const cityWeatherData = [
+        {
+          city: 'Москва',
+          russian: 'Зимой холодно, летом жарко.',
+          danish: 'Koldt om vinteren, varmt om sommeren.',
+        },
+        { city: 'Петербург', russian: 'Часто дождь и облачно.', danish: 'Ofte regn og overskyet.' },
+        { city: 'Сочи', russian: 'Тепло даже зимой.', danish: 'Mildt selv om vinteren.' },
+        {
+          city: 'Мурманск',
+          russian: 'Очень холодно. Полярная ночь.',
+          danish: 'Meget koldt. Polarnetter.',
+        },
+      ];
+
+      function renderWeather() {
+        const container = document.getElementById('weather-grid');
+        weatherData.forEach((w) => {
+          const card = document.createElement('div');
+          card.className = 'weather-card';
+          card.innerHTML = `
+                    <div class="weather-icon">${w.icon}</div>
+                    <div class="weather-russian">${w.russian}</div>
+                    <div class="weather-danish">${w.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(w.russian));
+          container.appendChild(card);
+        });
+      }
+
+      function renderCityWeather() {
+        const container = document.getElementById('city-weather-grid');
+        cityWeatherData.forEach((c) => {
+          const card = document.createElement('div');
+          card.className = 'city-weather-card';
+          card.innerHTML = `
+                    <div class="city-name">${c.city}</div>
+                    <div class="weather-russian">${c.russian}</div>
+                    <div class="city-weather-desc">${c.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(c.russian));
+          container.appendChild(card);
+        });
+      }
+
+      const memoryPairs = [
+        { russian: 'солнце', danish: 'sol' },
+        { russian: 'дождь', danish: 'regn' },
+        { russian: 'снег', danish: 'sne' },
+        { russian: 'зима', danish: 'vinter' },
+        { russian: 'лето', danish: 'sommer' },
+        { russian: 'холодно', danish: 'koldt' },
+      ];
+
+      const speedWords = [
+        { russian: 'солнце', danish: 'sol' },
+        { russian: 'дождь', danish: 'regn' },
+        { russian: 'снег', danish: 'sne' },
+        { russian: 'ветер', danish: 'vind' },
+        { russian: 'жарко', danish: 'varmt' },
+        { russian: 'холодно', danish: 'koldt' },
+        { russian: 'зима', danish: 'vinter' },
+        { russian: 'весна', danish: 'forar' },
+        { russian: 'лето', danish: 'sommer' },
+        { russian: 'осень', danish: 'efterar' },
+      ];
+
+      const listeningData = [
+        {
+          audio: 'Сегодня холодно',
+          options: ['Det er varmt i dag', 'Det er koldt i dag', 'Det regner i dag'],
+          correct: 1,
+        },
+        { audio: 'Идёт дождь', options: ['Det sner', 'Det regner', 'Solen skinner'], correct: 1 },
+        { audio: 'зима', options: ['sommer', 'vinter', 'forar'], correct: 1 },
+        { audio: 'солнце', options: ['regn', 'vind', 'sol'], correct: 2 },
+        {
+          audio: 'Какая сегодня погода?',
+          options: ['Hvad er klokken?', 'Hvordan er vejret i dag?', 'Hvor bor du?'],
+          correct: 1,
+        },
+      ];
+
+      const fillBlankData = [
+        {
+          text: 'Сегодня ___. Мне нужна куртка.',
+          answer: 'холодно',
+          hint: 'koldt',
+          danish: 'Det er koldt i dag. Jeg har brug for en jakke.',
+        },
+        {
+          text: 'Идёт ___. Возьми зонтик!',
+          answer: 'дождь',
+          hint: 'regn',
+          danish: 'Det regner. Tag en paraply!',
+        },
+        {
+          text: 'Летом в России ___.',
+          answer: 'жарко',
+          hint: 'varmt',
+          danish: 'Om sommeren i Rusland er det varmt.',
+        },
+        { text: 'Зимой идёт ___.', answer: 'снег', hint: 'sne', danish: 'Om vinteren sner det.' },
+      ];
+
+      const scrambleWords = [
+        { russian: 'солнце', danish: 'sol' },
+        { russian: 'дождь', danish: 'regn' },
+        { russian: 'зима', danish: 'vinter' },
+        { russian: 'лето', danish: 'sommer' },
+      ];
+
+      const dialogueData = [
+        {
+          speaker: 'A',
+          russian: 'Привет! Какая сегодня погода?',
+          danish: 'Hej! Hvordan er vejret i dag?',
+        },
+        {
+          speaker: 'B',
+          russian: 'Сегодня холодно и идёт снег.',
+          danish: 'Det er koldt i dag og det sner.',
+        },
+        { speaker: 'A', russian: 'Какая температура?', danish: 'Hvad er temperaturen?' },
+        { speaker: 'B', russian: 'Минус десять градусов.', danish: 'Minus ti grader.' },
+        {
+          speaker: 'A',
+          russian: 'Ого! Настоящая русская зима!',
+          danish: 'Wow! En rigtig russisk vinter!',
+        },
+        {
+          speaker: 'B',
+          russian: 'Да, нужно тепло одеваться.',
+          danish: 'Ja, man skal klaede sig varmt pa.',
+        },
+      ];
+
+      // AI CONVERSATION CONFIG
+      const aiConversationConfig = {
+        topic: 'Vejr og årstider',
+        level: 'A1',
+        vocabulary: [
+          { russian: 'солнце', danish: 'sol' },
+          { russian: 'дождь', danish: 'regn' },
+          { russian: 'снег', danish: 'sne' },
+          { russian: 'холодно', danish: 'koldt' },
+          { russian: 'жарко', danish: 'varmt' },
+          { russian: 'зима', danish: 'vinter' },
+          { russian: 'лето', danish: 'sommer' },
+          { russian: 'Какая погода?', danish: 'Hvordan er vejret?' },
+        ],
+        starterPrompts: [
+          { russian: 'Какая сегодня погода?', danish: 'Spørg om vejret' },
+          { russian: 'Сегодня холодно.', danish: 'Sig det er koldt' },
+          { russian: 'Идёт дождь.', danish: 'Sig det regner' },
+          { russian: 'Я люблю лето.', danish: 'Sig du elsker sommer' },
+        ],
+        systemPrompt:
+          'Fokuser på vejr og årstider. Spørg: Какая погода?, Какое время года ты любишь? Tal om vejret i forskellige byer.',
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        renderWeather();
+        renderCityWeather();
+        new MemoryGame('memory-game', memoryPairs);
+        new SpeedChallenge('speed-challenge', speedWords, 45);
+        new ListeningExercise('listening-exercise', listeningData);
+        new FillBlankExercise('fill-blank-exercise', fillBlankData);
+        new WordScramble('scramble-exercise', scrambleWords);
+        new AnimatedDialogue('dialogue-section', dialogueData);
+
+        // AI Conversation
+        new AIConversation('ai-conversation', aiConversationConfig);
+
+        // AI Emoji Translator
+        new AIEmojiTranslator('ai-emoji', {
+          vocabulary: aiConversationConfig.vocabulary,
+          maxRounds: 5,
+        });
+
+        // AI Quick Quiz
+        new AIQuickQuiz('ai-quiz', {
+          vocabulary: aiConversationConfig.vocabulary,
+          maxRounds: 8,
+        });
+      });
+    </script>
+  </body>
+</html>

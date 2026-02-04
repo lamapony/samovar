@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fonetisk og Rytme | Samovar</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <style>
+      :root {
+        --wave-color: #bdc3c7;
+      }
+
+      /* Audio Player Styles */
+      .audio-card {
+        background: white;
+        border: 1px solid var(--line-color);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .play-btn {
+        width: 40px;
+        height: 40px;
+        background: var(--accent-red);
+        border-radius: 50%;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        flex-shrink: 0;
+        transition: background 0.2s;
+      }
+
+      .play-btn:hover {
+        background: #803030;
+      }
+
+      .audio-info {
+        flex-grow: 1;
+      }
+
+      .audio-title {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .audio-desc {
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .waveform {
+        height: 30px;
+        width: 100px;
+        background: repeating-linear-gradient(
+          90deg,
+          var(--wave-color),
+          var(--wave-color) 2px,
+          transparent 2px,
+          transparent 4px
+        );
+        opacity: 0.5;
+        margin-left: 20px;
+      }
+
+      /* Exercise: Stress Test */
+      .stress-word {
+        font-size: 2rem;
+        font-family: var(--font-serif);
+        text-align: center;
+        margin: 40px 0;
+        letter-spacing: 0.1em;
+      }
+
+      .vowel {
+        cursor: pointer;
+        padding: 0 2px;
+        border-bottom: 2px solid transparent;
+        transition: all 0.2s;
+      }
+
+      .vowel:hover {
+        color: var(--accent-red);
+        border-bottom-color: var(--accent-red);
+      }
+
+      .vowel.correct {
+        color: green;
+        font-weight: bold;
+      }
+
+      .vowel.wrong {
+        color: red;
+        text-decoration: line-through;
+      }
+
+      .info-box {
+        background: #eef2f5;
+        padding: 15px;
+        border-left: 4px solid var(--accent-blue);
+        margin: 20px 0;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <h1>Fonetisk og Intonation</h1>
+      <p style="font-size: 1.1rem; color: #666; max-width: 700px">
+        Russisk udtale bygger på en stærk dynamisk betoning og reduktion af ubetonede vokaler. Her
+        lærer du at høre og gengive den korrekte rytme.
+      </p>
+
+      <section>
+        <h2>1. Vokalreduktion (Akanje)</h2>
+        <div class="info-box">
+          <strong>Regel:</strong> Ubetonet "O" udtales som "A" (eller en schwa-lyd [ə]).
+        </div>
+
+        <div class="audio-card">
+          <button class="play-btn">▶</button>
+          <div class="audio-info">
+            <span class="audio-title">Молоко (Mælk)</span>
+            <span class="audio-desc"
+              >Skrives: м<strong>о</strong>л<strong>о</strong>к<strong>о</strong> — Høres:
+              [м<strong>а</strong>л<strong>а</strong>к<strong>о</strong>]</span
+            >
+          </div>
+          <div class="waveform"></div>
+        </div>
+
+        <div class="audio-card">
+          <button class="play-btn">▶</button>
+          <div class="audio-info">
+            <span class="audio-title">Хорошо (Godt)</span>
+            <span class="audio-desc"
+              >Skrives: х<strong>о</strong>р<strong>о</strong>ш<strong>о</strong> — Høres:
+              [х<strong>а</strong>р<strong>а</strong>ш<strong>о</strong>]</span
+            >
+          </div>
+          <div class="waveform"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Intonationskonstruktioner (IK)</h2>
+        <p>
+          På russisk ændrer intonationen betydningen af en sætning, selv uden at ændre
+          ordstillingen.
+        </p>
+
+        <div class="audio-card">
+          <button class="play-btn">▶</button>
+          <div class="audio-info">
+            <span class="audio-title">IK-1: Punktum (Udsagn)</span>
+            <span class="audio-desc">Это Антон. ↘ (Stemmen går ned)</span>
+          </div>
+          <div class="waveform"></div>
+        </div>
+
+        <div class="audio-card">
+          <button class="play-btn">▶</button>
+          <div class="audio-info">
+            <span class="audio-title">IK-3: Spørgsmål (Uden spørgeord)</span>
+            <span class="audio-desc">Это Антон? ↗ (Skarpt løft på den betonede stavelse)</span>
+          </div>
+          <div class="waveform"></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Betoningstræner</h2>
+        <p>Klik på den betonede vokal i ordet.</p>
+
+        <div
+          id="stress-exercise"
+          style="
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border: 1px solid var(--line-color);
+          "
+        >
+          <div class="stress-word" id="current-word">
+            <!-- Word injected by JS -->
+          </div>
+          <div id="feedback" style="height: 20px; color: var(--text-ink)"></div>
+          <button
+            class="btn"
+            onclick="nextWord()"
+            style="
+              margin-top: 20px;
+              padding: 8px 16px;
+              background: var(--accent-blue);
+              color: white;
+              border: none;
+              cursor: pointer;
+            "
+          >
+            Næste ord
+          </button>
+        </div>
+      </section>
+
+      <samovar-footer></samovar-footer>
+    </div>
+
+    <script>
+      // Mock Audio Player Logic
+      const playBtns = document.querySelectorAll('.play-btn');
+      playBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const original = btn.innerText;
+          btn.innerText = '❚❚'; // Pause symbol
+          setTimeout(() => {
+            btn.innerText = original;
+          }, 2000); // Simulate playing for 2 seconds
+        });
+      });
+
+      // Stress Exercise Logic
+      const words = [
+        { text: 'м о л о к о', stressIndex: 5 }, // index of vowel chars only? Let's simplify: use spans
+        { text: 'с о б а к а', stressIndex: 3 },
+        { text: 'у ч и т е л ь', stressIndex: 2 },
+        { text: 'м а ш и н а', stressIndex: 2 },
+      ];
+
+      let currentWordIdx = 0;
+
+      function renderWord() {
+        const container = document.getElementById('current-word');
+        const wordData = words[currentWordIdx];
+        container.innerHTML = '';
+
+        const chars = wordData.text.split(' ');
+        chars.forEach((char, idx) => {
+          const span = document.createElement('span');
+          span.innerText = char;
+          if (['а', 'о', 'у', 'ы', 'э', 'е', 'ё', 'и', 'ю', 'я'].includes(char)) {
+            span.classList.add('vowel');
+            span.onclick = () => checkStress(idx, span);
+          }
+          container.appendChild(span);
+        });
+        document.getElementById('feedback').innerText = '';
+      }
+
+      function checkStress(idx, el) {
+        const wordData = words[currentWordIdx];
+        if (idx === wordData.stressIndex) {
+          el.classList.add('correct');
+          document.getElementById('feedback').innerText = 'Rigtigt!';
+          document.getElementById('feedback').style.color = 'green';
+        } else {
+          el.classList.add('wrong');
+          document.getElementById('feedback').innerText = 'Fejl. Prøv igen.';
+          document.getElementById('feedback').style.color = 'red';
+        }
+      }
+
+      function nextWord() {
+        currentWordIdx = (currentWordIdx + 1) % words.length;
+        renderWord();
+      }
+
+      // Init
+      renderWord();
+    </script>
+  </body>
+</html>

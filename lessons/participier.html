@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Причастия и Деепричастия | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Builder Game */
+      .builder-area {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        margin: 30px 0;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 12px;
+      }
+
+      .build-slot {
+        border: 2px dashed #ccc;
+        padding: 10px 20px;
+        background: white;
+        border-radius: 6px;
+        min-width: 100px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .part-pool {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .part-chip {
+        padding: 8px 15px;
+        background: white;
+        border: 1px solid var(--accent-blue);
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .part-chip:hover {
+        background: #e3f2fd;
+      }
+
+      /* Sorter */
+      .sorter-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .sort-col {
+        border: 2px solid #eee;
+        border-radius: 8px;
+        padding: 15px;
+        min-height: 200px;
+      }
+
+      .sort-header {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 15px;
+        color: var(--accent-blue);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="verbs.html">Глагол</a>
+          <a
+            href="participier.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Причастия</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Причастия и Деепричастия</h1>
+          <p class="lead">
+            Сжатие смысла. Как превратить два предложения в одно? Эти формы делают речь компактной и
+            литературной.
+          </p>
+
+          <section id="theory-participle">
+            <h2>Причастие (Participium)</h2>
+            <p>Гибрид Глагола и Прилагательного. Отвечает на вопрос <em>Какой?</em></p>
+
+            <div class="game-container" style="background: white">
+              <h3>Суффиксы-маркеры</h3>
+              <ul class="module-list">
+                <li class="module-item">
+                  <strong>-УЩ / -ЮЩ</strong> (Настоящее): Чита<strong>ющ</strong>ий (Læsende)
+                </li>
+                <li class="module-item">
+                  <strong>-ВШ</strong> (Прошедшее): Чита<strong>вш</strong>ий (En der læste)
+                </li>
+                <li class="module-item">
+                  <strong>-НН / -Т</strong> (Страдательное): Прочита<strong>нн</strong>ый (Læst/Som
+                  er læst)
+                </li>
+              </ul>
+            </div>
+
+            <div class="inline-quiz">
+              <span class="inline-question">Какое слово — причастие?</span>
+              <div class="inline-options">
+                <button class="inline-btn" onclick="checkInline(this, true, 'Да! Суффикс -ющ-.')">
+                  Думающий
+                </button>
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, false, 'Нет. Это просто глагол.')"
+                >
+                  Думает
+                </button>
+              </div>
+              <div class="inline-feedback"></div>
+            </div>
+          </section>
+
+          <section id="theory-gerund">
+            <h2>Деепричастие (Gerundium)</h2>
+            <p>Гибрид Глагола и Наречия. Отвечает на вопрос <em>Как? Что делая?</em></p>
+
+            <div
+              class="alert-box"
+              style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin-top: 10px"
+            >
+              <strong>Маркеры:</strong><br />
+              <strong>-А / -Я</strong> (Одновременно): Чита<strong>я</strong> (Idet han læser)<br />
+              <strong>-В / -ВШИ</strong> (Раньше): Прочита<strong>в</strong> (Efter at have læst)
+            </div>
+          </section>
+
+          <section id="practice-builder">
+            <h2>Конструктор слов</h2>
+            <p>Соберите слово: "Человек, который читает" (læsende).</p>
+
+            <div class="game-container">
+              <div class="part-pool">
+                <div class="part-chip" onclick="addToSlot('Чита')">Чита-</div>
+                <div class="part-chip" onclick="addToSlot('ющ')">-ющ-</div>
+                <div class="part-chip" onclick="addToSlot('ий')">-ий</div>
+                <div class="part-chip" onclick="addToSlot('ая')">-ая</div>
+              </div>
+
+              <div class="builder-area">
+                <div class="build-slot" id="build-result">...</div>
+              </div>
+
+              <div style="text-align: center">
+                <button class="btn" onclick="checkBuild()">Готово</button>
+                <button class="btn btn-outline" onclick="resetBuild()" style="margin-left: 10px">
+                  Сброс
+                </button>
+              </div>
+              <div id="build-feedback" class="feedback" style="margin-top: 15px"></div>
+            </div>
+          </section>
+
+          <section id="practice-sorter">
+            <h2>Сортировка: Причастие или Деепричастие?</h2>
+            <p>
+              Распределите слова. Подсказка: Причастия отвечают на "Какой?", Деепричастия на "Как?".
+            </p>
+
+            <div class="game-container">
+              <div
+                id="sort-pool-part"
+                style="
+                  display: flex;
+                  gap: 10px;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  margin-bottom: 20px;
+                "
+              >
+                <!-- Injected JS -->
+              </div>
+
+              <div class="sorter-grid">
+                <div class="sort-col" data-type="part">
+                  <div class="sort-header">Причастие (Какой?)</div>
+                  <div class="bucket-content"></div>
+                </div>
+                <div class="sort-col" data-type="ger">
+                  <div class="sort-header">Деепричастие (Как?)</div>
+                  <div class="bucket-content"></div>
+                </div>
+              </div>
+              <div id="sort-feedback-part" class="feedback"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Пунктуация</strong>
+            Деепричастный оборот ВСЕГДА выделяется запятыми. <br />
+            <em>Читая книгу, он пил чай.</em>
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar</div>
+      </footer>
+    </div>
+
+    <script>
+      // Inline Quiz
+      function checkInline(btn, isCorrect, msg) {
+        const container = btn.closest('.inline-quiz');
+        const feedback = container.querySelector('.inline-feedback');
+        container.querySelectorAll('.inline-btn').forEach((b) => {
+          b.style.background = 'white';
+          b.style.color = 'var(--text-faded)';
+          b.style.borderColor = '#ccc';
+        });
+        if (isCorrect) {
+          btn.style.background = 'var(--success-color)';
+          btn.style.color = 'white';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback correct';
+        } else {
+          btn.style.background = 'var(--error-color)';
+          btn.style.color = 'white';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback incorrect';
+        }
+      }
+
+      // Builder Game
+      let currentBuild = '';
+      function addToSlot(part) {
+        if (currentBuild === '') currentBuild = part;
+        else currentBuild += part;
+        document.getElementById('build-result').innerText = currentBuild;
+      }
+
+      function resetBuild() {
+        currentBuild = '';
+        document.getElementById('build-result').innerText = '...';
+        document.getElementById('build-feedback').style.display = 'none';
+      }
+
+      function checkBuild() {
+        const fb = document.getElementById('build-feedback');
+        if (currentBuild === 'Читающий') {
+          fb.innerText = 'Верно! Читающий человек.';
+          fb.className = 'feedback correct';
+        } else {
+          fb.innerText = 'Попробуйте еще раз. (Основа + Суффикс + Окончание м.р.)';
+          fb.className = 'feedback incorrect';
+        }
+        fb.style.display = 'block';
+      }
+
+      // Sorter Game
+      const wordsPart = [
+        { text: 'Читающий', type: 'part' },
+        { text: 'Читая', type: 'ger' },
+        { text: 'Сделав', type: 'ger' },
+        { text: 'Сделанный', type: 'part' },
+        { text: 'Живущий', type: 'part' },
+        { text: 'Подумав', type: 'ger' },
+      ];
+
+      const poolPart = document.getElementById('sort-pool-part');
+      const bucketsPart = document.querySelectorAll('.sort-col');
+      const fbPart = document.getElementById('sort-feedback-part');
+      let solvedPart = 0;
+
+      wordsPart
+        .sort(() => Math.random() - 0.5)
+        .forEach((w) => {
+          const chip = document.createElement('div');
+          chip.className = 'part-chip'; // reuse style
+          chip.style.border = '1px solid #ccc';
+          chip.innerText = w.text;
+          chip.draggable = true;
+
+          chip.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', JSON.stringify(w));
+            setTimeout(() => (chip.style.opacity = '0.5'), 0);
+          });
+
+          chip.addEventListener('dragend', () => {
+            chip.style.opacity = '1';
+          });
+
+          poolPart.appendChild(chip);
+        });
+
+      bucketsPart.forEach((b) => {
+        b.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          b.style.backgroundColor = '#f0f8ff';
+        });
+
+        b.addEventListener('dragleave', () => {
+          b.style.backgroundColor = '';
+        });
+
+        b.addEventListener('drop', (e) => {
+          e.preventDefault();
+          b.style.backgroundColor = '';
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+
+          // Find original
+          const original = [...poolPart.children].find(
+            (c) => c.innerText === data.text && c.style.display !== 'none',
+          );
+
+          if (data.type === b.dataset.type) {
+            const clone = document.createElement('div');
+            clone.innerText = data.text;
+            clone.style.padding = '5px';
+            clone.style.borderBottom = '1px solid #eee';
+            b.querySelector('.bucket-content').appendChild(clone);
+
+            if (original) original.remove();
+            solvedPart++;
+            if (solvedPart === wordsPart.length) {
+              fbPart.innerText = 'Отлично! Вы различаете формы.';
+              fbPart.className = 'feedback correct';
+              fbPart.style.display = 'block';
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

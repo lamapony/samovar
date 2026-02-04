@@ -1,0 +1,1143 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 10: Shopping | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #9b59b6;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Clothes Grid === */
+    .clothes-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .clothes-card {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .clothes-card:nth-child(4n) {
+      border-right: none;
+    }
+
+    .clothes-card:hover {
+      background: var(--editorial-light);
+    }
+
+    .clothes-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .clothes-russian {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .clothes-danish {
+      font-size: 0.8rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Colors Grid === */
+    .colors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .color-card {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+      border-right: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+      color: white;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .color-card:nth-child(3n) {
+      border-right: none;
+    }
+
+    .color-card:nth-last-child(-n + 3) {
+      border-bottom: none;
+    }
+
+    .color-card:hover {
+      transform: scale(1.02);
+    }
+
+    .color-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .color-danish {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* === Phrase Display === */
+    .phrase-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .phrase-russian {
+      font-size: clamp(1.5rem, 6vw, 2.5rem);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      display: block;
+      line-height: 1.3;
+    }
+
+    .phrase-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    .phrase-translation {
+      font-size: 1.25rem;
+      color: var(--editorial-gray);
+      margin-top: 1rem;
+      font-weight: 300;
+    }
+
+    /* === Phrases Grid === */
+    .phrases-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .phrase-item {
+      padding: 1.5rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .phrase-item:last-child {
+      border-bottom: none;
+    }
+
+    .phrase-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .phrase-item-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .phrase-item-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Dialogue === */
+    .dialogue-container {
+      margin: 3rem 0;
+    }
+
+    .dialogue-line {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .dialogue-line:last-child {
+      border-bottom: none;
+    }
+
+    .dialogue-speaker {
+      width: 60px;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+      padding-top: 0.25rem;
+    }
+
+    .dialogue-content {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .dialogue-content:hover .dialogue-russian {
+      color: var(--editorial-accent);
+    }
+
+    .dialogue-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .dialogue-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+      font-style: italic;
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Exercise Sections === */
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(4n) {
+      border-right: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-item .danish {
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .clothes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .clothes-card:nth-child(4n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .clothes-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .colors-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .color-card:nth-child(3n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .color-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .dialogue-line {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .dialogue-speaker {
+        width: auto;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-item:nth-child(4n) {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .summary-item:nth-child(2n) {
+        border-right: none;
+      }
+
+      .floating-nav {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="floating-nav">
+    <a href="../index-v2.html" class="floating-btn">Tilbage</a>
+  </nav>
+
+  <div class="container">
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 10</div>
+        <h1>Shopping</h1>
+        <p class="lead">Lær at købe tøj, spørge om priser og størrelser på russisk.</p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             MODERN: ONLINE MARKETPLACES
+             ============================================ -->
+    <section class="editorial-section"
+      style="background: #fafafa; border-top: 1px solid var(--editorial-line); border-bottom: 1px solid var(--editorial-line);">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+            <path d="M3 6h18" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg>
+          Moderne shopping
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Apps der har alt</h2>
+        </div>
+        <p class="narrative">
+          Selvom der er mange butikker, køber russerne i dag næsten alt på store on-line
+          markedspladser. Det er både billigere og hurtigere.
+        </p>
+
+        <div class="clothes-grid">
+          <div class="clothes-card" onclick="TTS.speak('Маркетплейс')">
+            <div class="clothes-icon" style="color: #9b59b6;">🟣</div>
+            <div class="clothes-russian">Wildberries</div>
+            <div class="clothes-danish">Den største butik</div>
+          </div>
+          <div class="clothes-card" onclick="TTS.speak('Озон')">
+            <div class="clothes-icon" style="color: #3498db;">🔵</div>
+            <div class="clothes-russian">Ozon</div>
+            <div class="clothes-danish">Alt til hjemmet</div>
+          </div>
+          <div class="clothes-card" onclick="TTS.speak('Пункт выдачи')">
+            <div class="clothes-icon">📦</div>
+            <div class="clothes-russian">Пункт выдачи</div>
+            <div class="clothes-danish">Pakkeshop</div>
+          </div>
+          <div class="clothes-card" onclick="TTS.speak('Доставка')">
+            <div class="clothes-icon">🚚</div>
+            <div class="clothes-russian">Доставка</div>
+            <div class="clothes-danish">Levering</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Prøv det derhjemme</div>
+          <p>
+            Det er helt normalt at bestille 10 par sko, prøve dem i en <strong>пункт выдачи</strong>
+            (pakkeshop med prøverum) og kun betale for dem, der passer. Det kaldes
+            <strong>"примерить и купить"</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: CLOTHES
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Tøj</h2>
+        </div>
+
+        <p class="narrative">Lær de vigtigste tøjord på russisk. Klik for at høre.</p>
+
+        <div class="clothes-grid" id="clothes-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Størrelser</div>
+          <p>
+            <strong>маленький</strong> (lille) / <strong>средний</strong> (medium) /
+            <strong>большой</strong> (stor)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 2: COLORS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 2</div>
+          <h2 class="chapter-title">Farver</h2>
+        </div>
+
+        <p class="narrative">Farver er vigtige når du handler. Klik for at høre.</p>
+
+        <div class="colors-grid" id="colors-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Grammatik</div>
+          <p>
+            Farver bøjes efter køn:<br />
+            <strong>красный</strong> (m) / <strong>красная</strong> (f) /
+            <strong>красное</strong> (n)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>I butikken.</h2>
+        <p>Vigtige fraser til shopping.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: SHOPPING PHRASES
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">Shopping-fraser</h2>
+        </div>
+
+        <p class="narrative">De vigtigste fraser til at handle ind.</p>
+
+        <div class="phrases-grid" id="phrases-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 4: DIALOGUE
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 4</div>
+          <h2 class="chapter-title">I tøjbutikken</h2>
+        </div>
+
+        <p class="narrative">En typisk samtale i en butik. Klik for at høre.</p>
+
+        <div class="dialogue-container" id="main-dialogue"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 5: CULTURE
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 5</div>
+          <h2 class="chapter-title">Kulturelt</h2>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Prøverum</div>
+          <p>
+            I Rusland er det normalt at prøve tøj før du køber. Prøverummet hedder
+            <strong>примерочная</strong>.
+          </p>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Betaling med QR</div>
+          <p>
+            I dag betaler mange ved at scanne en QR-kode direkte i butikken via
+            <strong>СБП</strong> eller <strong>SberPay</strong>. Det er super nemt, hvis
+            man har glemt sit kort eller telefonen ikke har NFC.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Nu er det din tur</h2>
+        <p>Test din viden om shopping.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Lyt og vælg</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Godt klaret.</h2>
+        <p>Nu skal du forbinde ordene.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Par ordene</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 3
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Hurtig quiz</h2>
+        <p>Test dig selv. Jo hurtigere du svarer, jo bedre.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: QUICK QUIZ (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Hurtig quiz</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 4
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Rollespil</h2>
+        <p>Øv dig i at handle i en butik.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 4: ROLE PLAY (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 4</div>
+            <h3 class="exercise-title">I butikken</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-roleplay"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Hvad du har lært</h2>
+        </div>
+
+        <div class="summary-grid" id="summary-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Lektion Færdig?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Har du gennemgået alle øvelser og føler dig klar til næste lektion?
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="09-city-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">I Byen</span>
+          </a>
+          <a href="11-weather-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">Vejret</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // CLOTHES DATA
+    // ============================================
+    const clothesData = [
+      { icon: '👔', russian: 'рубашка', danish: 'skjorte' },
+      { icon: '👕', russian: 'футболка', danish: 't-shirt' },
+      { icon: '👖', russian: 'брюки', danish: 'bukser' },
+      { icon: '👗', russian: 'платье', danish: 'kjole' },
+      { icon: '🧥', russian: 'куртка', danish: 'jakke' },
+      { icon: '👟', russian: 'обувь', danish: 'sko' },
+      { icon: '👒', russian: 'шляпа', danish: 'hat' },
+      { icon: '🧣', russian: 'шарф', danish: 'tørklæde' },
+    ];
+
+    // Render clothes grid
+    function renderClothes() {
+      const container = document.getElementById('clothes-grid');
+      if (!container) return;
+      clothesData.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'clothes-card';
+        card.innerHTML = `
+                    <div class="clothes-icon">${item.icon}</div>
+                    <div class="clothes-russian">${item.russian}</div>
+                    <div class="clothes-danish">${item.danish}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(item.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // COLORS DATA
+    // ============================================
+    const colorsData = [
+      { russian: 'красный', danish: 'rød', color: '#e74c3c' },
+      { russian: 'синий', danish: 'blå', color: '#3498db' },
+      { russian: 'зелёный', danish: 'grøn', color: '#27ae60' },
+      { russian: 'жёлтый', danish: 'gul', color: '#f1c40f', textColor: '#333' },
+      { russian: 'чёрный', danish: 'sort', color: '#2c3e50' },
+      { russian: 'белый', danish: 'hvid', color: '#ecf0f1', textColor: '#333' },
+    ];
+
+    // Render colors grid
+    function renderColors() {
+      const container = document.getElementById('colors-grid');
+      if (!container) return;
+      colorsData.forEach((c) => {
+        const card = document.createElement('div');
+        card.className = 'color-card';
+        card.style.background = c.color;
+        if (c.textColor) {
+          card.style.color = c.textColor;
+          card.style.textShadow = 'none';
+        }
+        card.innerHTML = `
+                    <div class="color-russian">${c.russian}</div>
+                    <div class="color-danish">${c.danish}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(c.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // PHRASES DATA
+    // ============================================
+    const phrasesData = [
+      { russian: 'Сколько это стоит?', danish: 'Hvor meget koster det?' },
+      { russian: 'Можно примерить?', danish: 'Må jeg prøve?' },
+      { russian: 'Есть другой размер?', danish: 'Har I en anden størrelse?' },
+      { russian: 'Я беру это.', danish: 'Jeg tager den.' },
+      { russian: 'Можно картой?', danish: 'Kan jeg betale med kort?' },
+      { russian: 'Где касса?', danish: 'Hvor er kassen?' },
+    ];
+
+    // Render phrases grid
+    function renderPhrases() {
+      const container = document.getElementById('phrases-grid');
+      if (!container) return;
+      phrasesData.forEach((phrase) => {
+        const item = document.createElement('div');
+        item.className = 'phrase-item';
+        item.innerHTML = `
+                    <div class="phrase-item-russian">${phrase.russian}</div>
+                    <div class="phrase-item-danish">${phrase.danish}</div>
+                `;
+        item.addEventListener('click', () => TTS.speak(phrase.russian));
+        container.appendChild(item);
+      });
+    }
+
+    // ============================================
+    // DIALOGUE DATA
+    // ============================================
+    const dialogueData = [
+      {
+        speaker: 'Kunde',
+        russian: 'Здравствуйте! Мне нужна куртка.',
+        danish: 'Goddag! Jeg har brug for en jakke.',
+      },
+      { speaker: 'Sælger', russian: 'Какой размер?', danish: 'Hvilken størrelse?' },
+      { speaker: 'Kunde', russian: 'Средний, пожалуйста.', danish: 'Medium, tak.' },
+      { speaker: 'Sælger', russian: 'Какой цвет?', danish: 'Hvilken farve?' },
+      { speaker: 'Kunde', russian: 'Чёрный или синий.', danish: 'Sort eller blå.' },
+      {
+        speaker: 'Sælger',
+        russian: 'Вот, пожалуйста. Примерочная там.',
+        danish: 'Værsgo. Prøverummet er der.',
+      },
+      { speaker: 'Kunde', russian: 'Сколько это стоит?', danish: 'Hvor meget koster det?' },
+      { speaker: 'Sælger', russian: 'Пять тысяч рублей.', danish: 'Fem tusind rubler.' },
+      {
+        speaker: 'Kunde',
+        russian: 'Я беру. Можно картой?',
+        danish: 'Jeg tager den. Kan jeg betale med kort?',
+      },
+    ];
+
+    // Render dialogue
+    function renderDialogue() {
+      const container = document.getElementById('main-dialogue');
+      if (!container) return;
+      dialogueData.forEach((line) => {
+        const div = document.createElement('div');
+        div.className = 'dialogue-line';
+        div.innerHTML = `
+                    <div class="dialogue-speaker">${line.speaker}</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-russian">${line.russian}</div>
+                        <div class="dialogue-danish">${line.danish}</div>
+                    </div>
+                `;
+        div
+          .querySelector('.dialogue-content')
+          .addEventListener('click', () => TTS.speak(line.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // SUMMARY DATA
+    // ============================================
+    const summaryData = [
+      { icon: '👔', russian: 'рубашка', danish: 'skjorte' },
+      { icon: '👖', russian: 'брюки', danish: 'bukser' },
+      { icon: '🧥', russian: 'куртка', danish: 'jakke' },
+      { icon: '🔴', russian: 'красный', danish: 'rød' },
+      { icon: '🔵', russian: 'синий', danish: 'blå' },
+      { icon: '⚫', russian: 'чёрный', danish: 'sort' },
+      { icon: '💰', russian: 'Сколько?', danish: 'Hvor meget?' },
+      { icon: '💳', russian: 'картой', danish: 'med kort' },
+    ];
+
+    // Render summary
+    function renderSummary() {
+      const container = document.getElementById('summary-grid');
+      if (!container) return;
+      summaryData.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = 'summary-item';
+        div.innerHTML = `
+                    <div class="icon">${item.icon}</div>
+                    <div class="russian">${item.russian}</div>
+                    <div class="danish">${item.danish}</div>
+                `;
+        div.addEventListener('click', () => TTS.speak(item.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      { audio: 'рубашка', options: ['skjorte', 'bukser', 'kjole'], correct: 0 },
+      {
+        audio: 'Сколько это стоит?',
+        options: ['Hvad er klokken?', 'Hvor meget koster det?', 'Hvor er det?'],
+        correct: 1,
+      },
+      { audio: 'красный', options: ['blå', 'rød', 'grøn'], correct: 1 },
+      {
+        audio: 'Можно примерить?',
+        options: ['Må jeg prøve?', 'Må jeg betale?', 'Må jeg gå?'],
+        correct: 0,
+      },
+    ];
+
+    const matchingData = [
+      { russian: 'рубашка', danish: 'skjorte' },
+      { russian: 'куртка', danish: 'jakke' },
+      { russian: 'красный', danish: 'rød' },
+      { russian: 'синий', danish: 'blå' },
+      { russian: 'чёрный', danish: 'sort' },
+    ];
+
+    const vocabularyData = [
+      ...clothesData.map((c) => ({ russian: c.russian, danish: c.danish })),
+      ...colorsData.map((c) => ({ russian: c.russian, danish: c.danish })),
+      ...phrasesData,
+    ];
+
+    // AI ROLE PLAY CONFIG
+    const aiRolePlayConfig = {
+      scenario: 'Du er i en russisk tøjbutik og vil købe en jakke.',
+      yourRole: 'En kunde',
+      aiRole: 'Ekspedient (Продавец)',
+      vocabulary: vocabularyData,
+      goals: [
+        'Sig hvad du leder efter',
+        'Spørg om pris',
+        'Spørg om størrelse',
+        'Beslut dig for at købe',
+      ],
+    };
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    const LESSON_ID = '10-shopping';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initLessonProgress(LESSON_ID);
+
+      renderClothes();
+      renderColors();
+      renderPhrases();
+      renderDialogue();
+      renderSummary();
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+
+      // AI exercises
+      new AIQuickQuiz('ai-quiz', {
+        vocabulary: vocabularyData,
+        maxRounds: 8,
+      });
+      new AIRolePlay('ai-roleplay', aiRolePlayConfig);
+
+      initScrollAnimations();
+      initProgressBar();
+
+      // Complete lesson button
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      const lessonStatus = Progress.getLessonStatus(LESSON_ID);
+
+      if (lessonStatus === 'completed') {
+        completeBtn.textContent = '✓ Allerede gennemført';
+        completeBtn.classList.add('completed');
+      }
+
+      completeBtn.addEventListener('click', () => {
+        if (lessonStatus !== 'completed') {
+          completeLessonWithModal(LESSON_ID);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

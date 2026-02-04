@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 5: Min Familie | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      .family-tree {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-l);
+        padding: var(--space-l);
+        background: var(--bg-paper);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+
+      .family-row {
+        display: flex;
+        gap: var(--space-l);
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .family-member {
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .family-member:hover {
+        transform: scale(1.05);
+      }
+
+      .family-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: var(--accent-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      .family-avatar.female {
+        background: var(--accent-red);
+      }
+
+      .family-russian {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+      }
+
+      .family-danish {
+        font-size: 0.85rem;
+        color: var(--text-light);
+      }
+
+      .possession-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: var(--space-m) 0;
+      }
+
+      .possession-table th,
+      .possession-table td {
+        padding: var(--space-s);
+        border: 1px solid var(--line-color);
+        text-align: center;
+      }
+
+      .possession-table th {
+        background: var(--bg-paper);
+      }
+
+      .possession-table .cyrillic {
+        font-size: 1.2rem;
+      }
+
+      /* === Pets Section === */
+      .pets-grid {
+        display: flex;
+        gap: var(--space-m);
+        flex-wrap: wrap;
+        margin: var(--space-m) 0;
+      }
+      .pet-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        border-radius: 8px;
+        min-width: 100px;
+      }
+      .pet-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+      .pet-icon {
+        font-size: 2.5rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      /* === Humor Note === */
+      .humor-note {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+        font-size: 0.9rem;
+      }
+      .humor-note strong {
+        color: #f57c00;
+      }
+
+      /* === Modern Family Note === */
+      .modern-note {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        padding: var(--space-m);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 5 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 45 min</span>
+          </div>
+          <h1>Min Familie</h1>
+          <p class="lead">
+            Familie er et vigtigt emne i russisk kultur. I denne lektion laerer du at fortaelle om
+            dine familiemedlemmer pa russisk.
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <!-- PART 1: FAMILY MEMBERS -->
+            <h2>
+              <span>Del 1: Familiemedlemmer</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <p>Klik pa et familiemedlem for at hore ordet pa russisk:</p>
+
+            <div class="family-tree">
+              <div class="family-row">
+                <div class="family-member" onclick="TTS.speak('бабушка')">
+                  <div class="family-avatar female">B</div>
+                  <div class="family-russian">бабушка</div>
+                  <div class="family-danish">bedstemor</div>
+                </div>
+                <div class="family-member" onclick="TTS.speak('дедушка')">
+                  <div class="family-avatar">D</div>
+                  <div class="family-russian">дедушка</div>
+                  <div class="family-danish">bedstefar</div>
+                </div>
+              </div>
+              <div class="family-row">
+                <div class="family-member" onclick="TTS.speak('мама')">
+                  <div class="family-avatar female">M</div>
+                  <div class="family-russian">мама</div>
+                  <div class="family-danish">mor</div>
+                </div>
+                <div class="family-member" onclick="TTS.speak('папа')">
+                  <div class="family-avatar">P</div>
+                  <div class="family-russian">папа</div>
+                  <div class="family-danish">far</div>
+                </div>
+              </div>
+              <div class="family-row">
+                <div class="family-member" onclick="TTS.speak('сестра')">
+                  <div class="family-avatar female">S</div>
+                  <div class="family-russian">сестра</div>
+                  <div class="family-danish">soster</div>
+                </div>
+                <div class="family-member" onclick="TTS.speak('я')">
+                  <div class="family-avatar">Я</div>
+                  <div class="family-russian">я</div>
+                  <div class="family-danish">jeg</div>
+                </div>
+                <div class="family-member" onclick="TTS.speak('брат')">
+                  <div class="family-avatar">B</div>
+                  <div class="family-russian">брат</div>
+                  <div class="family-danish">bror</div>
+                </div>
+              </div>
+            </div>
+
+            <div id="vocabulary-section" class="vocab-grid"></div>
+
+            <!-- PART 2: POSSESSIVE PRONOUNS -->
+            <h2>
+              <span>Del 2: Ejestedord</span>
+              <span class="chapter-num">Grammatik</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>"Min", "Din", "Hans/Hendes"</h3>
+              <p>Pa russisk aendrer ejestedord sig efter konnet pa det, de ejer:</p>
+            </div>
+
+            <table class="possession-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Hankøn</th>
+                  <th>Hunkøn</th>
+                  <th>Intetkøn</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>min/mit</td>
+                  <td class="cyrillic">мой (брат)</td>
+                  <td class="cyrillic">моя (сестра)</td>
+                  <td class="cyrillic">моё</td>
+                </tr>
+                <tr>
+                  <td>din/dit</td>
+                  <td class="cyrillic">твой</td>
+                  <td class="cyrillic">твоя</td>
+                  <td class="cyrillic">твоё</td>
+                </tr>
+                <tr>
+                  <td>hans</td>
+                  <td colspan="3" class="cyrillic">его (uaendret)</td>
+                </tr>
+                <tr>
+                  <td>hendes</td>
+                  <td colspan="3" class="cyrillic">её (uaendret)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="tip-box">
+              <strong>Tip:</strong> "Мой брат" (min bror) - hankøn. "Моя сестра" (min søster) -
+              hunkøn. Ejesteordet følger det ejede ords køn!
+            </div>
+
+            <div id="possessive-exercise" class="exercise-container"></div>
+
+            <!-- PART 3: TALKING ABOUT FAMILY -->
+            <h2>
+              <span>Del 3: "Jeg har..."</span>
+              <span class="chapter-num">Grammatik</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Konstruktionen "У меня есть"</h3>
+              <p>Pa russisk siger man "Ved mig er der" i stedet for "Jeg har":</p>
+              <div class="example-box">
+                <div class="example-russian">У меня есть брат.</div>
+                <div class="example-danish">Ved mig er der bror = Jeg har en bror.</div>
+              </div>
+            </div>
+
+            <table class="possession-table">
+              <tbody>
+                <tr>
+                  <td>Jeg har</td>
+                  <td class="cyrillic">У меня есть...</td>
+                </tr>
+                <tr>
+                  <td>Du har</td>
+                  <td class="cyrillic">У тебя есть...</td>
+                </tr>
+                <tr>
+                  <td>Han har</td>
+                  <td class="cyrillic">У него есть...</td>
+                </tr>
+                <tr>
+                  <td>Hun har</td>
+                  <td class="cyrillic">У неё есть...</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- PART 4: LISTENING -->
+            <h2>
+              <span>Del 4: Lytteovelse</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <p>Lyt og vaelg den rigtige oversaettelse:</p>
+
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <!-- PART 5: MATCHING -->
+            <h2>
+              <span>Del 5: Par Ordene</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="matching-exercise" class="exercise-container"></div>
+
+            <!-- PART 6: DIALOGUE -->
+            <h2>
+              <span>Del 6: Dialog</span>
+              <span class="chapter-num">Samtale</span>
+            </h2>
+
+            <div id="dialogue-section"></div>
+
+            <!-- PART 6b: PETS AND CLOSE PEOPLE -->
+            <h2>
+              <span>Del 6b: Kæledyr og Nære Mennesker</span>
+              <span class="chapter-num">Moderne</span>
+            </h2>
+
+            <p>For mange russere er kæledyr også en del af familien:</p>
+
+            <div class="pets-grid" id="pets-grid"></div>
+
+            <div class="theory-block">
+              <h3>Nære mennesker</h3>
+              <p>Vigtige mennesker i dit liv:</p>
+              <ul>
+                <li><strong>Это мой друг.</strong> — Det er min ven.</li>
+                <li><strong>Это моя подруга.</strong> — Det er min veninde.</li>
+                <li><strong>Это мой партнёр.</strong> — Det er min partner.</li>
+              </ul>
+            </div>
+
+            <div class="modern-note">
+              <strong>📱 Familie på afstand:</strong> Mange russere bor langt fra deres familie. De
+              holder kontakten via messenger:
+              <ul>
+                <li><strong>Мы часто звоним.</strong> — Vi ringer ofte.</li>
+                <li><strong>Мы пишем в мессенджере.</strong> — Vi skriver i messenger.</li>
+                <li><strong>Мои родители живут в Казани.</strong> — Mine forældre bor i Kazan.</li>
+              </ul>
+            </div>
+
+            <div class="humor-note">
+              <strong>😸 Sjov fakta:</strong> I mange russiske familier er der endnu et vigtigt
+              medlem — katten. Nogle gange er katten chefen!
+            </div>
+
+            <!-- PART 7: FILL BLANK -->
+            <h2>
+              <span>Del 7: Udfyld Tomme Pladser</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="fill-blank-exercise" class="exercise-container"></div>
+
+            <!-- PART 8: WRITING -->
+            <h2>
+              <span>Del 8: Skriveovelse</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="writing-exercise" class="exercise-container"></div>
+
+            <!-- PART 9: AI ROLE PLAY -->
+            <h2>
+              <span>Del 9: Rollespil med AI</span>
+              <span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🎭 Mød en ny ven</h3>
+              <p>
+                Øv dig i at fortælle om din familie! AI'en spiller rollen som en ny bekendt, der
+                gerne vil lære dig at kende. Brug ordene fra lektionen.
+              </p>
+            </div>
+
+            <div id="ai-roleplay" class="exercise-container"></div>
+
+            <!-- PART 10: AI TRANSLATION -->
+            <h2>
+              <span>Del 10: AI Oversættelse</span>
+              <span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <p>Oversæt sætninger om familie til russisk. AI giver dig feedback.</p>
+
+            <div id="ai-translation" class="exercise-container"></div>
+
+            <!-- AI WORD DETECTIVE -->
+            <h2>
+              <span>Del 11: Ord-Detektiv</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🔍 Gæt ordet fra hints!</h3>
+              <p>AI'en giver dig hints - kan du gætte det russiske ord?</p>
+            </div>
+
+            <div id="ai-detective" class="exercise-container"></div>
+
+            <!-- AI STORY BUILDER -->
+            <h2>
+              <span>Del 12: Byg en Historie</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>📖 Skriv en familiehistorie!</h3>
+              <p>Byg en historie sammen med AI om en russisk familie.</p>
+            </div>
+
+            <div id="ai-story" class="exercise-container"></div>
+
+            <!-- SUMMARY -->
+            <h2>
+              <span>Opsummering</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Hvad Du Har Laert</h3>
+              <ul>
+                <li>
+                  <strong>Familiemedlemmer:</strong> мама, папа, брат, сестра, бабушка, дедушка
+                </li>
+                <li><strong>Ejestedord:</strong> мой/моя, твой/твоя, его, её</li>
+                <li><strong>"Jeg har":</strong> У меня есть...</li>
+                <li><strong>Spørge om familie:</strong> У тебя есть брат?</li>
+                <li><strong>Kæledyr:</strong> кот, кошка, собака</li>
+                <li><strong>Nære mennesker:</strong> друг, подруга, партнёр</li>
+              </ul>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="lesson-nav">
+              <a href="04-about-me.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">Jeg Hedder...</span>
+              </a>
+              <a href="06-food.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Naeste lektion</span>
+                <span class="lesson-nav-title">Mad og Drikke</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Kultur</strong>
+              Familie er meget vigtig i Rusland. Det er normalt at bo med forældre længere end i
+              Danmark.
+            </div>
+            <div class="margin-note">
+              <strong>Sprog</strong>
+              Russisk har forskellige ord for «bedstemor fra mors side» (бабушка) og «bedstemor fra
+              fars side» — men i daglig tale bruger alle bare «бабушка».
+            </div>
+            <div class="margin-note">
+              <strong>Moderne Rusland</strong>
+              Mange unge flytter til storbyer for arbejde. De holder kontakten med familien via
+              videoopkald og messenger.
+            </div>
+            <div class="margin-note">
+              <strong>Kæledyr</strong>
+              Russere elsker deres kæledyr! «У меня есть кот» (Jeg har en kat) er en meget
+              almindelig sætning.
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <samovar-footer></samovar-footer>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      // VOCABULARY DATA
+      const vocabularyData = [
+        { russian: 'мама', danish: 'mor', transcription: 'MA-ma' },
+        { russian: 'папа', danish: 'far', transcription: 'PA-pa' },
+        { russian: 'брат', danish: 'bror', transcription: 'brat' },
+        { russian: 'сестра', danish: 'soster', transcription: 'sist-RA' },
+        { russian: 'бабушка', danish: 'bedstemor', transcription: 'BA-bush-ka' },
+        { russian: 'дедушка', danish: 'bedstefar', transcription: 'DJE-dush-ka' },
+        { russian: 'муж', danish: 'mand/aegtemand', transcription: 'muzh' },
+        { russian: 'жена', danish: 'kone', transcription: 'zhi-NA' },
+        { russian: 'сын', danish: 'son', transcription: 'syn' },
+        { russian: 'дочь', danish: 'datter', transcription: 'dotch' },
+        { russian: 'семья', danish: 'familie', transcription: 'sim-JA' },
+        { russian: 'родители', danish: 'foraeldre', transcription: 'ra-DI-tje-li' },
+        { russian: 'друг', danish: 'ven', transcription: 'druk' },
+        { russian: 'подруга', danish: 'veninde', transcription: 'pad-RU-ga' },
+      ];
+
+      // PETS DATA
+      const petsData = [
+        { russian: 'кот', danish: 'hankat', icon: '🐈' },
+        { russian: 'кошка', danish: 'kat (hun)', icon: '🐱' },
+        { russian: 'собака', danish: 'hund', icon: '🐕' },
+      ];
+
+      // Render pets grid
+      function renderPets() {
+        const container = document.getElementById('pets-grid');
+        petsData.forEach((pet) => {
+          const card = document.createElement('div');
+          card.className = 'pet-card';
+          card.innerHTML = `
+                    <div class="pet-icon">${pet.icon}</div>
+                    <div class="family-russian">${pet.russian}</div>
+                    <div class="family-danish">${pet.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(pet.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // POSSESSIVE MATCHING
+      const possessiveData = [
+        { russian: 'мой брат', danish: 'min bror' },
+        { russian: 'моя сестра', danish: 'min soster' },
+        { russian: 'твой папа', danish: 'din far' },
+        { russian: 'твоя мама', danish: 'din mor' },
+        { russian: 'его семья', danish: 'hans familie' },
+      ];
+
+      // LISTENING DATA
+      const listeningData = [
+        { audio: 'мама', options: ['mor', 'far', 'bror'], correct: 0 },
+        { audio: 'брат', options: ['soster', 'bror', 'son'], correct: 1 },
+        { audio: 'бабушка', options: ['bedstefar', 'mor', 'bedstemor'], correct: 2 },
+        {
+          audio: 'У меня есть сестра',
+          options: ['Jeg har en bror', 'Jeg har en soster', 'Hun har en soster'],
+          correct: 1,
+        },
+        { audio: 'моя семья', options: ['min familie', 'din familie', 'hans familie'], correct: 0 },
+        { audio: 'дедушка', options: ['bedstemor', 'bedstefar', 'far'], correct: 1 },
+      ];
+
+      // MATCHING DATA
+      const matchingData = [
+        { russian: 'мама', danish: 'mor' },
+        { russian: 'папа', danish: 'far' },
+        { russian: 'брат', danish: 'bror' },
+        { russian: 'сестра', danish: 'soster' },
+        { russian: 'семья', danish: 'familie' },
+      ];
+
+      // DIALOGUE DATA
+      const dialogueData = [
+        { speaker: 'A', russian: 'У тебя большая семья?', danish: 'Har du en stor familie?' },
+        { speaker: 'B', russian: 'Да, довольно большая.', danish: 'Ja, ret stor.' },
+        {
+          speaker: 'A',
+          russian: 'У тебя есть братья или сёстры?',
+          danish: 'Har du brodre eller sostre?',
+        },
+        {
+          speaker: 'B',
+          russian: 'Да, у меня есть брат и сестра.',
+          danish: 'Ja, jeg har en bror og en soster.',
+        },
+        { speaker: 'A', russian: 'А родители?', danish: 'Og foraeldre?' },
+        {
+          speaker: 'B',
+          russian: 'Мои родители живут в Москве.',
+          danish: 'Mine foraeldre bor i Moskva.',
+        },
+      ];
+
+      // FILL BLANK DATA
+      const fillBlankData = [
+        { text: 'У меня ___ брат.', answer: 'есть', hint: 'er/har', danish: 'Jeg har en bror.' },
+        {
+          text: '___ сестра очень красивая.',
+          answer: 'Моя',
+          hint: 'Min (hunkon)',
+          danish: 'Min soster er meget smuk.',
+          alternatives: ['моя'],
+        },
+        {
+          text: 'У тебя есть ___?',
+          answer: 'брат',
+          hint: 'bror',
+          danish: 'Har du en bror?',
+          alternatives: ['сестра', 'семья'],
+        },
+        {
+          text: '___ брат работает врачом.',
+          answer: 'Мой',
+          hint: 'Min (hankon)',
+          danish: 'Min bror arbejder som laege.',
+          alternatives: ['мой'],
+        },
+        {
+          text: 'Это ___ семья.',
+          answer: 'моя',
+          hint: 'min (hunkon)',
+          danish: 'Det er min familie.',
+        },
+      ];
+
+      // WRITING DATA
+      const writingData = [
+        { russian: 'мама', danish: 'mor', hint: '4 bogstaver' },
+        { russian: 'папа', danish: 'far', hint: '4 bogstaver' },
+        { russian: 'брат', danish: 'bror', hint: '4 bogstaver' },
+        { russian: 'сестра', danish: 'soster', hint: '6 bogstaver' },
+        { russian: 'семья', danish: 'familie', hint: '5 bogstaver' },
+      ];
+
+      // AI ROLE PLAY CONFIG
+      const aiRolePlayConfig = {
+        scenario: 'Du møder en ny russisk ven på en café. I taler om jeres familier.',
+        yourRole: 'En dansk studerende',
+        aiRole: 'En venlig russer (Миша)',
+        vocabulary: vocabularyData,
+        goals: ['Sig hej', 'Fortæl om din familie', 'Spørg om deres familie'],
+      };
+
+      // AI TRANSLATION CONFIG
+      const aiTranslationConfig = {
+        sentences: [
+          { danish: 'Jeg har en bror.', russian: 'У меня есть брат.', hint: 'У меня есть...' },
+          {
+            danish: 'Min mor hedder Anna.',
+            russian: 'Мою маму зовут Анна.',
+            hint: 'Мою маму зовут...',
+          },
+          { danish: 'Har du en søster?', russian: 'У тебя есть сестра?', hint: 'У тебя есть...?' },
+          { danish: 'Min familie er stor.', russian: 'Моя семья большая.', hint: 'Моя семья...' },
+          {
+            danish: 'Jeg elsker min bedstemor.',
+            russian: 'Я люблю мою бабушку.',
+            hint: 'Я люблю...',
+          },
+        ],
+        vocabulary: vocabularyData,
+      };
+
+      // INITIALIZE
+      document.addEventListener('DOMContentLoaded', function () {
+        new VocabularyList('vocabulary-section', vocabularyData);
+        new MatchingExercise('possessive-exercise', possessiveData);
+        new ListeningExercise('listening-exercise', listeningData);
+        new MatchingExercise('matching-exercise', matchingData);
+        new Dialogue('dialogue-section', dialogueData);
+        renderPets();
+        new FillBlankExercise('fill-blank-exercise', fillBlankData);
+        new WritingExercise('writing-exercise', writingData);
+
+        // AI Role Play
+        new AIRolePlay('ai-roleplay', aiRolePlayConfig);
+
+        // AI Translation
+        new AITranslationChallenge('ai-translation', aiTranslationConfig);
+
+        // AI Word Detective
+        new AIWordDetective('ai-detective', {
+          words: vocabularyData,
+          category: 'Familie',
+          maxRounds: 6,
+        });
+
+        // AI Story Builder
+        new AIStoryBuilder('ai-story', {
+          theme: 'En russisk familie',
+          vocabulary: vocabularyData,
+          suggestions: ['Hvem bor i huset?', 'Hvad laver familien?', 'Har de kæledyr?'],
+        });
+      });
+    </script>
+  </body>
+</html>

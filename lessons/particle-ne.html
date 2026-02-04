@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Правописание частицы НЕ | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Comparison Layout */
+      .comparison-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-l);
+        margin-bottom: var(--space-xl);
+      }
+
+      .rule-column {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        border-radius: var(--border-radius-lg);
+        padding: var(--space-l);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-s);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .rule-column:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .col-header {
+        font-size: 2rem;
+        font-weight: 400;
+        margin-bottom: var(--space-s);
+        font-family: var(--font-serif);
+        text-align: center;
+        padding-bottom: var(--space-s);
+        border-bottom: 1px solid var(--line-color);
+        color: var(--text-ink);
+      }
+
+      .rule-card {
+        background: var(--bg-paper);
+        padding: var(--space-s);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--line-color);
+      }
+
+      .rule-title {
+        font-weight: 600;
+        margin-bottom: var(--space-xs);
+        display: flex;
+        align-items: center;
+        gap: var(--space-xs);
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        color: var(--text-ink);
+      }
+
+      .example-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .example-item {
+        padding: var(--space-xs) 0;
+        border-bottom: 1px solid var(--line-color);
+        line-height: 1.6;
+      }
+
+      .example-item:last-child {
+        border-bottom: none;
+      }
+
+      .highlight-ne {
+        font-weight: 600;
+        color: var(--accent-red);
+      }
+
+      .dk-sub {
+        display: inline-block;
+        font-size: 0.875rem;
+        color: var(--text-light);
+        font-style: italic;
+        margin-left: var(--space-xs);
+      }
+
+      /* Practice Section */
+      .practice-area {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        border-radius: var(--border-radius-lg);
+        padding: var(--space-l);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+
+      .sentence-strip {
+        background: var(--bg-paper);
+        border: 1px solid var(--line-color);
+        border-radius: var(--border-radius);
+        padding: var(--space-s) var(--space-m);
+        margin-bottom: var(--space-s);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--space-s);
+        transition: all 0.2s ease;
+      }
+
+      .sentence-strip:hover {
+        background: var(--bg-card);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .toggle-btn {
+        background: var(--bg-card);
+        border: 2px solid var(--accent-blue);
+        border-radius: 20px;
+        padding: 6px var(--space-s);
+        font-weight: 600;
+        cursor: pointer;
+        color: var(--accent-blue);
+        min-width: 120px;
+        text-align: center;
+        transition: all 0.2s ease;
+        font-family: var(--font-sans);
+      }
+
+      .toggle-btn:hover {
+        background: var(--accent-blue);
+        color: var(--bg-card);
+      }
+
+      .toggle-btn.correct {
+        background: var(--color-success);
+        border-color: var(--color-success);
+        color: var(--bg-card);
+      }
+
+      .toggle-btn.wrong {
+        background: var(--color-error);
+        border-color: var(--color-error);
+        color: var(--bg-card);
+        animation: shake 0.4s;
+      }
+
+      .hint-text {
+        width: 100%;
+        font-size: 0.875rem;
+        color: var(--text-faded);
+        margin-top: var(--space-xs);
+        display: none;
+        font-style: italic;
+      }
+
+      .feedback {
+        padding: var(--space-s);
+        border-radius: var(--border-radius);
+        font-family: var(--font-sans);
+      }
+
+      .feedback.correct {
+        background: var(--color-success-bg);
+        color: var(--color-success);
+        border: 1px solid var(--color-success);
+      }
+
+      .feedback.incorrect {
+        background: var(--color-warning-bg);
+        color: var(--color-warning);
+        border: 1px solid var(--color-warning);
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        75% {
+          transform: translateX(5px);
+        }
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .comparison-container {
+          grid-template-columns: 1fr;
+          gap: var(--space-m);
+        }
+
+        .col-header {
+          font-size: 1.5rem;
+        }
+
+        .sentence-strip {
+          font-size: 1rem;
+        }
+
+        .toggle-btn {
+          min-width: 100px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="prefixes-pre-pri.html">ПРЕ/ПРИ</a>
+          <a
+            href="particle-ne.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 2px solid var(--accent-red)"
+            >НЕ</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Частица НЕ: Слитно или Раздельно?</h1>
+          <p class="lead">
+            Вечная дилемма: писать "не" вместе со словом или отдельно? Правила делятся на две
+            большие группы.
+          </p>
+
+          <div class="comparison-container">
+            <!-- SLITNO -->
+            <div class="rule-column col-together">
+              <div class="col-header">Слитно (Sammen)</div>
+
+              <div class="rule-card">
+                <div class="rule-title">🚫 Слово не существует без НЕ</div>
+                <ul class="example-list">
+                  <li class="example-item">
+                    <span class="highlight-ne">Не</span>лепый
+                    <span class="dk-sub">(Latterlig)</span>
+                  </li>
+                  <li class="example-item">
+                    <span class="highlight-ne">Не</span>навидеть
+                    <span class="dk-sub">(At hade)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-title">🔄 Можно заменить синонимом</div>
+                <p style="font-size: 0.875rem; color: var(--text-faded); margin: var(--space-xs) 0">
+                  Для сущ., прил. и наречий на -о/-е
+                </p>
+                <ul class="example-list">
+                  <li class="example-item">
+                    <span class="highlight-ne">Не</span>правда (= ложь)
+                    <span class="dk-sub">(Løgn)</span>
+                  </li>
+                  <li class="example-item">
+                    <span class="highlight-ne">Не</span>плохой (= хороший)
+                    <span class="dk-sub">(God)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-title">📦 Причастия без зависимых слов</div>
+                <ul class="example-list">
+                  <li class="example-item">
+                    <span class="highlight-ne">Не</span>прочитанная книга
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- RAZDELNO -->
+            <div class="rule-column col-apart">
+              <div class="col-header">Раздельно (Hver for sig)</div>
+
+              <div class="rule-card">
+                <div class="rule-title">🏃‍♂️ Глаголы и Деепричастия</div>
+                <p style="font-size: 0.875rem; color: var(--text-faded); margin: var(--space-xs) 0">
+                  Золотое правило!
+                </p>
+                <ul class="example-list">
+                  <li class="example-item">
+                    <span class="highlight-ne">Не</span> знаю
+                    <span class="dk-sub">(Jeg ved ikke)</span>
+                  </li>
+                  <li class="example-item">
+                    <span class="highlight-ne">Не</span> думая
+                    <span class="dk-sub">(Uden at tænke)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-title">⚖️ Противопоставление с "а"</div>
+                <ul class="example-list">
+                  <li class="example-item"><span class="highlight-ne">Не</span> друг, а враг</li>
+                  <li class="example-item">
+                    <span class="highlight-ne">Не</span> далеко, а близко
+                  </li>
+                </ul>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-title">🔗 Слова-магниты</div>
+                <p style="font-size: 0.875rem; color: var(--text-faded); margin: var(--space-xs) 0">
+                  Отнюдь не, вовсе не, далеко не
+                </p>
+                <ul class="example-list">
+                  <li class="example-item">Вовсе <span class="highlight-ne">не</span> интересно</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <section id="practice">
+            <h2>Практика</h2>
+            <p>
+              Нажмите на кнопку, чтобы переключить вариант написания (Слитно/Раздельно). Затем
+              нажмите "Проверить".
+            </p>
+
+            <div class="practice-area" id="practiceArea">
+              <!-- Generated JS -->
+            </div>
+            <div id="feedback" class="feedback" style="margin-top: var(--space-m)"></div>
+            <button
+              class="btn"
+              onclick="checkAll()"
+              style="margin-top: var(--space-m); width: 100%"
+            >
+              Проверить все ответы
+            </button>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Совет</strong>
+            Всегда начинайте с вопроса: "Это глагол?". Если да — раздельно. Если нет — "Существует
+            ли слово без НЕ?".
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      const tasks = [
+        {
+          before: 'Я ',
+          word: 'знаю',
+          after: ' ответ.',
+          type: 'verb',
+          answer: 'apart',
+          hint: 'Глаголы пишутся раздельно.',
+        },
+        {
+          before: 'Это ',
+          word: 'правда',
+          after: ', а ложь.',
+          type: 'opp',
+          answer: 'apart',
+          hint: "Противопоставление с союзом 'а'.",
+        },
+        {
+          before: 'Он ',
+          word: 'годовал',
+          after: ' от возмущения.',
+          type: 'exist',
+          answer: 'together',
+          hint: "Слово 'годовать' не существует.",
+        },
+        {
+          before: 'Это ',
+          word: 'известный',
+          after: ' писатель.',
+          type: 'adj',
+          answer: 'together',
+          hint: "Можно заменить синонимом 'безвестный' или просто утверждение качества.",
+        },
+        {
+          before: 'Книга ',
+          word: 'прочитана',
+          after: ' мной.',
+          type: 'short',
+          answer: 'apart',
+          hint: 'Краткие причастия — раздельно.',
+        },
+        {
+          before: 'Вовсе ',
+          word: 'интересный',
+          after: ' фильм.',
+          type: 'magnet',
+          answer: 'apart',
+          hint: "Слова 'вовсе не' требуют раздельного написания.",
+        },
+        {
+          before: 'Это ',
+          word: 'счастье',
+          after: ' (= беда).',
+          type: 'noun',
+          answer: 'together',
+          hint: "Можно заменить синонимом 'беда'.",
+        },
+      ];
+
+      const area = document.getElementById('practiceArea');
+
+      tasks.forEach((task, i) => {
+        const strip = document.createElement('div');
+        strip.className = 'sentence-strip';
+
+        const textBefore = document.createElement('span');
+        textBefore.innerText = task.before;
+
+        const btn = document.createElement('button');
+        btn.className = 'toggle-btn';
+        btn.innerText = 'не ' + task.word; // Default apart
+        btn.dataset.state = 'apart';
+        btn.dataset.word = task.word;
+
+        btn.onclick = () => {
+          if (btn.dataset.state === 'apart') {
+            btn.innerText = 'не' + task.word;
+            btn.dataset.state = 'together';
+          } else {
+            btn.innerText = 'не ' + task.word;
+            btn.dataset.state = 'apart';
+          }
+          btn.classList.remove('wrong', 'correct');
+        };
+
+        const textAfter = document.createElement('span');
+        textAfter.innerText = task.after;
+
+        const hint = document.createElement('div');
+        hint.className = 'hint-text';
+        hint.innerText = '💡 ' + task.hint;
+        hint.id = `hint-${i}`;
+
+        strip.appendChild(textBefore);
+        strip.appendChild(btn);
+        strip.appendChild(textAfter);
+        strip.appendChild(hint);
+
+        area.appendChild(strip);
+      });
+
+      function checkAll() {
+        const btns = document.querySelectorAll('.toggle-btn');
+        let correctCount = 0;
+
+        btns.forEach((btn, i) => {
+          const task = tasks[i];
+          const hint = document.getElementById(`hint-${i}`);
+
+          if (btn.dataset.state === task.answer) {
+            btn.classList.add('correct');
+            correctCount++;
+            hint.style.display = 'none';
+          } else {
+            btn.classList.add('wrong');
+            hint.style.display = 'block';
+          }
+        });
+
+        const feedback = document.getElementById('feedback');
+        if (correctCount === tasks.length) {
+          feedback.innerHTML = '<strong>Превосходно!</strong> Вы мастер частицы НЕ.';
+          feedback.className = 'feedback correct';
+        } else {
+          feedback.innerHTML = `Правильно: ${correctCount} из ${tasks.length}. Посмотрите подсказки.`;
+          feedback.className = 'feedback incorrect';
+        }
+      }
+    </script>
+  </body>
+</html>

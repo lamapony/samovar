@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Падежная система | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Presentation Styles Enhanced */
+      .presentation-container {
+        background: white;
+        border: none;
+        padding: 40px 60px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        position: relative;
+        min-height: 500px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .slide-title {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: var(--accent-blue);
+        border-bottom: none;
+      }
+
+      .slide-content {
+        font-size: 1.2rem;
+        line-height: 1.8;
+      }
+
+      .analogy-box {
+        background: #f8f9fa;
+        border-left: 4px solid var(--accent-red);
+        padding: 20px;
+        margin: 20px 0;
+        color: #555;
+        font-style: italic;
+      }
+
+      .case-tag {
+        display: inline-block;
+        padding: 4px 12px;
+        background: var(--accent-blue);
+        color: white;
+        font-size: 0.8em;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .nav-buttons {
+        margin-top: auto;
+        padding-top: 30px;
+        border-top: 1px solid #eee;
+      }
+
+      .btn-nav {
+        background: white;
+        border: 2px solid var(--line-color);
+        color: var(--text-ink);
+        padding: 10px 25px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: bold;
+      }
+
+      .btn-nav:hover:not(:disabled) {
+        border-color: var(--accent-blue);
+        color: var(--accent-blue);
+        background: #fbfbfb;
+      }
+
+      .btn-nav:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      /* Exercise Drag Drop Enhanced */
+      .sentence-strip {
+        background: white;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        font-size: 1.1rem;
+        flex-wrap: wrap;
+      }
+
+      .dk-hint {
+        display: block;
+        width: 100%;
+        font-size: 0.9rem;
+        color: #888;
+        margin-bottom: 10px;
+        font-style: italic;
+      }
+
+      .drop-slot {
+        display: inline-block;
+        width: 140px;
+        height: 40px;
+        border: 2px dashed #ccc;
+        margin: 0 10px;
+        vertical-align: middle;
+        background: #fafafa;
+        text-align: center;
+        line-height: 36px;
+        color: var(--accent-blue);
+        font-weight: bold;
+        transition: all 0.2s;
+      }
+
+      .drop-slot.hovered {
+        background: #e3f2fd;
+        border-color: var(--accent-blue);
+      }
+
+      .drop-slot.correct {
+        background: #e8f5e9;
+        border-color: #4caf50;
+        color: #2e7d32;
+        border-style: solid;
+      }
+
+      .drop-slot.wrong {
+        background: #ffebee;
+        border-color: #ef5350;
+        animation: shake 0.4s;
+      }
+
+      .options-pool {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+        background: #eee;
+        /* visual separation */
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+
+      .option-chip {
+        padding: 10px 20px;
+        background: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: grab;
+        font-weight: bold;
+        color: var(--accent-blue);
+        transition: transform 0.2s;
+        border: 1px solid transparent;
+      }
+
+      .option-chip:active {
+        cursor: grabbing;
+        transform: scale(0.95);
+      }
+
+      .option-chip.used {
+        opacity: 0.4;
+        pointer-events: none;
+        background: #ddd;
+        box-shadow: none;
+      }
+
+      .option-chip.selected {
+        border-color: var(--accent-blue);
+        background-color: #e3f2fd;
+      }
+
+      /* Detective Game */
+      .detective-box {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        padding: 30px;
+        margin-top: 40px;
+      }
+
+      .dk-sentence {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .highlight-word {
+        background: #fff3cd;
+        padding: 2px 5px;
+        color: var(--accent-ink);
+        border-bottom: 2px solid #ffc107;
+      }
+
+      .case-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+      }
+
+      .case-btn {
+        padding: 15px;
+        border: 2px solid #eee;
+        background: white;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s;
+        font-weight: bold;
+      }
+
+      .case-btn:hover {
+        border-color: var(--accent-blue);
+        background: #f5faff;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        75% {
+          transform: translateX(5px);
+        }
+      }
+
+      /* Mobile Optimizations */
+      @media (max-width: 768px) {
+        .presentation-container {
+          padding: 20px;
+          min-height: 450px;
+        }
+
+        .slide-title {
+          font-size: 1.75rem;
+          margin-bottom: 20px;
+        }
+
+        .slide-content {
+          font-size: 1rem;
+        }
+
+        .slide-content ul li {
+          font-size: 1rem;
+          margin-bottom: 12px;
+        }
+
+        .analogy-box {
+          padding: 15px;
+          margin: 15px 0;
+        }
+
+        .case-tag {
+          font-size: 0.7em;
+          padding: 3px 10px;
+        }
+
+        .nav-buttons {
+          padding-top: 20px;
+        }
+
+        .btn-nav {
+          padding: 12px 20px;
+          font-size: 0.95rem;
+        }
+
+        /* Detective game mobile */
+        .detective-box {
+          padding: 20px;
+        }
+
+        .dk-sentence {
+          font-size: 1.2rem;
+          margin-bottom: 15px;
+        }
+
+        .case-options {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .case-btn {
+          padding: 14px;
+          font-size: 1rem;
+        }
+
+        /* Drag-and-drop mobile */
+        .sentence-strip {
+          padding: 15px;
+          font-size: 1rem;
+        }
+
+        .dk-hint {
+          font-size: 0.85rem;
+          margin-bottom: 8px;
+        }
+
+        .drop-slot {
+          width: 100px;
+          height: 40px;
+          line-height: 36px;
+          margin: 5px;
+          font-size: 0.9rem;
+        }
+
+        .options-pool {
+          padding: 15px;
+          gap: 12px;
+        }
+
+        .option-chip {
+          padding: 10px 16px;
+          font-size: 0.95rem;
+        }
+      }
+
+      /* Touch device enhancements */
+      @media (hover: none) and (pointer: coarse) {
+        .option-chip {
+          min-height: 44px;
+          min-width: 44px;
+        }
+
+        .case-btn {
+          min-height: 48px;
+        }
+
+        .btn-nav {
+          min-height: 48px;
+        }
+      }
+    </style>
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Падежная система (Kasussystemet)</h1>
+          <p class="lead">
+            6 падежей — это навигационная система русского языка. Они отвечают на вопросы "Куда?",
+            "Откуда?", "Кем?", "Кому?". Это замена датским предлогам и порядку слов.
+          </p>
+          <!-- Presentation Component -->
+          <div class="presentation-container">
+            <!-- Slide 1: Intro -->
+            <div class="slide active" data-step="1">
+              <div class="slide-number">01 / 07</div>
+              <h2 class="slide-title">Философия падежа</h2>
+              <div class="slide-content">
+                <p>
+                  Представьте, что слово — это конструктор Lego. Корень — это основной кирпичик.
+                  Окончание — это цветная деталь, которая показывает, как этот кирпичик соединяется
+                  с другими.
+                </p>
+                <div class="analogy-box">
+                  <strong>Датский подход:</strong><br />"Jeg giver bogen <u>til</u> Peter"(Предлог
+                  'til' показывает направление). <br /><br /><strong>Русский подход:</strong
+                  ><br />"Я даю книгу Петер<u>у</u>"(Окончание '-у' делает работу предлога 'til').
+                </div>
+              </div>
+            </div>
+            <!-- Slide 2: Nominative -->
+            <div class="slide" data-step="2">
+              <div class="slide-number">02 / 07</div>
+              <span class="case-tag">1. Именительный (Nominativ)</span>
+              <h2 class="slide-title">Кто? Что? (Hvem? Hvad?)</h2>
+              <div class="slide-content">
+                <p>
+                  Это базовая форма слова. Так оно выглядит в словаре. Это всегда
+                  <strong>субъект</strong>(тот, кто делает).
+                </p>
+                <ul style="list-style: none; padding: 0; margin-top: 20px">
+                  <li style="margin-bottom: 15px; font-size: 1.3rem">
+                    👨‍🎓 <strong>Студент</strong>читает.<br /><span
+                      style="color: #777; font-size: 0.9rem"
+                      >(Den studerende læser)</span
+                    >
+                  </li>
+                  <li style="margin-bottom: 15px; font-size: 1.3rem">
+                    🍕 <strong>Пицца</strong>вкусная.<br /><span
+                      style="color: #777; font-size: 0.9rem"
+                      >(Pizzaen er god)</span
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- Slide 3: Genitive -->
+            <div class="slide" data-step="3">
+              <div class="slide-number">03 / 07</div>
+              <span class="case-tag">2. Родительный (Genitiv)</span>
+              <h2 class="slide-title">Нет кого? От кого?</h2>
+              <div class="slide-content">
+                <p>Самый популярный падеж. Используется для:</p>
+                <ol>
+                  <li><strong>Принадлежность</strong>(Dansk: -s / af).</li>
+                  <li><strong>Отрицание</strong>(Нет...).</li>
+                  <li><strong>Количество</strong>(Много, мало).</li>
+                </ol>
+                <div class="case-example">
+                  Это машина <strong>брата</strong>.<br />(Det еr brors bil)
+                </div>
+                <div class="case-example">
+                  У меня нет <strong>времени</strong>.<br />(Jeg har ikke tid - 'tid' меняется !)
+                </div>
+              </div>
+            </div>
+            <!-- Slide 4: Dative -->
+            <div class="slide" data-step="4">
+              <div class="slide-number">04 / 07</div>
+              <span class="case-tag">3. Дательный (Dativ)</span>
+              <h2 class="slide-title">Кому? К чему? (Til hvem?)</h2>
+              <div class="slide-content">
+                <p>Падеж адресата. Соответствует датскому предлогу <strong>til</strong>.</p>
+                <div class="analogy-box">
+                  Запомните глагол <strong>Давать</strong>(Give) → Дательный.
+                </div>
+                <div class="case-example">
+                  Я звоню <strong>маме</strong>.<br />(Jeg ringer til mor)
+                </div>
+                <div class="case-example">
+                  Мы идем к <strong>врачу</strong>.<br />(Vi går til lægen)
+                </div>
+              </div>
+            </div>
+            <!-- Slide 5: Accusative -->
+            <div class="slide" data-step="5">
+              <div class="slide-number">05 / 07</div>
+              <span class="case-tag">4. Винительный (Akkusativ)</span>
+              <h2 class="slide-title">Кого? Что? (Hvem/Hvad?)</h2>
+              <div class="slide-content">
+                <p>Падеж объекта. На что направлено действие?</p>
+                <div class="analogy-box">
+                  <strong>Важно:</strong>Неодушевленные предметы (стол, телефон) в этом падеже
+                  выглядят как в Именительном (Nominativ). Меняются только "живые" объекты и слова
+                  на -а/-я.
+                </div>
+                <div class="case-example">
+                  Я люблю <strong>музыку</strong>.<br />(Jeg elsker musik - 'музыка' меняется на
+                  'музыку')
+                </div>
+                <div class="case-example">
+                  Я вижу <strong>дом</strong>.<br />(Jeg ser et hus - форма не меняется, потому что
+                  неодушевленное)
+                </div>
+              </div>
+            </div>
+            <!-- Slide 6: Instrumental -->
+            <div class="slide" data-step="6">
+              <div class="slide-number">06 / 07</div>
+              <span class="case-tag">5. Творительный (Instrumentalis)</span>
+              <h2 class="slide-title">Кем? Чем? С кем?</h2>
+              <div class="slide-content">
+                <p>Две функции:</p>
+                <ol>
+                  <li><strong>Инструмент</strong>(Med hvad?). Датское "med" как инструмент.</li>
+                  <li><strong>Совместность</strong>(Med hvem?). Датское "med" как компания.</li>
+                </ol>
+                <div class="case-example">
+                  Я ем <strong>вилкой</strong>.<br />(Jeg spiser med en gaffel)
+                </div>
+                <div class="case-example">
+                  Я гуляю с <strong>подругой</strong>.<br />(Jeg går tur med en veninde)
+                </div>
+              </div>
+            </div>
+            <!-- Slide 7: Prepositional -->
+            <div class="slide" data-step="7">
+              <div class="slide-number">07 / 07</div>
+              <span class="case-tag">6. Предложный (Lokativ)</span>
+              <h2 class="slide-title">О ком? Где? (Hvor?)</h2>
+              <div class="slide-content">
+                <p>Всегда используется с предлогами (О, В, НА). Самый частый вопрос: "Где?" .</p>
+                <div class="analogy-box">Обычно окончание <strong>-е</strong>.</div>
+                <div class="case-example">
+                  Мы говорим о <strong>политике</strong>.<br />(Vi taler om politik)
+                </div>
+                <div class="case-example">
+                  Я сейчас в <strong>парке</strong>.<br />(Jeg еr i parken lige nu)
+                </div>
+              </div>
+            </div>
+            <div class="nav-buttons">
+              <button class="btn-nav" id="prevBtn" disabled>← Tilbage</button>
+              <button class="btn-nav" id="nextBtn">Frem →</button>
+            </div>
+          </div>
+          <section id="detective-game" class="detective-box">
+            <h2 style="margin-top: 0; text-align: center">🕵️‍♂️ Падежный Детектив (Kasus-detektiv)</h2>
+            <p style="text-align: center; margin-bottom: 30px">
+              Посмотрите на датскую фразу и определите, какой падеж нужен в русском для выделенного
+              слова.
+            </p>
+            <div id="game-area-detective"><!-- Dynamic Content --></div>
+            <div
+              id="detective-feedback"
+              class="feedback"
+              style="text-align: center; margin-top: 20px"
+            ></div>
+          </section>
+          <section id="practice" style="margin-top: 60px">
+            <h2>Падежный конструктор (Kasus-bygger)</h2>
+            <p>Вставьте правильное окончание, опираясь на датский перевод.</p>
+            <div class="options-pool" id="optionsPool"><!-- Options injected via JS --></div>
+            <div id="sentencesArea"><!-- Sentences injected via JS --></div>
+          </section>
+        </div>
+      </main>
+      <samovar-footer></samovar-footer>
+    </div>
+    <script>
+      // --- Presentation Logic ---
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      function updateSlides() {
+        slides.forEach((s, i) => {
+          if (i === currentSlide) {
+            s.style.display = 'block';
+            s.style.opacity = '0';
+            setTimeout(() => (s.style.opacity = '1'), 10);
+          } else {
+            s.style.display = 'none';
+          }
+        });
+
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides.length - 1;
+
+        if (currentSlide === slides.length - 1) {
+          nextBtn.innerText = 'Til praksis ↓';
+
+          nextBtn.onclick = () => {
+            document.getElementById('detective-game').scrollIntoView({
+              behavior: 'smooth',
+            });
+          };
+        } else {
+          nextBtn.innerText = 'Frem →';
+          nextBtn.onclick = nextSlide;
+        }
+      }
+
+      function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+          currentSlide++;
+          updateSlides();
+        }
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlides();
+        }
+      });
+
+      // Init Slides
+      updateSlides();
+
+      // --- Detective Game Logic ---
+      const detectiveCases = [
+        {
+          sentence: "Jeg giver bogen til <span class='highlight-word'>Anna</span>.",
+          question: 'Til hvem? (Адресат)',
+          correct: 'Dativ',
+          options: ['Genitiv', 'Dativ', 'Akkusativ'],
+        },
+        {
+          sentence: "Vi taler om <span class='highlight-word'>filmen</span>.",
+          question: 'Om hvad? (Объект мысли)',
+          correct: 'Lokativ', // Prepositional
+          options: ['Lokativ', 'Nominativ', 'Instrumentalis'],
+        },
+        {
+          sentence: "Jeg skriver med <span class='highlight-word'>en pen</span>.",
+          question: 'Med hvad? (Инструмент)',
+          correct: 'Instrumentalis',
+          options: ['Dativ', 'Instrumentalis', 'Genitiv'],
+        },
+        {
+          sentence: "Det еr <span class='highlight-word'>Peters</span> bil.",
+          question: 'Hvis? (Принадлежность)',
+          correct: 'Genitiv',
+          options: ['Nominativ', 'Akkusativ', 'Genitiv'],
+        },
+      ];
+
+      let currentDetective = 0;
+      const gameArea = document.getElementById('game-area-detective');
+      const detectiveFeedback = document.getElementById('detective-feedback');
+
+      function renderDetective() {
+        const data = detectiveCases[currentDetective];
+
+        gameArea.innerHTML = ` <div class="dk-sentence">${data.sentence}</div><p style="text-align: center; color: #666; margin-bottom: 20px;">${data.question}</p><div class="case-options">${data.options
+          .map(
+            (opt) => `<button class="case-btn" onclick="checkDetective('${opt}')" >${opt}</button>`,
+          )
+          .join('')}</div>`;
+      }
+
+      window.checkDetective = function (answer) {
+        const data = detectiveCases[currentDetective];
+
+        if (answer === data.correct) {
+          detectiveFeedback.innerHTML =
+            "<span style='color: green; font-weight: bold;'>Rigtigt! (Верно!)</span>";
+          detectiveFeedback.className = 'feedback correct';
+
+          setTimeout(() => {
+            currentDetective++;
+
+            if (currentDetective < detectiveCases.length) {
+              renderDetective();
+              detectiveFeedback.innerText = '';
+              detectiveFeedback.className = 'feedback';
+            } else {
+              gameArea.innerHTML =
+                "<h3 style='text-align: center;'>Bravo! Du forstår logikken.</h3>";
+              detectiveFeedback.style.display = 'none';
+            }
+          }, 1000);
+        } else {
+          detectiveFeedback.innerHTML =
+            "<span style='color: red;'>Prøv igen (Попробуй еще раз)</span>";
+          detectiveFeedback.className = 'feedback incorrect';
+        }
+      };
+
+      renderDetective();
+
+      // --- Practice Logic (Constructor) ---
+      const exercises = [
+        {
+          text: 'Я живу в Лондон__',
+          dk: 'Jeg bor i London (Hvor? - Lokativ)',
+          answer: '-е',
+          type: 'Prep',
+        },
+        {
+          text: 'Я пишу карандаш__',
+          dk: 'Jeg skriver med en blyant (Med hvad? - Instr.)',
+          answer: '-ом',
+          type: 'Inst',
+        },
+        {
+          text: 'Это книга брат__',
+          dk: 'Det еr brors bog (Hvis? - Genitiv)',
+          answer: '-а',
+          type: 'Gen',
+        },
+        {
+          text: 'Я звоню мам__',
+          dk: 'Jeg ringer til mor (Til hvem? - Dativ)',
+          answer: '-е',
+          type: 'Dat',
+        },
+      ];
+
+      const optionsArr = ['-е', '-ом', '-а', '-е'];
+
+      const poolContainer = document.getElementById('optionsPool');
+      const sentencesArea = document.getElementById('sentencesArea');
+
+      // Generate draggable chips
+      let chipIdCounter = 0;
+
+      optionsArr
+        .sort(() => Math.random() - 0.5)
+        .forEach((opt) => {
+          const chip = document.createElement('div');
+          chip.className = 'option-chip';
+          chip.draggable = true;
+          chip.innerText = opt;
+          chip.id = 'chip-' + chipIdCounter++;
+
+          chip.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', e.target.innerText);
+            e.dataTransfer.setData('chip-id', e.target.id);
+            setTimeout(() => (e.target.style.opacity = '0.5'), 0);
+          });
+
+          chip.addEventListener('dragend', (e) => {
+            e.target.style.opacity = '1';
+          });
+
+          // Mobile/Click support
+          chip.addEventListener('click', () => {
+            // Deselect others
+            document
+              .querySelectorAll('.option-chip')
+              .forEach((c) => c.classList.remove('selected'));
+            chip.classList.add('selected');
+          });
+
+          poolContainer.appendChild(chip);
+        });
+
+      // Generate sentences
+      exercises.forEach((ex, idx) => {
+        const strip = document.createElement('div');
+        strip.className = 'sentence-strip';
+
+        const dkHint = document.createElement('div');
+        dkHint.className = 'dk-hint';
+        dkHint.innerText = ex.dk;
+
+        const parts = ex.text.split('__');
+
+        const textStart = document.createElement('span');
+        textStart.innerText = parts[0];
+
+        const slot = document.createElement('div');
+        slot.className = 'drop-slot';
+        slot.dataset.answer = ex.answer;
+
+        // Drop Logic
+        slot.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          slot.classList.add('hovered');
+        });
+
+        slot.addEventListener('dragleave', () => {
+          slot.classList.remove('hovered');
+        });
+
+        slot.addEventListener('drop', (e) => {
+          e.preventDefault();
+          slot.classList.remove('hovered');
+          const val = e.dataTransfer.getData('text/plain');
+          const id = e.dataTransfer.getData('chip-id');
+
+          handleInput(slot, val, id);
+        });
+
+        // Click support (Receiver)
+        slot.addEventListener('click', () => {
+          const selected = document.querySelector('.option-chip.selected');
+
+          if (selected) {
+            handleInput(slot, selected.innerText, selected.id);
+            selected.classList.remove('selected');
+          }
+        });
+
+        strip.appendChild(dkHint);
+        strip.appendChild(textStart);
+        strip.appendChild(slot);
+
+        sentencesArea.appendChild(strip);
+      });
+
+      function handleInput(slot, val, chipId) {
+        // Check answer
+        if (val === slot.dataset.answer) {
+          slot.innerText = val;
+          slot.classList.add('correct');
+          slot.classList.remove('wrong');
+
+          // Hide used chip
+          const chip = document.getElementById(chipId);
+          if (chip) chip.classList.add('used');
+        } else {
+          slot.innerText = val;
+          slot.classList.add('wrong');
+          setTimeout(() => slot.classList.remove('wrong'), 500);
+        }
+      }
+    </script>
+  </body>
+</html>

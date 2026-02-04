@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 7: Pa Cafe | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      .menu-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        border-radius: 8px;
+        padding: var(--space-l);
+        margin: var(--space-m) 0;
+      }
+
+      .menu-header {
+        text-align: center;
+        border-bottom: 2px solid var(--accent-red);
+        padding-bottom: var(--space-s);
+        margin-bottom: var(--space-m);
+      }
+
+      .menu-header h3 {
+        font-family: var(--font-serif);
+        margin: 0;
+      }
+
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-xs) 0;
+        border-bottom: 1px dotted var(--line-color);
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .menu-item:hover {
+        background: var(--bg-paper);
+      }
+
+      .menu-item:last-child {
+        border-bottom: none;
+      }
+
+      .menu-name {
+        font-family: var(--font-serif);
+      }
+
+      .menu-price {
+        color: var(--accent-red);
+        font-weight: 600;
+      }
+
+      .cafe-scene {
+        background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+        color: white;
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+        text-align: center;
+      }
+
+      .cafe-scene h3 {
+        color: white;
+        margin-top: 0;
+      }
+
+      .phrase-card {
+        background: white;
+        color: var(--text-ink);
+        padding: var(--space-m);
+        border-radius: 8px;
+        margin: var(--space-s) 0;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+
+      .phrase-card:hover {
+        transform: scale(1.02);
+      }
+
+      .phrase-russian {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      .phrase-danish {
+        color: var(--text-faded);
+        font-size: 0.9rem;
+      }
+
+      .role-play {
+        background: var(--bg-paper);
+        border: 2px dashed var(--accent-blue);
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+
+      .role-play h3 {
+        color: var(--accent-blue);
+        margin-top: 0;
+      }
+
+      /* === Coworking Section === */
+      .coworking-scene {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+      .coworking-scene h3 {
+        color: white;
+        margin-top: 0;
+      }
+      .coworking-phrases {
+        display: grid;
+        gap: var(--space-s);
+        margin-top: var(--space-m);
+      }
+      .coworking-phrase {
+        background: rgba(255, 255, 255, 0.15);
+        padding: var(--space-s) var(--space-m);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .coworking-phrase:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .coworking-russian {
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      .coworking-danish {
+        font-size: 0.85rem;
+        opacity: 0.8;
+      }
+
+      /* === Humor Note === */
+      .humor-note {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+        font-size: 0.9rem;
+      }
+      .humor-note strong {
+        color: #f57c00;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 7 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 50 min</span>
+          </div>
+          <h1>Pa Cafe</h1>
+          <p class="lead">
+            At bestille mad og drikke er en af de mest praktiske faerdigheder. I denne lektion
+            laerer du at kommunikere pa en russisk cafe.
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <!-- PART 1: KEY PHRASES -->
+            <h2>
+              <span>Del 1: Vigtige Fraser</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <div class="cafe-scene">
+              <h3>Situationen</h3>
+              <p>Du sidder pa en cafe i Moskva. Tjeneren kommer hen til dit bord...</p>
+            </div>
+
+            <p>Klik pa en frase for at hore den:</p>
+
+            <div id="phrases-section"></div>
+
+            <!-- PART 2: MENU -->
+            <h2>
+              <span>Del 2: Menukortet</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <div class="menu-card">
+              <div class="menu-header">
+                <h3>МЕНЮ</h3>
+              </div>
+              <div id="menu-items"></div>
+            </div>
+
+            <!-- PART 3: ORDERING -->
+            <h2>
+              <span>Del 3: At Bestille</span>
+              <span class="chapter-num">Grammatik</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Bestillingsfraser</h3>
+              <div class="example-box">
+                <div class="example-russian">Мне, пожалуйста, кофе.</div>
+                <div class="example-danish">Til mig, tak, kaffe. (Jeg vil gerne have kaffe)</div>
+              </div>
+              <div class="example-box">
+                <div class="example-russian">Можно счёт?</div>
+                <div class="example-danish">Ma jeg fa regningen?</div>
+              </div>
+            </div>
+
+            <div class="tip-box">
+              <strong>Tip:</strong> "Мне" (til mig) er en meget hflig made at bestille pa. Det er
+              mere hoefligt end bare at sige "Я хочу" (jeg vil have).
+            </div>
+
+            <div class="theory-block">
+              <h3>Nyttige Sporgsmaal</h3>
+              <table class="possession-table">
+                <tr>
+                  <td class="cyrillic">Что вы рекомендуете?</td>
+                  <td>Hvad anbefaler De?</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Сколько это стоит?</td>
+                  <td>Hvor meget koster det?</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Можно меню?</td>
+                  <td>Ma jeg se menuen?</td>
+                </tr>
+                <tr>
+                  <td class="cyrillic">Где туалет?</td>
+                  <td>Hvor er toilettet?</td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- PART 4: DIALOGUE -->
+            <h2>
+              <span>Del 4: Dialog pa Cafe</span>
+              <span class="chapter-num">Samtale</span>
+            </h2>
+
+            <div id="dialogue-section"></div>
+
+            <!-- PART 4b: WORKING IN CAFE -->
+            <h2>
+              <span>Del 4b: Arbejde i Cafeen</span>
+              <span class="chapter-num">Moderne</span>
+            </h2>
+
+            <div class="coworking-scene">
+              <h3>💻 Cafe = Kontor?</h3>
+              <p>I storbyer bruger mange cafeer som arbejdsplads. Her er nyttige fraser:</p>
+              <div class="coworking-phrases" id="coworking-phrases"></div>
+            </div>
+
+            <div class="theory-block">
+              <h3>Plantemaelk</h3>
+              <p>Mange cafeer tilbyder nu alternativ maelk:</p>
+              <ul>
+                <li><strong>С молоком?</strong> — Med maelk?</li>
+                <li><strong>С овсяным, пожалуйста.</strong> — Med havremaelk, tak.</li>
+                <li><strong>Без молока.</strong> — Uden maelk.</li>
+              </ul>
+            </div>
+
+            <div class="humor-note">
+              <strong>😅 Sjov fakta:</strong> «Я закажу ещё один кофе, потому что работаю здесь уже
+              два часа.» (Jeg bestiller endnu en kaffe, fordi jeg har arbejdet her i to timer
+              allerede.)
+            </div>
+
+            <!-- PART 5: LISTENING -->
+            <h2>
+              <span>Del 5: Lytteovelse</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <!-- PART 6: FILL BLANK -->
+            <h2>
+              <span>Del 6: Udfyld Tomme Pladser</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="fill-blank-exercise" class="exercise-container"></div>
+
+            <!-- PART 7: MATCHING -->
+            <h2>
+              <span>Del 7: Par Ordene</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="matching-exercise" class="exercise-container"></div>
+
+            <!-- PART 8: ROLE PLAY -->
+            <h2>
+              <span>Del 8: Rollespil</span>
+              <span class="chapter-num">Produktion</span>
+            </h2>
+
+            <div class="role-play">
+              <h3>Din tur at bestille!</h3>
+              <p>Forestil dig, at du er pa en cafe. Sag disse saetninger hojt:</p>
+              <ol>
+                <li>
+                  <strong>Tjener:</strong> <span class="cyrillic">Здравствуйте! Что будете?</span>
+                </li>
+                <li>
+                  <strong>Du:</strong>
+                  <span class="cyrillic">Мне, пожалуйста, кофе и круассан.</span>
+                </li>
+                <li>
+                  <strong>Tjener:</strong> <span class="cyrillic">С молоком?</span> (Med maelk?)
+                </li>
+                <li>
+                  <strong>Du:</strong> <span class="cyrillic">Да, пожалуйста.</span> eller
+                  <span class="cyrillic">Нет, спасибо.</span>
+                </li>
+                <li><strong>Du:</strong> <span class="cyrillic">Можно счёт?</span></li>
+                <li>
+                  <strong>Tjener:</strong> <span class="cyrillic">Конечно.</span> (Selvfolgelig)
+                </li>
+                <li><strong>Du:</strong> <span class="cyrillic">Спасибо! До свидания!</span></li>
+              </ol>
+            </div>
+
+            <!-- PART 9: SENTENCE BUILDER -->
+            <h2>
+              <span>Del 9: Byg Saetninger</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="sentence-builder" class="exercise-container"></div>
+
+            <!-- PART 10: AI ROLE PLAY -->
+            <h2>
+              <span>Del 10: Rollespil på Café</span>
+              <span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>☕ Bestil på en russisk café</h3>
+              <p>
+                Øv dig i at bestille mad og drikke! AI'en spiller tjeneren. Prøv at bestille kaffe,
+                spørge om priser og bede om regningen.
+              </p>
+            </div>
+
+            <div id="ai-roleplay-cafe" class="exercise-container"></div>
+
+            <!-- AI QUICK QUIZ -->
+            <h2>
+              <span>Del 11: Hurtig Quiz</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>⚡ Test din viden!</h3>
+              <p>Svar hurtigt og korrekt for at få bonuspoint. Jo hurtigere, jo flere point!</p>
+            </div>
+
+            <div id="ai-quiz" class="exercise-container"></div>
+
+            <!-- AI EMOJI TRANSLATOR -->
+            <h2>
+              <span>Del 12: Emoji Oversætter</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🎭 Hvad betyder emoji'erne?</h3>
+              <p>Se emoji-sekvensen og skriv sætningen på russisk!</p>
+            </div>
+
+            <div id="ai-emoji" class="exercise-container"></div>
+
+            <!-- SUMMARY -->
+            <h2>
+              <span>Opsummering</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Cafe-fraser</h3>
+              <ul>
+                <li>
+                  <strong class="cyrillic">Мне, пожалуйста...</strong> - Jeg vil gerne have...
+                </li>
+                <li><strong class="cyrillic">Можно...?</strong> - Ma jeg...?</li>
+                <li>
+                  <strong class="cyrillic">Сколько это стоит?</strong> - Hvor meget koster det?
+                </li>
+                <li><strong class="cyrillic">Счёт, пожалуйста.</strong> - Regningen, tak.</li>
+                <li>
+                  <strong class="cyrillic">Можно пароль от Wi-Fi?</strong> - Ma jeg fa Wi-Fi-koden?
+                </li>
+                <li><strong class="cyrillic">Есть розетка?</strong> - Er der en stikkontakt?</li>
+              </ul>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="lesson-nav">
+              <a href="06-food.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">Mad og Drikke</span>
+              </a>
+              <a href="08-time.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Naeste lektion</span>
+                <span class="lesson-nav-title">Hvad Er Klokken?</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Kultur</strong>
+              I Rusland er det normalt at dele regningen eller at en person betaler for alle. At
+              bede om separat regning kan virke maerkeligt.
+            </div>
+            <div class="margin-note">
+              <strong>Drikkepenge</strong>
+              Drikkepenge er ikke obligatoriske i Rusland, men 10% er blevet mere normalt i
+              storbyernes cafeer og restauranter.
+            </div>
+            <div class="margin-note">
+              <strong>Cafe = Kontor</strong>
+              I Moskva og St. Petersborg sidder mange med laptops i cafeer i timevis. Det er helt
+              normalt at sporge om Wi-Fi og stikkontakt.
+            </div>
+            <div class="margin-note">
+              <strong>Plantemaelk</strong>
+              «Овсяное молоко» (havremaelk) er blevet meget populaert i russiske cafeer.
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <samovar-footer></samovar-footer>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      // PHRASES DATA
+      const phrasesData = [
+        { russian: 'Здравствуйте!', danish: 'Goddag!' },
+        { russian: 'Можно меню, пожалуйста?', danish: 'Ma jeg se menuen, tak?' },
+        { russian: 'Что вы рекомендуете?', danish: 'Hvad anbefaler De?' },
+        { russian: 'Мне, пожалуйста, кофе.', danish: 'Jeg vil gerne have kaffe, tak.' },
+        { russian: 'С сахаром или без?', danish: 'Med sukker eller uden?' },
+        { russian: 'Без сахара, пожалуйста.', danish: 'Uden sukker, tak.' },
+        { russian: 'Сколько это стоит?', danish: 'Hvor meget koster det?' },
+        { russian: 'Можно счёт?', danish: 'Ma jeg fa regningen?' },
+        { russian: 'Спасибо, очень вкусно!', danish: 'Tak, det var meget laekker!' },
+      ];
+
+      // COWORKING PHRASES DATA
+      const coworkingPhrasesData = [
+        { russian: 'Можно пароль от Wi-Fi?', danish: 'Ma jeg fa Wi-Fi-koden?' },
+        {
+          russian: 'Здесь можно посидеть с ноутбуком?',
+          danish: 'Kan jeg sidde her med min laptop?',
+        },
+        { russian: 'Есть розетка?', danish: 'Er der en stikkontakt?' },
+        { russian: 'Мне ещё один кофе, пожалуйста.', danish: 'Endnu en kaffe, tak.' },
+      ];
+
+      // MENU DATA
+      const menuData = [
+        { name: 'Кофе', price: '150 руб.' },
+        { name: 'Чай', price: '100 руб.' },
+        { name: 'Капучино', price: '200 руб.' },
+        { name: 'Круассан', price: '120 руб.' },
+        { name: 'Блины', price: '250 руб.' },
+        { name: 'Борщ', price: '350 руб.' },
+        { name: 'Салат', price: '280 руб.' },
+        { name: 'Пирожок', price: '80 руб.' },
+      ];
+
+      // Render phrases
+      function renderPhrases() {
+        const container = document.getElementById('phrases-section');
+        phrasesData.forEach((phrase) => {
+          const card = document.createElement('div');
+          card.className = 'phrase-card';
+          card.innerHTML = `
+                    <div class="phrase-russian">${phrase.russian}</div>
+                    <div class="phrase-danish">${phrase.danish}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(phrase.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render menu
+      function renderMenu() {
+        const container = document.getElementById('menu-items');
+        menuData.forEach((item) => {
+          const div = document.createElement('div');
+          div.className = 'menu-item';
+          div.innerHTML = `
+                    <span class="menu-name">${item.name}</span>
+                    <span class="menu-price">${item.price}</span>
+                `;
+          div.addEventListener('click', () => TTS.speak(item.name));
+          container.appendChild(div);
+        });
+      }
+
+      // Render coworking phrases
+      function renderCoworkingPhrases() {
+        const container = document.getElementById('coworking-phrases');
+        coworkingPhrasesData.forEach((phrase) => {
+          const div = document.createElement('div');
+          div.className = 'coworking-phrase';
+          div.innerHTML = `
+                    <div class="coworking-russian">${phrase.russian}</div>
+                    <div class="coworking-danish">${phrase.danish}</div>
+                `;
+          div.addEventListener('click', () => TTS.speak(phrase.russian));
+          container.appendChild(div);
+        });
+      }
+
+      // DIALOGUE DATA
+      const dialogueData = [
+        {
+          speaker: 'B',
+          russian: 'Здравствуйте! Что будете заказывать?',
+          danish: 'Goddag! Hvad vil De bestille?',
+        },
+        {
+          speaker: 'A',
+          russian: 'Здравствуйте! Мне, пожалуйста, капучино.',
+          danish: 'Goddag! Jeg vil gerne have en cappuccino, tak.',
+        },
+        { speaker: 'B', russian: 'Большой или маленький?', danish: 'Stor eller lille?' },
+        { speaker: 'A', russian: 'Большой, пожалуйста.', danish: 'Stor, tak.' },
+        { speaker: 'B', russian: 'Что-нибудь ещё?', danish: 'Noget andet?' },
+        { speaker: 'A', russian: 'Да, круассан, пожалуйста.', danish: 'Ja, en croissant, tak.' },
+        {
+          speaker: 'B',
+          russian: 'Хорошо. Триста двадцать рублей.',
+          danish: 'OK. Tre hundrede og tyve rubler.',
+        },
+        { speaker: 'A', russian: 'Вот, пожалуйста. Спасибо!', danish: 'Vaersgod. Tak!' },
+      ];
+
+      // LISTENING DATA
+      const listeningData = [
+        {
+          audio: 'Можно меню?',
+          options: ['Ma jeg se menuen?', 'Ma jeg fa regningen?', 'Hvad koster det?'],
+          correct: 0,
+        },
+        {
+          audio: 'Сколько это стоит?',
+          options: ['Hvad anbefaler De?', 'Hvor er toilettet?', 'Hvor meget koster det?'],
+          correct: 2,
+        },
+        {
+          audio: 'Счёт, пожалуйста',
+          options: ['Menuen, tak', 'Regningen, tak', 'Kaffe, tak'],
+          correct: 1,
+        },
+        {
+          audio: 'Мне кофе',
+          options: ['Jeg vil have kaffe', 'Jeg kan lide kaffe', 'Har du kaffe?'],
+          correct: 0,
+        },
+        {
+          audio: 'Очень вкусно!',
+          options: ['Meget dyrt!', 'Meget laekker!', 'Meget stor!'],
+          correct: 1,
+        },
+      ];
+
+      // FILL BLANK DATA
+      const fillBlankData = [
+        {
+          text: 'Мне, ___, кофе.',
+          answer: 'пожалуйста',
+          hint: 'tak',
+          danish: 'Jeg vil gerne have kaffe, tak.',
+        },
+        { text: 'Можно ___?', answer: 'счёт', hint: 'regningen', danish: 'Ma jeg fa regningen?' },
+        {
+          text: 'Сколько это ___?',
+          answer: 'стоит',
+          hint: 'koster',
+          danish: 'Hvor meget koster det?',
+        },
+        {
+          text: '___ вы рекомендуете?',
+          answer: 'Что',
+          hint: 'Hvad',
+          danish: 'Hvad anbefaler De?',
+          alternatives: ['что'],
+        },
+        {
+          text: 'Спасибо, очень ___!',
+          answer: 'вкусно',
+          hint: 'laekker',
+          danish: 'Tak, det var meget laekker!',
+        },
+      ];
+
+      // MATCHING DATA
+      const matchingData = [
+        { russian: 'счёт', danish: 'regningen' },
+        { russian: 'меню', danish: 'menuen' },
+        { russian: 'вкусно', danish: 'laekker' },
+        { russian: 'большой', danish: 'stor' },
+        { russian: 'маленький', danish: 'lille' },
+      ];
+
+      // SENTENCE BUILDER DATA
+      const sentenceBuilderData = [
+        { words: ['Мне', ',', 'пожалуйста', ',', 'кофе'], danish: 'Jeg vil gerne have kaffe, tak' },
+        { words: ['Можно', 'счёт', '?'], danish: 'Ma jeg fa regningen?' },
+        { words: ['Сколько', 'это', 'стоит', '?'], danish: 'Hvor meget koster det?' },
+        { words: ['Очень', 'вкусно', '!'], danish: 'Meget laekker!' },
+      ];
+
+      // AI ROLE PLAY: CAFE CONFIG
+      const aiRolePlayCafeConfig = {
+        scenario: 'Du sidder på en hyggelig russisk café og vil bestille.',
+        yourRole: 'En kunde',
+        aiRole: 'Tjener (Официант)',
+        vocabulary: [
+          { russian: 'кофе', danish: 'kaffe' },
+          { russian: 'чай', danish: 'te' },
+          { russian: 'вода', danish: 'vand' },
+          { russian: 'пирожок', danish: 'pirog' },
+          { russian: 'счёт', danish: 'regning' },
+          { russian: 'меню', danish: 'menu' },
+          { russian: 'Мне, пожалуйста', danish: 'Jeg vil gerne have' },
+          { russian: 'Сколько стоит', danish: 'Hvor meget koster' },
+          { russian: 'Можно', danish: 'Må jeg' },
+        ],
+        goals: ['Bestil en drik', 'Spørg om prisen', 'Bed om regningen'],
+      };
+
+      // INITIALIZE
+      document.addEventListener('DOMContentLoaded', function () {
+        renderPhrases();
+        renderMenu();
+        renderCoworkingPhrases();
+        new Dialogue('dialogue-section', dialogueData);
+        new ListeningExercise('listening-exercise', listeningData);
+        new FillBlankExercise('fill-blank-exercise', fillBlankData);
+        new MatchingExercise('matching-exercise', matchingData);
+        new SentenceBuilder('sentence-builder', sentenceBuilderData);
+
+        // AI Role Play: Cafe
+        new AIRolePlay('ai-roleplay-cafe', aiRolePlayCafeConfig);
+
+        // AI Quick Quiz
+        new AIQuickQuiz('ai-quiz', {
+          vocabulary: [
+            { russian: 'кофе', danish: 'kaffe' },
+            { russian: 'чай', danish: 'te' },
+            { russian: 'вода', danish: 'vand' },
+            { russian: 'счёт', danish: 'regning' },
+            { russian: 'меню', danish: 'menu' },
+            { russian: 'пожалуйста', danish: 'tak/venligst' },
+            { russian: 'вкусно', danish: 'lækker' },
+            { russian: 'большой', danish: 'stor' },
+            { russian: 'маленький', danish: 'lille' },
+          ],
+          maxRounds: 8,
+        });
+
+        // AI Emoji Translator
+        new AIEmojiTranslator('ai-emoji', {
+          vocabulary: [
+            { russian: 'кофе', danish: 'kaffe' },
+            { russian: 'чай', danish: 'te' },
+            { russian: 'я', danish: 'jeg' },
+            { russian: 'хочу', danish: 'vil have' },
+            { russian: 'люблю', danish: 'elsker' },
+            { russian: 'пожалуйста', danish: 'tak' },
+            { russian: 'счёт', danish: 'regning' },
+            { russian: 'вкусно', danish: 'lækker' },
+          ],
+          maxRounds: 5,
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 10: Shopping | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      /* === Clothes & Colors === */
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: var(--space-s);
+        margin: var(--space-m) 0;
+      }
+      .color-card {
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 8px;
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s;
+      }
+      .color-card:hover {
+        transform: scale(1.05);
+      }
+      .clothes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: var(--space-m);
+        margin: var(--space-m) 0;
+      }
+      .clothes-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.2s;
+      }
+      .clothes-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+      .clothes-icon {
+        font-size: 2rem;
+        margin-bottom: var(--space-xs);
+      }
+
+      /* === Scene Cards === */
+      .shop-scene {
+        background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+
+      /* === Online Shopping UI === */
+      .app-mockup {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        border-radius: 12px;
+        overflow: hidden;
+        margin: var(--space-m) 0;
+        max-width: 360px;
+      }
+      .app-header {
+        background: linear-gradient(135deg, #7b2ff7 0%, #f107a3 100%);
+        color: white;
+        padding: var(--space-s) var(--space-m);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: var(--space-s);
+      }
+      .app-header-icon {
+        font-size: 1.25rem;
+      }
+      .app-body {
+        padding: var(--space-m);
+      }
+      .app-order-card {
+        background: var(--bg-paper);
+        border-radius: 8px;
+        padding: var(--space-m);
+        margin-bottom: var(--space-s);
+      }
+      .app-order-status {
+        display: inline-block;
+        background: #e8f5e9;
+        color: #2e7d32;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-radius: 4px;
+        margin-bottom: var(--space-xs);
+      }
+      .app-order-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .app-order-meta {
+        font-size: 0.85rem;
+        color: var(--text-light);
+      }
+      .app-buttons {
+        display: flex;
+        gap: var(--space-s);
+        margin-top: var(--space-s);
+      }
+      .app-btn {
+        flex: 1;
+        padding: var(--space-s);
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          transform 0.15s,
+          opacity 0.15s;
+      }
+      .app-btn:hover {
+        transform: scale(1.02);
+      }
+      .app-btn:active {
+        transform: scale(0.98);
+      }
+      .app-btn-primary {
+        background: linear-gradient(135deg, #7b2ff7 0%, #f107a3 100%);
+        color: white;
+      }
+      .app-btn-secondary {
+        background: var(--bg-paper);
+        color: var(--text-ink);
+        border: 1px solid var(--line-color);
+      }
+
+      /* === Pickup Point Scene === */
+      .pickup-scene {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+
+      /* === Chat Bubbles === */
+      .chat-container {
+        max-width: 400px;
+        margin: var(--space-m) 0;
+      }
+      .chat-bubble {
+        padding: var(--space-s) var(--space-m);
+        border-radius: 16px;
+        margin-bottom: var(--space-s);
+        max-width: 85%;
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+      .chat-bubble:hover {
+        transform: scale(1.02);
+      }
+      .chat-bubble.outgoing {
+        background: linear-gradient(135deg, #7b2ff7 0%, #f107a3 100%);
+        color: white;
+        margin-left: auto;
+        border-bottom-right-radius: 4px;
+      }
+      .chat-bubble.incoming {
+        background: var(--bg-paper);
+        border: 1px solid var(--line-color);
+        border-bottom-left-radius: 4px;
+      }
+      .chat-russian {
+        font-weight: 500;
+        margin-bottom: 2px;
+      }
+      .chat-danish {
+        font-size: 0.8rem;
+        opacity: 0.8;
+      }
+      .chat-bubble.incoming .chat-danish {
+        color: var(--text-light);
+      }
+
+      /* === Eco Badge === */
+      .eco-tip {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-s);
+        background: #e8f5e9;
+        border-left: 3px solid #4caf50;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+      }
+      .eco-tip-icon {
+        font-size: 1.5rem;
+      }
+      .eco-tip-text {
+        font-size: 0.9rem;
+      }
+      .eco-tip-text strong {
+        color: #2e7d32;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 10 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 50 min</span>
+          </div>
+          <h1>Shopping og Levering</h1>
+          <p class="lead">
+            At handle ind i dag betyder bade butikker og apps. Her laerer du ordforrad om toj,
+            farver, online-bestilling og afhentning.
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <h2><span>Del 1: Toj</span><span class="chapter-num">Ordforrad</span></h2>
+            <div class="clothes-grid" id="clothes-grid"></div>
+
+            <h2><span>Del 2: Farver</span><span class="chapter-num">Ordforrad</span></h2>
+            <div class="color-grid" id="colors-grid"></div>
+
+            <h2><span>Del 3: Shopping-fraser</span><span class="chapter-num">Fraser</span></h2>
+            <div id="vocabulary-section" class="vocab-grid"></div>
+
+            <h2><span>Del 4: Hukommelsesspil</span><span class="chapter-num">Spil</span></h2>
+            <p>Find par af russiske ord og danske oversaettelser!</p>
+            <div id="memory-game" class="exercise-container"></div>
+
+            <h2><span>Del 5: Hurtighedsudfordring</span><span class="chapter-num">Spil</span></h2>
+            <p>Hvor mange ord kan du matche pa 45 sekunder?</p>
+            <div id="speed-challenge" class="exercise-container"></div>
+
+            <h2><span>Del 6: Dialog i Butikken</span><span class="chapter-num">Samtale</span></h2>
+            <div class="shop-scene">
+              <h3>Situation: I en tojbutik</h3>
+              <p>Se dialogen udfolde sig med animeret tekst:</p>
+            </div>
+            <div id="dialogue-section"></div>
+
+            <!-- === ONLINE SHOPPING SECTION === -->
+            <h2><span>Del 6b: Online-bestilling</span><span class="chapter-num">Moderne</span></h2>
+
+            <p>I dag bestiller mange russere toj online. Her er vigtige ord:</p>
+            <div id="online-vocab" class="vocab-grid"></div>
+
+            <h3>App-interface</h3>
+            <p>Sadan ser en typisk ordre ud i en app:</p>
+
+            <div class="app-mockup">
+              <div class="app-header">
+                <span class="app-header-icon">📦</span>
+                <span>Мои заказы</span>
+              </div>
+              <div class="app-body">
+                <div class="app-order-card">
+                  <div class="app-order-status">Готов к выдаче</div>
+                  <div class="app-order-title">Заказ #7291</div>
+                  <div class="app-order-meta">Куртка чёрная, размер M</div>
+                  <div class="app-order-meta">ПВЗ: ул. Ленина, 15</div>
+                </div>
+                <div class="app-buttons">
+                  <button class="app-btn app-btn-secondary" onclick="TTS.speak('Отменить')">
+                    Отменить
+                  </button>
+                  <button class="app-btn app-btn-primary" onclick="TTS.speak('Забрать')">
+                    Забрать
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="theory-block">
+              <h3>Ordforrad fra interface</h3>
+              <ul>
+                <li><strong>Мои заказы</strong> — Mine ordrer</li>
+                <li><strong>Готов к выдаче</strong> — Klar til afhentning</li>
+                <li><strong>Отменить</strong> — Annuller</li>
+                <li><strong>Забрать</strong> — Afhent</li>
+                <li><strong>ПВЗ</strong> — Pakkeshop (punkt vydachi zakazov)</li>
+              </ul>
+            </div>
+
+            <!-- === PICKUP POINT SECTION === -->
+            <h2><span>Del 6c: I Pakkeshoppen</span><span class="chapter-num">Samtale</span></h2>
+
+            <div class="pickup-scene">
+              <h3>Situation: Du henter din ordre</h3>
+              <p>En typisk dialog i et ПВЗ (pakkeshop):</p>
+            </div>
+
+            <div class="chat-container" id="pickup-chat"></div>
+
+            <div class="eco-tip">
+              <span class="eco-tip-icon">🌱</span>
+              <div class="eco-tip-text">
+                <strong>Oko-tip:</strong> Mange russere siger nu «Пакет не нужен» (Jeg behover ikke
+                pose) eller «У меня свой пакет» (Jeg har min egen pose).
+              </div>
+            </div>
+
+            <h2><span>Del 7: Lytteovelse</span><span class="chapter-num">Ovelse</span></h2>
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <h2><span>Del 8: Saet Bogstaverne</span><span class="chapter-num">Ovelse</span></h2>
+            <p>Saet bogstaverne i den rigtige raekkefolge:</p>
+            <div id="scramble-exercise" class="exercise-container"></div>
+
+            <h2><span>Del 9: Skriv pa Russisk</span><span class="chapter-num">Ovelse</span></h2>
+            <p>Skriv ordene - fa streak bonus for flere rigtige i traek!</p>
+            <div id="typing-exercise" class="exercise-container"></div>
+
+            <!-- AI ROLE PLAY: SHOP -->
+            <h2>
+              <span>Del 10: Rollespil i Butikken</span
+              ><span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🛍️ Øv dig i butikken</h3>
+              <p>
+                Du er i en russisk tøjbutik! AI'en spiller ekspedienten. Prøv at købe tøj, spørge om
+                priser og størrelser.
+              </p>
+            </div>
+
+            <div id="ai-roleplay-shop" class="exercise-container"></div>
+
+            <!-- AI CONVERSATION: ONLINE SHOPPING -->
+            <h2>
+              <span>Del 11: Chat om Online-shopping</span
+              ><span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>📱 Moderne shopping</h3>
+              <p>
+                Øv dig i at tale om online-bestillinger, levering og afhentning. AI-tutoren hjælper
+                dig med at bruge det nye ordforråd.
+              </p>
+            </div>
+
+            <div id="ai-conversation" class="exercise-container"></div>
+
+            <!-- AI SENTENCE AUCTION -->
+            <h2>
+              <span>Del 12: Sætnings-Auktion</span><span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🏛️ Køb de rigtige sætninger!</h3>
+              <p>Du har 100 mønter. Vælg den grammatisk korrekte sætning - forkert valg koster!</p>
+            </div>
+
+            <div id="ai-auction" class="exercise-container"></div>
+
+            <!-- AI QUICK QUIZ -->
+            <h2><span>Del 13: Speed Quiz</span><span class="chapter-num">🎮 AI Spil</span></h2>
+
+            <div class="ai-section-intro">
+              <h3>⚡ Hvor hurtig er du?</h3>
+              <p>Svar på tid! Streak-bonus for flere rigtige i træk.</p>
+            </div>
+
+            <div id="ai-quiz" class="exercise-container"></div>
+
+            <h2><span>Opsummering</span></h2>
+            <div class="theory-block">
+              <h3>Hvad Du Har Laert</h3>
+              <ul>
+                <li><strong>Toj:</strong> рубашка, брюки, куртка, платье...</li>
+                <li><strong>Farver:</strong> красный, синий, чёрный, белый...</li>
+                <li><strong>I butikken:</strong> Сколько стоит?, Можно примерить?</li>
+                <li><strong>Online:</strong> заказ, доставка, пункт выдачи, забрать</li>
+                <li><strong>Betaling:</strong> картой, наличными, перевод</li>
+              </ul>
+            </div>
+
+            <nav class="lesson-nav">
+              <a href="09-city.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">I Byen</span>
+              </a>
+              <a href="11-weather.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Naeste lektion</span>
+                <span class="lesson-nav-title">Vejret</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Kultur</strong>
+              I Rusland er det normalt at prove toj for du kober. Proeverum hedder «примерочная».
+            </div>
+            <div class="margin-note">
+              <strong>Moderne Rusland</strong>
+              Wildberries og Ozon er de storste online-butikker. Mange henter pakker i ПВЗ
+              (pakkeshops) i stedet for hjemmelevering.
+            </div>
+            <div class="margin-note">
+              <strong>Betaling</strong>
+              «Перевод по номеру» (overforsel via telefonnummer) er meget populaert. Mange smaboder
+              tager kun Sberbank-overforsel!
+            </div>
+            <div class="margin-note">
+              <strong>Sjov fakta</strong>
+              Nogle gange rejser din pakke laengere end dig. Taelmodighed er en russisk dyd. 📦
+            </div>
+          </aside>
+        </section>
+      </main>
+      <samovar-footer></samovar-footer>
+    </div>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      const clothesData = [
+        { icon: '👔', russian: 'рубашка', danish: 'skjorte' },
+        { icon: '👕', russian: 'футболка', danish: 't-shirt' },
+        { icon: '👖', russian: 'брюки', danish: 'bukser' },
+        { icon: '👗', russian: 'платье', danish: 'kjole' },
+        { icon: '🧥', russian: 'куртка', danish: 'jakke' },
+        { icon: '👟', russian: 'обувь', danish: 'sko' },
+        { icon: '👒', russian: 'шляпа', danish: 'hat' },
+        { icon: '🧣', russian: 'шарф', danish: 'torklaede' },
+      ];
+
+      const colorsData = [
+        { russian: 'красный', danish: 'rod', color: '#e74c3c' },
+        { russian: 'синий', danish: 'bla', color: '#3498db' },
+        { russian: 'зелёный', danish: 'gron', color: '#27ae60' },
+        { russian: 'жёлтый', danish: 'gul', color: '#f1c40f' },
+        { russian: 'чёрный', danish: 'sort', color: '#2c3e50' },
+        { russian: 'белый', danish: 'hvid', color: '#bdc3c7' },
+      ];
+
+      function renderClothes() {
+        const container = document.getElementById('clothes-grid');
+        clothesData.forEach((item) => {
+          const card = document.createElement('div');
+          card.className = 'clothes-card';
+          card.innerHTML = `<div class="clothes-icon">${item.icon}</div><div>${item.russian}</div><small>${item.danish}</small>`;
+          card.addEventListener('click', () => TTS.speak(item.russian));
+          container.appendChild(card);
+        });
+      }
+
+      function renderColors() {
+        const container = document.getElementById('colors-grid');
+        colorsData.forEach((c) => {
+          const card = document.createElement('div');
+          card.className = 'color-card';
+          card.style.background = c.color;
+          if (c.russian === 'белый' || c.russian === 'жёлтый') {
+            card.style.color = '#333';
+            card.style.textShadow = 'none';
+          }
+          card.innerHTML = `<div>${c.russian}</div><small>${c.danish}</small>`;
+          card.addEventListener('click', () => TTS.speak(c.russian));
+          container.appendChild(card);
+        });
+      }
+
+      const vocabularyData = [
+        {
+          russian: 'Сколько это стоит?',
+          danish: 'Hvor meget koster det?',
+          transcription: 'SKOL-ka E-ta STO-it',
+        },
+        {
+          russian: 'Можно примерить?',
+          danish: 'Ma jeg prove?',
+          transcription: "MOZH-na pri-MJE-rit'",
+        },
+        {
+          russian: 'Есть другой размер?',
+          danish: 'Har I en anden storrelse?',
+          transcription: "jest' dru-GOJ raz-MJER",
+        },
+        { russian: 'Я беру это.', danish: 'Jeg tager den.', transcription: 'ja bi-RU E-ta' },
+        {
+          russian: 'Можно картой?',
+          danish: 'Kan jeg betale med kort?',
+          transcription: 'MOZH-na KAR-toj',
+        },
+        {
+          russian: 'Наличными или картой?',
+          danish: 'Kontant eller kort?',
+          transcription: 'na-LICH-ny-mi I-li KAR-toj',
+        },
+      ];
+
+      // Online shopping vocabulary
+      const onlineVocabData = [
+        { russian: 'заказ', danish: 'ordre/bestilling', transcription: 'za-KAZ' },
+        { russian: 'доставка', danish: 'levering', transcription: 'da-STAV-ka' },
+        { russian: 'курьер', danish: 'bud/kurer', transcription: "kur'-JER" },
+        { russian: 'пункт выдачи', danish: 'pakkeshop', transcription: 'punkt VY-da-chi' },
+        { russian: 'корзина', danish: 'indkobskurv', transcription: 'kar-ZI-na' },
+        {
+          russian: 'оформить заказ',
+          danish: 'gennemfor ordre',
+          transcription: "a-FOR-mit' za-KAZ",
+        },
+        { russian: 'отменить', danish: 'annuller', transcription: "at-me-NIT'" },
+        {
+          russian: 'перевод по номеру',
+          danish: 'overforsel via tlf.',
+          transcription: 'pe-re-VOD pa NO-me-ru',
+        },
+      ];
+
+      // Pickup point chat dialogue
+      const pickupChatData = [
+        { type: 'outgoing', russian: 'Здравствуйте!', danish: 'Goddag!' },
+        {
+          type: 'incoming',
+          russian: 'Здравствуйте! Номер заказа?',
+          danish: 'Goddag! Ordrenummer?',
+        },
+        { type: 'outgoing', russian: 'Семь два девять один.', danish: '7291.' },
+        {
+          type: 'incoming',
+          russian: 'Секунду... Вот ваш заказ.',
+          danish: 'Et ojeblik... Her er din ordre.',
+        },
+        { type: 'incoming', russian: 'Пакет нужен?', danish: 'Skal du bruge en pose?' },
+        {
+          type: 'outgoing',
+          russian: 'Нет, спасибо. У меня рюкзак.',
+          danish: 'Nej tak. Jeg har en rygsaek.',
+        },
+        { type: 'incoming', russian: 'Хорошо. Всего доброго!', danish: 'OK. Ha det godt!' },
+        { type: 'outgoing', russian: 'Спасибо, до свидания!', danish: 'Tak, farvel!' },
+      ];
+
+      const memoryPairs = [
+        { russian: 'рубашка', danish: 'skjorte' },
+        { russian: 'брюки', danish: 'bukser' },
+        { russian: 'куртка', danish: 'jakke' },
+        { russian: 'красный', danish: 'rod' },
+        { russian: 'синий', danish: 'bla' },
+        { russian: 'чёрный', danish: 'sort' },
+      ];
+
+      const speedWords = [
+        { russian: 'рубашка', danish: 'skjorte' },
+        { russian: 'брюки', danish: 'bukser' },
+        { russian: 'платье', danish: 'kjole' },
+        { russian: 'куртка', danish: 'jakke' },
+        { russian: 'обувь', danish: 'sko' },
+        { russian: 'красный', danish: 'rod' },
+        { russian: 'синий', danish: 'bla' },
+        { russian: 'зелёный', danish: 'gron' },
+        { russian: 'чёрный', danish: 'sort' },
+        { russian: 'белый', danish: 'hvid' },
+      ];
+
+      const dialogueData = [
+        {
+          speaker: 'A',
+          russian: 'Здравствуйте! Мне нужна куртка.',
+          danish: 'Goddag! Jeg har brug for en jakke.',
+        },
+        { speaker: 'B', russian: 'Какой размер?', danish: 'Hvilken storrelse?' },
+        { speaker: 'A', russian: 'Средний, пожалуйста.', danish: 'Medium, tak.' },
+        { speaker: 'B', russian: 'Какой цвет?', danish: 'Hvilken farve?' },
+        { speaker: 'A', russian: 'Чёрный или синий.', danish: 'Sort eller bla.' },
+        {
+          speaker: 'B',
+          russian: 'Вот, пожалуйста. Примерочная там.',
+          danish: 'Vaersgod. Proeverummet er der.',
+        },
+        { speaker: 'A', russian: 'Сколько это стоит?', danish: 'Hvor meget koster det?' },
+        { speaker: 'B', russian: 'Пять тысяч рублей.', danish: 'Fem tusind rubler.' },
+        {
+          speaker: 'A',
+          russian: 'Я беру. Можно картой?',
+          danish: 'Jeg tager den. Kan jeg betale med kort?',
+        },
+      ];
+
+      const listeningData = [
+        { audio: 'рубашка', options: ['skjorte', 'bukser', 'kjole'], correct: 0 },
+        {
+          audio: 'Сколько это стоит?',
+          options: ['Hvad er klokken?', 'Hvor meget koster det?', 'Hvor er det?'],
+          correct: 1,
+        },
+        { audio: 'красный', options: ['bla', 'rod', 'gron'], correct: 1 },
+        {
+          audio: 'Можно примерить?',
+          options: ['Ma jeg prove?', 'Ma jeg betale?', 'Ma jeg ga?'],
+          correct: 0,
+        },
+      ];
+
+      const scrambleWords = [
+        { russian: 'куртка', danish: 'jakke' },
+        { russian: 'брюки', danish: 'bukser' },
+        { russian: 'синий', danish: 'bla' },
+        { russian: 'касса', danish: 'kasse' },
+      ];
+
+      const typingWords = [
+        { russian: 'рубашка', danish: 'skjorte' },
+        { russian: 'куртка', danish: 'jakke' },
+        { russian: 'красный', danish: 'rod' },
+        { russian: 'синий', danish: 'bla' },
+        { russian: 'чёрный', danish: 'sort' },
+      ];
+
+      // Render pickup chat bubbles
+      function renderPickupChat() {
+        const container = document.getElementById('pickup-chat');
+        pickupChatData.forEach((msg) => {
+          const bubble = document.createElement('div');
+          bubble.className = `chat-bubble ${msg.type}`;
+          bubble.innerHTML = `
+                    <div class="chat-russian">${msg.russian}</div>
+                    <div class="chat-danish">${msg.danish}</div>
+                `;
+          bubble.addEventListener('click', () => TTS.speak(msg.russian));
+          container.appendChild(bubble);
+        });
+      }
+
+      // AI ROLE PLAY: SHOP CONFIG
+      const aiRolePlayShopConfig = {
+        scenario: 'Du er i en russisk tøjbutik og vil købe en jakke.',
+        yourRole: 'En kunde',
+        aiRole: 'Ekspedient (Продавец)',
+        vocabulary: [
+          ...vocabularyData,
+          ...clothesData.map((c) => ({ russian: c.russian, danish: c.danish })),
+        ],
+        goals: [
+          'Sig hvad du leder efter',
+          'Spørg om pris',
+          'Spørg om størrelse',
+          'Beslut dig for at købe',
+        ],
+      };
+
+      // AI CONVERSATION: ONLINE SHOPPING CONFIG
+      const aiConversationConfig = {
+        topic: 'Online shopping og levering',
+        level: 'A1',
+        vocabulary: [...vocabularyData, ...onlineVocabData],
+        starterPrompts: [
+          { russian: 'Я заказал куртку.', danish: 'Jeg bestilte en jakke' },
+          { russian: 'Где мой заказ?', danish: 'Hvor er min ordre?' },
+          { russian: 'Когда доставка?', danish: 'Hvornår levering?' },
+          { russian: 'Можно отменить?', danish: 'Kan jeg annullere?' },
+        ],
+        systemPrompt:
+          'Fokuser på online shopping, levering og afhentning. Brug moderne ord som заказ, доставка, ПВЗ.',
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        renderClothes();
+        renderColors();
+        renderPickupChat();
+
+        new VocabularyList('vocabulary-section', vocabularyData);
+        new VocabularyList('online-vocab', onlineVocabData);
+        new MemoryGame('memory-game', memoryPairs);
+        new SpeedChallenge('speed-challenge', speedWords, 45);
+        new AnimatedDialogue('dialogue-section', dialogueData);
+        new ListeningExercise('listening-exercise', listeningData);
+        new WordScramble('scramble-exercise', scrambleWords);
+        new TypingPractice('typing-exercise', typingWords);
+
+        // AI Role Play: Shop
+        new AIRolePlay('ai-roleplay-shop', aiRolePlayShopConfig);
+
+        // AI Conversation: Online Shopping
+        new AIConversation('ai-conversation', aiConversationConfig);
+
+        // AI Sentence Auction
+        new AISentenceAuction('ai-auction', {
+          vocabulary: [...vocabularyData, ...onlineVocabData],
+          maxRounds: 6,
+        });
+
+        // AI Quick Quiz
+        new AIQuickQuiz('ai-quiz', {
+          vocabulary: [
+            ...vocabularyData,
+            ...clothesData.map((c) => ({ russian: c.russian, danish: c.danish })),
+            ...colorsData.map((c) => ({ russian: c.russian, danish: c.danish })),
+          ],
+          maxRounds: 10,
+        });
+      });
+    </script>
+  </body>
+</html>

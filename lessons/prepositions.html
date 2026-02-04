@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Præpositioner | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* V vs NA Sorter */
+      .v-na-game {
+        display: flex;
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .container-box {
+        flex: 1;
+        border: 2px solid #333;
+        border-radius: 4px;
+        /* Box-like */
+        min-height: 200px;
+        position: relative;
+        background: white;
+      }
+
+      .container-surface {
+        flex: 1;
+        border-bottom: 4px solid #333;
+        /* Surface-like */
+        min-height: 200px;
+        position: relative;
+        background: #f9f9f9;
+      }
+
+      .container-label {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent-blue);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 15px;
+        font-weight: bold;
+      }
+
+      .place-card {
+        background: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+        cursor: grab;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 4px;
+      }
+
+      .place-card:active {
+        cursor: grabbing;
+      }
+
+      .place-card.correct {
+        border-color: var(--success-color);
+        background: #e8f5e9;
+        cursor: default;
+      }
+
+      /* Rule Cards */
+      .rule-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin: 20px 0;
+      }
+
+      .rule-card {
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid #eee;
+        background: white;
+      }
+
+      .rule-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      /* Mobile Optimizations */
+      @media (max-width: 768px) {
+        .v-na-game {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .container-box,
+        .container-surface {
+          min-height: 180px;
+        }
+
+        .container-label {
+          font-size: 0.9rem;
+          padding: 4px 12px;
+        }
+
+        .place-card {
+          padding: 12px;
+          margin: 8px;
+          font-size: 1rem;
+        }
+
+        .rule-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .rule-card {
+          padding: 15px;
+        }
+
+        .rule-icon {
+          font-size: 1.5rem;
+        }
+
+        table {
+          font-size: 0.9rem;
+        }
+
+        table th,
+        table td {
+          padding: 8px;
+        }
+      }
+
+      /* Touch device enhancements */
+      @media (hover: none) and (pointer: coarse) {
+        .place-card {
+          min-height: 48px;
+          min-width: 48px;
+        }
+      }
+
+      /* Pick and Place Styles */
+      .place-card {
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          background-color 0.2s;
+      }
+
+      .place-card.picked {
+        transform: scale(1.1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        border-color: var(--accent-blue);
+        z-index: 100;
+        background: #e3f2fd;
+      }
+
+      /* When picking, show zones as interactive */
+      body.pnp-active .container-box,
+      body.pnp-active .container-surface {
+        border-color: var(--accent-blue);
+        cursor: pointer;
+      }
+
+      body.pnp-active .container-box:hover,
+      body.pnp-active .container-surface:hover {
+        background-color: #e3f2fd;
+      }
+    </style>
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Præpositioner: Forbindelser mellem ord</h1>
+          <p class="lead">
+            Præpositioner på russisk kræver bestemte kasus. Det er nøglen til at opbygge korrekte
+            sætninger.
+          </p>
+
+          <section id="preposition-cases">
+            <h2>Præpositioner og kasus</h2>
+
+            <div class="visual-concept">
+              <div class="visual-desc">
+                <strong>Formel:</strong>
+                Præposition + Endelse (Kasus) = Betydning. <br />
+                Uden den rigtige endelse mister præpositionen sin kraft.
+              </div>
+            </div>
+
+            <div class="game-container" style="background: white">
+              <h3>De vigtigste par</h3>
+
+              <table style="width: 100%; border-collapse: collapse; margin-top: 20px">
+                <tr style="background: #f0f0f0">
+                  <th style="padding: 10px; text-align: left">Præposition</th>
+                  <th style="padding: 10px; text-align: left">Kasus</th>
+                  <th style="padding: 10px; text-align: left">Spørgsmål/Forklaring</th>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">
+                    <strong>В / НА</strong>
+                  </td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">
+                    Akk. (Hvorhen?) <br />
+                    Præp. (Hvor?)
+                  </td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">
+                    I/På (retning)<br />I/På (sted)
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">
+                    <strong>С (Med)</strong>
+                  </td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">Instrumentalis</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">S kem? (Med hvem?)</td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">
+                    <strong>У (Hos)</strong>
+                  </td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">Genitiv</td>
+                  <td style="padding: 10px; border-bottom: 1px solid #eee">U kogo? (Hos hvem?)</td>
+                </tr>
+              </table>
+            </div>
+          </section>
+
+          <section id="v-na">
+            <h2>V vs NA: Beholder eller Overflade?</h2>
+            <p>Hovedreglen for valg af præposition:</p>
+
+            <div class="rule-grid">
+              <div class="rule-card">
+                <span class="rule-icon">📦</span>
+                <h3>В (I)</h3>
+                <p>Lukket rum (Beholder).</p>
+                <ul>
+                  <li>V komnate (I værelset)</li>
+                  <li>V sjkole (I skolen - bygning)</li>
+                  <li>V parke (I parken - grænser)</li>
+                </ul>
+              </div>
+              <div class="rule-card">
+                <span class="rule-icon">🍽️</span>
+                <h3>НА (På)</h3>
+                <p>Overflade eller Begivenhed.</p>
+                <ul>
+                  <li>Na stole (På bordet - overflade)</li>
+                  <li>Na rabote (På arbejde - funktion)</li>
+                  <li>Na kontserte (Til koncert - begivenhed)</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Praksis: Sortering</h2>
+            <p>Hvor skal vi hen? V (i kassen) eller Na (på pladsen)?</p>
+
+            <div class="game-container">
+              <div
+                id="place-pool"
+                style="
+                  display: flex;
+                  gap: 10px;
+                  flex-wrap: wrap;
+                  justify-content: center;
+                  margin-bottom: 200px;
+                "
+              >
+                <!-- Places injected via JS -->
+              </div>
+
+              <div class="v-na-game">
+                <div class="container-box" data-prep="v">
+                  <div class="container-label">В (I)</div>
+                  <div class="drop-content"></div>
+                </div>
+                <div class="container-surface" data-prep="na">
+                  <div class="container-label">НА (På)</div>
+                  <div class="drop-content"></div>
+                </div>
+              </div>
+              <div id="vna-feedback" class="feedback"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Undtagelsen "Køkkenet"</strong>
+            Vi siger "NA kukhne" (På køkkenet), selvom det er et værelse. Traditionelt var køkkenet
+            placeret ved ildstedet (et åbent område).
+          </div>
+        </aside>
+      </main>
+
+      <samovar-footer></samovar-footer>
+    </div>
+
+    <script src="../js/pick-and-place.js"></script>
+    <script>
+      const places = [
+        { text: 'Skole', prep: 'v' },
+        { text: 'Arbejde', prep: 'na' },
+        { text: 'Koncert', prep: 'na' },
+        { text: 'Butik', prep: 'v' },
+        { text: 'Bord', prep: 'na' },
+        { text: 'Museum', prep: 'v' },
+        { text: 'Gade', prep: 'na' },
+      ];
+
+      const pool = document.getElementById('place-pool');
+      const feedback = document.getElementById('vna-feedback');
+      let solved = 0;
+
+      // Render Cards
+      places
+        .sort(() => Math.random() - 0.5)
+        .forEach((p) => {
+          const card = document.createElement('div');
+          card.className = 'place-card';
+          card.innerText = p.text;
+          card.dataset.prep = p.prep;
+          pool.appendChild(card);
+        });
+
+      // Initialize PickAndPlace
+      const pnp = new PickAndPlace({
+        draggableSelector: '.place-card',
+        zoneSelector: '.container-box, .container-surface',
+        activeClass: 'picked',
+        onDrop: (item, zone) => {
+          const itemPrep = item.dataset.prep;
+          const zonePrep = zone.dataset.prep;
+
+          if (itemPrep === zonePrep) {
+            const clone = document.createElement('div');
+            clone.className = 'place-card correct';
+            clone.innerText = item.innerText;
+
+            const dropContent = zone.querySelector('.drop-content');
+            if (dropContent) {
+              dropContent.appendChild(clone);
+            } else {
+              zone.appendChild(clone);
+            }
+
+            item.remove();
+            solved++;
+
+            if (solved === places.length) {
+              feedback.innerText = 'Flot! Du har forstået logikken bag rummet.';
+              feedback.className = 'feedback correct';
+              feedback.style.color = 'var(--color-success)';
+              feedback.style.marginTop = '20px';
+              feedback.style.fontWeight = 'bold';
+            }
+            return true;
+          } else {
+            item.style.backgroundColor = '#ffebee';
+            setTimeout(() => (item.style.backgroundColor = 'white'), 500);
+
+            item.animate(
+              [
+                { transform: 'translateX(0)' },
+                { transform: 'translateX(-5px)' },
+                { transform: 'translateX(5px)' },
+                { transform: 'translateX(0)' },
+              ],
+              {
+                duration: 300,
+              },
+            );
+
+            return false;
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

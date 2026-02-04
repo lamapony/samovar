@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Синтаксис и Порядок слов | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .sentence-builder {
+        display: flex;
+        gap: 15px;
+        padding: 40px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        justify-content: center;
+        margin-bottom: 30px;
+        min-height: 150px;
+        align-items: center;
+        border: 1px solid #e0e0e0;
+      }
+
+      .word-block {
+        background: white;
+        border: 1px solid var(--accent-blue);
+        color: var(--accent-blue);
+        padding: 15px 25px;
+        border-radius: 4px;
+        cursor: grab;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .word-block:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .word-block:active {
+        cursor: grabbing;
+        transform: scale(0.98);
+      }
+
+      .meaning-display {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-style: italic;
+        color: var(--text-ink);
+        min-height: 3em;
+      }
+
+      .info-card {
+        border-left: 4px solid var(--accent-blue);
+        padding: 20px;
+        background: white;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      }
+
+      .example-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .comparison-box {
+        border: 1px solid #eee;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .comparison-header {
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        color: #999;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+      }
+
+      .highlight {
+        background: #fff3cd;
+        padding: 0 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="cases.html">Падежи</a>
+          <a
+            href="syntax.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Синтаксис</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Синтаксис: Свобода и Порядок</h1>
+          <p class="lead">
+            "Русский порядок слов свободный" — это популярный миф. Он свободный грамматически, но
+            строгий коммуникативно. Место слова в предложении определяет его смысловой вес.
+          </p>
+
+          <section id="theory">
+            <h2>Принцип "Тема — Рема"</h2>
+            <div class="info-card">
+              <p>
+                В русском языке самое важное слово (новое сообщение) ставится
+                <strong>в конец</strong> предложения. Это называется <em>Рема</em> (Rheme).
+                Известная информация (Тема) стоит в начале.
+              </p>
+            </div>
+
+            <div class="example-grid">
+              <div class="comparison-box">
+                <div class="comparison-header">Нейтрально</div>
+                <p><strong>Студенты</strong> читают книги.</p>
+                <p style="color: #666; font-size: 0.9rem">(Что делают студенты? Читают книги.)</p>
+              </div>
+              <div class="comparison-box">
+                <div class="comparison-header">Акцент на субъекте</div>
+                <p>Книги читают <strong>студенты</strong>.</p>
+                <p style="color: #666; font-size: 0.9rem">
+                  (Кто читает книги? Студенты, а не профессора.)
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="interactive-syntax">
+            <h2>Лаборатория Смысла</h2>
+            <p>
+              Попробуйте поменять порядок слов, чтобы изменить смысл фразы. Перетаскивайте блоки.
+            </p>
+
+            <div class="sentence-builder" id="builder-area">
+              <div class="word-block" draggable="true" id="w1">Я</div>
+              <div class="word-block" draggable="true" id="w2">люблю</div>
+              <div class="word-block" draggable="true" id="w3">тебя</div>
+            </div>
+
+            <div class="meaning-display" id="meaning-output">
+              Смысл: Я испытываю чувство к тебе (Нейтрально).
+            </div>
+
+            <div style="margin-top: 30px; font-size: 0.9rem; color: #666">
+              <em>Подсказка:</em>
+              <ul style="margin-top: 10px">
+                <li><strong>Я люблю ТЕБЯ</strong> = Именно тебя, никого больше.</li>
+                <li>
+                  <strong>Тебя люблю Я</strong> = Я тот человек, который тебя любит (а не он).
+                </li>
+                <li><strong>Я тебя ЛЮБЛЮ</strong> = Это именно любовь, а не просто дружба.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="danish-comparison">
+            <h2>Отличие от Датского (V2)</h2>
+            <p>
+              Датский язык имеет жесткое правило V2 (глагол всегда на втором месте). Русский язык
+              игнорирует это правило.
+            </p>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px">
+              <tr style="border-bottom: 1px solid #eee">
+                <td style="padding: 15px"><strong>Датский</strong></td>
+                <td style="padding: 15px">
+                  I går <span class="highlight">var</span> jeg hjemme. (Глагол #2)
+                </td>
+              </tr>
+              <tr style="border-bottom: 1px solid #eee">
+                <td style="padding: 15px"><strong>Русский</strong></td>
+                <td style="padding: 15px">
+                  Вчера я <span class="highlight">был</span> дома.<br />
+                  Вчера <span class="highlight">был</span> я дома.<br />
+                  Я <span class="highlight">был</span> дома вчера.<br />
+                  Дома я <span class="highlight">был</span> вчера.
+                </td>
+              </tr>
+            </table>
+            <p style="margin-top: 15px; color: #666; font-size: 0.9rem">
+              Все русские варианты грамматически верны, но используются в разных контекстах.
+            </p>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Инверсия</strong>
+            В поэзии порядок слов часто нарушается для рифмы или особого ритма.
+            <em>"Белеет парус одинокий..."</em> (вместо "Одинокий парус белеет").
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar.</div>
+      </footer>
+    </div>
+
+    <script>
+      const area = document.getElementById('builder-area');
+      const blocks = document.querySelectorAll('.word-block');
+      const output = document.getElementById('meaning-output');
+
+      blocks.forEach((block) => {
+        block.addEventListener('dragstart', () => {
+          block.classList.add('dragging');
+        });
+
+        block.addEventListener('dragend', () => {
+          block.classList.remove('dragging');
+          analyzeOrder();
+        });
+      });
+
+      area.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(area, e.clientX);
+        const draggable = document.querySelector('.dragging');
+        if (afterElement == null) {
+          area.appendChild(draggable);
+        } else {
+          area.insertBefore(draggable, afterElement);
+        }
+      });
+
+      function getDragAfterElement(container, x) {
+        const draggableElements = [...container.querySelectorAll('.word-block:not(.dragging)')];
+
+        return draggableElements.reduce(
+          (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = x - box.left - box.width / 2;
+            if (offset < 0 && offset > closest.offset) {
+              return { offset: offset, element: child };
+            } else {
+              return closest;
+            }
+          },
+          { offset: Number.NEGATIVE_INFINITY },
+        ).element;
+      }
+
+      function analyzeOrder() {
+        const currentOrder = [...area.querySelectorAll('.word-block')]
+          .map((b) => b.innerText)
+          .join(' ');
+
+        let meaning = '';
+
+        switch (currentOrder) {
+          case 'Я люблю тебя':
+            meaning = 'Смысл: Я испытываю чувство к тебе (Нейтрально).';
+            break;
+          case 'Я тебя люблю':
+            meaning = 'Смысл: Акцент на чувстве. (Я не просто нравлюсь, я ЛЮБЛЮ).';
+            break;
+          case 'Тебя люблю я':
+            meaning = 'Смысл: Акцент на субъекте. (Это Я тебя люблю, а не он).';
+            break;
+          case 'Люблю тебя я':
+            meaning = 'Смысл: Поэтично/Архаично. Звучит как начало стихотворения.';
+            break;
+          case 'Тебя я люблю':
+            meaning =
+              'Смысл: Акцент на действии (люблю), но объект вынесен вперед как тема разговора.';
+            break;
+          case 'Люблю я тебя':
+            meaning = 'Смысл: Эмоциональное утверждение. Часто с вздохом.';
+            break;
+          default:
+            meaning = 'Смысл: Нестандартный, но возможный порядок.';
+        }
+
+        output.innerText = meaning;
+        output.style.animation = 'none';
+        output.offsetHeight; /* trigger reflow */
+        output.style.animation = 'fadeIn 0.5s';
+      }
+
+      // Style for animation
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>

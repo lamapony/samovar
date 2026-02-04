@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 3: Tal fra 1 til 10 | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <style>
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: var(--space-m);
+      margin: var(--space-l) 0;
+    }
+
+    .number-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line-color);
+      padding: var(--space-l);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 8px;
+    }
+
+    .number-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-color: var(--accent-blue);
+    }
+
+    .number-digit {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--accent-blue);
+      display: block;
+    }
+
+    .number-russian {
+      font-size: 1.5rem;
+      font-family: var(--font-serif);
+      color: var(--text-ink);
+      margin: var(--space-s) 0;
+    }
+
+    .number-transcription {
+      font-size: 0.875rem;
+      color: var(--text-light);
+      font-family: monospace;
+    }
+
+    .phone-display {
+      font-size: 2rem;
+      font-family: monospace;
+      background: var(--bg-paper);
+      padding: var(--space-m);
+      border-radius: 8px;
+      margin: var(--space-m) 0;
+      letter-spacing: 4px;
+      text-align: center;
+    }
+
+    .price-tag {
+      display: inline-block;
+      background: var(--accent-red);
+      color: white;
+      padding: var(--space-s) var(--space-m);
+      border-radius: 4px;
+      font-size: 1.25rem;
+      margin: var(--space-xs);
+    }
+
+    .counting-game {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-s);
+      flex-wrap: wrap;
+      margin: var(--space-m) 0;
+    }
+
+    .counting-item {
+      width: 40px;
+      height: 40px;
+      background: var(--accent-blue);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.25rem;
+    }
+
+    .math-problem {
+      font-size: 1.5rem;
+      text-align: center;
+      margin: var(--space-m) 0;
+      font-family: var(--font-serif);
+    }
+
+    .math-operator {
+      color: var(--accent-red);
+      margin: 0 var(--space-s);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <samovar-header></samovar-header>
+
+    <main>
+      <div class="section-intro">
+        <div class="lesson-meta">
+          <span>Lektion 3 af 12</span>
+          <span>Niveau A0</span>
+          <span>Ca. 45 min</span>
+        </div>
+        <h1>Tal fra 1 til 10</h1>
+        <p class="lead">
+          Tal er overalt: priser, telefonnumre, adresser, tider. I denne lektion laerer du at
+          taelle pa russisk fra 1 til 10.
+        </p>
+      </div>
+
+      <section class="content-block">
+        <div class="content-main">
+          <!-- PART 1: NUMBERS -->
+          <h2>
+            <span>Del 1: Tallene 1-10</span>
+            <span class="chapter-num">Ordforrad</span>
+          </h2>
+
+          <p>Klik pa hvert tal for at hore udtalen. Gentag hojt!</p>
+
+          <div id="numbers-grid" class="number-grid"></div>
+
+          <div class="tip-box">
+            <strong>Udtaletip:</strong>
+            <ul>
+              <li><strong>Один</strong> - betoning pa sidste stavelse: a-DIN</li>
+              <li><strong>Четыре</strong> - CH som i engelsk "church"</li>
+              <li><strong>Семь</strong> - blødt M i slutningen</li>
+            </ul>
+          </div>
+
+          <!-- PART 2: LISTENING -->
+          <h2>
+            <span>Del 2: Lytteovelse</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>Lyt til tallet og valg det rigtige svar.</p>
+
+          <div id="listening-exercise" class="exercise-container"></div>
+
+          <!-- PART 3: MATCHING -->
+          <h2>
+            <span>Del 3: Par Tallene</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>Match det russiske tal med det rigtige ciffer.</p>
+
+          <div id="matching-exercise" class="exercise-container"></div>
+
+          <!-- PART 4: COUNTING -->
+          <h2>
+            <span>Del 4: Taelleovelse</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>Hvor mange cirkler ser du? Skriv tallet pa russisk.</p>
+
+          <div id="counting-exercise" class="exercise-container"></div>
+
+          <!-- PART 5: PHONE NUMBERS -->
+          <h2>
+            <span>Del 5: Telefonnumre</span>
+            <span class="chapter-num">Praktisk</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Sig telefonnumre pa russisk</h3>
+            <p>Russere laser telefonnumre ciffer for ciffer, ligesom pa dansk:</p>
+          </div>
+
+          <div class="phone-display">+7 495 <span class="cyrillic">один два три</span></div>
+
+          <p>Prov at laese disse telefonnumre:</p>
+
+          <div id="phone-exercise" class="exercise-container"></div>
+
+          <!-- PART 6: PRICES -->
+          <h2>
+            <span>Del 6: Priser</span>
+            <span class="chapter-num">Praktisk</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Priser i Rusland</h3>
+            <p>
+              Den russiske valuta hedder <strong class="cyrillic">рубль</strong> (rubel). Priser
+              siges saledes:
+            </p>
+            <div class="example-box">
+              <div class="example-russian">Пять рублей</div>
+              <div class="example-danish">Fem rubler</div>
+            </div>
+          </div>
+
+          <p>Hvad koster det? Match prisen:</p>
+
+          <div id="price-exercise" class="exercise-container"></div>
+
+          <!-- PART 7: WRITING -->
+          <h2>
+            <span>Del 7: Skriveovelse</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>Skriv tallet pa russisk.</p>
+
+          <div id="writing-exercise" class="exercise-container"></div>
+
+          <!-- PART 8: SIMPLE MATH -->
+          <h2>
+            <span>Del 8: Simpel Matematik</span>
+            <span class="chapter-num">Udfordring</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Matematiske Udtryk</h3>
+            <ul>
+              <li><strong class="cyrillic">плюс</strong> - plus (+)</li>
+              <li><strong class="cyrillic">минус</strong> - minus (-)</li>
+              <li><strong class="cyrillic">равно</strong> - lig med (=)</li>
+            </ul>
+          </div>
+
+          <p>Los regnestykket og skriv svaret pa russisk:</p>
+
+          <div id="math-exercise" class="exercise-container"></div>
+
+          <!-- AI TRANSLATION -->
+          <h2>
+            <span>Del 9: Oversæt med AI</span>
+            <span class="chapter-num">🤖 AI Praksis</span>
+          </h2>
+
+          <div class="ai-section-intro">
+            <h3>🔢 Tal i sætninger</h3>
+            <p>
+              Øv dig i at bruge tal i rigtige sætninger! AI'en giver dig feedback på din
+              oversættelse.
+            </p>
+          </div>
+
+          <div id="ai-translation" class="exercise-container"></div>
+
+          <!-- SUMMARY -->
+          <h2>
+            <span>Opsummering</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Tallene 1-10</h3>
+            <table class="comparison-table">
+              <tr>
+                <td>1</td>
+                <td class="cyrillic">один</td>
+                <td>6</td>
+                <td class="cyrillic">шесть</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td class="cyrillic">два</td>
+                <td>7</td>
+                <td class="cyrillic">семь</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td class="cyrillic">три</td>
+                <td>8</td>
+                <td class="cyrillic">восемь</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td class="cyrillic">четыре</td>
+                <td>9</td>
+                <td class="cyrillic">девять</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td class="cyrillic">пять</td>
+                <td>10</td>
+                <td class="cyrillic">десять</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- NAVIGATION -->
+          <nav class="lesson-nav">
+            <a href="02-alphabet.html" class="lesson-nav-item">
+              <span class="lesson-nav-label">Forrige lektion</span>
+              <span class="lesson-nav-title">Det Kyrilliske Alfabet</span>
+            </a>
+            <a href="04-about-me.html" class="lesson-nav-item">
+              <span class="lesson-nav-label">Naeste lektion</span>
+              <span class="lesson-nav-title">Jeg Hedder...</span>
+            </a>
+          </nav>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Vidste du?</strong>
+            Russisk bruger arabertal (1, 2, 3...) ligesom dansk. Kun ordene er forskellige!
+          </div>
+          <div class="margin-note">
+            <strong>Nul</strong>
+            Nul pa russisk er <strong class="cyrillic">ноль</strong> (nol) eller
+            <strong class="cyrillic">нуль</strong> (nul).
+          </div>
+          <div class="margin-note">
+            <strong>Ovelse</strong>
+            Tael alt du ser pa russisk: biler, traeer, mennesker. Det er den bedste made at lare
+            pa!
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <samovar-footer></samovar-footer>
+
+  <script type="module" src="/js/header.ts"></script>
+  <script type="module" src="/js/footer.ts"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // NUMBERS DATA
+    const numbersData = [
+      { digit: 1, russian: 'один', transcription: 'a-DIN' },
+      { digit: 2, russian: 'два', transcription: 'dva' },
+      { digit: 3, russian: 'три', transcription: 'tri' },
+      { digit: 4, russian: 'четыре', transcription: 'tchi-TY-rje' },
+      { digit: 5, russian: 'пять', transcription: "pjat'" },
+      { digit: 6, russian: 'шесть', transcription: "shest'" },
+      { digit: 7, russian: 'семь', transcription: "sjem'" },
+      { digit: 8, russian: 'восемь', transcription: "VO-sjem'" },
+      { digit: 9, russian: 'девять', transcription: "DJEV-jat'" },
+      { digit: 10, russian: 'десять', transcription: "DJES-jat'" },
+    ];
+
+    // Render numbers grid
+    function renderNumbersGrid() {
+      const container = document.getElementById('numbers-grid');
+      numbersData.forEach((num) => {
+        const card = document.createElement('div');
+        card.className = 'number-card';
+        card.innerHTML = `
+                    <span class="number-digit">${num.digit}</span>
+                    <span class="number-russian">${num.russian}</span>
+                    <span class="number-transcription">[${num.transcription}]</span>
+                `;
+        card.addEventListener('click', () => TTS.speak(num.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // LISTENING DATA
+    const listeningData = [
+      { audio: 'один', options: ['1', '2', '3'], correct: 0 },
+      { audio: 'пять', options: ['4', '5', '6'], correct: 1 },
+      { audio: 'три', options: ['3', '8', '10'], correct: 0 },
+      { audio: 'семь', options: ['6', '7', '9'], correct: 1 },
+      { audio: 'десять', options: ['9', '10', '8'], correct: 1 },
+      { audio: 'четыре', options: ['3', '5', '4'], correct: 2 },
+      { audio: 'восемь', options: ['8', '7', '6'], correct: 0 },
+      { audio: 'два', options: ['1', '2', '10'], correct: 1 },
+    ];
+
+    // MATCHING DATA
+    const matchingData = [
+      { russian: 'один', danish: '1' },
+      { russian: 'три', danish: '3' },
+      { russian: 'пять', danish: '5' },
+      { russian: 'семь', danish: '7' },
+      { russian: 'десять', danish: '10' },
+    ];
+
+    // COUNTING EXERCISE
+    const countingData = [
+      { count: 3, answer: 'три' },
+      { count: 5, answer: 'пять' },
+      { count: 7, answer: 'семь' },
+      { count: 2, answer: 'два' },
+      { count: 8, answer: 'восемь' },
+    ];
+
+    // Custom counting exercise
+    class CountingExercise {
+      constructor(containerId, data) {
+        this.container = document.getElementById(containerId);
+        this.data = data;
+        this.currentIndex = 0;
+        this.score = 0;
+        this.render();
+      }
+
+      render() {
+        const item = this.data[this.currentIndex];
+        let circles = '';
+        for (let i = 0; i < item.count; i++) {
+          circles += '<div class="counting-item"></div>';
+        }
+
+        this.container.innerHTML = `
+                    <div class="exercise-header">
+                        <span class="exercise-progress">Opgave ${this.currentIndex + 1} af ${this.data.length}</span>
+                        <span class="exercise-score">Point: ${this.score}</span>
+                    </div>
+                    <div class="counting-game">${circles}</div>
+                    <div class="writing-input-area">
+                        <input type="text" class="writing-input" placeholder="Skriv tallet pa russisk..." autocomplete="off">
+                    </div>
+                    <div class="exercise-actions">
+                        <button class="btn check-btn">Tjek</button>
+                    </div>
+                    <div class="exercise-feedback"></div>
+                `;
+
+        this.bindEvents(item);
+      }
+
+      bindEvents(item) {
+        const input = this.container.querySelector('.writing-input');
+        const checkBtn = this.container.querySelector('.check-btn');
+        const feedback = this.container.querySelector('.exercise-feedback');
+
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') this.check(input, item, feedback);
+        });
+        checkBtn.addEventListener('click', () => this.check(input, item, feedback));
+        input.focus({ preventScroll: true });
+      }
+
+      check(input, item, feedback) {
+        const userAnswer = input.value.trim().toLowerCase();
+        if (userAnswer === item.answer.toLowerCase()) {
+          this.score++;
+          feedback.className = 'exercise-feedback correct';
+          feedback.innerHTML = `<strong>Rigtigt!</strong> ${item.count} = ${item.answer} <button class="btn btn-next">Naeste</button>`;
+          TTS.speak(item.answer);
+        } else {
+          feedback.className = 'exercise-feedback incorrect';
+          feedback.innerHTML = `<strong>Ikke helt.</strong> Det rigtige svar: <strong>${item.answer}</strong> <button class="btn btn-next">Naeste</button>`;
+        }
+
+        this.container.querySelector('.btn-next').addEventListener('click', () => {
+          this.currentIndex++;
+          if (this.currentIndex < this.data.length) {
+            this.render();
+          } else {
+            this.showResults();
+          }
+        });
+      }
+
+      showResults() {
+        const percent = Math.round((this.score / this.data.length) * 100);
+        this.container.innerHTML = `
+                    <div class="exercise-results">
+                        <h3>Faerdig!</h3>
+                        <div class="result-score">${this.score} / ${this.data.length}</div>
+                        <div class="result-percent">${percent}%</div>
+                        <button class="btn" onclick="location.reload()">Prov igen</button>
+                    </div>
+                `;
+      }
+    }
+
+    // PHONE NUMBER EXERCISE
+    const phoneData = [
+      {
+        text: 'Sig dette nummer: ___ ___ ___',
+        answer: 'один два три',
+        hint: '1 2 3',
+        danish: 'Telefonnummer: 123',
+      },
+      {
+        text: 'Sig dette nummer: ___ ___ ___',
+        answer: 'пять шесть семь',
+        hint: '5 6 7',
+        danish: 'Telefonnummer: 567',
+      },
+      {
+        text: 'Sig dette nummer: ___ ___ ___ ___',
+        answer: 'восемь девять один ноль',
+        hint: '8 9 1 0',
+        danish: 'Telefonnummer: 8910',
+        alternatives: ['восемь девять один нуль'],
+      },
+    ];
+
+    // PRICE EXERCISE
+    const priceMatchingData = [
+      { russian: 'пять рублей', danish: '5 RUB' },
+      { russian: 'три рубля', danish: '3 RUB' },
+      { russian: 'десять рублей', danish: '10 RUB' },
+      { russian: 'один рубль', danish: '1 RUB' },
+      { russian: 'семь рублей', danish: '7 RUB' },
+    ];
+
+    // WRITING DATA
+    const writingData = [
+      { russian: 'один', danish: '1', hint: '4 bogstaver' },
+      { russian: 'два', danish: '2', hint: '3 bogstaver' },
+      { russian: 'пять', danish: '5', hint: '4 bogstaver' },
+      { russian: 'десять', danish: '10', hint: '6 bogstaver' },
+      { russian: 'восемь', danish: '8', hint: '6 bogstaver' },
+    ];
+
+    // MATH EXERCISE
+    const mathData = [
+      { text: 'Два ___ три равно пять', answer: 'плюс', hint: '+ (plus)', danish: '2 + 3 = 5' },
+      { text: 'Пять ___ два равно три', answer: 'минус', hint: '- (minus)', danish: '5 - 2 = 3' },
+      { text: 'Четыре плюс три равно ___', answer: 'семь', hint: '= 7', danish: '4 + 3 = ?' },
+      {
+        text: 'Десять минус шесть равно ___',
+        answer: 'четыре',
+        hint: '= 4',
+        danish: '10 - 6 = ?',
+      },
+    ];
+
+    // AI TRANSLATION CONFIG
+    const aiTranslationConfig = {
+      sentences: [
+        { danish: 'Jeg har tre æbler.', russian: 'У меня три яблока.', hint: 'У меня три...' },
+        { danish: 'Der er fem bøger.', russian: 'Пять книг.', hint: 'Пять...' },
+        {
+          danish: 'To plus to er fire.',
+          russian: 'Два плюс два равно четыре.',
+          hint: 'Два плюс два...',
+        },
+        { danish: 'Jeg er tyve år gammel.', russian: 'Мне двадцать лет.', hint: 'Мне... лет.' },
+        {
+          danish: 'Mit telefonnummer er 123.',
+          russian: 'Мой номер один два три.',
+          hint: 'Мой номер...',
+        },
+      ],
+      vocabulary: [
+        { russian: 'один', danish: '1' },
+        { russian: 'два', danish: '2' },
+        { russian: 'три', danish: '3' },
+        { russian: 'четыре', danish: '4' },
+        { russian: 'пять', danish: '5' },
+      ],
+    };
+
+    // INITIALIZE
+    document.addEventListener('DOMContentLoaded', function () {
+      renderNumbersGrid();
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+      new CountingExercise('counting-exercise', countingData);
+      new FillBlankExercise('phone-exercise', phoneData);
+      new MatchingExercise('price-exercise', priceMatchingData);
+      new WritingExercise('writing-exercise', writingData);
+      new FillBlankExercise('math-exercise', mathData);
+
+      // AI Translation
+      new AITranslationChallenge('ai-translation', aiTranslationConfig);
+    });
+  </script>
+</body>
+
+</html>

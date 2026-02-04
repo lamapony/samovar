@@ -1,0 +1,1236 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 4: Jeg Hedder... | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #6b5b95;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Phrase Display === */
+    .phrase-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .phrase-russian {
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .phrase-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    .phrase-phonetic {
+      font-family: 'SF Mono', 'Monaco', monospace;
+      font-size: 1rem;
+      color: var(--editorial-gray);
+      margin-top: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .phrase-translation {
+      font-size: 1.5rem;
+      color: var(--editorial-gray);
+      margin-top: 1rem;
+      font-weight: 300;
+    }
+
+    /* === Profile Card === */
+    .profile-card {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      max-width: 400px;
+      margin: 3rem auto;
+      overflow: hidden;
+    }
+
+    .profile-header {
+      background: var(--editorial-accent);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      background: white;
+      color: var(--editorial-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1rem;
+    }
+
+    .profile-name {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+    }
+
+    .profile-body {
+      padding: 1.5rem;
+    }
+
+    .profile-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--editorial-line);
+      cursor: pointer;
+    }
+
+    .profile-item:last-child {
+      border-bottom: none;
+    }
+
+    .profile-item:hover {
+      background: var(--editorial-light);
+      margin: 0 -1.5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .profile-label {
+      color: var(--editorial-gray);
+      font-size: 0.9rem;
+    }
+
+    .profile-value {
+      font-family: var(--font-serif);
+      color: var(--editorial-black);
+    }
+
+    /* === Country Grid === */
+    .country-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .country-item {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .country-item:nth-child(4n) {
+      border-right: none;
+    }
+
+    .country-item:nth-last-child(-n + 4) {
+      border-bottom: none;
+    }
+
+    .country-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .country-flag {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .country-russian {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .country-danish {
+      font-size: 0.8rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Profession Grid === */
+    .profession-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .profession-item {
+      padding: 2rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .profession-item:nth-child(odd) {
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .profession-item:nth-last-child(-n + 2) {
+      border-bottom: none;
+    }
+
+    .profession-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .profession-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .profession-russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .profession-danish {
+      font-size: 0.9rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Dialogue === */
+    .dialogue-container {
+      margin: 3rem 0;
+    }
+
+    .dialogue-line {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .dialogue-line:last-child {
+      border-bottom: none;
+    }
+
+    .dialogue-speaker {
+      width: 60px;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+      padding-top: 0.25rem;
+    }
+
+    .dialogue-content {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .dialogue-content:hover .dialogue-russian {
+      color: var(--editorial-accent);
+    }
+
+    .dialogue-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .dialogue-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+      font-style: italic;
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Exercise Sections === */
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 2rem 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(2n) {
+      border-right: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-item .danish {
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .country-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .country-item:nth-child(4n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .country-item:nth-child(2n) {
+        border-right: none;
+      }
+
+      .profession-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .profession-item:nth-child(odd) {
+        border-right: none;
+      }
+
+      .profession-item {
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .profession-item:last-child {
+        border-bottom: none;
+      }
+
+      .dialogue-line {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .dialogue-speaker {
+        width: auto;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-item {
+        border-right: none;
+      }
+
+      .floating-nav {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="floating-nav">
+    <a href="../index-v2.html" class="floating-btn">Tilbage</a>
+  </nav>
+
+  <div class="container">
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 4</div>
+        <h1>Jeg hedder...</h1>
+        <p class="lead">
+          Det første skridt i enhver samtale. Hvem er du? Hvor kommer du fra? Hvad laver du?
+        </p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: YOUR NAME
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Dit navn</h2>
+        </div>
+
+        <p class="narrative">
+          På russisk siger man bogstaveligt "Mig kalder (de)..." Det lyder mærkeligt, men det er
+          sådan det er.
+        </p>
+
+        <div class="phrase-display">
+          <span class="phrase-russian" onclick="TTS.speak('Меня зовут')">Меня зовут...</span>
+          <div class="phrase-phonetic">min-JA za-VUT</div>
+          <div class="phrase-translation">Jeg hedder...</div>
+        </div>
+
+        <p class="narrative" style="text-align: center; font-size: 1rem">
+          Klik på frasen for at høre udtalen.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 2: PROFILE
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 2</div>
+          <h2 class="chapter-title">En profil</h2>
+        </div>
+
+        <p class="narrative">
+          Forestil dig en russisk profil. Klik på hvert felt for at høre det.
+        </p>
+
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-avatar">А</div>
+            <div class="profile-name">Анна</div>
+          </div>
+          <div class="profile-body">
+            <div class="profile-item" onclick="TTS.speak('Меня зовут Анна')">
+              <span class="profile-label">Navn</span>
+              <span class="profile-value">Меня зовут Анна</span>
+            </div>
+            <div class="profile-item" onclick="TTS.speak('Я из Дании')">
+              <span class="profile-label">Fra</span>
+              <span class="profile-value">Я из Дании</span>
+            </div>
+            <div class="profile-item" onclick="TTS.speak('Я студентка')">
+              <span class="profile-label">Erhverv</span>
+              <span class="profile-value">Я студентка</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Grammatik</div>
+          <p>
+            Bemærk: På russisk udelades verbet "er" i nutid.
+            <strong>Я студент</strong> = Jeg (er) studerende.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Hvor kommer du fra?</h2>
+        <p>Lad os lære navnene på nogle lande.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: COUNTRIES
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">Lande</h2>
+        </div>
+
+        <p class="narrative">Klik på et land for at høre det på russisk.</p>
+
+        <div class="country-grid" id="countries-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Grammatik</div>
+          <p>
+            <strong>Я из + genitiv</strong> — Jeg er fra...<br />
+            Дания → из Дании, Россия → из России
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             MODERN: NEW ECONOMY
+             ============================================ -->
+    <section class="editorial-section"
+      style="background: #fafafa; border-top: 1px solid var(--editorial-line); border-bottom: 1px solid var(--editorial-line);">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M12 2v8m0 0l-4-4m4 4l4-4M5 20h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-3.5L12 10 8.5 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" />
+          </svg>
+          Den nye økonomi
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Freelance og IT</h2>
+        </div>
+        <p class="narrative">
+          Mange i storbyerne arbejder i dag med tech eller som freelancere. Her er ordene,
+          du vil høre i et coworking space:
+        </p>
+
+        <!-- This section will be populated dynamically by renderProfessions() -->
+        <div class="profession-grid" id="professions-grid"></div>
+
+        <div class="chapter-header" style="margin-top: 3rem;">
+          <h2 class="chapter-title">Hvor arbejder du?</h2>
+        </div>
+        <p class="narrative">
+          Om det er kaffebaren eller en hjemme-setup, er her de vigtigste fraser:
+        </p>
+
+        <div class="summary-grid" style="border: 1px solid var(--editorial-line); color: var(--editorial-black);">
+          <div class="summary-item" style="border-color: var(--editorial-line)"
+            onclick="TTS.speak('Я работаю в офисе')">
+            <div class="russian">Я работаю в офисе.</div>
+            <div class="danish">Jeg arbejder på kontoret.</div>
+          </div>
+          <div class="summary-item" style="border-right: none; border-color: var(--editorial-line)"
+            onclick="TTS.speak('Я работаю из дома')">
+            <div class="russian">Я работаю из дома.</div>
+            <div class="danish">Jeg arbejder hjemmefra.</div>
+          </div>
+          <div class="summary-item" style="border-bottom: none; border-color: var(--editorial-line)"
+            onclick="TTS.speak('Я работаю в коворкинге')">
+            <div class="russian">Я работаю в коворкинге.</div>
+            <div class="danish">Jeg arbejder i et coworking space.</div>
+          </div>
+          <div class="summary-item" style="border: none" onclick="TTS.speak('Я фрилансер. Я работаю везде... и нигде')">
+            <div class="russian">Я фрилансер... везде и нигде.</div>
+            <div class="danish">Jeg er freelancer... alle vegne og ingen steder.</div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Hjemmearbejde</div>
+          <p>
+            På russisk siger man <strong>"Я работаю из дома"</strong> (Jeg arbejder hjemmefra).
+            Det er blevet den nye norm for mange unge professionelle.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 5: DIALOGUE
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 5</div>
+          <h2 class="chapter-title">Første møde</h2>
+        </div>
+
+        <p class="narrative">Sådan kan en typisk præsentation se ud. Klik for at høre.</p>
+
+        <div class="dialogue-container" id="main-dialogue"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 6: CULTURE
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 6</div>
+          <h2 class="chapter-title">Kulturelt</h2>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Patronym</div>
+          <p>
+            Russere bruger ofte fadersnavn (patronym) i formelle situationer:<br />
+            <strong>Иван Петрович</strong> = Ivan, søn af Peter.<br />
+            Det viser respekt.
+          </p>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Moderne rytme</div>
+          <p>
+            I store byer arbejder mange ikke længere efter den klassiske "9-18" model. Remote arbejde,
+            coworking spaces og skæve arbejdstider er blevet en stor del af hverdagen for unge professionelle.
+          </p>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Kælenavne</div>
+          <p>
+            Russiske navne har koseformer:<br />
+            Александр → Саша, Екатерина → Катя, Дмитрий → Дима
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Nu er det din tur</h2>
+        <p>Test din viden om præsentation.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Lyt og vælg</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Godt klaret.</h2>
+        <p>Nu skal du forbinde ordene.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Par ordene</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 3
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Udfyld hullerne.</h2>
+        <p>Kan du fuldføre sætningerne?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: FILL BLANK
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Udfyld tomme pladser</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="fill-blank-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 4
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Hurtig quiz</h2>
+        <p>Test dig selv. Jo hurtigere du svarer, jo bedre.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 4: QUICK QUIZ (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 4</div>
+            <h3 class="exercise-title">Hurtig quiz</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 5
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Samtale</h2>
+        <p>Præsenter dig selv for AI-tutoren.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 5: CONVERSATION (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 5</div>
+            <h3 class="exercise-title">Øv samtale</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-conversation"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Hvad du har lært</h2>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item" onclick="TTS.speak('Меня зовут')">
+            <div class="russian">Меня зовут...</div>
+            <div class="danish">Jeg hedder...</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('Как вас зовут')">
+            <div class="russian">Как вас зовут?</div>
+            <div class="danish">Hvad hedder De?</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('Я из Дании')">
+            <div class="russian">Я из Дании</div>
+            <div class="danish">Jeg er fra Danmark</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('Очень приятно')">
+            <div class="russian">Очень приятно!</div>
+            <div class="danish">Glæder mig!</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Lektion Færdig?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Har du gennemgået alle øvelser og føler dig klar til næste lektion?
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="03-numbers-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">Tal fra 1 til 10</span>
+          </a>
+          <a href="05-family-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">Min Familie</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // COUNTRIES DATA
+    // ============================================
+    const countriesData = [
+      { flag: '🇩🇰', russian: 'Дания', danish: 'Danmark' },
+      { flag: '🇷🇺', russian: 'Россия', danish: 'Rusland' },
+      { flag: '🇩🇪', russian: 'Германия', danish: 'Tyskland' },
+      { flag: '🇺🇸', russian: 'США', danish: 'USA' },
+      { flag: '🇸🇪', russian: 'Швеция', danish: 'Sverige' },
+      { flag: '🇳🇴', russian: 'Норвегия', danish: 'Norge' },
+      { flag: '🇬🇧', russian: 'Англия', danish: 'England' },
+      { flag: '🇫🇷', russian: 'Франция', danish: 'Frankrig' },
+    ];
+
+    // Render countries grid
+    function renderCountries() {
+      const container = document.getElementById('countries-grid');
+      if (!container) return;
+      countriesData.forEach((country) => {
+        const item = document.createElement('div');
+        item.className = 'country-item';
+        item.innerHTML = `
+                    <div class="country-flag">${country.flag}</div>
+                    <div class="country-russian">${country.russian}</div>
+                    <div class="country-danish">${country.danish}</div>
+                `;
+        item.addEventListener('click', () => TTS.speak(country.russian));
+        container.appendChild(item);
+      });
+    }
+
+    // ============================================
+    // PROFESSIONS DATA
+    // ============================================
+    const professionsData = [
+      { icon: '🎓', russian: 'студент', danish: 'studerende' },
+      { icon: '👨‍🏫', russian: 'учитель', danish: 'lærer' },
+      { icon: '👨‍⚕️', russian: 'врач', danish: 'læge' },
+      { icon: '👨‍💻', russian: 'разработчик', danish: 'udvikler' },
+      { icon: '👨‍🔧', russian: 'инженер', danish: 'ingeniør' },
+      { icon: '💼', russian: 'бизнесмен', danish: 'forretningsmand' },
+      { icon: '🌐', russian: 'преподаватель онлайн', danish: 'online-underviser' },
+    ];
+
+    // Render professions grid
+    function renderProfessions() {
+      const container = document.getElementById('professions-grid');
+      if (!container) return;
+      professionsData.forEach((prof) => {
+        const item = document.createElement('div');
+        item.className = 'profession-item';
+        item.innerHTML = `
+                    <div class="profession-icon">${prof.icon}</div>
+                    <div class="profession-russian">${prof.russian}</div>
+                    <div class="profession-danish">${prof.danish}</div>
+                `;
+        item.addEventListener('click', () => TTS.speak(prof.russian));
+        container.appendChild(item);
+      });
+    }
+
+    // ============================================
+    // DIALOGUE DATA
+    // ============================================
+    const dialogueData = [
+      { speaker: 'A', russian: 'Здравствуйте!', danish: 'Goddag!' },
+      { speaker: 'B', russian: 'Здравствуйте!', danish: 'Goddag!' },
+      { speaker: 'A', russian: 'Меня зовут Анна. А вас?', danish: 'Jeg hedder Anna. Og De?' },
+      { speaker: 'B', russian: 'Меня зовут Михаил. Очень приятно.', danish: 'Jeg hedder Mikhail. Glæder mig.' },
+      {
+        speaker: 'A',
+        russian: 'Вы работаете в офисе?',
+        danish: 'Arbejder De på kontoret?',
+      },
+      {
+        speaker: 'B',
+        russian: 'Нет, я работаю из дома. Я программист. А вы?',
+        danish: 'Nej, jeg arbejder hjemmefra. Jeg er programmør. Og De?',
+      },
+      { speaker: 'A', russian: 'Я фрилансер. Я работаю везде... и нигде.', danish: 'Jeg er freelancer. Jeg arbejder alle vegne... og ingen steder.' },
+    ];
+
+    // Render dialogue
+    function renderDialogue() {
+      const container = document.getElementById('main-dialogue');
+      if (!container) return;
+      dialogueData.forEach((line) => {
+        const div = document.createElement('div');
+        div.className = 'dialogue-line';
+        div.innerHTML = `
+                    <div class="dialogue-speaker">${line.speaker}</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-russian">${line.russian}</div>
+                        <div class="dialogue-danish">${line.danish}</div>
+                    </div>
+                `;
+        div
+          .querySelector('.dialogue-content')
+          .addEventListener('click', () => TTS.speak(line.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      {
+        audio: 'Меня зовут Анна',
+        options: ['Jeg hedder Anna', 'Hun hedder Anna', 'Hvad hedder du?'],
+        correct: 0,
+      },
+      {
+        audio: 'Я из Дании',
+        options: ['Jeg er i Danmark', 'Jeg er fra Danmark', 'Danmark er stort'],
+        correct: 1,
+      },
+      {
+        audio: 'Очень приятно',
+        options: ['Meget godt', 'Glæder mig', 'Tak skal du have'],
+        correct: 1,
+      },
+      {
+        audio: 'Я студент',
+        options: ['Jeg er lærer', 'Jeg er studerende', 'Jeg studerer'],
+        correct: 1,
+      },
+    ];
+
+    const matchingData = [
+      { russian: 'Дания', danish: 'Danmark' },
+      { russian: 'Россия', danish: 'Rusland' },
+      { russian: 'студент', danish: 'studerende' },
+      { russian: 'врач', danish: 'læge' },
+      { russian: 'Очень приятно', danish: 'Glæder mig' },
+    ];
+
+    const fillBlankData = [
+      {
+        text: '___ зовут Мария.',
+        answer: 'Меня',
+        hint: 'Jeg',
+        danish: 'Jeg hedder Maria.',
+        alternatives: ['меня'],
+      },
+      { text: 'Я ___ Дании.', answer: 'из', hint: 'fra', danish: 'Jeg er fra Danmark.' },
+      { text: 'Очень ___!', answer: 'приятно', hint: 'glæder mig', danish: 'Glæder mig!' },
+      {
+        text: 'Я ___.',
+        answer: 'студент',
+        hint: 'studerende',
+        danish: 'Jeg er studerende.',
+        alternatives: ['студентка', 'врач'],
+      },
+    ];
+
+    const vocabularyData = [
+      { russian: 'Меня зовут', danish: 'Jeg hedder' },
+      { russian: 'Как вас зовут?', danish: 'Hvad hedder De?' },
+      { russian: 'Я из', danish: 'Jeg er fra' },
+      { russian: 'Очень приятно', danish: 'Glæder mig' },
+      ...countriesData.map((c) => ({ russian: c.russian, danish: c.danish })),
+      ...professionsData.map((p) => ({ russian: p.russian, danish: p.danish })),
+    ];
+
+    // AI CONVERSATION CONFIG
+    const aiConversationConfig = {
+      topic: 'Præsentation og bekendtskab',
+      level: 'A1',
+      vocabulary: vocabularyData,
+      starterPrompts: [
+        { russian: 'Привет!', danish: 'Sig hej' },
+        { russian: 'Меня зовут...', danish: 'Sig dit navn' },
+        { russian: 'Я из Дании.', danish: 'Sig hvor du er fra' },
+        { russian: 'Очень приятно!', danish: 'Sig glæder mig' },
+      ],
+      systemPrompt:
+        'Fokuser på præsentation: navn, land, erhverv. Stil spørgsmål som Как вас зовут?, Откуда вы?, Кто вы по профессии?',
+    };
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    const LESSON_ID = '04-about-me';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initLessonProgress(LESSON_ID);
+
+      renderCountries();
+      renderProfessions();
+      renderDialogue();
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+      new FillBlankExercise('fill-blank-exercise', fillBlankData);
+
+      // AI exercises
+      new AIQuickQuiz('ai-quiz', {
+        vocabulary: vocabularyData,
+        maxRounds: 8,
+      });
+      new AIConversation('ai-conversation', aiConversationConfig);
+
+      initScrollAnimations();
+      initProgressBar();
+
+      // Complete lesson button
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      const lessonStatus = Progress.getLessonStatus(LESSON_ID);
+
+      if (lessonStatus === 'completed') {
+        completeBtn.textContent = '✓ Allerede gennemført';
+        completeBtn.classList.add('completed');
+      }
+
+      completeBtn.addEventListener('click', () => {
+        if (lessonStatus !== 'completed') {
+          completeLessonWithModal(LESSON_ID);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

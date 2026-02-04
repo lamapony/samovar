@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Праздники и Традиции | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Timeline Style */
+      .timeline {
+        position: relative;
+        padding: 20px 0;
+        margin: 40px 0;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 50px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #e0e0e0;
+      }
+
+      .event-card {
+        display: flex;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .event-date {
+        width: 100px;
+        text-align: right;
+        padding-right: 30px;
+        font-family: var(--font-serif);
+        color: var(--accent-blue);
+        font-weight: bold;
+        font-size: 1.1rem;
+        padding-top: 5px;
+      }
+
+      .event-marker {
+        position: absolute;
+        left: 44px; /* (50px line - 6px radius) */
+        top: 10px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: white;
+        border: 3px solid var(--accent-red);
+        z-index: 2;
+      }
+
+      .event-content {
+        flex: 1;
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        padding: 20px;
+        margin-left: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+      }
+
+      .event-title {
+        margin: 0 0 10px 0;
+        font-size: 1.2rem;
+        color: var(--text-ink);
+      }
+
+      .event-desc {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .tradition-tag {
+        display: inline-block;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 3px 8px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        margin-top: 10px;
+        margin-right: 5px;
+        color: #888;
+      }
+
+      /* Interactive Calendar Grid */
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      .calendar-item {
+        border: 1px solid #eee;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .calendar-item:hover {
+        border-color: var(--accent-blue);
+        background: #f9f9f9;
+      }
+
+      .cal-month {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 5px;
+      }
+
+      .cal-day {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--accent-blue);
+        margin-bottom: 5px;
+      }
+
+      /* Detail View */
+      .detail-view {
+        margin-top: 20px;
+        padding: 20px;
+        border-left: 3px solid var(--accent-blue);
+        background: #fcfcfc;
+        display: none;
+      }
+
+      .detail-view.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="etiquette.html">Этикет</a>
+          <a
+            href="holidays.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Праздники</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Культурный календарь</h1>
+          <p class="lead">
+            Российский праздничный цикл — это уникальный сплав православных традиций, советского
+            наследия и современной государственной идеологии. Чтобы понять русский менталитет, нужно
+            знать, что и как здесь празднуют.
+          </p>
+
+          <section>
+            <h2>Основные события</h2>
+            <div class="timeline">
+              <div class="event-card">
+                <div class="event-date">31 Дек</div>
+                <div class="event-marker"></div>
+                <div class="event-content">
+                  <h3 class="event-title">Новый Год (Nytår)</h3>
+                  <div class="event-desc">
+                    Главный светский праздник года. Заменяет европейское Рождество. В эту ночь семьи
+                    собираются за столом, слушают речь президента и бой курантов на Красной площади.
+                    Подарки приносит Дед Мороз.
+                  </div>
+                  <span class="tradition-tag">Оливье</span>
+                  <span class="tradition-tag">Шампанское</span>
+                  <span class="tradition-tag">Салюты</span>
+                </div>
+              </div>
+
+              <div class="event-card">
+                <div class="event-date">7 Янв</div>
+                <div class="event-marker"></div>
+                <div class="event-content">
+                  <h3 class="event-title">Православное Рождество</h3>
+                  <div class="event-desc">
+                    Религиозный праздник. Отмечается скромнее, чем Новый год. Дата отличается от
+                    западной из-за юлианского календаря.
+                  </div>
+                  <span class="tradition-tag">Церковь</span>
+                  <span class="tradition-tag">Семья</span>
+                </div>
+              </div>
+
+              <div class="event-card">
+                <div class="event-date">Фев/Март</div>
+                <div class="event-marker"></div>
+                <div class="event-content">
+                  <h3 class="event-title">Масленица (Maslenitsa)</h3>
+                  <div class="event-desc">
+                    Языческий праздник проводов зимы перед Великим постом. Длится неделю. Главный
+                    символ — блины (солнце). В конце недели сжигают чучело Зимы.
+                  </div>
+                  <span class="tradition-tag">Блины</span>
+                  <span class="tradition-tag">Гуляния</span>
+                </div>
+              </div>
+
+              <div class="event-card">
+                <div class="event-date">9 Мая</div>
+                <div class="event-marker"></div>
+                <div class="event-content">
+                  <h3 class="event-title">День Победы</h3>
+                  <div class="event-desc">
+                    День памяти о победе во Второй мировой войне. Парад на Красной площади, минута
+                    молчания, цветы ветеранам. Самый эмоциональный национальный праздник.
+                  </div>
+                  <span class="tradition-tag">Память</span>
+                  <span class="tradition-tag">Парад</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="gender-holidays">
+            <h2>"Гендерные" праздники</h2>
+            <p>
+              Уникальная особенность постсоветского пространства — разделение праздников на
+              "мужской" и "женский" дни.
+            </p>
+
+            <div class="calendar-grid">
+              <div class="calendar-item" onclick="showDetail('feb23')">
+                <div class="cal-month">Февраль</div>
+                <div class="cal-day">23</div>
+                <div>День Защитника</div>
+              </div>
+              <div class="calendar-item" onclick="showDetail('mar8')">
+                <div class="cal-month">Март</div>
+                <div class="cal-day">08</div>
+                <div>Женский День</div>
+              </div>
+              <div class="calendar-item" onclick="showDetail('easter')">
+                <div class="cal-month">Апрель/Май</div>
+                <div class="cal-day">?</div>
+                <div>Пасха</div>
+              </div>
+            </div>
+
+            <div id="feb23" class="detail-view">
+              <h3>23 Февраля: День защитника Отечества</h3>
+              <p>
+                Изначально день Красной Армии. Сейчас воспринимается как общий "День мужчин".
+                Женщины поздравляют коллег, мужей и сыновей, дарят небольшие подарки (носки,
+                дезодоранты — предмет шуток).
+              </p>
+            </div>
+
+            <div id="mar8" class="detail-view">
+              <h3>8 Марта: Международный женский день</h3>
+              <p>
+                В России этот день лишен политического окраса борьбы за права. Это день весны и
+                красоты. Мужчины дарят цветы (тюльпаны, мимозы) всем знакомым женщинам. Это
+                официальный выходной.
+              </p>
+            </div>
+
+            <div id="easter" class="detail-view">
+              <h3>Пасха (Påske)</h3>
+              <p>
+                Главный православный праздник. Традиция: "Христос Воскресе!" — "Воистину Воскресе!".
+                На столе всегда крашеные яйца и кулич (сладкий хлеб с изюмом). Многие ходят на
+                кладбище поминать усопших (хотя церковь это не всегда одобряет в сам день Пасхи).
+              </p>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Цветочный этикет</strong>
+            Если вы дарите цветы на праздник, их должно быть <strong>нечетное</strong> количество
+            (1, 3, 5...). <br />
+            Четное количество (2, 4...) приносят только на похороны. Это строжайшее правило.
+          </div>
+          <div class="margin-note">
+            <strong>Тосты</strong>
+            Русское застолье — это череда тостов. Нельзя просто пить. Нужно сказать "За..." (За
+            здоровье, За любовь, За хозяйку). Простого "Skål" (На здоровье) недостаточно.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar.</div>
+      </footer>
+    </div>
+
+    <script>
+      function showDetail(id) {
+        // Hide all details
+        document.querySelectorAll('.detail-view').forEach((el) => el.classList.remove('active'));
+        document
+          .querySelectorAll('.calendar-item')
+          .forEach((el) => (el.style.borderColor = '#eee'));
+
+        // Show selected
+        const detail = document.getElementById(id);
+        if (detail) {
+          detail.classList.add('active');
+          // Find trigger and highlight it (simple loop match)
+          // In a real app we'd pass 'this' or manage state better
+        }
+      }
+    </script>
+  </body>
+</html>

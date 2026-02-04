@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Приставки ПРЕ- и ПРИ- | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Prefix Cards */
+      .prefix-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        border-radius: var(--border-radius-lg);
+        padding: var(--space-l);
+        margin-bottom: var(--space-l);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .prefix-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      }
+
+      .prefix-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: var(--space-m);
+        padding-bottom: var(--space-s);
+        border-bottom: 1px solid var(--line-color);
+      }
+
+      .prefix-title {
+        font-size: 2rem;
+        font-weight: 400;
+        font-family: var(--font-serif);
+        color: var(--text-ink);
+      }
+
+      .prefix-meaning {
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-weight: 600;
+        padding: var(--space-xs) var(--space-s);
+        border-radius: 20px;
+        border: 1px solid var(--line-color);
+        color: var(--text-faded);
+        background: var(--bg-paper);
+      }
+
+      .rule-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--space-s);
+      }
+
+      .rule-item {
+        background: var(--bg-paper);
+        padding: var(--space-s);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--line-color);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+      }
+
+      .rule-item strong {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-ink);
+        margin-bottom: var(--space-xs);
+      }
+
+      .example-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-top: var(--space-xs);
+        font-size: 0.95rem;
+        padding-top: var(--space-xs);
+        border-top: 1px solid var(--line-color);
+      }
+
+      .example-row:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .example-dk {
+        color: var(--text-light);
+        font-style: italic;
+        font-size: 0.875rem;
+      }
+
+      .highlight-prefix {
+        font-weight: 600;
+        color: var(--accent-red);
+      }
+
+      /* Practice Game */
+      .game-area {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        border-radius: var(--border-radius-lg);
+        padding: var(--space-l);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        margin-top: var(--space-xl);
+      }
+
+      .word-bank {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-s);
+        justify-content: center;
+        margin-bottom: var(--space-l);
+        min-height: 80px;
+        padding: var(--space-m);
+        background: var(--bg-paper);
+        border-radius: var(--border-radius);
+        border: 1px dashed var(--line-color);
+      }
+
+      .word-card {
+        padding: var(--space-s) var(--space-m);
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        border-bottom: 2px solid var(--line-color);
+        border-radius: var(--border-radius);
+        cursor: grab;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: var(--font-sans);
+      }
+
+      .word-card span.dk-hint {
+        font-size: 0.75rem;
+        color: var(--text-light);
+        font-weight: 400;
+        margin-top: var(--space-xs);
+        font-style: italic;
+      }
+
+      .word-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-color: var(--accent-blue);
+      }
+
+      .word-card:active {
+        cursor: grabbing;
+        transform: scale(0.98);
+      }
+
+      .word-card.correct {
+        background: var(--color-success-bg);
+        color: var(--color-success);
+        border-color: var(--color-success);
+        cursor: default;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .word-card.wrong {
+        background: var(--color-error-bg);
+        border-color: var(--color-error);
+        animation: shake 0.4s;
+      }
+
+      .zones-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-l);
+      }
+
+      .drop-zone {
+        min-height: 250px;
+        border-radius: var(--border-radius-lg);
+        padding: var(--space-m);
+        text-align: center;
+        transition: all 0.2s ease;
+        border: 2px dashed var(--line-color);
+        background: var(--bg-paper);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .drop-zone.hovered {
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-style: solid;
+        border-color: var(--accent-blue);
+      }
+
+      .drop-zone-title {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: var(--space-xs);
+        font-family: var(--font-serif);
+        color: var(--text-ink);
+      }
+
+      .drop-zone-subtitle {
+        font-size: 0.875rem;
+        color: var(--text-faded);
+        margin-bottom: var(--space-m);
+      }
+
+      .drop-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+        margin-top: var(--space-s);
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        75% {
+          transform: translateX(5px);
+        }
+      }
+
+      .memory-tip {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        border-left: 4px solid var(--accent-blue);
+        padding: var(--space-m);
+        margin: var(--space-l) 0;
+        border-radius: var(--border-radius);
+        font-size: 0.95rem;
+      }
+
+      .memory-tip strong {
+        font-family: var(--font-sans);
+        color: var(--text-ink);
+      }
+
+      .feedback {
+        padding: var(--space-s);
+        border-radius: var(--border-radius);
+        font-family: var(--font-sans);
+      }
+
+      .feedback.correct {
+        background: var(--color-success-bg);
+        color: var(--color-success);
+        border: 1px solid var(--color-success);
+      }
+
+      .feedback.incorrect {
+        background: var(--color-warning-bg);
+        color: var(--color-warning);
+        border: 1px solid var(--color-warning);
+      }
+
+      @media (max-width: 768px) {
+        .zones-container {
+          grid-template-columns: 1fr;
+        }
+
+        .rule-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="spelling-n-nn.html">Н/НН</a>
+          <a
+            href="prefixes-pre-pri.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 2px solid var(--accent-red)"
+            >ПРЕ/ПРИ</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Приставки ПРЕ- и ПРИ-</h1>
+          <p class="lead">
+            Две буквы, которые меняют смысл. Это не просто орфография, это логика действия. <br />
+            <strong>ПРЕ-</strong> — это масштаб и перемена. <strong>ПРИ-</strong> — это близость и
+            результат.
+          </p>
+
+          <section id="theory">
+            <!-- ПРЕ CARD -->
+            <div class="prefix-card">
+              <div class="prefix-header">
+                <div class="prefix-title">ПРЕ-</div>
+                <div class="prefix-meaning">Максимум / Через</div>
+              </div>
+
+              <div class="rule-grid">
+                <div class="rule-item">
+                  <strong>Очень (Meget)</strong>
+                  <div class="example-row">
+                    <span>Прекрасный</span>
+                    <span class="example-dk">Meget smuk</span>
+                  </div>
+                  <div class="example-row">
+                    <span>Премудрый</span>
+                    <span class="example-dk">Meget klog</span>
+                  </div>
+                </div>
+                <div class="rule-item">
+                  <strong>Пере- (Over-/Af-)</strong>
+                  <div class="example-row">
+                    <span>Прервать</span>
+                    <span class="example-dk">Afbryde</span>
+                  </div>
+                  <div class="example-row">
+                    <span>Преступить</span>
+                    <span class="example-dk">Overtræde</span>
+                  </div>
+                </div>
+                <div class="rule-item">
+                  <strong>Превосходство</strong>
+                  <div class="example-row">
+                    <span>Превосходить</span>
+                    <span class="example-dk">Overgå</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ПРИ CARD -->
+            <div class="prefix-card">
+              <div class="prefix-header">
+                <div class="prefix-title">ПРИ-</div>
+                <div class="prefix-meaning">Близость / Действие</div>
+              </div>
+
+              <div class="rule-grid">
+                <div class="rule-item">
+                  <strong>Близость (Ved)</strong>
+                  <div class="example-row">
+                    <span>Приморский</span>
+                    <span class="example-dk">Ved havet</span>
+                  </div>
+                  <div class="example-row">
+                    <span>Пришкольный</span>
+                    <span class="example-dk">Ved skolen</span>
+                  </div>
+                </div>
+                <div class="rule-item">
+                  <strong>Присоединение</strong>
+                  <div class="example-row">
+                    <span>Пришить</span>
+                    <span class="example-dk">Sy fast</span>
+                  </div>
+                  <div class="example-row">
+                    <span>Приклеить</span>
+                    <span class="example-dk">Klæbe fast</span>
+                  </div>
+                </div>
+                <div class="rule-item">
+                  <strong>Чуть-чуть (Lidt)</strong>
+                  <div class="example-row">
+                    <span>Приоткрыть</span>
+                    <span class="example-dk">Åbne lidt</span>
+                  </div>
+                  <div class="example-row">
+                    <span>Присесть</span>
+                    <span class="example-dk">Sidde lidt</span>
+                  </div>
+                </div>
+                <div class="rule-item">
+                  <strong>Результат</strong>
+                  <div class="example-row">
+                    <span>Придумать</span>
+                    <span class="example-dk">Finde på</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="memory-tip">
+              <strong>Логика для датчан:</strong><br />
+              Если слово похоже на "meget" или "over-" — пишите <strong>Е</strong>.<br />
+              Если слово похоже на "ved", "til", "lidt" — пишите <strong>И</strong>.
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Тренажер интуиции</h2>
+            <p>
+              Распределите слова по колонкам. Ориентируйтесь на значение (указано мелким шрифтом).
+            </p>
+
+            <div class="game-area">
+              <div class="word-bank" id="wordBank">
+                <!-- Words will be generated here -->
+              </div>
+
+              <div class="zones-container">
+                <div class="drop-zone" data-prefix="pre">
+                  <div class="drop-zone-title">ПРЕ-</div>
+                  <div class="drop-zone-subtitle">Очень, Пере-</div>
+                  <div class="drop-content"></div>
+                </div>
+                <div class="drop-zone" data-prefix="pri">
+                  <div class="drop-zone-title">ПРИ-</div>
+                  <div class="drop-zone-subtitle">Близко, Чуть-чуть, К себе</div>
+                  <div class="drop-content"></div>
+                </div>
+              </div>
+
+              <div
+                id="feedback"
+                class="feedback"
+                style="margin-top: 30px; text-align: center; font-size: 1.2rem; font-weight: bold"
+              ></div>
+              <button
+                class="btn"
+                onclick="resetGame()"
+                style="display: none; margin: 20px auto"
+                id="resetBtn"
+              >
+                Сыграть еще раз
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Сложные случаи</strong>
+            <ul style="padding-left: 20px; margin-top: 10px">
+              <li><strong>Предать</strong> (forråde) — "передать" кого-то.</li>
+              <li><strong>Придать</strong> (give form) — добавить форму.</li>
+              <li><strong>Пребывать</strong> (opholde sig) — быть где-то.</li>
+              <li><strong>Прибывать</strong> (ankomme) — приезжать.</li>
+            </ul>
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      const allWords = [
+        { word: 'Пр_красный', prefix: 'pre', meaning: 'meget smuk', full: 'Прекрасный' },
+        { word: 'Пр_морский', prefix: 'pri', meaning: 'ved havet', full: 'Приморский' },
+        { word: 'Пр_рвать', prefix: 'pre', meaning: 'afbryde', full: 'Прервать' },
+        { word: 'Пр_шить', prefix: 'pri', meaning: 'sy fast', full: 'Пришить' },
+        { word: 'Пр_зирать', prefix: 'pre', meaning: 'foragte', full: 'Презирать' },
+        { word: 'Пр_открыть', prefix: 'pri', meaning: 'åbne lidt', full: 'Приоткрыть' },
+        { word: 'Пр_восходить', prefix: 'pre', meaning: 'overgå', full: 'Превосходить' },
+        { word: 'Пр_думать', prefix: 'pri', meaning: 'finde på', full: 'Придумать' },
+        { word: 'Пр_мудрый', prefix: 'pre', meaning: 'meget klog', full: 'Премудрый' },
+        { word: 'Пр_клеить', prefix: 'pri', meaning: 'klæbe fast', full: 'Приклеить' },
+        { word: 'Пр_ехать', prefix: 'pri', meaning: 'ankomme', full: 'Приехать' },
+        { word: 'Пр_града', prefix: 'pre', meaning: 'hindring (pere-)', full: 'Преграда' },
+        { word: 'Пр_лечь', prefix: 'pri', meaning: 'ligge lidt ned', full: 'Прилечь' },
+        { word: 'Пр_увеличить', prefix: 'pre', meaning: 'overdrive', full: 'Преувеличить' },
+      ];
+
+      const bank = document.getElementById('wordBank');
+      const dropZones = document.querySelectorAll('.drop-zone');
+      const feedback = document.getElementById('feedback');
+      let solved = 0;
+      let currentWords = [];
+
+      function initGame() {
+        bank.innerHTML = '';
+        dropZones.forEach((z) => (z.querySelector('.drop-content').innerHTML = ''));
+        feedback.innerHTML = '';
+        feedback.className = 'feedback';
+        solved = 0;
+        document.getElementById('resetBtn').style.display = 'none';
+
+        // Pick 10 random words
+        currentWords = [...allWords].sort(() => Math.random() - 0.5).slice(0, 10);
+
+        currentWords.forEach((w) => {
+          const card = document.createElement('div');
+          card.className = 'word-card';
+          card.innerHTML = `${w.word} <span class="dk-hint">${w.meaning}</span>`;
+          card.draggable = true;
+          card.dataset.prefix = w.prefix;
+          card.dataset.full = w.full;
+
+          card.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', JSON.stringify(w));
+            setTimeout(() => (card.style.opacity = '0.5'), 0);
+          });
+
+          card.addEventListener('dragend', () => {
+            card.style.opacity = '1';
+          });
+
+          // Click support
+          card.addEventListener('click', () => {
+            document.querySelectorAll('.word-card').forEach((c) => c.classList.remove('selected'));
+            card.style.borderColor = 'var(--accent-blue)';
+            card.classList.add('selected');
+          });
+
+          bank.appendChild(card);
+        });
+      }
+
+      dropZones.forEach((zone) => {
+        zone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          zone.classList.add('hovered');
+        });
+
+        zone.addEventListener('dragleave', () => {
+          zone.classList.remove('hovered');
+        });
+
+        zone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          zone.classList.remove('hovered');
+          const dataStr = e.dataTransfer.getData('text/plain');
+          if (!dataStr) return;
+
+          const data = JSON.parse(dataStr);
+          // Find the specific card element in bank that matches
+          const card = [...bank.children].find(
+            (c) => c.innerText.includes(data.word) && c.style.display !== 'none',
+          );
+
+          handleDrop(data, card, zone);
+        });
+
+        zone.addEventListener('click', () => {
+          const selected = document.querySelector('.word-card.selected');
+          if (selected) {
+            // Reconstruct data object
+            const fullText = selected.innerText.split('\n')[0]; // simple hack or use dataset
+            const data = {
+              prefix: selected.dataset.prefix,
+              full: selected.dataset.full,
+            };
+            handleDrop(data, selected, zone);
+            selected.classList.remove('selected');
+          }
+        });
+      });
+
+      function handleDrop(data, element, zone) {
+        const targetPrefix = zone.dataset.prefix;
+
+        if (data.prefix === targetPrefix) {
+          const successCard = document.createElement('div');
+          successCard.className = 'word-card correct';
+          successCard.innerText = data.full;
+
+          zone.querySelector('.drop-content').appendChild(successCard);
+          if (element) element.remove();
+
+          solved++;
+          if (solved === currentWords.length) {
+            feedback.innerHTML = 'Отлично! Вы справились со всеми словами.';
+            feedback.className = 'feedback correct';
+            document.getElementById('resetBtn').style.display = 'block';
+          }
+        } else {
+          if (element) {
+            element.classList.add('wrong');
+            setTimeout(() => element.classList.remove('wrong'), 500);
+            feedback.innerText = 'Ошибка! Попробуйте другую колонку.';
+            feedback.className = 'feedback incorrect';
+          }
+        }
+      }
+
+      function resetGame() {
+        initGame();
+      }
+
+      initGame();
+    </script>
+  </body>
+</html>

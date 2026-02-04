@@ -1,0 +1,1267 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 8: Hvad Er Klokken? | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #3498db;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Clock Display === */
+    .clock-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .clock-time {
+      font-size: clamp(4rem, 15vw, 8rem);
+      font-weight: 700;
+      color: var(--editorial-accent);
+      display: block;
+      line-height: 1;
+      font-family: 'SF Mono', 'Monaco', monospace;
+    }
+
+    .clock-russian {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      font-family: var(--font-serif);
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      margin-top: 1rem;
+    }
+
+    .clock-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    /* === Time Grid === */
+    .time-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .time-card {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .time-card:nth-child(4n) {
+      border-right: none;
+    }
+
+    .time-card:hover {
+      background: var(--editorial-light);
+    }
+
+    .time-card-number {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+      font-family: 'SF Mono', 'Monaco', monospace;
+    }
+
+    .time-card-russian {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--editorial-black);
+    }
+
+    /* === Days Grid === */
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .day-card {
+      padding: 1.5rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .day-card:last-child {
+      border-right: none;
+    }
+
+    .day-card:hover {
+      background: var(--editorial-accent);
+      color: white;
+    }
+
+    .day-card:hover .day-short,
+    .day-card:hover .day-danish {
+      color: white;
+    }
+
+    .day-short {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .day-danish {
+      font-size: 0.7rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Months Grid === */
+    .months-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .month-card {
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .month-card:nth-child(4n) {
+      border-right: none;
+    }
+
+    .month-card:nth-last-child(-n + 4) {
+      border-bottom: none;
+    }
+
+    .month-card:hover {
+      background: var(--editorial-light);
+    }
+
+    .month-russian {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .month-danish {
+      font-size: 0.8rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Phrase Display === */
+    .phrase-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .phrase-russian {
+      font-size: clamp(1.5rem, 6vw, 3rem);
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      display: block;
+      line-height: 1.2;
+    }
+
+    .phrase-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    .phrase-translation {
+      font-size: 1.25rem;
+      color: var(--editorial-gray);
+      margin-top: 1rem;
+      font-weight: 300;
+    }
+
+    /* === Time Expressions Grid === */
+    .expressions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .expression-item {
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .expression-item:nth-child(odd) {
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .expression-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .expression-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .expression-danish {
+      font-size: 0.9rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Dialogue === */
+    .dialogue-container {
+      margin: 3rem 0;
+    }
+
+    .dialogue-line {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .dialogue-line:last-child {
+      border-bottom: none;
+    }
+
+    .dialogue-speaker {
+      width: 60px;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+      padding-top: 0.25rem;
+    }
+
+    .dialogue-content {
+      flex: 1;
+      cursor: pointer;
+    }
+
+    .dialogue-content:hover .dialogue-russian {
+      color: var(--editorial-accent);
+    }
+
+    .dialogue-russian {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+
+    .dialogue-danish {
+      font-size: 0.95rem;
+      color: var(--editorial-gray);
+      font-style: italic;
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Exercise Sections === */
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(2n) {
+      border-right: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .summary-item .danish {
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .time-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .time-card:nth-child(4n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .time-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .days-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .day-card:nth-child(4n) {
+        border-right: none;
+      }
+
+      .day-card:nth-child(7) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .months-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .month-card:nth-child(4n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .month-card:nth-child(3n) {
+        border-right: none;
+      }
+
+      .expressions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .expression-item:nth-child(odd) {
+        border-right: none;
+      }
+
+      .dialogue-line {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .dialogue-speaker {
+        width: auto;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-item {
+        border-right: none;
+      }
+
+      .floating-nav {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="floating-nav">
+    <a href="../index-v2.html" class="floating-btn">Tilbage</a>
+  </nav>
+
+  <div class="container">
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 8</div>
+        <h1>Hvad er klokken?</h1>
+        <p class="lead">
+          Tid er vigtigt i alle sprog. Lær at spørge om tid, ugedage og måneder på russisk.
+        </p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: ASKING TIME
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Spørge om tid</h2>
+        </div>
+
+        <p class="narrative">
+          Der er to måder at spørge om klokken på russisk. Begge er almindelige.
+        </p>
+
+        <div class="phrase-display">
+          <span class="phrase-russian" onclick="TTS.speak('Который час?')">Который час?</span>
+          <div class="phrase-translation">Hvad er klokken? (Bogst.: Hvilken time?)</div>
+        </div>
+
+        <div class="phrase-display">
+          <span class="phrase-russian" onclick="TTS.speak('Сколько времени?')">Сколько времени?</span>
+          <div class="phrase-translation">Hvad er klokken? (Bogst.: Hvor meget tid?)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 2: HOURS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 2</div>
+          <h2 class="chapter-title">Timer</h2>
+        </div>
+
+        <p class="narrative">Klik på et tidspunkt for at høre det på russisk.</p>
+
+        <div class="time-grid" id="hours-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Grammatik</div>
+          <p>
+            <strong>1:00</strong> — час (én time)<br />
+            <strong>2:00-4:00</strong> — два/три/четыре часа (genitiv singularis)<br />
+            <strong>5:00-12:00</strong> — пять... часов (genitiv pluralis)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Ugedage.</h2>
+        <p>I Rusland starter ugen med mandag, ikke søndag.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: DAYS
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">Ugedage</h2>
+        </div>
+
+        <p class="narrative">Klik på en dag for at høre den.</p>
+
+        <div class="days-grid" id="days-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">"På" en dag</div>
+          <p>
+            Brug <strong>в</strong> + akkusativ for at sige "på (en dag)":<br />
+            <strong>В понедельник я работаю.</strong> — På mandag arbejder jeg.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 4: MONTHS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 4</div>
+          <h2 class="chapter-title">Måneder</h2>
+        </div>
+
+        <p class="narrative">Klik på en måned for at høre den.</p>
+
+        <div class="months-grid" id="months-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             MODERN: DIGITAL RHYTHM
+             ============================================ -->
+    <section class="editorial-section"
+      style="background: #fafafa; border-top: 1px solid var(--editorial-line); border-bottom: 1px solid var(--editorial-line);">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          Digital rytme
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Livet på Zoom</h2>
+        </div>
+        <p class="narrative">
+          Tid er i dag styret af kalendere og notifikationer. Her er hvad du siger, når du er online:
+        </p>
+
+        <!-- This section will be populated dynamically by renderExpressions() -->
+        <div class="expressions-grid" id="expressions-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Mandags-humør</div>
+          <p>
+            På russisk sociale medier er <strong>"Понедельник — день тяжёлый"</strong>
+            (Mandag er en hård dag) en sand klassiker. Man sender ofte memes om, hvor svært det er
+            at starte ugen kl. 09:00.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 6: DIALOGUE
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 6</div>
+          <h2 class="chapter-title">Samtale om tid</h2>
+        </div>
+
+        <p class="narrative">En typisk samtale om tid. Klik for at høre.</p>
+
+        <div class="dialogue-container" id="main-dialogue"></div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Nu er det din tur</h2>
+        <p>Test din viden om tid.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Lyt og vælg</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Godt klaret.</h2>
+        <p>Nu skal du forbinde ordene.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Par ordene</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 3
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Udfyld hullerne.</h2>
+        <p>Kan du fuldføre sætningerne?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: FILL BLANK
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Udfyld tomme pladser</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="fill-blank-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 4
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Hurtig quiz</h2>
+        <p>Test dig selv. Jo hurtigere du svarer, jo bedre.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 4: QUICK QUIZ (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 4</div>
+            <h3 class="exercise-title">Hurtig quiz</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 5
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Samtale</h2>
+        <p>Øv dig i at tale om tid.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 5: CONVERSATION (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 5</div>
+            <h3 class="exercise-title">Øv samtale</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-conversation"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Hvad du har lært</h2>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item" onclick="TTS.speak('Который час?')">
+            <div class="russian">Который час?</div>
+            <div class="danish">Hvad er klokken?</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('сегодня')">
+            <div class="russian">сегодня</div>
+            <div class="danish">i dag</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('завтра')">
+            <div class="russian">завтра</div>
+            <div class="danish">i morgen</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('вчера')">
+            <div class="russian">вчера</div>
+            <div class="danish">i går</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('утром')">
+            <div class="russian">утром</div>
+            <div class="danish">om morgenen</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('вечером')">
+            <div class="russian">вечером</div>
+            <div class="danish">om aftenen</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Lektion Færdig?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Har du gennemgået alle øvelser og føler dig klar til næste lektion?
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="07-cafe-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">På Café</span>
+          </a>
+          <a href="09-city-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">I Byen</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // HOURS DATA
+    // ============================================
+    const hoursData = [
+      { number: '1:00', russian: 'час' },
+      { number: '2:00', russian: 'два часа' },
+      { number: '3:00', russian: 'три часа' },
+      { number: '4:00', russian: 'четыре часа' },
+      { number: '5:00', russian: 'пять часов' },
+      { number: '6:00', russian: 'шесть часов' },
+      { number: '7:00', russian: 'семь часов' },
+      { number: '8:00', russian: 'восемь часов' },
+      { number: '9:00', russian: 'девять часов' },
+      { number: '10:00', russian: 'десять часов' },
+      { number: '11:00', russian: 'одиннадцать часов' },
+      { number: '12:00', russian: 'двенадцать часов' },
+    ];
+
+    // Render hours grid
+    function renderHours() {
+      const container = document.getElementById('hours-grid');
+      if (!container) return;
+      hoursData.forEach((hour) => {
+        const card = document.createElement('div');
+        card.className = 'time-card';
+        card.innerHTML = `
+                    <div class="time-card-number">${hour.number}</div>
+                    <div class="time-card-russian">${hour.russian}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(hour.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // DAYS DATA
+    // ============================================
+    const daysData = [
+      { short: 'Пн', russian: 'понедельник', danish: 'man' },
+      { short: 'Вт', russian: 'вторник', danish: 'tir' },
+      { short: 'Ср', russian: 'среда', danish: 'ons' },
+      { short: 'Чт', russian: 'четверг', danish: 'tor' },
+      { short: 'Пт', russian: 'пятница', danish: 'fre' },
+      { short: 'Сб', russian: 'суббота', danish: 'lør' },
+      { short: 'Вс', russian: 'воскресенье', danish: 'søn' },
+    ];
+
+    // Render days grid
+    function renderDays() {
+      const container = document.getElementById('days-grid');
+      if (!container) return;
+      daysData.forEach((day) => {
+        const card = document.createElement('div');
+        card.className = 'day-card';
+        card.innerHTML = `
+                    <div class="day-short">${day.short}</div>
+                    <div class="day-danish">${day.danish}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(day.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // MONTHS DATA
+    // ============================================
+    const monthsData = [
+      { russian: 'январь', danish: 'januar' },
+      { russian: 'февраль', danish: 'februar' },
+      { russian: 'март', danish: 'marts' },
+      { russian: 'апрель', danish: 'april' },
+      { russian: 'май', danish: 'maj' },
+      { russian: 'июнь', danish: 'juni' },
+      { russian: 'июль', danish: 'juli' },
+      { russian: 'август', danish: 'august' },
+      { russian: 'сентябрь', danish: 'september' },
+      { russian: 'октябрь', danish: 'oktober' },
+      { russian: 'ноябрь', danish: 'november' },
+      { russian: 'декабрь', danish: 'december' },
+    ];
+
+    // Render months grid
+    function renderMonths() {
+      const container = document.getElementById('months-grid');
+      if (!container) return;
+      monthsData.forEach((month) => {
+        const card = document.createElement('div');
+        card.className = 'month-card';
+        card.innerHTML = `
+                    <div class="month-russian">${month.russian}</div>
+                    <div class="month-danish">${month.danish}</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(month.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // EXPRESSIONS DATA
+    // ============================================
+    const expressionsData = [
+      { russian: 'сегодня', danish: 'i dag' },
+      { russian: 'завтра', danish: 'i morgen' },
+      { russian: 'вчера', danish: 'i går' },
+      { russian: 'сейчас', danish: 'nu' },
+      { russian: 'утром', danish: 'om morgenen' },
+      { russian: 'днём', danish: 'om dagen' },
+      { russian: 'вечером', danish: 'om aftenen' },
+      { russian: 'ночью', danish: 'om natten' },
+    ];
+
+    // Render expressions grid
+    function renderExpressions() {
+      const container = document.getElementById('expressions-grid');
+      if (!container) return;
+      expressionsData.forEach((expr) => {
+        const item = document.createElement('div');
+        item.className = 'expression-item';
+        item.innerHTML = `
+                    <div class="expression-russian">${expr.russian}</div>
+                    <div class="expression-danish">${expr.danish}</div>
+                `;
+        item.addEventListener('click', () => TTS.speak(expr.russian));
+        container.appendChild(item);
+      });
+    }
+
+    // ============================================
+    // DIALOGUE DATA
+    // ============================================
+    const dialogueData = [
+      { speaker: 'A', russian: 'Извините, который час?', danish: 'Undskyld, hvad er klokken?' },
+      { speaker: 'B', russian: 'Сейчас три часа.', danish: 'Klokken er tre.' },
+      {
+        speaker: 'A',
+        russian: 'Спасибо! А какой сегодня день?',
+        danish: 'Tak! Og hvilken dag er det i dag?',
+      },
+      { speaker: 'B', russian: 'Сегодня среда.', danish: 'Det er onsdag i dag.' },
+      {
+        speaker: 'A',
+        russian: 'Во сколько открывается музей?',
+        danish: 'Hvad tid åbner museet?',
+      },
+      { speaker: 'B', russian: 'В десять часов утра.', danish: 'Klokken ti om morgenen.' },
+    ];
+
+    // Render dialogue
+    function renderDialogue() {
+      const container = document.getElementById('main-dialogue');
+      if (!container) return;
+      dialogueData.forEach((line) => {
+        const div = document.createElement('div');
+        div.className = 'dialogue-line';
+        div.innerHTML = `
+                    <div class="dialogue-speaker">${line.speaker}</div>
+                    <div class="dialogue-content">
+                        <div class="dialogue-russian">${line.russian}</div>
+                        <div class="dialogue-danish">${line.danish}</div>
+                    </div>
+                `;
+        div
+          .querySelector('.dialogue-content')
+          .addEventListener('click', () => TTS.speak(line.russian));
+        container.appendChild(div);
+      });
+    }
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      {
+        audio: 'Который час?',
+        options: ['Hvad er klokken?', 'Hvilken dag er det?', 'Hvilken måned?'],
+        correct: 0,
+      },
+      { audio: 'понедельник', options: ['tirsdag', 'mandag', 'søndag'], correct: 1 },
+      { audio: 'завтра', options: ['i går', 'i dag', 'i morgen'], correct: 2 },
+      { audio: 'пять часов', options: ['klokken 4', 'klokken 5', 'klokken 6'], correct: 1 },
+      { audio: 'вечером', options: ['om morgenen', 'om aftenen', 'om natten'], correct: 1 },
+    ];
+
+    const matchingData = [
+      { russian: 'понедельник', danish: 'mandag' },
+      { russian: 'сегодня', danish: 'i dag' },
+      { russian: 'завтра', danish: 'i morgen' },
+      { russian: 'утром', danish: 'om morgenen' },
+      { russian: 'вечером', danish: 'om aftenen' },
+    ];
+
+    const fillBlankData = [
+      { text: 'Который ___?', answer: 'час', hint: 'time', danish: 'Hvad er klokken?' },
+      { text: 'Сейчас пять ___.', answer: 'часов', hint: 'timer', danish: 'Klokken er fem.' },
+      {
+        text: '___ я работаю.',
+        answer: 'Завтра',
+        hint: 'I morgen',
+        danish: 'I morgen arbejder jeg.',
+        alternatives: ['завтра', 'Сегодня', 'сегодня'],
+      },
+      {
+        text: 'В ___ у меня встреча.',
+        answer: 'понедельник',
+        hint: 'mandag',
+        danish: 'På mandag har jeg et møde.',
+      },
+    ];
+
+    const vocabularyData = [
+      ...expressionsData,
+      ...daysData.map((d) => ({ russian: d.russian, danish: d.danish })),
+      { russian: 'Который час?', danish: 'Hvad er klokken?' },
+      { russian: 'Сколько времени?', danish: 'Hvad er klokken?' },
+    ];
+
+    // AI CONVERSATION CONFIG
+    const aiConversationConfig = {
+      topic: 'Tid, dage og aftaler',
+      level: 'A1',
+      vocabulary: vocabularyData,
+      starterPrompts: [
+        { russian: 'Который час?', danish: 'Spørg om klokken' },
+        { russian: 'Какой сегодня день?', danish: 'Spørg om dagen' },
+        { russian: 'Во сколько?', danish: 'Spørg hvad tid' },
+        { russian: 'Завтра я работаю.', danish: 'Fortæl om dine planer' },
+      ],
+      systemPrompt:
+        'Fokuser på tid og planlægning. Spørg om klokken, ugedage, planer. Brug: Который час?, Какой сегодня день?, Во сколько...?',
+    };
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    const LESSON_ID = '08-time';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initLessonProgress(LESSON_ID);
+
+      renderHours();
+      renderDays();
+      renderMonths();
+      renderExpressions();
+      renderDialogue();
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+      new FillBlankExercise('fill-blank-exercise', fillBlankData);
+
+      // AI exercises
+      new AIQuickQuiz('ai-quiz', {
+        vocabulary: vocabularyData,
+        maxRounds: 8,
+      });
+      new AIConversation('ai-conversation', aiConversationConfig);
+
+      initScrollAnimations();
+      initProgressBar();
+
+      // Complete lesson button
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      const lessonStatus = Progress.getLessonStatus(LESSON_ID);
+
+      if (lessonStatus === 'completed') {
+        completeBtn.textContent = '✓ Allerede gennemført';
+        completeBtn.classList.add('completed');
+      }
+
+      completeBtn.addEventListener('click', () => {
+        if (lessonStatus !== 'completed') {
+          completeLessonWithModal(LESSON_ID);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

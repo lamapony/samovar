@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Виды глагола: Процесс или Результат? | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/advanced.css" />
+    <link rel="stylesheet" href="../css/tooltips.css" />
+    <style>
+      .aspect-comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin: 30px 0;
+      }
+
+      .aspect-card {
+        background: #fff;
+        border: 3px solid #e0e0e0;
+        padding: 30px;
+      }
+
+      .aspect-card.imperfective {
+        border-color: #ff9800;
+      }
+
+      .aspect-card.perfective {
+        border-color: #4caf50;
+      }
+
+      .aspect-card h3 {
+        margin-top: 0;
+        font-size: 1.8rem;
+      }
+
+      .aspect-card.imperfective h3 {
+        color: #ff9800;
+      }
+
+      .aspect-card.perfective h3 {
+        color: #4caf50;
+      }
+
+      .timeline {
+        background: #f5f5f5;
+        padding: 30px;
+        margin: 30px 0;
+        position: relative;
+      }
+
+      .timeline-line {
+        height: 4px;
+        background: #ddd;
+        position: relative;
+        margin: 40px 0;
+      }
+
+      .timeline-point {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: #4caf50;
+        top: -8px;
+        left: 50%;
+      }
+
+      .timeline-process {
+        position: absolute;
+        height: 100%;
+        background: #ff9800;
+        left: 0;
+        width: 100%;
+      }
+
+      .quiz-card {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        padding: 25px;
+        margin: 20px 0;
+      }
+
+      .quiz-question {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .quiz-context {
+        background: #f8f9fa;
+        padding: 15px;
+        margin: 15px 0;
+        font-style: italic;
+        border: 1px solid #dee2e6;
+      }
+
+      .option-btn {
+        display: block;
+        width: 100%;
+        padding: 15px 20px;
+        margin: 10px 0;
+        background: white;
+        border: 2px solid #e0e0e0;
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s;
+        font-size: 1.1rem;
+      }
+
+      .option-btn:hover {
+        background: #f5f5f5;
+        border-color: var(--accent-blue);
+      }
+
+      .option-btn.correct {
+        background: var(--color-success);
+        border-color: var(--color-success);
+        color: white;
+      }
+
+      .option-btn.wrong {
+        background: var(--color-error);
+        border-color: var(--color-error);
+        color: white;
+        animation: shake 0.5s;
+      }
+
+      .feedback {
+        margin-top: 15px;
+        padding: 15px;
+        display: none;
+      }
+
+      .feedback.show {
+        display: block;
+      }
+
+      .feedback.correct {
+        background: var(--color-success-bg);
+        border: 1px solid var(--color-success);
+        color: #2e7d32;
+      }
+
+      .feedback.incorrect {
+        background: var(--color-error-bg);
+        border: 1px solid var(--color-error);
+        color: #c62828;
+      }
+
+      .pair-example {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        padding: 20px;
+        margin: 15px 0;
+      }
+
+      .pair-example .imperfective-ex {
+        color: #ff9800;
+        font-weight: bold;
+      }
+
+      .pair-example .perfective-ex {
+        color: #4caf50;
+        font-weight: bold;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        75% {
+          transform: translateX(5px);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .aspect-comparison {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../articles/index.html">Мастерская</a>
+          <a
+            href="#"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-gold)"
+            >Виды глагола</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Виды глагола: Процесс или Результат?</h1>
+          <p class="lead">
+            Вид глагола — это самая сложная тема для иностранцев. Но это и самая важная! Вид меняет
+            СМЫСЛ действия: процесс это или результат, завершено или нет.
+          </p>
+
+          <!-- ТЕОРИЯ: Основная разница -->
+          <section id="theory-basic">
+            <h2>Две стороны одного действия</h2>
+
+            <div class="aspect-comparison">
+              <div class="aspect-card imperfective">
+                <h3>Несовершенный вид</h3>
+                <p><strong>ПРОЦЕСС</strong> (Imperfektiv aspekt)</p>
+                <p>Фокус на самом действии, БЕЗ результата:</p>
+                <ul>
+                  <li>Что делать?</li>
+                  <li>Длительность</li>
+                  <li>Повторение</li>
+                  <li>Незавершенность</li>
+                </ul>
+
+                <div class="timeline">
+                  <div class="timeline-line">
+                    <div class="timeline-process"></div>
+                  </div>
+                  <p style="text-align: center">━━━━━━━━━━━━━━━━<br />Процесс продолжается</p>
+                </div>
+
+                <div class="pair-example">
+                  Я <span class="imperfective-ex">читал</span> книгу вчера.<br />
+                  <em style="color: #666"
+                    >(Jeg læste en bog i går - процесс, не знаем, закончил ли)</em
+                  >
+                </div>
+              </div>
+
+              <div class="aspect-card perfective">
+                <h3>Совершенный вид</h3>
+                <p><strong>РЕЗУЛЬТАТ</strong> (Perfektiv aspekt)</p>
+                <p>Фокус на РЕЗУЛЬТАТЕ, действие ЗАВЕРШЕНО:</p>
+                <ul>
+                  <li>Что сделать?</li>
+                  <li>Завершенность</li>
+                  <li>Однократность</li>
+                  <li>Результат</li>
+                </ul>
+
+                <div class="timeline">
+                  <div class="timeline-line">
+                    <div class="timeline-point"></div>
+                  </div>
+                  <p style="text-align: center">━━━━━━●<br />Результат достигнут</p>
+                </div>
+
+                <div class="pair-example">
+                  Я <span class="perfective-ex">прочитал</span> книгу вчера.<br />
+                  <em style="color: #666"
+                    >(Jeg læste en bog færdig i går - завершено, есть результат)</em
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ТЕОРИЯ: Пары глаголов -->
+          <section id="theory-pairs">
+            <h2>Видовые пары</h2>
+
+            <p>Большинство глаголов существуют в ПАРАХ:</p>
+
+            <table class="table-forms">
+              <thead>
+                <tr>
+                  <th>Несовершенный (процесс)</th>
+                  <th>Совершенный (результат)</th>
+                  <th>Dansk</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>читать</strong> (что делать?)</td>
+                  <td><strong>прочитать</strong> (что сделать?)</td>
+                  <td>læse / læse færdig</td>
+                </tr>
+                <tr>
+                  <td><strong>писать</strong></td>
+                  <td><strong>написать</strong></td>
+                  <td>skrive / skrive færdig</td>
+                </tr>
+                <tr>
+                  <td><strong>делать</strong></td>
+                  <td><strong>сделать</strong></td>
+                  <td>gøre / gøre færdig</td>
+                </tr>
+                <tr>
+                  <td><strong>решать</strong></td>
+                  <td><strong>решить</strong></td>
+                  <td>løse / løse (færdig)</td>
+                </tr>
+                <tr>
+                  <td><strong>покупать</strong></td>
+                  <td><strong>купить</strong></td>
+                  <td>købe / købe (færdig)</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="analogy-box">
+              <strong>Как образуются пары?</strong><br />
+              1. Приставка: делать → <strong>с</strong>делать<br />
+              2. Суффикс: решить → реш<strong>а</strong>ть<br />
+              3. Разные корни: говорить → сказать
+            </div>
+          </section>
+
+          <!-- ТЕОРИЯ: Когда использовать -->
+          <section id="theory-usage">
+            <h2>Когда использовать какой вид?</h2>
+
+            <div class="aspect-comparison">
+              <div class="aspect-card imperfective">
+                <h3>Несовершенный вид</h3>
+                <p><strong>Используйте, когда:</strong></p>
+                <ol>
+                  <li>
+                    <strong>Процесс важнее результата</strong><br />
+                    Я <span class="imperfective-ex">читал</span> всю ночь.
+                  </li>
+                  <li>
+                    <strong>Регулярное действие</strong><br />
+                    Каждый день я <span class="imperfective-ex">читаю</span> газету.
+                  </li>
+                  <li>
+                    <strong>Одновременные действия</strong><br />
+                    Я <span class="imperfective-ex">читал</span> и
+                    <span class="imperfective-ex">слушал</span> музыку.
+                  </li>
+                </ol>
+              </div>
+
+              <div class="aspect-card perfective">
+                <h3>Совершенный вид</h3>
+                <p><strong>Используйте, когда:</strong></p>
+                <ol>
+                  <li>
+                    <strong>Результат важен</strong><br />
+                    Я <span class="perfective-ex">прочитал</span> эту книгу!
+                  </li>
+                  <li>
+                    <strong>Последовательность действий</strong><br />
+                    Я <span class="perfective-ex">встал</span>,
+                    <span class="perfective-ex">умылся</span>,
+                    <span class="perfective-ex">позавтракал</span>.
+                  </li>
+                  <li>
+                    <strong>Будущее время</strong><br />
+                    Завтра я <span class="perfective-ex">прочитаю</span> эту книгу.
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </section>
+
+          <!-- ПРАКТИКА 1: Выбор вида -->
+          <section id="practice-choice">
+            <h2>Практика 1: Выберите правильный вид</h2>
+
+            <div id="choice-container">
+              <!-- Динамически заполняется JS -->
+            </div>
+          </section>
+
+          <!-- ПРАКТИКА 2: Контекст -->
+          <section id="practice-context">
+            <h2>Практика 2: Процесс или результат?</h2>
+
+            <div id="context-container">
+              <!-- Динамически заполняется JS -->
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Золотое правило</strong>
+            Несовершенный = КАК? (процесс)<br />
+            Совершенный = ЧТО? (результат)
+          </div>
+          <div class="margin-note">
+            <strong>Частая ошибка</strong>
+            "Я буду читать книгу завтра" ❌<br />
+            "Я прочитаю книгу завтра" ✅<br />
+            (В будущем обычно совершенный вид!)
+          </div>
+          <div class="margin-note">
+            <strong>Совет</strong>
+            Учите глаголы ПАРАМИ! Не отдельно "читать" и "прочитать", а вместе как одну единицу.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      // ПРАКТИКА 1: Выбор вида
+      const choiceQuestions = [
+        {
+          question: 'Вчера я ___ эту книгу за один вечер.',
+          context: 'Я закончил книгу, прочитал до конца.',
+          options: [
+            { text: 'читал', correct: false, aspect: 'imperfective' },
+            { text: 'прочитал', correct: true, aspect: 'perfective' },
+          ],
+          explanation:
+            'Правильно: ПРОЧИТАЛ. Есть результат - книга прочитана до конца (совершенный вид).',
+        },
+        {
+          question: 'Каждый вечер я ___ газету.',
+          context: 'Это моя привычка, я делаю это регулярно.',
+          options: [
+            { text: 'читаю', correct: true, aspect: 'imperfective' },
+            { text: 'прочитаю', correct: false, aspect: 'perfective' },
+          ],
+          explanation: 'Правильно: ЧИТАЮ. Регулярное действие, привычка (несовершенный вид).',
+        },
+        {
+          question: 'Завтра я ___ домашнее задание.',
+          context: 'Я планирую закончить его завтра.',
+          options: [
+            { text: 'буду делать', correct: false, aspect: 'imperfective' },
+            { text: 'сделаю', correct: true, aspect: 'perfective' },
+          ],
+          explanation: 'Правильно: СДЕЛАЮ. Будущее время с результатом (совершенный вид).',
+        },
+        {
+          question: 'Когда ты звонил, я ___ ужин.',
+          context: 'Я был в процессе приготовления.',
+          options: [
+            { text: 'готовил', correct: true, aspect: 'imperfective' },
+            { text: 'приготовил', correct: false, aspect: 'perfective' },
+          ],
+          explanation:
+            'Правильно: ГОТОВИЛ. Процесс, который происходил в момент звонка (несовершенный вид).',
+        },
+        {
+          question: 'Я ___, ___ и ___ на работу.',
+          context: 'Последовательность утренних действий.',
+          options: [
+            { text: 'вставал, умывался, шёл', correct: false, aspect: 'imperfective' },
+            { text: 'встал, умылся, пошёл', correct: true, aspect: 'perfective' },
+          ],
+          explanation:
+            'Правильно: ВСТАЛ, УМЫЛСЯ, ПОШЁЛ. Последовательность завершенных действий (совершенный вид).',
+        },
+      ];
+
+      let currentChoice = 0;
+      const choiceContainer = document.getElementById('choice-container');
+
+      function renderChoice() {
+        if (currentChoice >= choiceQuestions.length) {
+          choiceContainer.innerHTML =
+            "<h3 style='text-align: center; color: var(--color-success);'>Отлично! Вы понимаете виды глагола! 🎉</h3>";
+          return;
+        }
+
+        const data = choiceQuestions[currentChoice];
+        choiceContainer.innerHTML = `
+            <div class="quiz-card">
+                <div class="quiz-question">${data.question}</div>
+                <div class="quiz-context">${data.context}</div>
+                ${data.options
+                  .map(
+                    (opt, idx) => `
+                    <button class="option-btn" onclick="checkChoice(${idx})">${opt.text}</button>
+                `,
+                  )
+                  .join('')}
+                <div class="feedback" id="choice-feedback"></div>
+            </div>
+        `;
+      }
+
+      window.checkChoice = function (optIdx) {
+        const data = choiceQuestions[currentChoice];
+        const buttons = document.querySelectorAll('.option-btn');
+        const feedback = document.getElementById('choice-feedback');
+
+        if (data.options[optIdx].correct) {
+          buttons[optIdx].classList.add('correct');
+          feedback.className = 'feedback show correct';
+          feedback.textContent = data.explanation;
+
+          setTimeout(() => {
+            currentChoice++;
+            renderChoice();
+          }, 2500);
+        } else {
+          buttons[optIdx].classList.add('wrong');
+          setTimeout(() => buttons[optIdx].classList.remove('wrong'), 500);
+          feedback.className = 'feedback show incorrect';
+          feedback.textContent = 'Подумайте: нужен процесс или результат?';
+        }
+      };
+
+      renderChoice();
+
+      // ПРАКТИКА 2: Контекст
+      const contextQuestions = [
+        {
+          question: 'Определите, какой вид нужен:',
+          sentence: 'Вчера весь день я ___ (писать/написать) статью.',
+          correct: 'писал',
+          explanation: 'ПИСАЛ - процесс длился весь день, результат не важен.',
+        },
+        {
+          question: 'Определите, какой вид нужен:',
+          sentence: 'Наконец-то я ___ (писать/написать) эту статью!',
+          correct: 'написал',
+          explanation: 'НАПИСАЛ - есть результат, статья готова!',
+        },
+        {
+          question: 'Определите, какой вид нужен:',
+          sentence: 'Каждое утро я ___ (решать/решить) кроссворд.',
+          correct: 'решаю',
+          explanation: 'РЕШАЮ - регулярное действие, привычка.',
+        },
+      ];
+
+      let currentContext = 0;
+      const contextContainer = document.getElementById('context-container');
+
+      function renderContext() {
+        if (currentContext >= contextQuestions.length) {
+          contextContainer.innerHTML =
+            "<h3 style='text-align: center; color: var(--color-success);'>Превосходно! Вы мастер видов глагола! 🎉</h3>";
+          return;
+        }
+
+        const data = contextQuestions[currentContext];
+        contextContainer.innerHTML = `
+            <div class="quiz-card">
+                <div class="quiz-question">${data.question}</div>
+                <div class="quiz-context">${data.sentence}</div>
+                <input type="text" class="input-field" id="context-input" placeholder="Введите правильную форму глагола...">
+                <button class="check-btn" onclick="checkContext()">Проверить</button>
+                <div class="feedback" id="context-feedback"></div>
+            </div>
+        `;
+      }
+
+      window.checkContext = function () {
+        const data = contextQuestions[currentContext];
+        const input = document.getElementById('context-input').value.toLowerCase().trim();
+        const feedback = document.getElementById('context-feedback');
+
+        if (input === data.correct) {
+          feedback.className = 'feedback show correct';
+          feedback.textContent = data.explanation;
+
+          setTimeout(() => {
+            currentContext++;
+            renderContext();
+          }, 2500);
+        } else {
+          feedback.className = 'feedback show incorrect';
+          feedback.textContent = 'Попробуйте еще раз. Подумайте о процессе и результате.';
+        }
+      };
+
+      renderContext();
+    </script>
+    <script src="../js/tooltips.js"></script>
+  </body>
+</html>

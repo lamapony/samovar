@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Обособленные члены предложения | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .concept-block {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      }
+
+      .concept-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .concept-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--accent-blue);
+        color: white;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+      }
+
+      .concept-title {
+        margin: 0;
+        color: var(--accent-blue);
+        font-size: 1.5rem;
+      }
+
+      .intonation-curve {
+        height: 60px;
+        background: linear-gradient(
+          to right,
+          transparent 0%,
+          #e3f2fd 10%,
+          #e3f2fd 90%,
+          transparent 100%
+        );
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0;
+        position: relative;
+      }
+
+      .curve-label {
+        font-weight: bold;
+        color: var(--accent-blue);
+        z-index: 2;
+      }
+
+      .pause-marker {
+        position: absolute;
+        bottom: -10px;
+        color: var(--accent-red);
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .pause-left {
+        left: 10%;
+      }
+      .pause-right {
+        right: 10%;
+      }
+
+      .rule-box {
+        border-left: 4px solid var(--accent-red);
+        padding-left: 20px;
+        margin: 20px 0;
+      }
+
+      .example-item {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+
+      .highlight-iso {
+        background-color: #fff3cd;
+        padding: 2px 5px;
+        border-radius: 4px;
+        border-bottom: 2px solid #ffc107;
+      }
+
+      /* Interactive Sentence */
+      .sentence-click-area {
+        font-size: 1.3rem;
+        line-height: 2;
+        padding: 30px;
+        background: #f8f9fa;
+        border-radius: 12px;
+        margin-bottom: 20px;
+      }
+
+      .word-span {
+        cursor: default;
+        padding: 2px;
+      }
+
+      .comma-spot {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #e0e0e0;
+        margin: 0 5px;
+        vertical-align: middle;
+        cursor: pointer;
+        text-align: center;
+        line-height: 24px;
+        font-weight: bold;
+        color: transparent;
+        transition: all 0.2s;
+      }
+
+      .comma-spot:hover {
+        transform: scale(1.2);
+        background: #d0d0d0;
+      }
+
+      .comma-spot.active {
+        background: var(--accent-red);
+        color: white;
+        content: ',';
+      }
+
+      .comma-spot.active::after {
+        content: ',';
+      }
+
+      .feedback-msg {
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 10px;
+        display: none;
+      }
+
+      .feedback-msg.success {
+        background: #e8f5e9;
+        color: #2e7d32;
+        display: block;
+      }
+
+      .feedback-msg.error {
+        background: #ffebee;
+        color: #c62828;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="comma-homogeneous.html">Однородные</a>
+          <a
+            href="isolated-members.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 2px solid var(--accent-red)"
+            >Обособленные</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Обособленные члены: Интонация</h1>
+          <p class="lead">
+            Обособление — это способ выделить важную информацию голосом (интонацией) и знаками
+            (запятыми).
+          </p>
+
+          <!-- Причастный оборот -->
+          <div class="concept-block">
+            <div class="concept-header">
+              <div class="concept-icon">1</div>
+              <h2 class="concept-title">Определения (Причастный оборот)</h2>
+            </div>
+
+            <div class="intonation-curve">
+              <span class="pause-marker pause-left">,</span>
+              <span class="curve-label">Обособленный оборот (пауза)</span>
+              <span class="pause-marker pause-right">,</span>
+            </div>
+
+            <div class="rule-box">
+              <p>
+                <strong>Правило:</strong> Если определение (какой?) стоит
+                <strong>ПОСЛЕ</strong> слова, к которому относится — ставим запятые.
+              </p>
+            </div>
+
+            <div class="example-item">
+              Дом, <span class="highlight-iso">построенный отцом</span>, был старым.
+            </div>
+            <div class="example-item" style="opacity: 0.6">
+              <span class="highlight-iso">Построенный отцом</span> дом был старым. (Перед словом —
+              нет запятой!)
+            </div>
+          </div>
+
+          <!-- Деепричастный оборот -->
+          <div class="concept-block">
+            <div class="concept-header">
+              <div class="concept-icon">2</div>
+              <h2 class="concept-title">Обстоятельства (Деепричастия)</h2>
+            </div>
+
+            <div class="rule-box">
+              <p>
+                <strong>Правило:</strong> Деепричастия (что делая? что сделав?) выделяются запятыми
+                <strong>ВСЕГДА</strong>, независимо от места.
+              </p>
+            </div>
+
+            <div class="example-item">
+              <span class="highlight-iso">Читая книгу</span>, он пил чай.
+            </div>
+            <div class="example-item">
+              Он пил чай, <span class="highlight-iso">читая книгу</span>.
+            </div>
+          </div>
+
+          <section id="practice">
+            <h2>Расставь запятые</h2>
+            <p>Кликайте на кружки, чтобы поставить или убрать запятую.</p>
+
+            <div id="exercises"></div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Для датчан</strong>
+            Деепричастие соответствует датскому "mens han læste..." или "idet han...". В русском это
+            более компактная форма.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      const sentences = [
+        {
+          parts: ['Мальчик', 'гуляющий в парке', 'увидел белку'],
+          correct: [1, 1], // Comma after part 0, Comma after part 1
+          hint: "Причастный оборот после слова 'Мальчик'.",
+        },
+        {
+          parts: ['Гуляющий в парке', 'мальчик', 'увидел белку'],
+          correct: [0, 0], // No commas
+          hint: 'Причастный оборот перед словом — запятых нет.',
+        },
+        {
+          parts: ['Он сидел', 'смотря в окно', 'и думал'],
+          correct: [1, 1],
+          hint: 'Деепричастный оборот (что делая?) — всегда выделяется.',
+        },
+        {
+          parts: ['Сделав работу', 'мы пошли', 'домой'],
+          correct: [1, 0],
+          hint: 'Деепричастный оборот в начале.',
+        },
+      ];
+
+      const container = document.getElementById('exercises');
+
+      sentences.forEach((ex, idx) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'concept-block';
+        wrapper.style.padding = '20px';
+
+        const area = document.createElement('div');
+        area.className = 'sentence-click-area';
+
+        // Build sentence with clickable spots
+        let html = '';
+        ex.parts.forEach((part, i) => {
+          html += `<span class="word-span">${part}</span>`;
+          if (i < ex.parts.length - 1) {
+            html += `<span class="comma-spot" data-idx="${i}" onclick="toggleComma(this)"></span>`;
+          }
+        });
+        area.innerHTML = html;
+
+        const btn = document.createElement('button');
+        btn.className = 'btn';
+        btn.style.background = 'var(--accent-blue)';
+        btn.style.color = 'white';
+        btn.style.padding = '8px 20px';
+        btn.style.borderRadius = '20px';
+        btn.style.border = 'none';
+        btn.style.cursor = 'pointer';
+        btn.innerText = 'Проверить';
+
+        const feedback = document.createElement('div');
+        feedback.className = 'feedback-msg';
+
+        btn.onclick = () => {
+          const spots = area.querySelectorAll('.comma-spot');
+          let isCorrect = true;
+
+          spots.forEach((spot, i) => {
+            const hasComma = spot.classList.contains('active');
+            const shouldHave = ex.correct[i] === 1;
+
+            if (hasComma !== shouldHave) {
+              isCorrect = false;
+            }
+          });
+
+          if (isCorrect) {
+            feedback.className = 'feedback-msg success';
+            feedback.innerText = 'Верно! ' + ex.hint;
+            btn.style.display = 'none';
+          } else {
+            feedback.className = 'feedback-msg error';
+            feedback.innerText = 'Неверно. Попробуйте еще раз.';
+          }
+        };
+
+        wrapper.appendChild(area);
+        wrapper.appendChild(btn);
+        wrapper.appendChild(feedback);
+        container.appendChild(wrapper);
+      });
+
+      function toggleComma(el) {
+        el.classList.toggle('active');
+      }
+    </script>
+  </body>
+</html>

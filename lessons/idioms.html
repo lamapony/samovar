@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Идиомы и Фразеологизмы | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body>
+    <div class="container main-grid">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="etiquette.html">Этикет</a>
+          <a
+            href="idioms.html"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Идиомы</a
+          >
+        </nav>
+      </header>
+
+      <main>
+        <h1>Идиомы и Фразеологизмы</h1>
+        <p class="lead">
+          Русский язык богат устойчивыми выражениями, которые нельзя переводить дословно. Понимание
+          идиом — это ключ к пониманию русской культуры и мышления.
+        </p>
+
+        <section id="common-idioms">
+          <h2>Популярные идиомы</h2>
+
+          <div class="game-container" style="background: white">
+            <h3>Топ-10 идиом</h3>
+
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px">
+              <tr style="background: #f0f0f0">
+                <th style="padding: 10px; text-align: left">Идиома</th>
+                <th style="padding: 10px; text-align: left">Буквальный перевод</th>
+                <th style="padding: 10px; text-align: left">Реальное значение</th>
+                <th style="padding: 10px; text-align: left">Dansk</th>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">
+                  <strong>Бить баклуши</strong>
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Slå på træklodser</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Бездельничать</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Dovne sig</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">
+                  <strong>Водить за нос</strong>
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Føre ved næsen</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Обманывать</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Snyde</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">
+                  <strong>Как рыба в воде</strong>
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Som fisk i vand</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">
+                  Чувствовать себя уверенно
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Føle sig hjemme</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">
+                  <strong>Кот наплакал</strong>
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Katten har grædt</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Очень мало</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Meget lidt</td>
+              </tr>
+              <tr>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">
+                  <strong>Ни в зуб ногой</strong>
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">
+                  Ikke i tanden med foden
+                </td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Совсем не понимать</td>
+                <td style="padding: 10px; border-bottom: 1px solid #eee">Slet ikke forstå</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+
+        <section id="cultural-context">
+          <h2>Культурный контекст</h2>
+          <p>Многие идиомы связаны с русской историей, природой и бытом.</p>
+
+          <ul class="module-list">
+            <li class="module-item">
+              <strong>"Медвежья услуга"</strong> — помощь, которая приносит вред. Связано с басней
+              Крылова о медведе, который убил муху на лбу друга.
+            </li>
+            <li class="module-item">
+              <strong>"Как с гуся вода"</strong> — безразлично, не действует. Отсылка к
+              водонепроницаемым перьям гуся.
+            </li>
+            <li class="module-item">
+              <strong>"Делать из мухи слона"</strong> — преувеличивать проблему. (At gøre en myg til
+              en elefant)
+            </li>
+          </ul>
+        </section>
+
+        <section id="practice">
+          <h2>Практика</h2>
+          <div class="game-container">
+            <h3>Угадайте значение</h3>
+            <p>"Он работает как <strong>белка в колесе</strong>" означает:</p>
+            <div style="margin-top: 15px">
+              <button class="btn btn-outline" onclick="checkIdiom(this, false)" style="margin: 5px">
+                Он очень медленный
+              </button>
+              <button class="btn btn-outline" onclick="checkIdiom(this, true)" style="margin: 5px">
+                Он очень занят
+              </button>
+              <button class="btn btn-outline" onclick="checkIdiom(this, false)" style="margin: 5px">
+                Он работает с животными
+              </button>
+            </div>
+            <div id="idiom-feedback" class="feedback" style="margin-top: 15px"></div>
+          </div>
+        </section>
+      </main>
+
+      <aside>
+        <div class="margin-note" style="margin-top: 150px">
+          <strong>Совет</strong>
+          Не пытайтесь переводить идиомы дословно! Изучайте их как отдельные единицы языка, как
+          словарь.
+        </div>
+      </aside>
+
+      <footer>
+        <div>&copy; 2025 Samovar</div>
+      </footer>
+    </div>
+
+    <script>
+      function checkIdiom(btn, isCorrect) {
+        const feedback = document.getElementById('idiom-feedback');
+        const buttons = document.querySelectorAll('#practice .btn');
+
+        buttons.forEach((b) => {
+          b.style.backgroundColor = '';
+          b.style.color = '';
+        });
+
+        if (isCorrect) {
+          btn.style.backgroundColor = 'green';
+          btn.style.color = 'white';
+          feedback.innerText = "Верно! 'Белка в колесе' означает постоянную суету и занятость.";
+          feedback.className = 'feedback correct';
+        } else {
+          btn.style.backgroundColor = 'red';
+          btn.style.color = 'white';
+          feedback.innerText =
+            "Неверно. 'Белка в колесе' означает постоянную занятость без результата.";
+          feedback.className = 'feedback incorrect';
+        }
+      }
+    </script>
+
+    <script src="../js/subscription.js"></script>
+  </body>
+</html>

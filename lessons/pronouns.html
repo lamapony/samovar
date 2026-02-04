@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Местоимения | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      /* Interactive Pronoun Game */
+      .sentence-area {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        margin: 30px 0;
+        font-size: 1.2rem;
+      }
+
+      .target-noun {
+        border-bottom: 2px dashed var(--accent-blue);
+        padding: 0 5px;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+      }
+
+      .target-noun.highlight {
+        background-color: #e3f2fd;
+      }
+
+      .pronoun-pool {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .pronoun-chip {
+        padding: 8px 16px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        cursor: grab;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .pronoun-chip:active {
+        cursor: grabbing;
+      }
+
+      .replaced-text {
+        color: var(--success-color);
+        font-weight: bold;
+      }
+
+      /* Matrix Visualizer */
+      .pronoun-matrix {
+        display: grid;
+        grid-template-columns: auto repeat(3, 1fr);
+        gap: 1px;
+        background: #e0e0e0;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 20px 0;
+      }
+
+      .matrix-cell {
+        background: white;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: background 0.2s;
+        position: relative;
+      }
+
+      .matrix-cell:hover {
+        background: #f5faff;
+      }
+
+      .matrix-header {
+        background: #f0f0f0;
+        font-weight: bold;
+        color: var(--text-faded);
+      }
+
+      .tooltip {
+        display: none;
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #333;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        z-index: 10;
+      }
+
+      .matrix-cell:hover .tooltip {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="nouns.html">Род</a>
+          <a
+            href="pronouns.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Местоимения</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Местоимения: Замена имен</h1>
+          <p class="lead">
+            Местоимения заменяют имена и существительные. В русском они склоняются по падежам, как
+            существительные, но имеют свои особенности.
+          </p>
+
+          <section id="personal-pronouns">
+            <h2>Личные местоимения (Personlige pronominer)</h2>
+            <p>Наведите на ячейку, чтобы увидеть пример использования.</p>
+
+            <div class="pronoun-matrix">
+              <!-- Headers -->
+              <div class="matrix-cell matrix-header">Падеж</div>
+              <div class="matrix-cell matrix-header">Я (Jeg)</div>
+              <div class="matrix-cell matrix-header">Ты (Du)</div>
+              <div class="matrix-cell matrix-header">Они (De)</div>
+
+              <!-- Rows -->
+              <div class="matrix-cell matrix-header">Nom</div>
+              <div class="matrix-cell">
+                Я
+                <div class="tooltip">Я здесь</div>
+              </div>
+              <div class="matrix-cell">
+                Ты
+                <div class="tooltip">Ты там</div>
+              </div>
+              <div class="matrix-cell">
+                Они
+                <div class="tooltip">Они спят</div>
+              </div>
+
+              <div class="matrix-cell matrix-header">Gen</div>
+              <div class="matrix-cell">
+                Меня
+                <div class="tooltip">У меня нет...</div>
+              </div>
+              <div class="matrix-cell">
+                Тебя
+                <div class="tooltip">У тебя есть?</div>
+              </div>
+              <div class="matrix-cell">
+                Их
+                <div class="tooltip">Их нет дома</div>
+              </div>
+
+              <div class="matrix-cell matrix-header">Acc</div>
+              <div class="matrix-cell">
+                Меня
+                <div class="tooltip">Он видит меня</div>
+              </div>
+              <div class="matrix-cell">
+                Тебя
+                <div class="tooltip">Я люблю тебя</div>
+              </div>
+              <div class="matrix-cell">
+                Их
+                <div class="tooltip">Я знаю их</div>
+              </div>
+
+              <div class="matrix-cell matrix-header">Dat</div>
+              <div class="matrix-cell">
+                Мне
+                <div class="tooltip">Дай мне</div>
+              </div>
+              <div class="matrix-cell">
+                Тебе
+                <div class="tooltip">Звоню тебе</div>
+              </div>
+              <div class="matrix-cell">
+                Им
+                <div class="tooltip">Помоги им</div>
+              </div>
+            </div>
+
+            <p style="font-size: 0.9rem; color: #666; margin-top: 10px">
+              * Таблица упрощена для наглядности. Полную таблицу см. в учебнике.
+            </p>
+          </section>
+
+          <section id="possessive">
+            <h2>Притяжательные местоимения (Ejestedord)</h2>
+            <p>
+              Мой, твой, его, её, наш, ваш, их — изменяются как прилагательные (кроме его, её, их)!
+            </p>
+
+            <div class="inline-quiz">
+              <span class="inline-question">Какое местоимение НЕ меняется по родам?</span>
+              <div class="inline-options">
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, false, 'Нет. Мой/Моя/Моё/Мои.')"
+                >
+                  Мой
+                </button>
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, true, 'Верно! Его, её, их — неизменны.')"
+                >
+                  Его
+                </button>
+              </div>
+              <div class="inline-feedback"></div>
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Практика: Замените слово</h2>
+            <p>Перетащите местоимение на выделенное слово, чтобы заменить его.</p>
+
+            <div class="game-container">
+              <div class="pronoun-pool">
+                <div class="pronoun-chip" draggable="true">Его</div>
+                <div class="pronoun-chip" draggable="true">Ему</div>
+                <div class="pronoun-chip" draggable="true">Их</div>
+              </div>
+
+              <div class="sentence-area">
+                Я вижу <span class="target-noun" data-correct="Его">брата</span>. (Acc)
+              </div>
+
+              <div class="sentence-area">
+                Я звоню <span class="target-noun" data-correct="Ему">папе</span>. (Dat)
+              </div>
+
+              <div id="pron-feedback" class="feedback"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Его, Её, Их</strong>
+            Эти слова работают и как "личные" (Acc/Gen), и как "притяжательные". <br />
+            <em>Я вижу его.</em> (Личное, Acc)<br />
+            <em>Это его дом.</em> (Притяжательное)
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar</div>
+      </footer>
+    </div>
+
+    <script>
+      // Inline Quiz Logic
+      function checkInline(btn, isCorrect, msg) {
+        const container = btn.closest('.inline-quiz');
+        const feedback = container.querySelector('.inline-feedback');
+
+        container.querySelectorAll('.inline-btn').forEach((b) => {
+          b.style.background = 'white';
+          b.style.color = 'var(--text-faded)';
+          b.style.borderColor = '#ccc';
+        });
+
+        if (isCorrect) {
+          btn.style.background = 'var(--success-color)';
+          btn.style.color = 'white';
+          btn.style.borderColor = 'var(--success-color)';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback correct';
+        } else {
+          btn.style.background = 'var(--error-color)';
+          btn.style.color = 'white';
+          btn.style.borderColor = 'var(--error-color)';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback incorrect';
+        }
+      }
+
+      // Drag and Drop Logic
+      const chips = document.querySelectorAll('.pronoun-chip');
+      const targets = document.querySelectorAll('.target-noun');
+      const feedback = document.getElementById('pron-feedback');
+      let solved = 0;
+
+      chips.forEach((chip) => {
+        chip.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', chip.innerText);
+          chip.classList.add('dragging');
+        });
+        chip.addEventListener('dragend', () => {
+          chip.classList.remove('dragging');
+        });
+      });
+
+      targets.forEach((target) => {
+        target.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          target.classList.add('highlight');
+        });
+
+        target.addEventListener('dragleave', () => {
+          target.classList.remove('highlight');
+        });
+
+        target.addEventListener('drop', (e) => {
+          e.preventDefault();
+          target.classList.remove('highlight');
+          const val = e.dataTransfer.getData('text/plain');
+
+          if (val === target.dataset.correct) {
+            target.innerText = val;
+            target.classList.add('replaced-text');
+            target.style.borderBottom = 'none';
+            solved++;
+
+            // Remove used chip visual
+            const usedChip = [...chips].find((c) => c.innerText === val);
+            if (usedChip) usedChip.style.display = 'none';
+
+            if (solved === 2) {
+              feedback.innerText = 'Отлично! Вы правильно заменили существительные.';
+              feedback.className = 'feedback correct';
+            }
+          } else {
+            target.style.color = 'red';
+            setTimeout(() => (target.style.color = 'inherit'), 500);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

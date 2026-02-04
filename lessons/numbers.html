@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Числительные | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .rule-visualizer {
+        display: flex;
+        margin: 30px 0;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #ddd;
+      }
+
+      .rule-segment {
+        flex: 1;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+      }
+
+      .rule-1 {
+        background: #e3f2fd;
+        border-right: 1px solid #fff;
+      }
+      .rule-24 {
+        background: #fff3e0;
+        border-right: 1px solid #fff;
+      }
+      .rule-5 {
+        background: #fbe9e7;
+      }
+
+      .rule-num {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--accent-blue);
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .rule-case {
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #666;
+      }
+
+      /* Calculator Game */
+      .calc-container {
+        background: #333;
+        padding: 20px;
+        border-radius: 12px;
+        width: 300px;
+        margin: 0 auto;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .calc-screen {
+        background: #a5d6a7; /* LCD green */
+        padding: 15px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 1.5rem;
+        text-align: right;
+        margin-bottom: 20px;
+        color: #333;
+        border: 2px solid #888;
+      }
+
+      .calc-problem {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #ccc;
+        text-align: center;
+      }
+
+      .calc-options {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .calc-btn {
+        background: #555;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .calc-btn:hover {
+        background: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="cases.html">Падежи</a>
+          <a
+            href="numbers.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Числительные</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Числительные: Математика языка</h1>
+          <p class="lead">
+            Русские числительные требуют особого внимания. Они управляют падежом существительного по
+            строгим математическим правилам.
+          </p>
+
+          <section id="cardinal">
+            <h2>Количественные числительные (Kardinaltal)</h2>
+            <p>Главное правило русского счета: 1, 2-4, 5+.</p>
+
+            <div class="rule-visualizer">
+              <div class="rule-segment rule-1">
+                <span class="rule-num">1</span>
+                <span class="rule-case">Nominativ</span>
+                <div style="margin-top: 10px">стол</div>
+              </div>
+              <div class="rule-segment rule-24">
+                <span class="rule-num">2, 3, 4</span>
+                <span class="rule-case">Genitiv Sing.</span>
+                <div style="margin-top: 10px">стол<strong>а</strong></div>
+              </div>
+              <div class="rule-segment rule-5">
+                <span class="rule-num">5 - 20</span>
+                <span class="rule-case">Genitiv Plur.</span>
+                <div style="margin-top: 10px">стол<strong>ов</strong></div>
+              </div>
+            </div>
+
+            <div class="inline-quiz">
+              <span class="inline-question"
+                >Какое окончание у слова "Дом" (Hus) после цифры 3?</span
+              >
+              <div class="inline-options">
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, true, 'Верно! 2, 3, 4 требуют Gen. Sing. (Дома)')"
+                >
+                  Дома
+                </button>
+                <button
+                  class="inline-btn"
+                  onclick="checkInline(this, false, 'Нет. Домов — это для 5+.')"
+                >
+                  Домов
+                </button>
+              </div>
+              <div class="inline-feedback"></div>
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Грамматический Калькулятор</h2>
+            <p>Решите пример и выберите правильную грамматическую форму результата.</p>
+
+            <div class="calc-container">
+              <div class="calc-problem" id="calc-prob">1 + 1 = ?</div>
+              <div class="calc-screen" id="calc-display">...</div>
+
+              <div class="calc-options" id="calc-opts">
+                <button class="calc-btn" onclick="checkCalc('два стола')">Два стола</button>
+                <button class="calc-btn" onclick="checkCalc('два столов')">Два столов</button>
+              </div>
+            </div>
+            <div
+              id="calc-feedback"
+              class="feedback"
+              style="text-align: center; margin-top: 20px"
+            ></div>
+          </section>
+
+          <section id="gender-one">
+            <h2>Один, Одна, Одно</h2>
+            <p>Число "1" ведет себя как прилагательное. Оно меняется по родам.</p>
+            <ul class="module-list">
+              <li class="module-item">Один дом (m)</li>
+              <li class="module-item">Одна машина (f)</li>
+              <li class="module-item">Одно окно (n)</li>
+            </ul>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Сложные числительные</strong>
+            В "21" (двадцать один) главное — последнее слово. <br />
+            <em>Двадцать один стол.</em> (Как 1)<br />
+            <em>Двадцать два стола.</em> (Как 2)
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar</div>
+      </footer>
+    </div>
+
+    <script>
+      // Inline Quiz Logic
+      function checkInline(btn, isCorrect, msg) {
+        const container = btn.closest('.inline-quiz');
+        const feedback = container.querySelector('.inline-feedback');
+
+        container.querySelectorAll('.inline-btn').forEach((b) => {
+          b.style.background = 'white';
+          b.style.color = 'var(--text-faded)';
+          b.style.borderColor = '#ccc';
+        });
+
+        if (isCorrect) {
+          btn.style.background = 'var(--success-color)';
+          btn.style.color = 'white';
+          btn.style.borderColor = 'var(--success-color)';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback correct';
+        } else {
+          btn.style.background = 'var(--error-color)';
+          btn.style.color = 'white';
+          btn.style.borderColor = 'var(--error-color)';
+          feedback.innerText = msg;
+          feedback.className = 'inline-feedback incorrect';
+        }
+      }
+
+      // Calculator Game
+      const problems = [
+        { q: '1 + 1', ans: 2, text: 'Два стола', correct: true, opts: ['Два стола', 'Два столов'] },
+        {
+          q: '2 + 3',
+          ans: 5,
+          text: 'Пять столов',
+          correct: true,
+          opts: ['Пять столов', 'Пять стола'],
+        },
+        {
+          q: '10 + 11',
+          ans: 21,
+          text: 'Двадцать один стол',
+          correct: true,
+          opts: ['Двадцать один стол', 'Двадцать один столов'],
+        },
+        {
+          q: '2 + 2',
+          ans: 4,
+          text: 'Четыре стола',
+          correct: true,
+          opts: ['Четыре стола', 'Четыре столов'],
+        },
+      ];
+
+      let currentProb = 0;
+
+      function renderCalc() {
+        const p = problems[currentProb];
+        document.getElementById('calc-prob').innerText = p.q + ' = ?';
+        document.getElementById('calc-display').innerText = p.ans;
+
+        const optsContainer = document.getElementById('calc-opts');
+        optsContainer.innerHTML = '';
+
+        // Shuffle options
+        const shuffled = [...p.opts].sort(() => Math.random() - 0.5);
+
+        shuffled.forEach((opt) => {
+          const btn = document.createElement('button');
+          btn.className = 'calc-btn';
+          btn.innerText = opt;
+          btn.onclick = () => checkCalc(opt);
+          optsContainer.appendChild(btn);
+        });
+
+        document.getElementById('calc-feedback').style.display = 'none';
+      }
+
+      function checkCalc(selected) {
+        const p = problems[currentProb];
+        const fb = document.getElementById('calc-feedback');
+
+        if (selected === p.text) {
+          fb.innerText = 'Верно! ' + p.text;
+          fb.className = 'feedback correct';
+          setTimeout(() => {
+            currentProb = (currentProb + 1) % problems.length;
+            renderCalc();
+          }, 1500);
+        } else {
+          fb.innerText = 'Ошибка. Посмотрите на правило 1 / 2-4 / 5+';
+          fb.className = 'feedback incorrect';
+        }
+        fb.style.display = 'block';
+      }
+
+      renderCalc();
+    </script>
+  </body>
+</html>

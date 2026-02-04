@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Литература и Подтекст | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/advanced.css" />
+    <style>
+      .quote-card {
+        padding: 30px;
+        margin-bottom: 25px;
+        background: #fdfbf7;
+        border: 1px solid #e0e0e0;
+        position: relative;
+        font-family: var(--font-serif);
+      }
+
+      .quote-card::before {
+        content: '«';
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        font-size: 4rem;
+        color: rgba(0, 0, 0, 0.1);
+        line-height: 1;
+      }
+
+      .quote-text {
+        font-size: 1.2rem;
+        font-style: italic;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .quote-author {
+        text-align: right;
+        font-size: 0.9rem;
+        color: #666;
+        font-family: var(--font-sans);
+      }
+
+      .subtext-reveal {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        color: #555;
+        display: none;
+      }
+
+      .reveal-btn {
+        background: none;
+        border: none;
+        color: var(--accent-gold);
+        cursor: pointer;
+        font-size: 0.9rem;
+        padding: 0;
+        margin-top: 10px;
+        text-decoration: underline;
+      }
+
+      /* Drag and Drop improvements */
+      .drop-column {
+        transition:
+          background-color 0.3s,
+          transform 0.2s;
+        background: #f8f9fa;
+        border: 1px dashed #ccc;
+      }
+
+      .drop-column.drag-over {
+        background-color: rgba(0, 0, 0, 0.05);
+        transform: scale(1.02);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-style: solid;
+        border-color: var(--accent-gold);
+      }
+
+      .word-card {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 5px;
+        background: white;
+        border: 1px solid var(--accent-gold);
+        cursor: grab;
+        user-select: none;
+        font-weight: 500;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s;
+      }
+
+      .word-card:active {
+        cursor: grabbing;
+        transform: scale(0.95);
+      }
+
+      .word-card.correct {
+        background: var(--color-success);
+        color: white;
+        border-color: var(--color-success);
+        cursor: default;
+      }
+
+      .word-card.wrong {
+        background: var(--color-error);
+        color: white;
+        border-color: var(--color-error);
+        animation: shake 0.5s;
+      }
+
+      .hint-box {
+        background: #fff3cd;
+        color: #856404;
+        padding: 10px;
+        text-align: center;
+        margin-bottom: 15px;
+        min-height: 40px;
+        font-style: italic;
+        display: none;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        50% {
+          transform: translateX(5px);
+        }
+
+        75% {
+          transform: translateX(-5px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a
+            href="#"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-gold)"
+            >Литература</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Литература и Подтекст</h1>
+          <p class="lead">
+            В России литература больше, чем литература. Это способ говорить о запретном, используя
+            "Эзопов язык". Чтобы понять русских, нужно уметь читать между строк.
+          </p>
+
+          <section id="theory">
+            <h2>Искусство намека</h2>
+
+            <div class="quote-card">
+              <div class="quote-text">"Мы все глядим в Наполеоны; Двуногих тварей миллионы..."</div>
+              <div class="quote-author">— А.С. Пушкин, "Евгений Онегин"</div>
+              <button
+                class="reveal-btn"
+                onclick="
+                  this.nextElementSibling.style.display = 'block';
+                  this.style.display = 'none';
+                "
+              >
+                Показать подтекст
+              </button>
+              <div class="subtext-reveal">
+                <strong>Смысл:</strong> Критика амбиций и эгоизма. Пушкин иронизирует над модой на
+                "сильную личность", которая готова идти по головам ради успеха.
+              </div>
+            </div>
+
+            <div class="quote-card">
+              <div class="quote-text">"Рукописи не горят."</div>
+              <div class="quote-author">— М.А. Булгаков, "Мастер и Маргарита"</div>
+              <button
+                class="reveal-btn"
+                onclick="
+                  this.nextElementSibling.style.display = 'block';
+                  this.style.display = 'none';
+                "
+              >
+                Показать подтекст
+              </button>
+              <div class="subtext-reveal">
+                <strong>Смысл:</strong> Истинное искусство и правду невозможно уничтожить, даже если
+                уничтожить физический носитель или самого автора.
+              </div>
+            </div>
+
+            <h3>Эзопов язык (Aesopian language)</h3>
+            <p>
+              Способ маскировать политическую сатиру под сказки, басни или истории о животных, чтобы
+              обойти цензуру.
+            </p>
+          </section>
+
+          <section id="practice-section">
+            <h2>Практика: Что хотел сказать автор?</h2>
+            <p>Соедините цитату с её скрытым смыслом.</p>
+
+            <div class="game-container">
+              <div id="hint-display" class="hint-box">Подсказка появится здесь...</div>
+
+              <div
+                id="word-bank"
+                style="
+                  min-height: 60px;
+                  padding: 10px;
+                  background: #fff;
+                  border-bottom: 1px solid #eee;
+                  margin-bottom: 20px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 10px;
+                  justify-content: center;
+                "
+              >
+                <!-- Words will be generated here -->
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px">
+                <div
+                  class="drop-column"
+                  data-target="irony"
+                  style="min-height: 200px; padding: 10px; text-align: center"
+                >
+                  <h3>Ирония / Сатира</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+                <div
+                  class="drop-column"
+                  data-target="philosophy"
+                  style="min-height: 200px; padding: 10px; text-align: center"
+                >
+                  <h3>Философия / Судьба</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+              </div>
+              <div
+                id="feedback"
+                class="feedback"
+                style="margin-top: 20px; text-align: center; font-size: 1.2rem"
+              ></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Интеллигенция</strong>
+            Уникальный русский социальный слой. Люди умственного труда, чувствующие моральную
+            ответственность за судьбу страны.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      const quotes = [
+        { t: 'А судьи кто?', g: 'irony', hint: 'Грибоедов. Критика лицемерия власти.' },
+        {
+          t: 'Человек — это звучит гордо',
+          g: 'philosophy',
+          hint: 'Горький. Вера в потенциал человека.',
+        },
+        {
+          t: 'Служить бы рад, прислуживаться тошно',
+          g: 'irony',
+          hint: 'Грибоедов. Отказ от лакейства.',
+        },
+        { t: 'Красота спасет мир', g: 'philosophy', hint: 'Достоевский. Духовное спасение.' },
+        {
+          t: 'Умом Россию не понять',
+          g: 'philosophy',
+          hint: 'Тютчев. Иррациональность русской души.',
+        },
+        {
+          t: 'В России две беды: дураки и дороги',
+          g: 'irony',
+          hint: 'Народная мудрость / Гоголь. Сатира на управление.',
+        },
+      ];
+
+      const bank = document.getElementById('word-bank');
+      const columns = document.querySelectorAll('.drop-column');
+      const feedback = document.getElementById('feedback');
+      const hintBox = document.getElementById('hint-display');
+      let solved = 0;
+
+      // Initialize Game
+      function initGame() {
+        quotes.sort(() => Math.random() - 0.5); // Shuffle
+        quotes.forEach((w) => {
+          const el = document.createElement('div');
+          el.className = 'word-card';
+          el.innerText = w.t;
+          el.draggable = true;
+          el.dataset.target = w.g;
+          el.dataset.hint = w.hint;
+
+          el.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', JSON.stringify(w));
+            e.dataTransfer.effectAllowed = 'move';
+            setTimeout(() => (el.style.opacity = '0.5'), 0);
+            showHint(w.hint);
+          });
+
+          el.addEventListener('dragend', () => {
+            el.style.opacity = '1';
+          });
+
+          el.addEventListener('click', () => {
+            if (el.classList.contains('correct')) return;
+            showHint(w.hint);
+            if (document.querySelector('.selected-word')) {
+              document.querySelector('.selected-word').classList.remove('selected-word');
+              document.querySelector('.selected-word').style.borderColor = 'var(--accent-gold)';
+            }
+            el.classList.add('selected-word');
+            el.style.borderColor = 'var(--accent-gold)';
+          });
+
+          bank.appendChild(el);
+        });
+      }
+
+      function showHint(text) {
+        hintBox.style.display = 'block';
+        hintBox.innerText = text;
+      }
+
+      // Drop Logic
+      columns.forEach((col) => {
+        col.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          col.classList.add('drag-over');
+        });
+
+        col.addEventListener('dragleave', () => {
+          col.classList.remove('drag-over');
+        });
+
+        col.addEventListener('drop', (e) => {
+          e.preventDefault();
+          col.classList.remove('drag-over');
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          const draggedEl = [...bank.children].find(
+            (c) => c.innerText === data.t && c.style.display !== 'none',
+          );
+
+          handleMove(data, draggedEl, col);
+        });
+
+        col.addEventListener('click', () => {
+          const selected = document.querySelector('.selected-word');
+          if (selected) {
+            const target = selected.dataset.target;
+            const data = { t: selected.innerText, g: target };
+            handleMove(data, selected, col);
+          }
+        });
+      });
+
+      function handleMove(data, element, col) {
+        if (col.dataset.target === data.g) {
+          // Correct
+          const successEl = document.createElement('div');
+          successEl.className = 'word-card correct';
+          successEl.innerText = data.t;
+          successEl.style.display = 'block';
+          successEl.style.width = '100%';
+          successEl.style.marginBottom = '5px';
+          successEl.draggable = false;
+
+          col.querySelector('.drop-zone-content').appendChild(successEl);
+          if (element) element.remove();
+
+          solved++;
+          checkWin();
+          hintBox.style.display = 'none';
+        } else {
+          // Wrong
+          if (element) {
+            element.classList.add('wrong');
+            setTimeout(() => element.classList.remove('wrong'), 500);
+            hintBox.innerText = 'Не совсем. Подумайте о контексте.';
+          }
+        }
+      }
+
+      function checkWin() {
+        if (solved === quotes.length) {
+          feedback.innerHTML = '<strong>Великолепно!</strong> Вы чувствуете русскую душу.';
+          feedback.style.color = 'var(--color-success)';
+        }
+      }
+
+      initGame();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Политика и Медиа (C1) | Samovar</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/advanced.css" />
+  <style>
+    .news-card {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      padding: 15px;
+      margin-bottom: 15px;
+      font-family: 'Georgia', serif;
+    }
+
+    .headline {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .decode-box {
+      background: #222;
+      color: #0f0;
+      font-family: monospace;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+  </style>
+  <script type="module" src="/js/header.ts"></script>
+  <script type="module" src="/js/footer.ts"></script>
+</head>
+
+<body>
+  <div class="container">
+    <samovar-header></samovar-header>
+
+    <main>
+      <article class="content-block section-advanced">
+        <div class="content-main">
+          <span class="tag active">Общество</span>
+          <h1>Политика и Медиа: Читаем между строк</h1>
+          <p class="lead">
+            Язык новостей — это особый код. Чтобы понимать, что происходит, нужно уметь переводить
+            с "новояза" на человеческий язык.
+          </p>
+
+          <div class="visual-concept" style="text-align: center; margin: 30px 0">
+            <img src="../images/politics_media_constructivism_1763982162017.png" alt="Constructivist Media" style="
+                  max-width: 100%;
+                  border-radius: 8px;
+                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                " />
+          </div>
+
+          <h2>Словарь Эвфемизмов (Новояз)</h2>
+          <p>Официальные СМИ часто смягчают реальность, используя специальные термины.</p>
+
+          <div class="news-card">
+            <div class="headline">"Произошел хлопок газа"</div>
+            <div class="decode-box">> Взрыв (Eksplosion)</div>
+          </div>
+
+          <div class="news-card">
+            <div class="headline">"Отрицательный рост экономики"</div>
+            <div class="decode-box">> Падение / Кризис (Tilbagegang)</div>
+          </div>
+
+          <div class="news-card">
+            <div class="headline">"Задымление"</div>
+            <div class="decode-box">> Пожар (Brand)</div>
+          </div>
+
+          <div class="news-card">
+            <div class="headline">"Высвобождение рабочей силы"</div>
+            <div class="decode-box">> Массовые увольнения (Fyringer)</div>
+          </div>
+
+          <h2>Политическая лексика</h2>
+          <ul>
+            <li>
+              <strong>Силовики</strong> — представители силовых структур (полиция, ФСБ, армия),
+              имеющие политическое влияние.
+            </li>
+            <li>
+              <strong>Иноагент (Иностранный агент)</strong> — ярлык для оппозиционных СМИ и
+              активистов.
+            </li>
+            <li>
+              <strong>Скрепы</strong> — традиционные ценности, объединяющие нацию (часто
+              используется иронично).
+            </li>
+          </ul>
+
+          <h3>Практика: Дешифратор Заголовков</h3>
+          <p>Что на самом деле означает этот заголовок?</p>
+          <div id="media-quiz" class="quiz-container"></div>
+        </div>
+      </article>
+    </main>
+
+    <samovar-footer></samovar-footer>
+  </div>
+
+  <script src="../js/quiz-engine.js"></script>
+  <script>
+    const questions = [
+      {
+        text: "Заголовок: 'Наблюдается коррекция цен на продукты'. Что это значит?",
+        options: [
+          { text: 'Цены стали ниже' },
+          { text: 'Цены выросли' },
+          { text: 'Цены не изменились' },
+        ],
+        correctIndex: 1,
+        explanation:
+          "'Коррекция' в новостях почти всегда означает повышение цен, но звучит мягче.",
+      },
+      {
+        text: "Заголовок: 'Проведена оптимизация системы здравоохранения'. Что произошло?",
+        options: [
+          { text: 'Построили новые больницы' },
+          { text: 'Закрыли часть больниц и сократили врачей' },
+          { text: 'Врачам подняли зарплату' },
+        ],
+        correctIndex: 1,
+        explanation:
+          "'Оптимизация' в бюрократическом языке часто означает сокращение расходов и закрытие учреждений.",
+      },
+      {
+        text: "Заголовок: 'Жесткая посадка самолета'. Что это?",
+        options: [
+          { text: 'Авария / Крушение' },
+          { text: 'Обычная посадка' },
+          { text: 'Посадка в сильный ветер' },
+        ],
+        correctIndex: 0,
+        explanation:
+          "'Жесткая посадка' — эвфемизм для аварии, когда самолет поврежден при приземлении.",
+      },
+    ];
+
+    new QuizEngine('media-quiz', questions);
+  </script>
+</body>
+
+</html>

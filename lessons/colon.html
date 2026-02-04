@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Двоеточие | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .case-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+      }
+
+      .case-card {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+        border-top: 4px solid var(--accent-blue);
+      }
+
+      .case-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .case-icon {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        background: #f8f9fa;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+      .case-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: var(--accent-blue);
+      }
+
+      .case-example {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .colon-h {
+        color: var(--accent-red);
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      .visual-stop {
+        text-align: center;
+        margin: 40px 0;
+        padding: 30px;
+        background: #2c3e50;
+        color: white;
+        border-radius: 12px;
+      }
+
+      .stop-sign {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      /* Practice */
+      .practice-container {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+      }
+
+      .sentence-row {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .sentence-content {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        line-height: 1.8;
+      }
+
+      .gap-btn {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background: #e0e0e0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        vertical-align: middle;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+        color: transparent;
+        margin: 0 4px;
+      }
+
+      .gap-btn.active {
+        background: var(--accent-blue);
+        color: white;
+      }
+
+      .gap-btn.active::after {
+        content: ':';
+      }
+
+      .check-status {
+        font-size: 0.9rem;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+      .check-status.ok {
+        color: var(--color-success);
+      }
+      .check-status.err {
+        color: var(--color-error);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="direct-speech.html">Прямая речь</a>
+          <a
+            href="colon.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 2px solid var(--accent-red)"
+            >Двоеточие</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Двоеточие: Знак ожидания</h1>
+          <p class="lead">
+            Двоеточие в русском языке работает как знак "Внимание!". Оно говорит: дальше будет
+            объяснение, список или причина.
+          </p>
+
+          <div class="visual-stop">
+            <span class="stop-sign">⚠️ : 👇</span>
+            <strong>Стоп! Смотри вниз.</strong><br />
+            Двоеточие предупреждает, что следующая часть раскрывает смысл предыдущей.
+          </div>
+
+          <div class="case-grid">
+            <div class="case-card">
+              <div class="case-icon">📋</div>
+              <div class="case-title">Перечисление</div>
+              <p>После обобщающего слова.</p>
+              <div class="case-example">
+                На столе лежало всё<span class="colon-h">:</span> ручки, книги, тетради.
+              </div>
+            </div>
+
+            <div class="case-card">
+              <div class="case-icon">💡</div>
+              <div class="case-title">Причина</div>
+              <p>Почему? Потому что...</p>
+              <div class="case-example">
+                Я не пошел гулять<span class="colon-h">:</span> шел сильный дождь.
+              </div>
+            </div>
+
+            <div class="case-card">
+              <div class="case-icon">🗣</div>
+              <div class="case-title">Прямая речь</div>
+              <p>После слов автора.</p>
+              <div class="case-example">Он сказал<span class="colon-h">:</span> "Привет!"</div>
+            </div>
+          </div>
+
+          <section id="practice">
+            <h2>Где поставить двоеточие?</h2>
+            <p>
+              Нажмите на серый квадрат, чтобы поставить двоеточие. Только одно место правильное.
+            </p>
+
+            <div class="practice-container" id="practiceArea">
+              <!-- JS Generated -->
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Совет</strong>
+            Если вторую часть можно заменить на "потому что" или "а именно" — ставьте двоеточие.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      const sentences = [
+        {
+          parts: ['Я', 'знаю', 'одно', 'любовь', 'это', 'важно'],
+          correctGap: 2, // After 'одно'
+        },
+        {
+          parts: ['Он', 'открыл', 'дверь', 'на', 'пороге', 'стоял', 'кот'],
+          correctGap: 2, // After 'дверь' -> "Он открыл дверь: на пороге стоял кот" (пояснение)
+        },
+        {
+          parts: ['Купи', 'фрукты', 'яблоки', 'и', 'груши'],
+          correctGap: 1, // After 'фрукты'
+        },
+      ];
+
+      const area = document.getElementById('practiceArea');
+
+      sentences.forEach((task, idx) => {
+        const row = document.createElement('div');
+        row.className = 'sentence-row';
+
+        const content = document.createElement('div');
+        content.className = 'sentence-content';
+
+        task.parts.forEach((word, wIdx) => {
+          const span = document.createElement('span');
+          span.innerText = word;
+          content.appendChild(span);
+
+          if (wIdx < task.parts.length - 1) {
+            const btn = document.createElement('button');
+            btn.className = 'gap-btn';
+            btn.dataset.idx = wIdx;
+            btn.onclick = () => check(btn, wIdx, task.correctGap, idx);
+            content.appendChild(btn);
+          } else {
+            content.appendChild(document.createTextNode('.'));
+          }
+          content.appendChild(document.createTextNode(' '));
+        });
+
+        const status = document.createElement('div');
+        status.className = 'check-status';
+        status.id = `status-${idx}`;
+
+        row.appendChild(content);
+        row.appendChild(status);
+        area.appendChild(row);
+      });
+
+      function check(btn, gapIdx, correctGap, taskIdx) {
+        // Reset buttons in this row
+        const row = btn.parentElement;
+        const btns = row.querySelectorAll('.gap-btn');
+        btns.forEach((b) => b.classList.remove('active'));
+
+        btn.classList.add('active');
+
+        const status = document.getElementById(`status-${taskIdx}`);
+        if (gapIdx === correctGap) {
+          status.innerText = 'Верно!';
+          status.className = 'check-status ok';
+        } else {
+          status.innerText = 'Неверно. Попробуйте другое место.';
+          status.className = 'check-status err';
+        }
+      }
+    </script>
+  </body>
+</html>

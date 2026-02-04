@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сложные предложения | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .connector-card {
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 25px;
+        margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      .connector-tag {
+        background: var(--accent-blue);
+        color: white;
+        padding: 10px;
+        text-align: center;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 1.2rem;
+      }
+
+      .connector-desc {
+        font-size: 1rem;
+      }
+
+      .example-line {
+        margin-top: 10px;
+        font-style: italic;
+        color: #555;
+      }
+
+      .contrast-visual {
+        display: flex;
+        gap: 20px;
+        margin: 30px 0;
+        justify-content: center;
+      }
+
+      .contrast-box {
+        width: 45%;
+        padding: 20px;
+        border: 2px solid #eee;
+        border-radius: 8px;
+        text-align: center;
+        transition: all 0.3s;
+      }
+
+      .contrast-box:hover {
+        border-color: var(--accent-blue);
+      }
+
+      .contrast-icon {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        display: block;
+      }
+
+      /* Exercise */
+      .sentence-gap-fill {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        line-height: 2;
+      }
+
+      .gap-input {
+        border: none;
+        border-bottom: 2px solid #ccc;
+        background: transparent;
+        width: 120px;
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--accent-blue);
+        font-weight: bold;
+      }
+
+      .gap-input:focus {
+        outline: none;
+        border-bottom-color: var(--accent-blue);
+      }
+
+      .gap-input.correct {
+        border-bottom-color: var(--success-color);
+        color: var(--success-color);
+      }
+      .gap-input.wrong {
+        border-bottom-color: var(--error-color);
+        color: var(--error-color);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="syntax.html">Синтаксис</a>
+          <a
+            href="complex-sentences.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Сложные предложения</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Сложные предложения</h1>
+          <p class="lead">
+            Искусство связывать мысли. Русские союзы делят мир на "равных" и "подчиненных".
+          </p>
+
+          <section id="coordinating">
+            <h2>Сочинительные союзы (Равноправие)</h2>
+            <p>Эти союзы соединяют две независимые фразы.</p>
+
+            <div class="connector-card">
+              <div class="connector-tag">И</div>
+              <div class="connector-desc">
+                <strong>Значение:</strong> Соединение (Og).<br />
+                <div class="example-line">
+                  Я читаю книгу, <strong>и</strong> брат слушает музыку.
+                </div>
+              </div>
+            </div>
+
+            <h3>Битва союзов: А vs НО</h3>
+            <p>Оба переводятся как "Men", но работают по-разному.</p>
+
+            <div class="contrast-visual">
+              <div class="contrast-box">
+                <span class="contrast-icon" style="color: #e67e22">А</span>
+                <strong>Сравнение</strong><br />
+                (Слева - Справа)<br />
+                <em>Я здесь, <strong>а</strong> ты там.</em>
+              </div>
+              <div class="contrast-box">
+                <span class="contrast-icon" style="color: #c0392b">НО</span>
+                <strong>Конфликт</strong><br />
+                (Ожидание - Реальность)<br />
+                <em>Я хочу спать, <strong>но</strong> я работаю.</em>
+              </div>
+            </div>
+          </section>
+
+          <section id="subordinating">
+            <h2>Подчинительные союзы (Зависимость)</h2>
+            <p>Здесь одно предложение не может жить без другого.</p>
+
+            <div class="connector-card">
+              <div class="connector-tag">ЧТО</div>
+              <div class="connector-desc">
+                <strong>Значение:</strong> At (Факты).<br />
+                <div class="example-line">
+                  Я знаю, <strong>что</strong> это правда. (Jeg ved, at det er sandt)
+                </div>
+              </div>
+            </div>
+
+            <div class="connector-card">
+              <div class="connector-tag">ЧТОБЫ</div>
+              <div class="connector-desc">
+                <strong>Значение:</strong> For at (Цель).<br />
+                <div class="example-line">
+                  Я учу русский, <strong>чтобы</strong> работать в Москве.
+                </div>
+              </div>
+            </div>
+
+            <div class="connector-card">
+              <div class="connector-tag">ПОТОМУ ЧТО</div>
+              <div class="connector-desc">
+                <strong>Значение:</strong> Fordi (Причина).<br />
+                <div class="example-line">
+                  Я счастлив, <strong>потому что</strong> сегодня пятница.
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="punctuation-rule">
+            <h2>Золотое правило пунктуации</h2>
+            <div
+              style="background: #e3f2fd; border-left: 4px solid var(--accent-blue); padding: 20px"
+            >
+              Перед словами <em>что, где, когда, который, если, потому что</em> почти
+              <strong>ВСЕГДА</strong> ставится запятая. <br /><br />
+              <em>Я думаю, что ты прав.</em>
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Практика</h2>
+            <p>Впишите подходящий союз (а, но, что, чтобы).</p>
+
+            <div class="sentence-gap-fill">
+              1. Я не знаю,
+              <input type="text" class="gap-input" data-ans="что" placeholder="..." /> ты делаешь.
+              <br />
+              2. Это не чай,
+              <input type="text" class="gap-input" data-ans="а" placeholder="..." /> кофе.
+              (Сравнение) <br />
+              3. Я иду в магазин,
+              <input type="text" class="gap-input" data-ans="чтобы" placeholder="..." /> купить
+              хлеб. (Цель) <br />
+              4. На улице холодно,
+              <input type="text" class="gap-input" data-ans="но" placeholder="..." /> мы идем
+              гулять. (Конфликт)
+            </div>
+            <button class="btn" style="margin-top: 20px" onclick="checkGaps()">Проверить</button>
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar.</div>
+      </footer>
+    </div>
+
+    <script>
+      function checkGaps() {
+        const inputs = document.querySelectorAll('.gap-input');
+        inputs.forEach((inp) => {
+          const val = inp.value.trim().toLowerCase();
+          if (val === inp.dataset.ans) {
+            inp.classList.add('correct');
+            inp.classList.remove('wrong');
+          } else {
+            inp.classList.add('wrong');
+            inp.classList.remove('correct');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

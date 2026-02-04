@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Условные предложения | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .world-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .world-card {
+        padding: 30px;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s;
+      }
+
+      .world-real {
+        background: white;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .world-unreal {
+        background: #f3f0ff; /* Light purple for dream/unreal */
+        border: 1px solid #dcd6f7;
+        box-shadow: 0 4px 10px rgba(108, 92, 231, 0.1);
+      }
+
+      .world-title {
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        border-bottom: 2px solid;
+        padding-bottom: 10px;
+        display: inline-block;
+      }
+
+      .world-real .world-title {
+        border-color: var(--success-color);
+        color: var(--text-ink);
+      }
+      .world-unreal .world-title {
+        border-color: #6c5ce7;
+        color: #6c5ce7;
+      }
+
+      .formula-box {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 10px;
+        border-radius: 4px;
+        font-family: monospace;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      .example-text {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
+      .particle-by {
+        color: #6c5ce7;
+        font-weight: bold;
+        border-bottom: 2px dashed #6c5ce7;
+      }
+
+      /* Slider Switch */
+      .reality-switch-container {
+        background: #eee;
+        padding: 20px;
+        border-radius: 50px;
+        width: fit-content;
+        margin: 0 auto 40px auto;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        position: relative;
+      }
+
+      .switch-label {
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 2;
+        padding: 10px 20px;
+        transition: color 0.3s;
+      }
+
+      .switch-label.active {
+        color: white;
+      }
+
+      .switch-bg {
+        position: absolute;
+        left: 20px;
+        top: 15px;
+        height: 50px;
+        width: 140px;
+        background: var(--accent-blue);
+        border-radius: 30px;
+        transition: transform 0.3s;
+        z-index: 1;
+      }
+
+      /* Interactive Sentence */
+      .transformation-area {
+        text-align: center;
+        font-size: 1.5rem;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a href="complex-sentences.html">Сложные предложения</a>
+          <a
+            href="conditionals.html"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Условия</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Условные предложения</h1>
+          <p class="lead">
+            Русский язык четко разделяет Реальность и Мечту. Для этого существует всего одна
+            маленькая частица: "БЫ".
+          </p>
+
+          <div class="reality-switch-container">
+            <div class="switch-bg" id="switch-bg"></div>
+            <div class="switch-label active" onclick="setMode('real')">Реальность</div>
+            <div class="switch-label" onclick="setMode('unreal')">Фантазия</div>
+          </div>
+
+          <div class="transformation-area" id="transform-text">
+            Если будет дождь, я останусь дома.
+          </div>
+          <p style="text-align: center; color: #666; margin-bottom: 50px" id="transform-desc">
+            (План на будущее. 50/50)
+          </p>
+
+          <div class="world-container">
+            <div class="world-card world-real">
+              <h3 class="world-title">Реальный мир</h3>
+              <div class="formula-box">ЕСЛИ + Будущее время</div>
+              <p class="example-text">
+                Мы строим планы. Это может случиться.<br /><br />
+                <em>Если у меня <strong>будут</strong> деньги, я <strong>куплю</strong> машину.</em>
+              </p>
+              <p style="font-size: 0.9rem; color: #666; margin-top: 20px">
+                Аналог: Danish "Hvis jeg har penge..." (Realis)
+              </p>
+            </div>
+
+            <div class="world-card world-unreal">
+              <h3 class="world-title">Параллельный мир</h3>
+              <div class="formula-box">
+                ЕСЛИ <span class="particle-by">БЫ</span> + Прошедшее время
+              </div>
+              <p class="example-text">
+                Мы мечтаем или сожалеем. Этого нет сейчас.<br /><br />
+                <em
+                  >Если <span class="particle-by">бы</span> у меня <strong>были</strong> деньги, я
+                  <span class="particle-by">бы</span> <strong>купил</strong> машину.</em
+                >
+              </p>
+              <p style="font-size: 0.9rem; color: #666; margin-top: 20px">
+                Аналог: Danish "Hvis jeg havde penge..." (Irrealis)
+              </p>
+            </div>
+          </div>
+
+          <section id="mechanics">
+            <h2>Механика "БЫ"</h2>
+            <p>
+              Частица <strong>БЫ</strong> работает как маркер нереальности. Она всегда требует
+              <strong>Прошедшего времени</strong> (даже если мы говорим о будущем!).
+            </p>
+
+            <div
+              style="
+                background: #fff3cd;
+                padding: 20px;
+                border-radius: 8px;
+                border: 1px solid #ffeeba;
+              "
+            >
+              <strong>Ошибка новичка:</strong><br />
+              <span style="color: red; text-decoration: line-through">Если бы я буду знать...</span>
+              ❌<br />
+              <span style="color: green">Если бы я знал...</span> ✓
+            </div>
+          </section>
+
+          <section id="practice">
+            <h2>Тест на реальность</h2>
+            <p>Выберите правильную форму глагола.</p>
+
+            <div
+              style="margin-bottom: 20px; padding: 20px; border: 1px solid #eee; border-radius: 8px"
+            >
+              <div style="margin-bottom: 10px">
+                1. Если завтра
+                <select class="inline-select" id="q1" onchange="checkQuiz()">
+                  <option value="">...</option>
+                  <option value="real">будет</option>
+                  <option value="unreal">была бы</option>
+                </select>
+                хорошая погода, мы пойдем в парк. (Реальный план)
+              </div>
+              <div id="fb1" class="mini-feedback"></div>
+            </div>
+
+            <div
+              style="margin-bottom: 20px; padding: 20px; border: 1px solid #eee; border-radius: 8px"
+            >
+              <div style="margin-bottom: 10px">
+                2. Если
+                <select class="inline-select" id="q2" onchange="checkQuiz()">
+                  <option value="">...</option>
+                  <option value="real">буду</option>
+                  <option value="unreal">бы был</option>
+                </select>
+                президентом, я бы отменил налоги. (Фантазия)
+              </div>
+              <div id="fb2" class="mini-feedback"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Мечтательность</strong>
+            Русские очень любят сослагательное наклонение. "Вот если бы..." — начало многих
+            разговоров на кухне.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar.</div>
+      </footer>
+    </div>
+
+    <script>
+      function setMode(mode) {
+        const bg = document.getElementById('switch-bg');
+        const labels = document.querySelectorAll('.switch-label');
+        const text = document.getElementById('transform-text');
+        const desc = document.getElementById('transform-desc');
+
+        labels.forEach((l) => l.classList.remove('active'));
+
+        if (mode === 'real') {
+          bg.style.transform = 'translateX(0)';
+          labels[0].classList.add('active');
+          text.innerHTML = 'Если <strong>будет</strong> дождь, я <strong>останусь</strong> дома.';
+          desc.innerText = '(План на будущее. 50/50)';
+          text.style.color = 'var(--text-ink)';
+        } else {
+          bg.style.transform = 'translateX(115px)'; /* Approx width + gap */
+          labels[1].classList.add('active');
+          text.innerHTML =
+            "Если <span class='particle-by'>бы</span> <strong>был</strong> дождь, я <span class='particle-by'>бы</span> <strong>остался</strong> дома.";
+          desc.innerText = '(Но дождя нет! Я просто воображаю.)';
+          text.style.color = '#6c5ce7';
+        }
+      }
+
+      function checkQuiz() {
+        const q1 = document.getElementById('q1').value;
+        const q2 = document.getElementById('q2').value;
+
+        const fb1 = document.getElementById('fb1');
+        const fb2 = document.getElementById('fb2');
+
+        if (q1 === 'real') {
+          fb1.innerHTML = "<span style='color:green'>✓ Правильно. Реальное условие.</span>";
+        } else if (q1 === 'unreal') {
+          fb1.innerHTML =
+            "<span style='color:red'>✗ Нет. Здесь нет частицы 'бы' во второй части.</span>";
+        } else {
+          fb1.innerHTML = '';
+        }
+
+        if (q2 === 'unreal') {
+          fb2.innerHTML = "<span style='color:green'>✓ Правильно. Бы + Прошедшее.</span>";
+        } else if (q2 === 'real') {
+          fb2.innerHTML =
+            "<span style='color:red'>✗ Нет. Стать президентом — это гипотеза здесь.</span>";
+        } else {
+          fb2.innerHTML = '';
+        }
+      }
+    </script>
+  </body>
+</html>

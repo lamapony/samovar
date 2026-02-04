@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 3: Tal fra 1 til 10 | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <link rel="stylesheet" href="../css/editorial-base.css" />
+  <style>
+    /* ============================================
+           LESSON-SPECIFIC STYLES
+           ============================================ */
+
+    /* Lesson accent color */
+    :root {
+      --editorial-accent: #e63946;
+      --modern-accent: #27ae60;
+    }
+
+    /* === Modern Badge === */
+    .modern-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(39, 174, 96, 0.1);
+      color: var(--modern-accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+
+    .modern-badge svg {
+      color: var(--modern-accent);
+    }
+
+    /* === Number Display === */
+    .number-display {
+      text-align: center;
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .number-digit {
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 700;
+      color: var(--editorial-accent);
+      display: block;
+      line-height: 1;
+    }
+
+    .number-russian {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-family: var(--font-serif);
+      color: var(--editorial-black);
+      cursor: pointer;
+      transition: color 0.2s;
+      margin-top: 1rem;
+    }
+
+    .number-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    .number-phonetic {
+      font-family: 'SF Mono', 'Monaco', monospace;
+      font-size: 1rem;
+      color: var(--editorial-gray);
+      margin-top: 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* === Number Grid === */
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .number-card {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .number-card:nth-child(5n) {
+      border-right: none;
+    }
+
+    .number-card:nth-last-child(-n + 5) {
+      border-bottom: none;
+    }
+
+    .number-card:hover {
+      background: var(--editorial-light);
+    }
+
+    .number-card-digit {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .number-card-russian {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-black);
+      margin-bottom: 0.25rem;
+    }
+
+    .number-card-phonetic {
+      font-size: 0.75rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Aside / Margin Note === */
+    .editorial-aside {
+      background: var(--editorial-light);
+      padding: 2rem;
+      margin: 3rem 0;
+      border-left: 3px solid var(--editorial-accent);
+    }
+
+    .editorial-aside-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .editorial-aside p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    /* === Interlude Section === */
+    .interlude {
+      background: var(--editorial-black);
+      color: white;
+      text-align: center;
+      min-height: 50vh;
+    }
+
+    .interlude h2 {
+      font-size: 2rem;
+      font-weight: 300;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .interlude p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* === Phone Display === */
+    .phone-mockup {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      max-width: 320px;
+      margin: 2rem auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .phone-header {
+      background: var(--editorial-black);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .phone-body {
+      padding: 2rem;
+    }
+
+    .phone-number {
+      font-size: 2rem;
+      font-family: 'SF Mono', 'Monaco', monospace;
+      text-align: center;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+      color: var(--editorial-black);
+    }
+
+    .phone-russian {
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: var(--editorial-gray);
+      cursor: pointer;
+    }
+
+    .phone-russian:hover {
+      color: var(--editorial-accent);
+    }
+
+    /* === Price Tags === */
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      margin: 3rem 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .price-item {
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .price-item:nth-child(odd) {
+      border-right: 1px solid var(--editorial-line);
+    }
+
+    .price-item:nth-last-child(-n + 2) {
+      border-bottom: none;
+    }
+
+    .price-item:hover {
+      background: var(--editorial-light);
+    }
+
+    .price-tag {
+      display: inline-block;
+      background: var(--editorial-accent);
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-russian {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--editorial-black);
+    }
+
+    /* === Exercise Sections === */
+    .exercise-section {
+      background: var(--editorial-light);
+      border-top: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-frame {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .exercise-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--editorial-line);
+    }
+
+    .exercise-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .exercise-title {
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--editorial-black);
+      margin: 0;
+    }
+
+    .exercise-body {
+      min-height: 300px;
+    }
+
+    /* === Summary Section === */
+    .summary-section {
+      background: var(--editorial-black);
+      color: white;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item {
+      padding: 2rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .summary-item:nth-child(5n) {
+      border-right: none;
+    }
+
+    .summary-item:nth-last-child(-n + 5) {
+      border-bottom: none;
+    }
+
+    .summary-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .summary-item .digit {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--editorial-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .summary-item .russian {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+    }
+
+    /* === Completion Section === */
+    .completion-section {
+      background: var(--editorial-light);
+      min-height: auto;
+      padding: 4rem 2rem;
+    }
+
+    .complete-lesson-btn {
+      background: var(--editorial-black);
+      color: white;
+      border: none;
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .complete-lesson-btn:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .complete-lesson-btn.completed {
+      background: #2ecc71;
+      cursor: default;
+    }
+
+    .complete-lesson-btn.completed:hover {
+      transform: none;
+    }
+
+    /* === Navigation === */
+    .nav-section {
+      background: white;
+      padding: 4rem 2rem;
+      min-height: auto;
+    }
+
+    /* === Scroll Animations === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 768px) {
+      .editorial-section {
+        padding: 4rem 1.5rem;
+      }
+
+      .number-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .number-card:nth-child(5n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .number-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .number-card:nth-last-child(-n + 5) {
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .number-card:nth-last-child(-n + 2) {
+        border-bottom: none;
+      }
+
+      .price-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-item:nth-child(odd) {
+        border-right: none;
+      }
+
+      .price-item {
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .price-item:last-child {
+        border-bottom: none;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .summary-item:nth-child(5n) {
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .summary-item:nth-child(2n) {
+        border-right: none;
+      }
+
+      .floating-nav {
+        top: 1rem;
+        left: 1rem;
+      }
+
+      .exercise-frame {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress-bar" id="progress-bar"></div>
+
+  <nav class="floating-nav">
+    <a href="../index-v2.html" class="floating-btn">Tilbage</a>
+  </nav>
+
+  <div class="container">
+    <!-- ============================================
+             HERO
+             ============================================ -->
+    <section class="editorial-section editorial-hero">
+      <div class="editorial-inner">
+        <div class="lesson-number">Lektion 3</div>
+        <h1>1, 2, 3...</h1>
+        <p class="lead">
+          Tal er overalt: priser, telefonnumre, adresser. I dag lærer du at tælle til ti på
+          russisk.
+        </p>
+      </div>
+      <div class="scroll-indicator">Scroll</div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 1: THE FIRST NUMBER
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 1</div>
+          <h2 class="chapter-title">Det første tal</h2>
+        </div>
+
+        <p class="narrative">Lad os starte med det enkleste. Et. Én. Alene.</p>
+
+        <div class="number-display">
+          <span class="number-digit">1</span>
+          <span class="number-russian" onclick="TTS.speak('один')">один</span>
+          <div class="number-phonetic">a-DIN</div>
+        </div>
+
+        <p class="narrative" style="text-align: center; font-size: 1rem">
+          Klik på ordet for at høre udtalen.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 2: ALL NUMBERS
+             ============================================ -->
+    <section class="editorial-section" style="background: var(--editorial-light)">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 2</div>
+          <h2 class="chapter-title">Tallene 1-10</h2>
+        </div>
+
+        <p class="narrative">Her er alle ti tal. Klik på hvert tal for at høre det.</p>
+
+        <div class="number-grid" id="numbers-grid"></div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Udtaletips</div>
+          <p>
+            <strong>Один</strong> — betoning på sidste stavelse: a-DIN<br />
+            <strong>Четыре</strong> — CH som i engelsk "church"<br />
+            <strong>Семь</strong> — blødt M i slutningen
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Praktisk brug.</h2>
+        <p>Tal bruger du hver dag. Lad os se hvordan.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 3: PHONE NUMBERS
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 3</div>
+          <h2 class="chapter-title">Telefonnumre</h2>
+        </div>
+
+        <p class="narrative">Russere læser telefonnumre ciffer for ciffer — ligesom på dansk.</p>
+
+        <div class="phone-mockup">
+          <div class="phone-header">Kontakt</div>
+          <div class="phone-body">
+            <div class="phone-number">+7 495 123</div>
+            <div class="phone-russian" onclick="TTS.speak('плюс семь четыре девять пять один два три')">
+              плюс семь четыре девять пять один два три
+            </div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Vidste du?</div>
+          <p>+7 er Ruslands landekode. 495 er Moskvas områdekode.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             MODERN: REAL PRICES
+             ============================================ -->
+    <section class="editorial-section"
+      style="background: #fafafa; border-top: 1px solid var(--editorial-line); border-bottom: 1px solid var(--editorial-line);">
+      <div class="editorial-inner reveal">
+        <div class="modern-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1v22m5-18H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>
+          Priser i det virkelige liv
+        </div>
+        <div class="chapter-header">
+          <h2 class="chapter-title">Hvad koster det?</h2>
+        </div>
+        <p class="narrative">
+          Priser i f.eks. Moskva er steget meget. Her er hvad du typisk betaler for hverdagens ting
+          (i rubler):
+        </p>
+
+        <div class="price-grid">
+          <div class="price-item" onclick="TTS.speak('Метро — шестьдесят рублей')">
+            <div class="price-tag">60 ₽</div>
+            <div class="price-russian">Метро</div>
+            <div class="price-phonetic" style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.6;">En tur med metroen
+            </div>
+          </div>
+          <div class="price-item" onclick="TTS.speak('Кофе — двести рублей')">
+            <div class="price-tag">200 ₽</div>
+            <div class="price-russian">Кофе (to go)</div>
+            <div class="price-phonetic" style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.6;">En god kaffe</div>
+          </div>
+          <div class="price-item" onclick="TTS.speak('Такси — четыреста рублей')">
+            <div class="price-tag">400 ₽</div>
+            <div class="price-russian">Такси</div>
+            <div class="price-phonetic" style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.6;">Kort tur i byen
+            </div>
+          </div>
+          <div class="price-item" onclick="TTS.speak('Аренда — пятьдесят тысяч')">
+            <div class="price-tag">50k+ ₽</div>
+            <div class="price-russian">Аренда</div>
+            <div class="price-phonetic" style="font-size: 0.8rem; margin-top: 0.5rem; opacity: 0.6;">Leje (pr. måned)
+            </div>
+          </div>
+        </div>
+
+        <div class="editorial-aside">
+          <div class="editorial-aside-label">Humor i hverdagen</div>
+          <p>
+            Hvis du synes at 1 til 10 er svært, så vent til du møder <strong>одиннадцать</strong> (11).
+            Det er her, mange studerende overvejer at skifte til spansk. Men vi tager det i næste lektion!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             CHAPTER 5: MATH
+             ============================================ -->
+    <section class="editorial-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header">
+          <div class="chapter-number">Kapitel 5</div>
+          <h2 class="chapter-title">Simpel matematik</h2>
+        </div>
+
+        <p class="narrative">Matematiske udtryk på russisk er nemme at lære.</p>
+
+        <div class="price-grid">
+          <div class="price-item" onclick="TTS.speak('плюс')">
+            <div class="price-tag">+</div>
+            <div class="price-russian">плюс</div>
+          </div>
+          <div class="price-item" onclick="TTS.speak('минус')">
+            <div class="price-tag">−</div>
+            <div class="price-russian">минус</div>
+          </div>
+          <div class="price-item" onclick="TTS.speak('равно')">
+            <div class="price-tag">=</div>
+            <div class="price-russian">равно</div>
+          </div>
+          <div class="price-item" onclick="TTS.speak('два плюс три равно пять')">
+            <div class="price-tag">2+3=5</div>
+            <div class="price-russian">два плюс три равно пять</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Nu er det din tur</h2>
+        <p>Test din viden om russiske tal.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 1: LISTENING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 1</div>
+            <h3 class="exercise-title">Lyt og vælg</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="listening-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 2
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Godt klaret.</h2>
+        <p>Nu skal du forbinde tallene med cifrene.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 2: MATCHING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 2</div>
+            <h3 class="exercise-title">Par tallene</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 3
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Sidste udfordring.</h2>
+        <p>Kan du skrive tallene selv?</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 3: WRITING
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 3</div>
+            <h3 class="exercise-title">Skriv tallet</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="writing-exercise"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 4
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Hurtig quiz</h2>
+        <p>Test dig selv. Jo hurtigere du svarer, jo bedre.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 4: QUICK QUIZ (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 4</div>
+            <h3 class="exercise-title">Hurtig quiz</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-quiz"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE INTERLUDE 5
+             ============================================ -->
+    <section class="editorial-section interlude">
+      <div class="editorial-inner reveal">
+        <h2>Samtale</h2>
+        <p>Øv dig i at bruge tal i samtale.</p>
+      </div>
+    </section>
+
+    <!-- ============================================
+             EXERCISE 5: CONVERSATION (AI)
+             ============================================ -->
+    <section class="editorial-section exercise-section">
+      <div class="editorial-inner reveal">
+        <div class="exercise-frame">
+          <div class="exercise-header">
+            <div class="exercise-type">Øvelse 5</div>
+            <h3 class="exercise-title">Øv samtale</h3>
+          </div>
+          <div class="exercise-body">
+            <div id="ai-conversation"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             SUMMARY
+             ============================================ -->
+    <section class="editorial-section summary-section">
+      <div class="editorial-inner reveal">
+        <div class="chapter-header" style="border-color: rgba(255, 255, 255, 0.2)">
+          <div class="chapter-number" style="color: rgba(255, 255, 255, 0.5)">Opsummering</div>
+          <h2 class="chapter-title" style="color: white">Tallene 1-10</h2>
+        </div>
+
+        <div class="summary-grid">
+          <div class="summary-item" onclick="TTS.speak('один')">
+            <div class="digit">1</div>
+            <div class="russian">один</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('два')">
+            <div class="digit">2</div>
+            <div class="russian">два</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('три')">
+            <div class="digit">3</div>
+            <div class="russian">три</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('четыре')">
+            <div class="digit">4</div>
+            <div class="russian">четыре</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('пять')">
+            <div class="digit">5</div>
+            <div class="russian">пять</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('шесть')">
+            <div class="digit">6</div>
+            <div class="russian">шесть</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('семь')">
+            <div class="digit">7</div>
+            <div class="russian">семь</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('восемь')">
+            <div class="digit">8</div>
+            <div class="russian">восемь</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('девять')">
+            <div class="digit">9</div>
+            <div class="russian">девять</div>
+          </div>
+          <div class="summary-item" onclick="TTS.speak('десять')">
+            <div class="digit">10</div>
+            <div class="russian">десять</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================
+             LESSON COMPLETION
+             ============================================ -->
+    <section class="editorial-section completion-section">
+      <div class="editorial-inner" style="text-align: center">
+        <h2 style="font-size: 2rem; font-weight: 300; margin-bottom: 1rem">Lektion Færdig?</h2>
+        <p style="color: var(--editorial-gray); margin-bottom: 2rem">
+          Har du gennemgået alle øvelser og føler dig klar til næste lektion?
+        </p>
+        <button id="complete-lesson-btn" class="complete-lesson-btn">✓ Marker som færdig</button>
+      </div>
+    </section>
+
+    <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+    <section class="editorial-section nav-section">
+      <div class="editorial-inner">
+        <nav class="lesson-nav">
+          <a href="02-alphabet-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Forrige lektion</span>
+            <span class="lesson-nav-title">Det Kyrilliske Alfabet</span>
+          </a>
+          <a href="04-about-me-v2.html" class="lesson-nav-item">
+            <span class="lesson-nav-label">Næste lektion</span>
+            <span class="lesson-nav-title">Jeg Hedder...</span>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/progress-system.js"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // ============================================
+    // NUMBERS DATA
+    // ============================================
+    const numbersData = [
+      { digit: 1, russian: 'один', transcription: 'a-DIN' },
+      { digit: 2, russian: 'два', transcription: 'dva' },
+      { digit: 3, russian: 'три', transcription: 'tri' },
+      { digit: 4, russian: 'четыре', transcription: 'tchi-TY-rje' },
+      { digit: 5, russian: 'пять', transcription: "pjat'" },
+      { digit: 6, russian: 'шесть', transcription: "shest'" },
+      { digit: 7, russian: 'семь', transcription: "sjem'" },
+      { digit: 8, russian: 'восемь', transcription: "VO-sjem'" },
+      { digit: 9, russian: 'девять', transcription: "DJEV-jat'" },
+      { digit: 10, russian: 'десять', transcription: "DJES-jat'" },
+    ];
+
+    // Render numbers grid
+    function renderNumbersGrid() {
+      const container = document.getElementById('numbers-grid');
+      numbersData.forEach((num) => {
+        const card = document.createElement('div');
+        card.className = 'number-card';
+        card.innerHTML = `
+                    <div class="number-card-digit">${num.digit}</div>
+                    <div class="number-card-russian">${num.russian}</div>
+                    <div class="number-card-phonetic">[${num.transcription}]</div>
+                `;
+        card.addEventListener('click', () => TTS.speak(num.russian));
+        container.appendChild(card);
+      });
+    }
+
+    // ============================================
+    // EXERCISE DATA
+    // ============================================
+    const listeningData = [
+      { audio: 'один', options: ['1', '2', '3'], correct: 0 },
+      { audio: 'пять', options: ['4', '5', '6'], correct: 1 },
+      { audio: 'три', options: ['3', '8', '10'], correct: 0 },
+      { audio: 'семь', options: ['6', '7', '9'], correct: 1 },
+      { audio: 'десять', options: ['9', '10', '8'], correct: 1 },
+      { audio: 'четыре', options: ['3', '5', '4'], correct: 2 },
+    ];
+
+    const matchingData = [
+      { russian: 'один', danish: '1' },
+      { russian: 'три', danish: '3' },
+      { russian: 'пять', danish: '5' },
+      { russian: 'семь', danish: '7' },
+      { russian: 'десять', danish: '10' },
+    ];
+
+    const writingData = [
+      { russian: 'один', danish: '1', hint: '4 bogstaver' },
+      { russian: 'два', danish: '2', hint: '3 bogstaver' },
+      { russian: 'пять', danish: '5', hint: '4 bogstaver' },
+      { russian: 'десять', danish: '10', hint: '6 bogstaver' },
+    ];
+
+    const vocabularyData = numbersData.map((n) => ({
+      russian: n.russian,
+      danish: n.digit.toString(),
+      transcription: n.transcription,
+    }));
+
+    // AI CONVERSATION CONFIG
+    const aiConversationConfig = {
+      topic: 'Tal og tælling',
+      level: 'A0',
+      vocabulary: vocabularyData,
+      starterPrompts: [
+        { russian: 'Сколько?', danish: 'Spørg hvor mange' },
+        { russian: 'Один, два, три...', danish: 'Tæl til tre' },
+        { russian: 'Мой номер...', danish: 'Sig dit nummer' },
+      ],
+      systemPrompt:
+        'Fokuser på tal fra 1-10. Hold samtalen enkel. Spørg om antal, telefonnumre, priser.',
+    };
+
+    // ============================================
+    // SCROLL ANIMATIONS
+    // ============================================
+    function initScrollAnimations() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px',
+        },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    }
+
+    // ============================================
+    // PROGRESS BAR
+    // ============================================
+    function initProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = (scrollTop / docHeight) * 100;
+        progressBar.style.width = `${progress}%`;
+      });
+    }
+
+    // ============================================
+    // INITIALIZE
+    // ============================================
+    const LESSON_ID = '03-numbers';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      initLessonProgress(LESSON_ID);
+
+      renderNumbersGrid();
+      new ListeningExercise('listening-exercise', listeningData);
+      new MatchingExercise('matching-exercise', matchingData);
+      new WritingExercise('writing-exercise', writingData);
+
+      // AI exercises
+      new AIQuickQuiz('ai-quiz', {
+        vocabulary: vocabularyData,
+        maxRounds: 8,
+      });
+      new AIConversation('ai-conversation', aiConversationConfig);
+
+      initScrollAnimations();
+      initProgressBar();
+
+      // Complete lesson button
+      const completeBtn = document.getElementById('complete-lesson-btn');
+      const lessonStatus = Progress.getLessonStatus(LESSON_ID);
+
+      if (lessonStatus === 'completed') {
+        completeBtn.textContent = '✓ Allerede gennemført';
+        completeBtn.classList.add('completed');
+      }
+
+      completeBtn.addEventListener('click', () => {
+        if (lessonStatus !== 'completed') {
+          completeLessonWithModal(LESSON_ID);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

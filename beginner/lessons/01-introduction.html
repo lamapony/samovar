@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 1: Hej! Farvel! | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <style>
+    /* === Chat Bubbles === */
+    .chat-container {
+      max-width: 380px;
+      margin: var(--space-m) 0;
+      background: var(--bg-paper);
+      border-radius: 16px;
+      padding: var(--space-m);
+      border: 1px solid var(--line-color);
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-s);
+      padding-bottom: var(--space-s);
+      border-bottom: 1px solid var(--line-color);
+      margin-bottom: var(--space-m);
+    }
+
+    .chat-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .chat-name {
+      font-weight: 600;
+    }
+
+    .chat-status {
+      font-size: 0.75rem;
+      color: var(--text-light);
+    }
+
+    .chat-bubble {
+      padding: var(--space-s) var(--space-m);
+      border-radius: 16px;
+      margin-bottom: var(--space-s);
+      max-width: 85%;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .chat-bubble:hover {
+      transform: scale(1.02);
+    }
+
+    .chat-bubble.outgoing {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 4px;
+    }
+
+    .chat-bubble.incoming {
+      background: var(--bg-card);
+      border: 1px solid var(--line-color);
+      border-bottom-left-radius: 4px;
+    }
+
+    .chat-russian {
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .chat-danish {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .chat-bubble.incoming .chat-danish {
+      color: var(--text-light);
+    }
+
+    .chat-time {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin: var(--space-s) 0;
+    }
+
+    /* === Humor Note === */
+    .humor-note {
+      background: #fff8e1;
+      border-left: 3px solid #ffc107;
+      padding: var(--space-m);
+      border-radius: 0 8px 8px 0;
+      margin: var(--space-m) 0;
+      font-size: 0.9rem;
+    }
+
+    .humor-note strong {
+      color: #f57c00;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <samovar-header></samovar-header>
+
+    <main>
+      <div class="section-intro">
+        <div class="lesson-meta">
+          <span>Lektion 1 af 12</span>
+          <span>Niveau A0</span>
+          <span>Ca. 45 min</span>
+        </div>
+        <h1>Hej! Farvel!</h1>
+        <p class="lead">
+          I denne forste lektion larer du de vigtigste russiske ord: hilsner og hoflige udtryk.
+          Efter denne lektion kan du sige hej, farvel og tak pa russisk.
+        </p>
+      </div>
+
+      <section class="content-block">
+        <div class="content-main">
+          <!-- PART 1: VOCABULARY -->
+          <h2>
+            <span>Del 1: Nye Ord</span>
+            <span class="chapter-num">Ordforrad</span>
+          </h2>
+
+          <p>
+            Lad os starte med de mest grundlæggende russiske ord. Klik pa hojttalerikonet for at
+            hore udtalen.
+          </p>
+
+          <div id="vocabulary-section" class="vocab-grid"></div>
+
+          <div class="theory-block">
+            <h3>Formelt vs. Uformelt</h3>
+            <p>Ligesom pa dansk (du/De) har russisk to mader at tiltale folk pa:</p>
+            <ul>
+              <li>
+                <strong>Привет</strong> (Privet) - Uformelt "hej", til venner og jævnaldrende
+              </li>
+              <li>
+                <strong>Здравствуйте</strong> (Zdravstvujte) - Formelt "goddag", til fremmede og
+                ældre
+              </li>
+            </ul>
+          </div>
+
+          <div class="tip-box">
+            <strong>Udtale-tip:</strong> "Здравствуйте" er sværet at udtale! Den forste "в" er
+            næsten lydlos. Sig "zdra-stvuj-te" langsomt.
+          </div>
+
+          <!-- PART 2: LISTENING -->
+          <h2>
+            <span>Del 2: Lytteovelse</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>Lyt til det russiske ord og valg den rigtige oversættelse.</p>
+
+          <div id="listening-exercise" class="exercise-container"></div>
+
+          <!-- PART 3: MATCHING -->
+          <h2>
+            <span>Del 3: Par Ordene</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>
+            Klik pa et russisk ord til venstre, derefter pa den danske oversættelse til hojre.
+          </p>
+
+          <div id="matching-exercise" class="exercise-container"></div>
+
+          <!-- PART 4: FILL IN BLANK -->
+          <h2>
+            <span>Del 4: Udfyld Tomme Pladser</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>Skriv det manglende russiske ord i sætningen.</p>
+
+          <div id="fill-blank-exercise" class="exercise-container"></div>
+
+          <!-- PART 5: WRITING -->
+          <h2>
+            <span>Del 5: Skriveovelse</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>Skriv det russiske ord baseret pa den danske oversættelse.</p>
+
+          <div id="writing-exercise" class="exercise-container"></div>
+
+          <!-- PART 6: DIALOGUE -->
+          <h2>
+            <span>Del 6: Dialog</span>
+            <span class="chapter-num">Samtale</span>
+          </h2>
+
+          <p>Her er en typisk russisk hilsen-samtale. Lyt og gentag.</p>
+
+          <div id="dialogue-section"></div>
+
+          <!-- PART 6b: CHAT GREETINGS -->
+          <h2>
+            <span>Del 6b: Hilsner i Chatten</span>
+            <span class="chapter-num">Moderne</span>
+          </h2>
+
+          <p>Sadan skriver russere i messenger-apps:</p>
+
+          <div class="chat-container" id="messenger-chat">
+            <div class="chat-header">
+              <div class="chat-avatar">М</div>
+              <div>
+                <div class="chat-name">Миша</div>
+                <div class="chat-status">онлайн</div>
+              </div>
+            </div>
+            <!-- Chat bubbles rendered by JS -->
+          </div>
+
+          <div class="theory-block">
+            <h3>Ordforrad fra chatten</h3>
+            <ul>
+              <li><strong>Приветики!</strong> — Hej! (meget uformelt, venligt)</li>
+              <li><strong>Как дела?</strong> — Hvordan gar det?</li>
+              <li><strong>Нормально</strong> — OK / fint</li>
+              <li>
+                <strong>Удобно говорить?</strong> — Er det et godt tidspunkt? (for du ringer)
+              </li>
+              <li><strong>Напишу позже</strong> — Jeg skriver senere</li>
+            </ul>
+          </div>
+
+          <div class="humor-note">
+            <strong>😅 Sjov fakta:</strong> Hvis du kan udtale «Здравствуйте» korrekt, er du
+            allerede halvvejs til B1-niveau!
+          </div>
+
+          <!-- PART 7: SENTENCE BUILDER -->
+          <h2>
+            <span>Del 7: Byg Sætninger</span>
+            <span class="chapter-num">Ovelse</span>
+          </h2>
+
+          <p>Klik pa ordene i den rigtige rækkefølge for at bygge sætningen.</p>
+
+          <div id="sentence-builder" class="exercise-container"></div>
+
+          <!-- PART 8: AI CONVERSATION -->
+          <h2>
+            <span>Del 8: Øv med AI-tutor</span>
+            <span class="chapter-num">🤖 AI Praksis</span>
+          </h2>
+
+          <div class="ai-section-intro">
+            <h3>🤖 Interaktiv Samtale</h3>
+            <p>
+              Nu er det tid til at øve det, du har lært! Skriv til AI-tutoren på russisk og få
+              feedback på dine svar. Brug ordene fra lektionen: hilsner, farvel, tak.
+            </p>
+          </div>
+
+          <div id="ai-conversation" class="exercise-container"></div>
+
+          <!-- PART 9: AI TRANSLATION -->
+          <h2>
+            <span>Del 9: AI Oversættelse</span>
+            <span class="chapter-num">🤖 AI Praksis</span>
+          </h2>
+
+          <p>Oversæt sætningerne til russisk. AI-tutoren giver dig feedback på dine svar.</p>
+
+          <div id="ai-translation" class="exercise-container"></div>
+
+          <!-- SUMMARY -->
+          <h2>
+            <span>Opsummering</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Hvad Du Har Laert</h3>
+            <p>I denne lektion har du laert:</p>
+            <ul>
+              <li><strong>Привет</strong> - Hej (uformelt)</li>
+              <li><strong>Здравствуйте</strong> - Goddag (formelt)</li>
+              <li><strong>Пока</strong> - Hej hej / Farvel (uformelt)</li>
+              <li><strong>До свидания</strong> - Farvel (formelt)</li>
+              <li><strong>Спасибо</strong> - Tak</li>
+              <li><strong>Пожалуйста</strong> - Selv tak / Vær så god</li>
+              <li><strong>Да</strong> - Ja</li>
+              <li><strong>Нет</strong> - Nej</li>
+              <li><strong>Приветики</strong> - Hej! (chat-stil)</li>
+              <li><strong>Нормально</strong> - OK / fint</li>
+            </ul>
+          </div>
+
+          <!-- NAVIGATION -->
+          <nav class="lesson-nav">
+            <a href="../index.html" class="lesson-nav-item">
+              <span class="lesson-nav-label">Tilbage til</span>
+              <span class="lesson-nav-title">Kursusoversigt</span>
+            </a>
+            <a href="02-alphabet.html" class="lesson-nav-item">
+              <span class="lesson-nav-label">Næste lektion</span>
+              <span class="lesson-nav-title">Det Kyrilliske Alfabet</span>
+            </a>
+          </nav>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Vidste du?</strong>
+            «Здравствуйте» kommer fra ordet «здоровье» (sundhed). Du onsker bogstaveligt talt den
+            anden person god sundhed!
+          </div>
+          <div class="margin-note">
+            <strong>Kulturelt tip</strong>
+            Russere smiler ikke til fremmede pa gaden. Det betyder ikke, de er uvenlige — det er
+            bare kultur. Et smil er reserveret til venner.
+          </div>
+          <div class="margin-note">
+            <strong>Moderne etikette</strong>
+            I store byer skriver folk ofte for de ringer: «Удобно говорить?» (Er det et godt
+            tidspunkt?). Det er den nye norm!
+          </div>
+          <div class="margin-note">
+            <strong>Ovelse</strong>
+            Prov at sige «Привет» og «Спасибо» hojt 10 gange. Gentag, indtil det foles naturligt.
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <samovar-footer></samovar-footer>
+
+  <script type="module" src="/js/header.ts"></script>
+  <script type="module" src="/js/footer.ts"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // VOCABULARY DATA
+    const vocabularyData = [
+      {
+        russian: 'Привет',
+        danish: 'Hej',
+        transcription: 'pri-VJET',
+        example: 'Привет, как дела?',
+        exampleDanish: 'Hej, hvordan gar det?',
+      },
+      {
+        russian: 'Здравствуйте',
+        danish: 'Goddag',
+        transcription: 'ZDRA-stvuj-tje',
+        example: 'Здравствуйте, господин Иванов.',
+        exampleDanish: 'Goddag, hr. Ivanov.',
+      },
+      {
+        russian: 'Пока',
+        danish: 'Hej hej / Farvel',
+        transcription: 'pa-KA',
+        example: 'Пока, увидимся!',
+        exampleDanish: 'Hej hej, vi ses!',
+      },
+      {
+        russian: 'До свидания',
+        danish: 'Farvel',
+        transcription: 'da svi-DA-ni-ja',
+        example: 'До свидания, спасибо за всё.',
+        exampleDanish: 'Farvel, tak for alt.',
+      },
+      {
+        russian: 'Спасибо',
+        danish: 'Tak',
+        transcription: 'spa-SI-ba',
+        example: 'Спасибо большое!',
+        exampleDanish: 'Mange tak!',
+      },
+      {
+        russian: 'Пожалуйста',
+        danish: 'Selv tak / Vaer sa god',
+        transcription: 'pa-ZHA-lu-sta',
+        example: 'Пожалуйста, входите.',
+        exampleDanish: 'Vaer sa god, kom ind.',
+      },
+      {
+        russian: 'Да',
+        danish: 'Ja',
+        transcription: 'da',
+        example: 'Да, конечно!',
+        exampleDanish: 'Ja, selvfolgelig!',
+      },
+      {
+        russian: 'Нет',
+        danish: 'Nej',
+        transcription: 'njet',
+        example: 'Нет, спасибо.',
+        exampleDanish: 'Nej tak.',
+      },
+    ];
+
+    // LISTENING DATA
+    const listeningData = [
+      { audio: 'Привет', options: ['Hej', 'Farvel', 'Tak'], correct: 0 },
+      { audio: 'Спасибо', options: ['Ja', 'Nej', 'Tak'], correct: 2 },
+      { audio: 'До свидания', options: ['Goddag', 'Farvel', 'Hej'], correct: 1 },
+      { audio: 'Да', options: ['Nej', 'Ja', 'Tak'], correct: 1 },
+      { audio: 'Пожалуйста', options: ['Selv tak', 'Hej', 'Farvel'], correct: 0 },
+      { audio: 'Нет', options: ['Ja', 'Nej', 'Goddag'], correct: 1 },
+    ];
+
+    // MATCHING DATA
+    const matchingData = [
+      { russian: 'Привет', danish: 'Hej' },
+      { russian: 'Спасибо', danish: 'Tak' },
+      { russian: 'Да', danish: 'Ja' },
+      { russian: 'Нет', danish: 'Nej' },
+      { russian: 'Пока', danish: 'Hej hej' },
+    ];
+
+    // FILL BLANK DATA
+    const fillBlankData = [
+      {
+        text: '___, как дела?',
+        answer: 'Привет',
+        hint: 'Hej',
+        danish: 'Hej, hvordan gar det?',
+        alternatives: ['привет'],
+      },
+      {
+        text: '___ большое!',
+        answer: 'Спасибо',
+        hint: 'Tak',
+        danish: 'Mange tak!',
+        alternatives: ['спасибо'],
+      },
+      {
+        text: 'До ___, увидимся завтра.',
+        answer: 'свидания',
+        hint: 'farvel',
+        danish: 'Farvel, vi ses i morgen.',
+        alternatives: [],
+      },
+      {
+        text: '___, конечно!',
+        answer: 'Да',
+        hint: 'Ja',
+        danish: 'Ja, selvfolgelig!',
+        alternatives: ['да'],
+      },
+      {
+        text: '___, спасибо.',
+        answer: 'Нет',
+        hint: 'Nej',
+        danish: 'Nej tak.',
+        alternatives: ['нет'],
+      },
+    ];
+
+    // WRITING DATA
+    const writingData = [
+      { russian: 'Привет', danish: 'Hej', hint: '6 bogstaver' },
+      { russian: 'Спасибо', danish: 'Tak', hint: '7 bogstaver' },
+      { russian: 'Да', danish: 'Ja', hint: '2 bogstaver' },
+      { russian: 'Нет', danish: 'Nej', hint: '3 bogstaver' },
+      { russian: 'Пока', danish: 'Hej hej', hint: '4 bogstaver' },
+    ];
+
+    // DIALOGUE DATA
+    const dialogueData = [
+      { speaker: 'A', russian: 'Здравствуйте!', danish: 'Goddag!' },
+      { speaker: 'B', russian: 'Здравствуйте! Как дела?', danish: 'Goddag! Hvordan gar det?' },
+      { speaker: 'A', russian: 'Хорошо, спасибо. А у вас?', danish: 'Godt, tak. Og hos dig?' },
+      { speaker: 'B', russian: 'Тоже хорошо.', danish: 'Ogsa godt.' },
+      { speaker: 'A', russian: 'До свидания!', danish: 'Farvel!' },
+      { speaker: 'B', russian: 'До свидания!', danish: 'Farvel!' },
+    ];
+
+    // MESSENGER CHAT DATA
+    const messengerChatData = [
+      { type: 'incoming', russian: 'Приветики!', danish: 'Hej!' },
+      { type: 'outgoing', russian: 'Привет! Как дела?', danish: 'Hej! Hvordan gar det?' },
+      {
+        type: 'incoming',
+        russian: 'Нормально. Ты на работе?',
+        danish: 'Fint. Er du pa arbejde?',
+      },
+      { type: 'outgoing', russian: 'Да, напишу позже.', danish: 'Ja, jeg skriver senere.' },
+      { type: 'incoming', russian: 'Ок, пока!', danish: 'OK, hej hej!' },
+      { type: 'outgoing', russian: 'Пока! 👋', danish: 'Hej hej!' },
+    ];
+
+    // SENTENCE BUILDER DATA
+    const sentenceBuilderData = [
+      { words: ['Привет', ',', 'как', 'дела', '?'], danish: 'Hej, hvordan gar det?' },
+      { words: ['Спасибо', 'большое', '!'], danish: 'Mange tak!' },
+      { words: ['До', 'свидания', '!'], danish: 'Farvel!' },
+      { words: ['Да', ',', 'конечно', '!'], danish: 'Ja, selvfolgelig!' },
+    ];
+
+    // Render messenger chat
+    function renderMessengerChat() {
+      const container = document.getElementById('messenger-chat');
+      messengerChatData.forEach((msg) => {
+        const bubble = document.createElement('div');
+        bubble.className = `chat-bubble ${msg.type}`;
+        bubble.innerHTML = `
+                    <div class="chat-russian">${msg.russian}</div>
+                    <div class="chat-danish">${msg.danish}</div>
+                `;
+        bubble.addEventListener('click', () => TTS.speak(msg.russian));
+        container.appendChild(bubble);
+      });
+    }
+
+    // AI CONVERSATION CONFIG
+    const aiConversationConfig = {
+      topic: 'Hilsner og høflighed',
+      level: 'A0',
+      vocabulary: vocabularyData,
+      starterPrompts: [
+        { russian: 'Привет!', danish: 'Sig hej' },
+        { russian: 'Как дела?', danish: 'Spørg hvordan det går' },
+        { russian: 'Спасибо!', danish: 'Sig tak' },
+        { russian: 'До свидания!', danish: 'Sig farvel' },
+      ],
+      systemPrompt: 'Fokuser på hilsner og høflige udtryk. Hold samtalen enkel og venlig.',
+    };
+
+    // AI TRANSLATION CONFIG
+    const aiTranslationConfig = {
+      sentences: [
+        { danish: 'Hej!', russian: 'Привет!', hint: 'Uformel hilsen' },
+        { danish: 'Goddag!', russian: 'Здравствуйте!', hint: 'Formel hilsen' },
+        { danish: 'Tak!', russian: 'Спасибо!', hint: '7 bogstaver' },
+        { danish: 'Farvel!', russian: 'До свидания!', hint: 'Formel afsked' },
+        { danish: 'Ja, tak.', russian: 'Да, спасибо.', hint: 'To ord' },
+        { danish: 'Nej tak.', russian: 'Нет, спасибо.', hint: 'To ord' },
+      ],
+      vocabulary: vocabularyData,
+    };
+
+    // INITIALIZE EXERCISES
+    document.addEventListener('DOMContentLoaded', function () {
+      // Vocabulary
+      new VocabularyList('vocabulary-section', vocabularyData);
+
+      // Listening
+      new ListeningExercise('listening-exercise', listeningData);
+
+      // Matching
+      new MatchingExercise('matching-exercise', matchingData);
+
+      // Fill Blank
+      new FillBlankExercise('fill-blank-exercise', fillBlankData);
+
+      // Writing
+      new WritingExercise('writing-exercise', writingData);
+
+      // Dialogue
+      new Dialogue('dialogue-section', dialogueData);
+
+      // Sentence Builder
+      new SentenceBuilder('sentence-builder', sentenceBuilderData);
+
+      // Messenger Chat
+      renderMessengerChat();
+
+      // AI Conversation
+      new AIConversation('ai-conversation', aiConversationConfig);
+
+      // AI Translation
+      new AITranslationChallenge('ai-translation', aiTranslationConfig);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Научный стиль | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/advanced.css" />
+    <link rel="stylesheet" href="../css/tooltips.css" />
+    <style>
+      .style-card {
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #e0e0e0;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+      }
+
+      .comparison-table th {
+        background: #f9f9f9;
+        font-family: var(--font-serif);
+      }
+
+      /* Drag and Drop improvements */
+      .drop-column {
+        transition:
+          background-color 0.3s,
+          transform 0.2s;
+        background: #f8f9fa;
+        border: 1px dashed #ccc;
+      }
+
+      .drop-column.drag-over {
+        background-color: rgba(0, 0, 0, 0.05);
+        transform: scale(1.02);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-style: solid;
+        border-color: var(--accent-blue);
+      }
+
+      .word-card {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 5px;
+        background: white;
+        border: 1px solid var(--accent-blue);
+        cursor: grab;
+        user-select: none;
+        font-weight: 500;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s;
+        font-size: 0.9rem;
+      }
+
+      .word-card:active {
+        cursor: grabbing;
+        transform: scale(0.95);
+      }
+
+      .word-card.correct {
+        background: var(--color-success);
+        color: white;
+        border-color: var(--color-success);
+        cursor: default;
+      }
+
+      .word-card.wrong {
+        background: var(--color-error);
+        color: white;
+        border-color: var(--color-error);
+        animation: shake 0.5s;
+      }
+
+      .hint-box {
+        background: #fff3cd;
+        color: #856404;
+        padding: 10px;
+        text-align: center;
+        margin-bottom: 15px;
+        min-height: 40px;
+        font-style: italic;
+        display: none;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        50% {
+          transform: translateX(5px);
+        }
+
+        75% {
+          transform: translateX(-5px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a
+            href="#"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-gold)"
+            >Научный стиль</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Научный стиль</h1>
+          <p class="lead">
+            Язык науки стремится к
+            <span class="tooltip-word"
+              >объективности<span class="tooltip-popup">objektivitet</span></span
+            >. Здесь нет места эмоциям, "я" исчезает,
+            <span class="tooltip-word"
+              >уступая место<span class="tooltip-popup">giver plads til</span></span
+            >
+            "мы" или
+            <span class="tooltip-word"
+              >безличным конструкциям<span class="tooltip-popup"
+                >upersonlige konstruktioner</span
+              ></span
+            >. Это язык фактов,
+            <span class="tooltip-word">гипотез<span class="tooltip-popup">hypoteser</span></span> и
+            <span class="tooltip-word">доказательств<span class="tooltip-popup">beviser</span></span
+            >.
+          </p>
+
+          <section id="theory">
+            <h2>Основные черты</h2>
+            <div class="style-topographic">
+              <h3>
+                1.
+                <span class="tooltip-word"
+                  >Обезличенность<span class="tooltip-popup">upersonlighed</span></span
+                >
+                (Impersonality)
+              </h3>
+              <p>
+                Вместо "Я думаю" (I think) используется "<span class="tooltip-word"
+                  >Считается<span class="tooltip-popup">det anses for</span></span
+                >" (It is considered) или "Мы
+                <span class="tooltip-word"
+                  >полагаем<span class="tooltip-popup">mener, antager</span></span
+                >" (We suppose).
+              </p>
+              <p>
+                <em>Пример:</em> Не "Я сделал опыт", а "Был
+                <span class="tooltip-word"
+                  >проведен<span class="tooltip-popup">gennemført</span></span
+                >
+                эксперимент".
+              </p>
+            </div>
+
+            <div class="style-topographic">
+              <h3>
+                2.
+                <span class="tooltip-word"
+                  >Пассивный залог<span class="tooltip-popup">passiv</span></span
+                >
+                (Passive Voice)
+              </h3>
+              <p>
+                <span class="tooltip-word">Акцент<span class="tooltip-popup">fokus</span></span> на
+                действии, а не на
+                <span class="tooltip-word"
+                  >деятеле<span class="tooltip-popup">den handlende</span></span
+                >.
+                <span class="tooltip-word"
+                  >Страдательные причастия<span class="tooltip-popup"
+                    >passive participier</span
+                  ></span
+                >
+                и
+                <span class="tooltip-word"
+                  >возвратные глаголы<span class="tooltip-popup">refleksive verber</span></span
+                >
+                (-ся).
+              </p>
+              <p>
+                <em>Пример:</em> "Данные
+                <span class="tooltip-word"
+                  >анализируются<span class="tooltip-popup">analyseres</span></span
+                >" (Data is being analyzed).
+              </p>
+            </div>
+
+            <div class="style-topographic">
+              <h3>
+                3.
+                <span class="tooltip-word"
+                  >Терминология<span class="tooltip-popup">fagsprog</span></span
+                >
+                и Точность
+              </h3>
+              <p>
+                Использование специальных терминов и отсутствие
+                <span class="tooltip-word"
+                  >метафор<span class="tooltip-popup">metaforer</span></span
+                >
+                (если они не являются терминами).
+              </p>
+            </div>
+
+            <table class="comparison-table" style="margin-top: 30px">
+              <thead>
+                <tr>
+                  <th>Обычный язык</th>
+                  <th>Научный стиль</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Я нашел, что...</td>
+                  <td>Было установлено, что...</td>
+                </tr>
+                <tr>
+                  <td>Это происходит из-за...</td>
+                  <td>
+                    Данное
+                    <span class="tooltip-word"
+                      >явление<span class="tooltip-popup">fænomen</span></span
+                    >
+                    <span class="tooltip-word"
+                      >обусловлено<span class="tooltip-popup">er betinget af</span></span
+                    >...
+                  </td>
+                </tr>
+                <tr>
+                  <td>Если посмотреть на график...</td>
+                  <td>Анализ графика показывает...</td>
+                </tr>
+                <tr>
+                  <td>Мы хотим сказать...</td>
+                  <td>Следует отметить...</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="practice-section">
+            <h2>Практика: Переводчик стилей</h2>
+            <p>Распределите фразы по категориям: Обычный разговорный или Научный академический.</p>
+
+            <div class="game-container">
+              <div id="hint-display" class="hint-box">Подсказка появится здесь...</div>
+
+              <div
+                id="word-bank"
+                style="
+                  min-height: 60px;
+                  padding: 10px;
+                  background: #fff;
+                  border-bottom: 1px solid #eee;
+                  margin-bottom: 20px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 10px;
+                  justify-content: center;
+                "
+              >
+                <!-- Words will be generated here -->
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px">
+                <div
+                  class="drop-column"
+                  data-target="normal"
+                  style="min-height: 200px; padding: 10px; text-align: center"
+                >
+                  <h3>Обычный (Normal)</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+                <div
+                  class="drop-column"
+                  data-target="scientific"
+                  style="min-height: 200px; padding: 10px; text-align: center"
+                >
+                  <h3>Научный (Scientific)</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+              </div>
+              <div
+                id="feedback"
+                class="feedback"
+                style="margin-top: 20px; text-align: center; font-size: 1.2rem"
+              ></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Авторское "МЫ"</strong>
+            В научных статьях автор часто пишет "Мы", даже если работал один. Это знак
+            <span class="tooltip-word"
+              >скромности<span class="tooltip-popup">beskedenhed</span></span
+            >
+            и приглашение читателя к совместному
+            <span class="tooltip-word"
+              >размышлению<span class="tooltip-popup">eftertanke</span></span
+            >.
+          </div>
+          <div class="margin-note">
+            <strong>Клише</strong>
+            "<span class="tooltip-word"
+              >Актуальность<span class="tooltip-popup">relevans</span></span
+            >
+            темы", "<span class="tooltip-word"
+              >Предметом исследования<span class="tooltip-popup">genstand for forskning</span></span
+            >
+            является", "В
+            <span class="tooltip-word"
+              >заключение<span class="tooltip-popup">konklusion</span></span
+            >
+            можно сказать". Эти фразы —
+            <span class="tooltip-word">каркас<span class="tooltip-popup">ramme, skelet</span></span>
+            любой научной работы.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      const phrases = [
+        { t: 'Я думаю, это круто', g: 'normal', hint: 'Субъективное мнение, сленг.' },
+        { t: 'Данный метод эффективен', g: 'scientific', hint: 'Объективная оценка, термин.' },
+        { t: 'Мы пошли в лабу', g: 'normal', hint: "Разговорное сокращение 'лаба'." },
+        {
+          t: 'Эксперимент проводился в лаборатории',
+          g: 'scientific',
+          hint: 'Пассивный залог, полная форма.',
+        },
+        { t: 'В этой штуке много проблем', g: 'normal', hint: "Слово 'штука', неточность." },
+        { t: 'Выявлен ряд недостатков', g: 'scientific', hint: 'Пассивная конструкция, точность.' },
+        { t: 'Как мы видим из таблицы', g: 'scientific', hint: 'Стандартная ссылка на данные.' },
+        { t: 'Посмотри сюда', g: 'normal', hint: 'Повелительное наклонение, фамильярность.' },
+      ];
+
+      const bank = document.getElementById('word-bank');
+      const columns = document.querySelectorAll('.drop-column');
+      const feedback = document.getElementById('feedback');
+      const hintBox = document.getElementById('hint-display');
+      let solved = 0;
+
+      // Initialize Game
+      function initGame() {
+        phrases.sort(() => Math.random() - 0.5); // Shuffle
+        phrases.forEach((w) => {
+          const el = document.createElement('div');
+          el.className = 'word-card';
+          el.innerText = w.t;
+          el.draggable = true;
+          el.dataset.target = w.g;
+          el.dataset.hint = w.hint;
+
+          el.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', JSON.stringify(w));
+            e.dataTransfer.effectAllowed = 'move';
+            setTimeout(() => (el.style.opacity = '0.5'), 0);
+            showHint(w.hint);
+          });
+
+          el.addEventListener('dragend', () => {
+            el.style.opacity = '1';
+          });
+
+          el.addEventListener('click', () => {
+            if (el.classList.contains('correct')) return;
+            showHint(w.hint);
+            if (document.querySelector('.selected-word')) {
+              document.querySelector('.selected-word').classList.remove('selected-word');
+              document.querySelector('.selected-word').style.borderColor = 'var(--accent-blue)';
+            }
+            el.classList.add('selected-word');
+            el.style.borderColor = 'var(--accent-gold)';
+          });
+
+          bank.appendChild(el);
+        });
+      }
+
+      function showHint(text) {
+        hintBox.style.display = 'block';
+        hintBox.innerText = text;
+      }
+
+      // Drop Logic
+      columns.forEach((col) => {
+        col.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          col.classList.add('drag-over');
+        });
+
+        col.addEventListener('dragleave', () => {
+          col.classList.remove('drag-over');
+        });
+
+        col.addEventListener('drop', (e) => {
+          e.preventDefault();
+          col.classList.remove('drag-over');
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          const draggedEl = [...bank.children].find(
+            (c) => c.innerText === data.t && c.style.display !== 'none',
+          );
+
+          handleMove(data, draggedEl, col);
+        });
+
+        col.addEventListener('click', () => {
+          const selected = document.querySelector('.selected-word');
+          if (selected) {
+            const target = selected.dataset.target;
+            const data = { t: selected.innerText, g: target };
+            handleMove(data, selected, col);
+          }
+        });
+      });
+
+      function handleMove(data, element, col) {
+        if (col.dataset.target === data.g) {
+          // Correct
+          const successEl = document.createElement('div');
+          successEl.className = 'word-card correct';
+          successEl.innerText = data.t;
+          successEl.style.display = 'block';
+          successEl.style.width = '100%';
+          successEl.style.marginBottom = '5px';
+          successEl.draggable = false;
+
+          col.querySelector('.drop-zone-content').appendChild(successEl);
+          if (element) element.remove();
+
+          solved++;
+          checkWin();
+          hintBox.style.display = 'none';
+        } else {
+          // Wrong
+          if (element) {
+            element.classList.add('wrong');
+            setTimeout(() => element.classList.remove('wrong'), 500);
+            hintBox.innerText = 'Неверно! Подумайте о стиле.';
+          }
+        }
+      }
+
+      function checkWin() {
+        if (solved === phrases.length) {
+          feedback.innerHTML = '<strong>Блестяще!</strong> Вы готовы к написанию диссертации.';
+          feedback.style.color = 'var(--color-success)';
+        }
+      }
+
+      initGame();
+    </script>
+    <script src="../js/tooltips.js"></script>
+  </body>
+</html>

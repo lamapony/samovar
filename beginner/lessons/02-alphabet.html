@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="da">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lektion 2: Det Kyrilliske Alfabet | Samovar</title>
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../css/beginner.css" />
+  <style>
+    .alphabet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+      gap: var(--space-s);
+      margin: var(--space-l) 0;
+    }
+
+    .letter-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line-color);
+      padding: var(--space-m);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .letter-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-color: var(--accent-blue);
+    }
+
+    .letter-card.familiar {
+      background: #e8f5e9;
+      border-color: var(--color-success);
+    }
+
+    .letter-card.similar {
+      background: #fff3cd;
+      border-color: var(--color-warning);
+    }
+
+    .letter-card.new {
+      background: #ffebee;
+      border-color: var(--color-error);
+    }
+
+    .letter-big {
+      font-size: 2.5rem;
+      font-family: var(--font-serif);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .letter-small {
+      font-size: 1.5rem;
+      color: var(--text-faded);
+    }
+
+    .letter-sound {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .legend {
+      display: flex;
+      gap: var(--space-m);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-m);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: 0.875rem;
+    }
+
+    .legend-color {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    .legend-color.familiar {
+      background: #e8f5e9;
+      border: 1px solid var(--color-success);
+    }
+
+    .legend-color.similar {
+      background: #fff3cd;
+      border: 1px solid var(--color-warning);
+    }
+
+    .legend-color.new {
+      background: #ffebee;
+      border: 1px solid var(--color-error);
+    }
+
+    .letter-group {
+      margin: var(--space-l) 0;
+    }
+
+    .letter-group h3 {
+      margin-bottom: var(--space-s);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-m) 0;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: var(--space-s);
+      border: 1px solid var(--line-color);
+      text-align: center;
+    }
+
+    .comparison-table th {
+      background: var(--bg-paper);
+    }
+
+    .comparison-table .cyrillic {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <samovar-header></samovar-header>
+
+    <main>
+      <div class="section-intro">
+        <div class="lesson-meta">
+          <span>Lektion 2 af 12</span>
+          <span>Niveau A0</span>
+          <span>Ca. 60 min</span>
+        </div>
+        <h1>Det Kyrilliske Alfabet</h1>
+        <p class="lead">
+          Det russiske alfabet har 33 bogstaver. Mange ligner de latinske bogstaver, du kender. Vi
+          starter med de lette og arbejder os frem til de svaere.
+        </p>
+      </div>
+
+      <section class="content-block">
+        <div class="content-main">
+          <!-- PART 1: OVERVIEW -->
+          <h2>
+            <span>Del 1: Overblik</span>
+            <span class="chapter-num">Alfabetet</span>
+          </h2>
+
+          <p>Klik pa et bogstav for at hore, hvordan det udtales.</p>
+
+          <div class="legend">
+            <div class="legend-item">
+              <div class="legend-color familiar"></div>
+              <span>Ser ud og lyder som pa dansk</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color similar"></div>
+              <span>Ser bekendt ud, men lyder anderledes</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color new"></div>
+              <span>Helt nye bogstaver</span>
+            </div>
+          </div>
+
+          <div id="full-alphabet" class="alphabet-grid"></div>
+
+          <!-- PART 2: FAMILIAR LETTERS -->
+          <h2>
+            <span>Del 2: Kendte Bogstaver</span>
+            <span class="chapter-num">Gruppe 1</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Disse bogstaver kender du allerede!</h3>
+            <p>Disse 6 bogstaver ser ud og lyder naesten som pa dansk:</p>
+          </div>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Russisk</th>
+                <th>Lyder som</th>
+                <th>Eksempel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cyrillic">А а</td>
+                <td>A som i "abe"</td>
+                <td class="cyrillic">Анна (Anna)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Е е</td>
+                <td>JE som i "jeg"</td>
+                <td class="cyrillic">нет (nej)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">К к</td>
+                <td>K som i "kat"</td>
+                <td class="cyrillic">кот (kat)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">М м</td>
+                <td>M som i "mor"</td>
+                <td class="cyrillic">мама (mor)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">О о</td>
+                <td>O som i "ko"</td>
+                <td class="cyrillic">он (han)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Т т</td>
+                <td>T som i "tak"</td>
+                <td class="cyrillic">там (der)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div id="familiar-exercise" class="exercise-container"></div>
+
+          <!-- PART 3: TRICKY LETTERS -->
+          <h2>
+            <span>Del 3: Faldgruber</span>
+            <span class="chapter-num">Gruppe 2</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Pas pa! Disse ser kendte ud, men lyder anderledes</h3>
+            <p>Disse bogstaver ligner latinske, men har helt andre lyde:</p>
+          </div>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Russisk</th>
+                <th>Ligner</th>
+                <th>Men lyder som</th>
+                <th>Eksempel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cyrillic">В в</td>
+                <td>B</td>
+                <td>V som i "vand"</td>
+                <td class="cyrillic">вода (vand)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Н н</td>
+                <td>H</td>
+                <td>N som i "nat"</td>
+                <td class="cyrillic">нос (naese)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Р р</td>
+                <td>P</td>
+                <td>R (rullende)</td>
+                <td class="cyrillic">рука (hand)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">С с</td>
+                <td>C</td>
+                <td>S som i "sol"</td>
+                <td class="cyrillic">сок (juice)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">У у</td>
+                <td>Y</td>
+                <td>U/OO som i "uge"</td>
+                <td class="cyrillic">утро (morgen)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Х х</td>
+                <td>X</td>
+                <td>CH som i tysk "Bach"</td>
+                <td class="cyrillic">хлеб (brod)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="tip-box">
+            <strong>Vigtigt:</strong> Russisk "Р" ligner "P", men det er et R! "РЕСТОРАН" er
+            "RESTORAN" (restaurant), ikke "PESTOPAH".
+          </div>
+
+          <div id="tricky-exercise" class="exercise-container"></div>
+
+          <!-- PART 4: NEW LETTERS -->
+          <h2>
+            <span>Del 4: Nye Bogstaver</span>
+            <span class="chapter-num">Gruppe 3</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Disse er helt nye</h3>
+            <p>Disse bogstaver findes ikke i det latinske alfabet:</p>
+          </div>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Russisk</th>
+                <th>Lyder som</th>
+                <th>Eksempel</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="cyrillic">Б б</td>
+                <td>B som i "bold"</td>
+                <td class="cyrillic">брат (bror)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Г г</td>
+                <td>G som i "gade"</td>
+                <td class="cyrillic">год (ar)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Д д</td>
+                <td>D som i "dag"</td>
+                <td class="cyrillic">дом (hus)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Ж ж</td>
+                <td>ZH som i fransk "jour"</td>
+                <td class="cyrillic">жена (kone)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">З з</td>
+                <td>Z som i "zone"</td>
+                <td class="cyrillic">звук (lyd)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">И и</td>
+                <td>I som i "ide"</td>
+                <td class="cyrillic">имя (navn)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Й й</td>
+                <td>J som i "ja" (kort)</td>
+                <td class="cyrillic">мой (min)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Л л</td>
+                <td>L som i "lys"</td>
+                <td class="cyrillic">луна (mane)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">П п</td>
+                <td>P som i "pen"</td>
+                <td class="cyrillic">папа (far)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Ф ф</td>
+                <td>F som i "far"</td>
+                <td class="cyrillic">фото (foto)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Ц ц</td>
+                <td>TS som i "tsar"</td>
+                <td class="cyrillic">царь (tsar)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Ч ч</td>
+                <td>TCH som i "match"</td>
+                <td class="cyrillic">час (time)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Ш ш</td>
+                <td>SH som i engelsk "shop"</td>
+                <td class="cyrillic">школа (skole)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Щ щ</td>
+                <td>SHCH (blod SH)</td>
+                <td class="cyrillic">щи (kalssuppe)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Ы ы</td>
+                <td>Y (dyb I-lyd)</td>
+                <td class="cyrillic">сын (son)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Э э</td>
+                <td>E som i "el"</td>
+                <td class="cyrillic">это (dette)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Ю ю</td>
+                <td>JU som i "junior"</td>
+                <td class="cyrillic">юг (syd)</td>
+              </tr>
+              <tr>
+                <td class="cyrillic">Я я</td>
+                <td>JA som i "ja"</td>
+                <td class="cyrillic">я (jeg)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- PART 5: SPECIAL SIGNS -->
+          <h2>
+            <span>Del 5: Specielle Tegn</span>
+            <span class="chapter-num">Ъ og Ь</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Blødt og Hardt Tegn</h3>
+            <p>Disse to bogstaver har ingen lyd selv, men pavirker andre bogstaver:</p>
+            <ul>
+              <li>
+                <strong class="cyrillic">Ь</strong> (blodt tegn) - gor konsonanten for blodere
+              </li>
+              <li><strong class="cyrillic">Ъ</strong> (hardt tegn) - skaber en kort pause</li>
+            </ul>
+          </div>
+
+          <div class="note-box">
+            <strong>Eksempler:</strong><br />
+            <span class="cyrillic">мать</span> (mor) - "т" er blod<br />
+            <span class="cyrillic">объект</span> (objekt) - kort pause mellem "б" og "е"
+          </div>
+
+          <!-- PART 6: READING PRACTICE -->
+          <h2>
+            <span>Del 6: Læseøvelse</span>
+            <span class="chapter-num">Øvelse</span>
+          </h2>
+
+          <p>Prøv at læse disse russiske ord. Klik for at høre den rigtige udtale.</p>
+
+          <div id="reading-exercise" class="exercise-container"></div>
+
+          <!-- PART 7: LISTENING -->
+          <h2>
+            <span>Del 7: Lytteøvelse</span>
+            <span class="chapter-num">Øvelse</span>
+          </h2>
+
+          <p>Lyt og vælg det rigtige bogstav.</p>
+
+          <div id="listening-exercise" class="exercise-container"></div>
+
+          <!-- SUMMARY -->
+          <h2>
+            <span>Opsummering</span>
+          </h2>
+
+          <div class="theory-block">
+            <h3>Det Russiske Alfabet</h3>
+            <p>Du har nu set alle 33 russiske bogstaver:</p>
+            <ul>
+              <li><strong>6 bogstaver</strong> der ligner og lyder som pa dansk</li>
+              <li><strong>6 bogstaver</strong> der ligner, men lyder anderledes (faldgruber!)</li>
+              <li><strong>19 bogstaver</strong> der er helt nye</li>
+              <li><strong>2 tegn</strong> (Ъ og Ь) der ikke har egen lyd</li>
+            </ul>
+            <p>Fortsæt med at øve - snart vil du læse kyrillisk uden problemer!</p>
+          </div>
+
+          <!-- NAVIGATION -->
+          <nav class="lesson-nav">
+            <a href="01-introduction.html" class="lesson-nav-item">
+              <span class="lesson-nav-label">Forrige lektion</span>
+              <span class="lesson-nav-title">Hej! Farvel!</span>
+            </a>
+            <a href="03-numbers.html" class="lesson-nav-item">
+              <span class="lesson-nav-label">Næste lektion</span>
+              <span class="lesson-nav-title">Tal fra 1 til 10</span>
+            </a>
+          </nav>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Historie</strong>
+            Det kyrilliske alfabet blev skabt i det 9. arhundrede af de byzantinske brødre
+            Kyrillos og Methodios til at skrive slaviske sprog.
+          </div>
+          <div class="margin-note">
+            <strong>Tip</strong>
+            Start med at lære de "falske venner" - bogstaver der ligner latinske, men lyder
+            anderledes. De er de mest forvirrende!
+          </div>
+          <div class="margin-note">
+            <strong>Øvelse</strong>
+            Prøv at læse skilte, menuer eller produktnavne pa russisk. Mange internationale ord er
+            lette at genkende!
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <samovar-footer></samovar-footer>
+
+  <script type="module" src="/js/header.ts"></script>
+  <script type="module" src="/js/footer.ts"></script>
+  <script src="../js/lesson-engine.js"></script>
+  <script>
+    // FULL ALPHABET DATA
+    const alphabetData = [
+      { upper: 'А', lower: 'а', sound: 'a', type: 'familiar' },
+      { upper: 'Б', lower: 'б', sound: 'b', type: 'new' },
+      { upper: 'В', lower: 'в', sound: 'v', type: 'similar' },
+      { upper: 'Г', lower: 'г', sound: 'g', type: 'new' },
+      { upper: 'Д', lower: 'д', sound: 'd', type: 'new' },
+      { upper: 'Е', lower: 'е', sound: 'je', type: 'familiar' },
+      { upper: 'Ё', lower: 'ё', sound: 'jo', type: 'new' },
+      { upper: 'Ж', lower: 'ж', sound: 'zh', type: 'new' },
+      { upper: 'З', lower: 'з', sound: 'z', type: 'new' },
+      { upper: 'И', lower: 'и', sound: 'i', type: 'new' },
+      { upper: 'Й', lower: 'й', sound: 'j', type: 'new' },
+      { upper: 'К', lower: 'к', sound: 'k', type: 'familiar' },
+      { upper: 'Л', lower: 'л', sound: 'l', type: 'new' },
+      { upper: 'М', lower: 'м', sound: 'm', type: 'familiar' },
+      { upper: 'Н', lower: 'н', sound: 'n', type: 'similar' },
+      { upper: 'О', lower: 'о', sound: 'o', type: 'familiar' },
+      { upper: 'П', lower: 'п', sound: 'p', type: 'new' },
+      { upper: 'Р', lower: 'р', sound: 'r', type: 'similar' },
+      { upper: 'С', lower: 'с', sound: 's', type: 'similar' },
+      { upper: 'Т', lower: 'т', sound: 't', type: 'familiar' },
+      { upper: 'У', lower: 'у', sound: 'u', type: 'similar' },
+      { upper: 'Ф', lower: 'ф', sound: 'f', type: 'new' },
+      { upper: 'Х', lower: 'х', sound: 'ch', type: 'similar' },
+      { upper: 'Ц', lower: 'ц', sound: 'ts', type: 'new' },
+      { upper: 'Ч', lower: 'ч', sound: 'tch', type: 'new' },
+      { upper: 'Ш', lower: 'ш', sound: 'sh', type: 'new' },
+      { upper: 'Щ', lower: 'щ', sound: 'shch', type: 'new' },
+      { upper: 'Ъ', lower: 'ъ', sound: '-', type: 'new' },
+      { upper: 'Ы', lower: 'ы', sound: 'y', type: 'new' },
+      { upper: 'Ь', lower: 'ь', sound: '-', type: 'new' },
+      { upper: 'Э', lower: 'э', sound: 'e', type: 'new' },
+      { upper: 'Ю', lower: 'ю', sound: 'ju', type: 'new' },
+      { upper: 'Я', lower: 'я', sound: 'ja', type: 'new' },
+    ];
+
+    // Render alphabet grid
+    function renderAlphabet() {
+      const container = document.getElementById('full-alphabet');
+      alphabetData.forEach((letter) => {
+        const card = document.createElement('div');
+        card.className = `letter-card ${letter.type}`;
+        card.innerHTML = `
+                    <span class="letter-big">${letter.upper}</span>
+                    <span class="letter-small">${letter.lower}</span>
+                    <span class="letter-sound">[${letter.sound}]</span>
+                `;
+        card.addEventListener('click', () => {
+          if (letter.sound !== '-') {
+            TTS.speak(letter.upper);
+          }
+        });
+        container.appendChild(card);
+      });
+    }
+
+    // LISTENING DATA
+    const listeningData = [
+      { audio: 'А', options: ['А', 'О', 'Е'], correct: 0 },
+      { audio: 'Р', options: ['П', 'Р', 'В'], correct: 1 },
+      { audio: 'Н', options: ['Н', 'М', 'И'], correct: 0 },
+      { audio: 'С', options: ['З', 'С', 'Э'], correct: 1 },
+      { audio: 'В', options: ['В', 'Б', 'Ф'], correct: 0 },
+      { audio: 'Б', options: ['В', 'П', 'Б'], correct: 2 },
+    ];
+
+    // READING EXERCISE - words to read
+    const readingWords = [
+      { russian: 'мама', danish: 'mor', transcription: 'mama' },
+      { russian: 'папа', danish: 'far', transcription: 'papa' },
+      { russian: 'кот', danish: 'kat', transcription: 'kot' },
+      { russian: 'дом', danish: 'hus', transcription: 'dom' },
+      { russian: 'вода', danish: 'vand', transcription: 'vada' },
+      { russian: 'нос', danish: 'naese', transcription: 'nos' },
+      { russian: 'рука', danish: 'hand', transcription: 'ruka' },
+      { russian: 'сок', danish: 'juice', transcription: 'sok' },
+    ];
+
+    // Custom reading exercise
+    function renderReadingExercise() {
+      const container = document.getElementById('reading-exercise');
+      container.innerHTML = '<div class="vocab-grid"></div>';
+      const grid = container.querySelector('.vocab-grid');
+
+      readingWords.forEach((word) => {
+        const card = document.createElement('div');
+        card.className = 'vocab-card';
+        card.innerHTML = `
+                    <div class="vocab-russian">
+                        <span class="vocab-word">${word.russian}</span>
+                        <button class="speak-btn" title="Lyt">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="vocab-transcription">[${word.transcription}]</div>
+                    <div class="vocab-danish">${word.danish}</div>
+                `;
+        card.querySelector('.speak-btn').addEventListener('click', () => TTS.speak(word.russian));
+        card
+          .querySelector('.vocab-word')
+          .addEventListener('click', () => TTS.speak(word.russian));
+        grid.appendChild(card);
+      });
+    }
+
+    // FAMILIAR LETTERS MATCHING
+    const familiarMatchingData = [
+      { russian: 'А', danish: 'A-lyd' },
+      { russian: 'К', danish: 'K-lyd' },
+      { russian: 'М', danish: 'M-lyd' },
+      { russian: 'О', danish: 'O-lyd' },
+      { russian: 'Т', danish: 'T-lyd' },
+    ];
+
+    // TRICKY LETTERS MATCHING
+    const trickyMatchingData = [
+      { russian: 'В', danish: 'V-lyd (ikke B!)' },
+      { russian: 'Н', danish: 'N-lyd (ikke H!)' },
+      { russian: 'Р', danish: 'R-lyd (ikke P!)' },
+      { russian: 'С', danish: 'S-lyd (ikke C!)' },
+      { russian: 'У', danish: 'U-lyd (ikke Y!)' },
+    ];
+
+    // INITIALIZE
+    document.addEventListener('DOMContentLoaded', function () {
+      renderAlphabet();
+      renderReadingExercise();
+      new MatchingExercise('familiar-exercise', familiarMatchingData);
+      new MatchingExercise('tricky-exercise', trickyMatchingData);
+      new ListeningExercise('listening-exercise', listeningData);
+    });
+  </script>
+</body>
+
+</html>

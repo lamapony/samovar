@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Samovar: Падежная система</title>
+    <style>
+      :root {
+        --bg-paper: #f9f9f7;
+        --text-ink: #2b2b2b;
+        --accent-red: #a33e3e;
+        --accent-blue: #2c3e50;
+        --line-color: #e0e0e0;
+        --slide-bg: #ffffff;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+        background-color: var(--bg-paper);
+        color: var(--text-ink);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      header {
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line-color);
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: 'Georgia', serif;
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--text-ink);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      nav a {
+        margin-left: 20px;
+        text-decoration: none;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      h1 {
+        font-family: 'Georgia', serif;
+        font-size: 2.5rem;
+        font-weight: normal;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+        max-width: 600px;
+      }
+
+      /* Presentation Mode Styles */
+      .presentation-container {
+        background: var(--slide-bg);
+        border: 1px solid var(--line-color);
+        border-radius: 4px;
+        padding: 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        position: relative;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-bottom: 60px;
+      }
+
+      .slide {
+        display: none;
+        animation: fadeIn 0.5s;
+      }
+
+      .slide.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .slide-number {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-family: monospace;
+        color: #999;
+      }
+
+      .slide-title {
+        font-family: 'Georgia', serif;
+        font-size: 2rem;
+        color: var(--accent-blue);
+        margin-top: 0;
+        border-bottom: 2px solid var(--accent-red);
+        display: inline-block;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+      }
+
+      .slide-content {
+        font-size: 1.2rem;
+        max-width: 80%;
+      }
+
+      .case-example {
+        background: #f4f4f4;
+        padding: 15px;
+        border-left: 4px solid var(--accent-blue);
+        margin: 20px 0;
+        font-family: monospace;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 40px;
+      }
+
+      .btn {
+        background: transparent;
+        border: 1px solid var(--text-ink);
+        padding: 10px 20px;
+        cursor: pointer;
+        font-family: inherit;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+
+      .btn:hover {
+        background: var(--text-ink);
+        color: white;
+      }
+
+      .btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      /* Exercise Section */
+      .exercise-section {
+        border-top: 1px solid var(--line-color);
+        padding-top: 40px;
+        margin-bottom: 80px;
+      }
+
+      .exercise-card {
+        background: white;
+        border: 1px solid var(--line-color);
+        padding: 30px;
+        margin-top: 20px;
+      }
+
+      .word-bank {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #eee;
+      }
+
+      .draggable-word {
+        background: white;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        cursor: grab;
+        user-select: none;
+      }
+
+      .target-sentence {
+        font-size: 1.5rem;
+        line-height: 2;
+      }
+
+      .drop-zone {
+        display: inline-block;
+        width: 120px;
+        height: 40px;
+        border-bottom: 2px dashed #999;
+        vertical-align: middle;
+        text-align: center;
+        margin: 0 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a href="index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="index.html">Главная</a>
+          <a href="phonetics.html">Фонетика</a>
+          <a
+            href="cases.html"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-red)"
+            >Падежи</a
+          >
+        </nav>
+      </header>
+
+      <h1>Падежная система</h1>
+      <p class="subtitle">
+        Интерактивная презентация 6 падежей русского языка. Используйте стрелки для навигации.
+      </p>
+
+      <!-- Presentation Component -->
+      <div class="presentation-container">
+        <!-- Slide 1: Intro -->
+        <div class="slide active" data-step="1">
+          <div class="slide-number">01 / 07</div>
+          <h2 class="slide-title">Что такое падеж?</h2>
+          <div class="slide-content">
+            <p>
+              Падеж — это роль слова в предложении. В русском языке окончания слов меняются, чтобы
+              показать, кто совершает действие, над кем оно совершается и где это происходит.
+            </p>
+            <p>
+              <em>Аналогия с датским:</em> В датском роль слова определяет порядок слов (SVO). В
+              русском порядок слов свободный, потому что роль "зашита" в слове.
+            </p>
+          </div>
+        </div>
+
+        <!-- Slide 2: Nominative -->
+        <div class="slide" data-step="2">
+          <div class="slide-number">02 / 07</div>
+          <h2 class="slide-title">1. Именительный (Nominativ)</h2>
+          <div class="slide-content">
+            <p><strong>Вопрос:</strong> Кто? Что? (Hvem? Hvad?)</p>
+            <p><strong>Роль:</strong> Субъект действия. Словарная форма.</p>
+            <div class="case-example">
+              <strong>Студент</strong> читает книгу.<br />
+              (Den studerende læser bogen)
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Genitive -->
+        <div class="slide" data-step="3">
+          <div class="slide-number">03 / 07</div>
+          <h2 class="slide-title">2. Родительный (Genitiv)</h2>
+          <div class="slide-content">
+            <p><strong>Вопрос:</strong> Кого? Чего? (Hvis? Af hvem/hvad?)</p>
+            <p><strong>Роль:</strong> Принадлежность, отсутствие, количество.</p>
+            <div class="case-example">
+              Это книга <strong>студента</strong>.<br />
+              (Det er den studerendes bog)
+            </div>
+            <div class="case-example">
+              У меня нет <strong>времени</strong>.<br />
+              (Jeg har ikke tid)
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Dative -->
+        <div class="slide" data-step="4">
+          <div class="slide-number">04 / 07</div>
+          <h2 class="slide-title">3. Дательный (Dativ)</h2>
+          <div class="slide-content">
+            <p><strong>Вопрос:</strong> Кому? Чему? (Til hvem?)</p>
+            <p><strong>Роль:</strong> Адресат действия, возраст.</p>
+            <div class="case-example">
+              Я даю книгу <strong>студенту</strong>.<br />
+              (Jeg giver bogen til den studerende)
+            </div>
+            <div class="case-example">
+              <strong>Мне</strong> 20 лет.<br />
+              (Jeg er 20 år)
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: Accusative -->
+        <div class="slide" data-step="5">
+          <div class="slide-number">05 / 07</div>
+          <h2 class="slide-title">4. Винительный (Akkusativ)</h2>
+          <div class="slide-content">
+            <p><strong>Вопрос:</strong> Кого? Что? (Hvem? Hvad?)</p>
+            <p><strong>Роль:</strong> Прямой объект действия.</p>
+            <div class="case-example">
+              Я вижу <strong>студента</strong>.<br />
+              (Jeg ser den studerende)
+            </div>
+            <div class="case-example">
+              Я читаю <strong>книгу</strong>.<br />
+              (Jeg læser bogen)
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Instrumental -->
+        <div class="slide" data-step="6">
+          <div class="slide-number">06 / 07</div>
+          <h2 class="slide-title">5. Творительный (Instrumentalis)</h2>
+          <div class="slide-content">
+            <p><strong>Вопрос:</strong> Кем? Чем? (Med hvem/hvad?)</p>
+            <p><strong>Роль:</strong> Инструмент, совместное действие ("с").</p>
+            <div class="case-example">
+              Я пишу <strong>ручкой</strong>.<br />
+              (Jeg skriver med en kuglepen)
+            </div>
+            <div class="case-example">
+              Мы гуляем с <strong>другом</strong>.<br />
+              (Vi går tur med en ven)
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: Prepositional -->
+        <div class="slide" data-step="7">
+          <div class="slide-number">07 / 07</div>
+          <h2 class="slide-title">6. Предложный (Lokativ)</h2>
+          <div class="slide-content">
+            <p><strong>Вопрос:</strong> О ком? О чем? Где? (Om hvem/hvad? Hvor?)</p>
+            <p><strong>Роль:</strong> Объект мысли, местонахождение.</p>
+            <div class="case-example">
+              Мы говорим о <strong>фильме</strong>.<br />
+              (Vi taler om filmen)
+            </div>
+            <div class="case-example">
+              Я живу в <strong>Москве</strong>.<br />
+              (Jeg bor i Moskva)
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn" id="prevBtn" disabled>← Назад</button>
+          <button class="btn" id="nextBtn">Вперед →</button>
+        </div>
+      </div>
+
+      <section class="exercise-section">
+        <h2>Упражнение: Падежный конструктор</h2>
+        <p>Перетащите правильное окончание в пропуск.</p>
+
+        <div class="exercise-card">
+          <div class="word-bank" id="wordBank">
+            <div class="draggable-word" draggable="true">-у (Dat)</div>
+            <div class="draggable-word" draggable="true">-е (Prep)</div>
+            <div class="draggable-word" draggable="true">-ом (Inst)</div>
+            <div class="draggable-word" draggable="true">-а (Gen)</div>
+          </div>
+
+          <div class="target-sentence">
+            1. Я живу в Лондон<span class="drop-zone" data-correct="-е (Prep)"></span>.<br /><br />
+            2. Я пишу карандаш<span class="drop-zone" data-correct="-ом (Inst)"></span>.<br /><br />
+            3. Это книга брат<span class="drop-zone" data-correct="-а (Gen)"></span>.
+          </div>
+
+          <div id="feedback" style="margin-top: 20px; font-weight: bold; display: none"></div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      // Presentation Logic
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      function updateSlides() {
+        slides.forEach((s, i) => {
+          s.classList.remove('active');
+          if (i === currentSlide) s.classList.add('active');
+        });
+
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides.length - 1;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (currentSlide > 0) {
+          currentSlide--;
+          updateSlides();
+        }
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentSlide < slides.length - 1) {
+          currentSlide++;
+          updateSlides();
+        }
+      });
+
+      // Drag and Drop Logic
+      const draggables = document.querySelectorAll('.draggable-word');
+      const dropZones = document.querySelectorAll('.drop-zone');
+      const feedback = document.getElementById('feedback');
+
+      draggables.forEach((draggable) => {
+        draggable.addEventListener('dragstart', () => {
+          draggable.classList.add('dragging');
+        });
+        draggable.addEventListener('dragend', () => {
+          draggable.classList.remove('dragging');
+        });
+      });
+
+      dropZones.forEach((zone) => {
+        zone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          zone.style.background = '#e0e0e0';
+        });
+
+        zone.addEventListener('dragleave', () => {
+          zone.style.background = 'transparent';
+        });
+
+        zone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          zone.style.background = 'transparent';
+          const draggable = document.querySelector('.dragging');
+          if (draggable) {
+            const val = draggable.innerText;
+            const correct = zone.getAttribute('data-correct');
+
+            zone.innerText = val.split(' ')[0]; // show only ending
+            zone.style.borderBottom = '2px solid var(--accent-blue)';
+
+            if (val === correct) {
+              zone.style.color = 'green';
+              checkAll();
+            } else {
+              zone.style.color = 'red';
+            }
+          }
+        });
+      });
+
+      function checkAll() {
+        // Simple check logic mock
+        // In real app, count correct answers
+      }
+    </script>
+  </body>
+</html>

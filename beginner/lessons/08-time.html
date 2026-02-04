@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 8: Hvad Er Klokken? | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      .clock-display {
+        width: 200px;
+        height: 200px;
+        border: 4px solid var(--accent-blue);
+        border-radius: 50%;
+        margin: var(--space-m) auto;
+        position: relative;
+        background: white;
+      }
+
+      .clock-center {
+        width: 10px;
+        height: 10px;
+        background: var(--accent-blue);
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .clock-hand {
+        position: absolute;
+        background: var(--accent-blue);
+        transform-origin: bottom center;
+        left: 50%;
+      }
+
+      .hour-hand {
+        width: 4px;
+        height: 50px;
+        bottom: 50%;
+        margin-left: -2px;
+      }
+
+      .minute-hand {
+        width: 2px;
+        height: 70px;
+        bottom: 50%;
+        margin-left: -1px;
+      }
+
+      .time-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: var(--space-m);
+        margin: var(--space-m) 0;
+      }
+
+      .time-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-m);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        border-radius: 8px;
+      }
+
+      .time-card:hover {
+        border-color: var(--accent-blue);
+        transform: translateY(-2px);
+      }
+
+      .time-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--accent-blue);
+      }
+
+      .time-russian {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        margin: var(--space-xs) 0;
+      }
+
+      .days-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: var(--space-xs);
+        margin: var(--space-m) 0;
+      }
+
+      .day-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-s);
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .day-card:hover {
+        background: var(--accent-blue);
+        color: white;
+      }
+
+      .day-short {
+        font-weight: bold;
+        display: block;
+      }
+
+      .months-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-s);
+        margin: var(--space-m) 0;
+      }
+
+      .month-card {
+        background: var(--bg-card);
+        border: 1px solid var(--line-color);
+        padding: var(--space-s);
+        text-align: center;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .month-card:hover {
+        border-color: var(--accent-blue);
+      }
+
+      @media (max-width: 600px) {
+        .days-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        .months-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* === My Day Section === */
+      .my-day-scene {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: var(--space-l);
+        border-radius: 8px;
+        margin: var(--space-m) 0;
+      }
+      .my-day-scene h3 {
+        color: white;
+        margin-top: 0;
+      }
+      .day-schedule {
+        display: grid;
+        gap: var(--space-s);
+        margin-top: var(--space-m);
+      }
+      .schedule-item {
+        background: rgba(255, 255, 255, 0.15);
+        padding: var(--space-s) var(--space-m);
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        gap: var(--space-m);
+      }
+      .schedule-item:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      .schedule-time {
+        font-size: 1.2rem;
+        font-weight: 600;
+        min-width: 60px;
+      }
+      .schedule-russian {
+        font-weight: 500;
+      }
+      .schedule-danish {
+        font-size: 0.85rem;
+        opacity: 0.8;
+      }
+
+      /* === Humor Note === */
+      .humor-note {
+        background: #fff8e1;
+        border-left: 3px solid #ffc107;
+        padding: var(--space-m);
+        border-radius: 0 8px 8px 0;
+        margin: var(--space-m) 0;
+        font-size: 0.9rem;
+      }
+      .humor-note strong {
+        color: #f57c00;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <samovar-header></samovar-header>
+
+      <main>
+        <div class="section-intro">
+          <div class="lesson-meta">
+            <span>Lektion 8 af 12</span>
+            <span>Niveau A1</span>
+            <span>Ca. 50 min</span>
+          </div>
+          <h1>Hvad Er Klokken?</h1>
+          <p class="lead">
+            Tid er vigtigt i alle sprog. I denne lektion laerer du at fortaelle og sporge om tid,
+            ugedage og maneder pa russisk.
+          </p>
+        </div>
+
+        <section class="content-block">
+          <div class="content-main">
+            <!-- PART 1: ASKING TIME -->
+            <h2>
+              <span>Del 1: Sporge om Tid</span>
+              <span class="chapter-num">Fraser</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Hvordan sporger man?</h3>
+              <div class="example-box">
+                <div class="example-russian">Который час?</div>
+                <div class="example-danish">Hvad er klokken? (Bogstaveligt: Hvilken time?)</div>
+              </div>
+              <div class="example-box">
+                <div class="example-russian">Сколько времени?</div>
+                <div class="example-danish">Hvad er klokken? (Bogstaveligt: Hvor meget tid?)</div>
+              </div>
+            </div>
+
+            <!-- PART 2: HOURS -->
+            <h2>
+              <span>Del 2: Timer</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <p>Klik pa et tidspunkt for at hore det pa russisk:</p>
+
+            <div class="time-grid" id="hours-grid"></div>
+
+            <div class="theory-block">
+              <h3>At sige hele timer</h3>
+              <p>Russisk bruger ordinaltal til timer:</p>
+              <table class="possession-table">
+                <tr>
+                  <td>1:00</td>
+                  <td class="cyrillic">час</td>
+                  <td>(en time)</td>
+                </tr>
+                <tr>
+                  <td>2:00, 3:00, 4:00</td>
+                  <td class="cyrillic">два/три/четыре часа</td>
+                  <td>(timer - genitiv singularis)</td>
+                </tr>
+                <tr>
+                  <td>5:00-12:00</td>
+                  <td class="cyrillic">пять... часов</td>
+                  <td>(timer - genitiv pluralis)</td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- PART 3: DAYS -->
+            <h2>
+              <span>Del 3: Ugedage</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <p>Klik pa en dag for at hore den:</p>
+
+            <div class="days-grid" id="days-grid"></div>
+
+            <div class="tip-box">
+              <strong>Bemærk:</strong> Pa russisk starter ugen med mandag, ikke sondag!
+            </div>
+
+            <div class="theory-block">
+              <h3>"Pa" en dag</h3>
+              <div class="example-box">
+                <div class="example-russian">В понедельник я работаю.</div>
+                <div class="example-danish">Pa mandag arbejder jeg.</div>
+              </div>
+              <p>Brug <strong class="cyrillic">в</strong> + akkusativ for at sige "pa (en dag)".</p>
+            </div>
+
+            <!-- PART 4: MONTHS -->
+            <h2>
+              <span>Del 4: Maneder</span>
+              <span class="chapter-num">Ordforrad</span>
+            </h2>
+
+            <div class="months-grid" id="months-grid"></div>
+
+            <!-- PART 5: USEFUL EXPRESSIONS -->
+            <h2>
+              <span>Del 5: Nyttige Udtryk</span>
+              <span class="chapter-num">Fraser</span>
+            </h2>
+
+            <div id="vocabulary-section" class="vocab-grid"></div>
+
+            <!-- PART 6: LISTENING -->
+            <h2>
+              <span>Del 6: Lytteovelse</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="listening-exercise" class="exercise-container"></div>
+
+            <!-- PART 7: MATCHING -->
+            <h2>
+              <span>Del 7: Par Ordene</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="matching-exercise" class="exercise-container"></div>
+
+            <!-- PART 8: FILL BLANK -->
+            <h2>
+              <span>Del 8: Udfyld Tomme Pladser</span>
+              <span class="chapter-num">Ovelse</span>
+            </h2>
+
+            <div id="fill-blank-exercise" class="exercise-container"></div>
+
+            <!-- PART 9: DIALOGUE -->
+            <h2>
+              <span>Del 9: Dialog</span>
+              <span class="chapter-num">Samtale</span>
+            </h2>
+
+            <div id="dialogue-section"></div>
+
+            <!-- PART 9b: MY DAY -->
+            <h2>
+              <span>Del 9b: Min Dag</span>
+              <span class="chapter-num">Moderne</span>
+            </h2>
+
+            <div class="my-day-scene">
+              <h3>📅 En typisk dag</h3>
+              <p>Sådan kan en dag se ud for en ung russer i storbyen:</p>
+              <div class="day-schedule" id="day-schedule"></div>
+            </div>
+
+            <div class="theory-block">
+              <h3>Online-møder</h3>
+              <p>Mange arbejder hjemmefra og har online-møder:</p>
+              <ul>
+                <li>
+                  <strong>У меня встреча в Зуме в три часа.</strong> — Jeg har et Zoom-møde klokken
+                  tre.
+                </li>
+                <li><strong>В будни я работаю.</strong> — På hverdage arbejder jeg.</li>
+                <li><strong>В выходные я сплю.</strong> — I weekenden sover jeg.</li>
+              </ul>
+            </div>
+
+            <div class="humor-note">
+              <strong>😅 Sjov fakta:</strong> «Сегодня понедельник.» — «О нет...» (Det er mandag i
+              dag. — Åh nej...) En universel reaktion!
+            </div>
+
+            <!-- PART 8: AI CONVERSATION -->
+            <h2>
+              <span>Del 8: Tal om Tid med AI</span>
+              <span class="chapter-num">🤖 AI Praksis</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>⏰ Hvad er klokken?</h3>
+              <p>
+                Øv dig i at spørge om tid, dage og aftale møder! AI-tutoren vil hjælpe dig med at
+                bruge tidsudtryk korrekt.
+              </p>
+            </div>
+
+            <div id="ai-conversation" class="exercise-container"></div>
+
+            <!-- AI QUICK QUIZ -->
+            <h2>
+              <span>Del 9: Tids-Quiz</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>⏰ Hvor godt kender du tiden?</h3>
+              <p>Hurtige spørgsmål om tid, dage og måneder!</p>
+            </div>
+
+            <div id="ai-quiz" class="exercise-container"></div>
+
+            <!-- AI WORD DETECTIVE -->
+            <h2>
+              <span>Del 10: Gæt Tidsudtrykket</span>
+              <span class="chapter-num">🎮 AI Spil</span>
+            </h2>
+
+            <div class="ai-section-intro">
+              <h3>🔍 Hvilket tidsudtryk er det?</h3>
+              <p>AI'en giver hints - gæt det russiske ord!</p>
+            </div>
+
+            <div id="ai-detective" class="exercise-container"></div>
+
+            <!-- SUMMARY -->
+            <h2>
+              <span>Opsummering</span>
+            </h2>
+
+            <div class="theory-block">
+              <h3>Hvad Du Har Laert</h3>
+              <ul>
+                <li><strong>Sporge om tid:</strong> Который час? / Сколько времени?</li>
+                <li><strong>Timer:</strong> час, два часа, пять часов...</li>
+                <li><strong>Ugedage:</strong> понедельник - воскресенье</li>
+                <li><strong>Maneder:</strong> январь - декабрь</li>
+                <li><strong>Udtryk:</strong> сегодня, завтра, вчера, утром, вечером...</li>
+                <li><strong>Moderne:</strong> встреча в Зуме, в будни, в выходные</li>
+              </ul>
+            </div>
+
+            <!-- NAVIGATION -->
+            <nav class="lesson-nav">
+              <a href="07-cafe.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Forrige lektion</span>
+                <span class="lesson-nav-title">Pa Cafe</span>
+              </a>
+              <a href="09-city.html" class="lesson-nav-item">
+                <span class="lesson-nav-label">Naeste lektion</span>
+                <span class="lesson-nav-title">I Byen</span>
+              </a>
+            </nav>
+          </div>
+
+          <aside class="content-note">
+            <div class="margin-note">
+              <strong>Tidszoner</strong>
+              Rusland har 11 tidszoner! Når det er middag i Moskva, er klokken 20:00 i Vladivostok.
+            </div>
+            <div class="margin-note">
+              <strong>24-timers system</strong>
+              I Rusland bruger man ofte 24-timers systemet, særligt i officielle sammenhænge.
+            </div>
+            <div class="margin-note">
+              <strong>Arbejdsliv</strong>
+              Mange unge i storbyer har fleksible arbejdstider. «Удалёнка» (fjernarbejde) er blevet
+              meget udbredt.
+            </div>
+            <div class="margin-note">
+              <strong>Weekenden</strong>
+              «Выходные» (weekenden) er hellig for mange russere. Det er tid til familie, venner og
+              afslapning.
+            </div>
+          </aside>
+        </section>
+      </main>
+    </div>
+
+    <samovar-footer></samovar-footer>
+
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      // HOURS DATA
+      const hoursData = [
+        { number: '1:00', russian: 'час', danish: 'et' },
+        { number: '2:00', russian: 'два часа', danish: 'to' },
+        { number: '3:00', russian: 'три часа', danish: 'tre' },
+        { number: '4:00', russian: 'четыре часа', danish: 'fire' },
+        { number: '5:00', russian: 'пять часов', danish: 'fem' },
+        { number: '6:00', russian: 'шесть часов', danish: 'seks' },
+        { number: '7:00', russian: 'семь часов', danish: 'syv' },
+        { number: '8:00', russian: 'восемь часов', danish: 'otte' },
+        { number: '9:00', russian: 'девять часов', danish: 'ni' },
+        { number: '10:00', russian: 'десять часов', danish: 'ti' },
+        { number: '11:00', russian: 'одиннадцать часов', danish: 'elleve' },
+        { number: '12:00', russian: 'двенадцать часов', danish: 'tolv' },
+      ];
+
+      // DAYS DATA
+      const daysData = [
+        { short: 'Пн', russian: 'понедельник', danish: 'mandag' },
+        { short: 'Вт', russian: 'вторник', danish: 'tirsdag' },
+        { short: 'Ср', russian: 'среда', danish: 'onsdag' },
+        { short: 'Чт', russian: 'четверг', danish: 'torsdag' },
+        { short: 'Пт', russian: 'пятница', danish: 'fredag' },
+        { short: 'Сб', russian: 'суббота', danish: 'lordag' },
+        { short: 'Вс', russian: 'воскресенье', danish: 'sondag' },
+      ];
+
+      // MONTHS DATA
+      const monthsData = [
+        { russian: 'январь', danish: 'januar' },
+        { russian: 'февраль', danish: 'februar' },
+        { russian: 'март', danish: 'marts' },
+        { russian: 'апрель', danish: 'april' },
+        { russian: 'май', danish: 'maj' },
+        { russian: 'июнь', danish: 'juni' },
+        { russian: 'июль', danish: 'juli' },
+        { russian: 'август', danish: 'august' },
+        { russian: 'сентябрь', danish: 'september' },
+        { russian: 'октябрь', danish: 'oktober' },
+        { russian: 'ноябрь', danish: 'november' },
+        { russian: 'декабрь', danish: 'december' },
+      ];
+
+      // Render hours
+      function renderHours() {
+        const container = document.getElementById('hours-grid');
+        hoursData.forEach((hour) => {
+          const card = document.createElement('div');
+          card.className = 'time-card';
+          card.innerHTML = `
+                    <div class="time-number">${hour.number}</div>
+                    <div class="time-russian">${hour.russian}</div>
+                `;
+          card.addEventListener('click', () => TTS.speak(hour.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render days
+      function renderDays() {
+        const container = document.getElementById('days-grid');
+        daysData.forEach((day) => {
+          const card = document.createElement('div');
+          card.className = 'day-card';
+          card.innerHTML = `
+                    <span class="day-short">${day.short}</span>
+                    <small>${day.danish}</small>
+                `;
+          card.addEventListener('click', () => TTS.speak(day.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render months
+      function renderMonths() {
+        const container = document.getElementById('months-grid');
+        monthsData.forEach((month) => {
+          const card = document.createElement('div');
+          card.className = 'month-card';
+          card.innerHTML = `
+                    <div>${month.russian}</div>
+                    <small>${month.danish}</small>
+                `;
+          card.addEventListener('click', () => TTS.speak(month.russian));
+          container.appendChild(card);
+        });
+      }
+
+      // Render day schedule
+      function renderDaySchedule() {
+        const container = document.getElementById('day-schedule');
+        dayScheduleData.forEach((item) => {
+          const div = document.createElement('div');
+          div.className = 'schedule-item';
+          div.innerHTML = `
+                    <span class="schedule-time">${item.time}</span>
+                    <div>
+                        <div class="schedule-russian">${item.russian}</div>
+                        <div class="schedule-danish">${item.danish}</div>
+                    </div>
+                `;
+          div.addEventListener('click', () => TTS.speak(item.russian));
+          container.appendChild(div);
+        });
+      }
+
+      // VOCABULARY DATA
+      const vocabularyData = [
+        { russian: 'сегодня', danish: 'i dag', transcription: 'si-VOD-nja' },
+        { russian: 'завтра', danish: 'i morgen', transcription: 'ZAV-tra' },
+        { russian: 'вчера', danish: 'i gar', transcription: 'fchi-RA' },
+        { russian: 'утром', danish: 'om morgenen', transcription: 'UT-ram' },
+        { russian: 'днём', danish: 'om dagen', transcription: 'dnjom' },
+        { russian: 'вечером', danish: 'om aftenen', transcription: 'VJE-chi-ram' },
+        { russian: 'ночью', danish: 'om natten', transcription: 'NO-tchju' },
+        { russian: 'сейчас', danish: 'nu', transcription: 'sij-TCHAS' },
+        { russian: 'в будни', danish: 'på hverdage', transcription: 'v BUD-ni' },
+        { russian: 'в выходные', danish: 'i weekenden', transcription: 'v vy-had-NY-je' },
+      ];
+
+      // DAY SCHEDULE DATA
+      const dayScheduleData = [
+        { time: '08:00', russian: 'Утром я пью кофе.', danish: 'Om morgenen drikker jeg kaffe.' },
+        { time: '09:00', russian: 'Я работаю из дома.', danish: 'Jeg arbejder hjemmefra.' },
+        { time: '15:00', russian: 'У меня встреча в Зуме.', danish: 'Jeg har et Zoom-møde.' },
+        { time: '19:00', russian: 'Вечером я дома.', danish: 'Om aftenen er jeg hjemme.' },
+        { time: '📺', russian: 'Я смотрю сериалы.', danish: 'Jeg ser serier.' },
+      ];
+
+      // LISTENING DATA
+      const listeningData = [
+        {
+          audio: 'Который час?',
+          options: ['Hvad er klokken?', 'Hvilken dag er det?', 'Hvilken maned?'],
+          correct: 0,
+        },
+        { audio: 'понедельник', options: ['tirsdag', 'mandag', 'sondag'], correct: 1 },
+        { audio: 'завтра', options: ['i gar', 'i dag', 'i morgen'], correct: 2 },
+        { audio: 'пять часов', options: ['klokken 4', 'klokken 5', 'klokken 6'], correct: 1 },
+        { audio: 'вечером', options: ['om morgenen', 'om aftenen', 'om natten'], correct: 1 },
+      ];
+
+      // MATCHING DATA
+      const matchingData = [
+        { russian: 'понедельник', danish: 'mandag' },
+        { russian: 'сегодня', danish: 'i dag' },
+        { russian: 'завтра', danish: 'i morgen' },
+        { russian: 'утром', danish: 'om morgenen' },
+        { russian: 'вечером', danish: 'om aftenen' },
+      ];
+
+      // FILL BLANK DATA
+      const fillBlankData = [
+        { text: 'Который ___?', answer: 'час', hint: 'time', danish: 'Hvad er klokken?' },
+        { text: 'Сейчас пять ___.', answer: 'часов', hint: 'timer', danish: 'Klokken er fem.' },
+        {
+          text: '___ я работаю.',
+          answer: 'Завтра',
+          hint: 'I morgen',
+          danish: 'I morgen arbejder jeg.',
+          alternatives: ['завтра', 'Сегодня', 'сегодня'],
+        },
+        {
+          text: 'В ___ у меня встреча.',
+          answer: 'понедельник',
+          hint: 'mandag',
+          danish: 'Pa mandag har jeg et mode.',
+        },
+        { text: 'Сейчас ___.', answer: 'утро', hint: 'morgen', danish: 'Det er morgen nu.' },
+      ];
+
+      // DIALOGUE DATA
+      const dialogueData = [
+        { speaker: 'A', russian: 'Извините, который час?', danish: 'Undskyld, hvad er klokken?' },
+        { speaker: 'B', russian: 'Сейчас три часа.', danish: 'Klokken er tre.' },
+        {
+          speaker: 'A',
+          russian: 'Спасибо! А какой сегодня день?',
+          danish: 'Tak! Og hvilken dag er det i dag?',
+        },
+        { speaker: 'B', russian: 'Сегодня среда.', danish: 'Det er onsdag i dag.' },
+        {
+          speaker: 'A',
+          russian: 'Во сколько открывается музей?',
+          danish: 'Hvad tid abner museet?',
+        },
+        { speaker: 'B', russian: 'В десять часов утра.', danish: 'Klokken ti om morgenen.' },
+      ];
+
+      // AI CONVERSATION CONFIG
+      const aiConversationConfig = {
+        topic: 'Tid, dage og aftaler',
+        level: 'A1',
+        vocabulary: vocabularyData,
+        starterPrompts: [
+          { russian: 'Который час?', danish: 'Spørg om klokken' },
+          { russian: 'Какой сегодня день?', danish: 'Spørg om dagen' },
+          { russian: 'Во сколько?', danish: 'Spørg hvad tid' },
+          { russian: 'Завтра я работаю.', danish: 'Fortæl om dine planer' },
+        ],
+        systemPrompt:
+          'Fokuser på tid og planlægning. Spørg om klokken, ugedage, planer. Brug: Который час?, Какой сегодня день?, Во сколько...?',
+      };
+
+      // INITIALIZE
+      document.addEventListener('DOMContentLoaded', function () {
+        renderHours();
+        renderDays();
+        renderMonths();
+        renderDaySchedule();
+        new VocabularyList('vocabulary-section', vocabularyData);
+        new ListeningExercise('listening-exercise', listeningData);
+        new MatchingExercise('matching-exercise', matchingData);
+        new FillBlankExercise('fill-blank-exercise', fillBlankData);
+        new Dialogue('dialogue-section', dialogueData);
+
+        // AI Conversation
+        new AIConversation('ai-conversation', aiConversationConfig);
+
+        // AI Quick Quiz
+        new AIQuickQuiz('ai-quiz', {
+          vocabulary: vocabularyData,
+          maxRounds: 8,
+        });
+
+        // AI Word Detective
+        new AIWordDetective('ai-detective', {
+          words: vocabularyData,
+          category: 'Tid og dage',
+          maxRounds: 5,
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lektion 7: En Dag på Café | Samovar</title>
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../css/beginner.css" />
+    <style>
+      /* ============================================
+           STORY-DRIVEN LESSON STYLES
+           ============================================ */
+
+      :root {
+        --story-bg: #1a1a2e;
+        --story-accent: #e94560;
+        --story-warm: #f8b739;
+        --story-cool: #667eea;
+        --cafe-brown: #8b4513;
+        --cafe-cream: #f5f0e8;
+      }
+
+      /* === Full-screen Story Sections === */
+      .story-section {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: var(--space-xl) var(--space-m);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .story-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0.1;
+        pointer-events: none;
+      }
+
+      /* === Hero / Opening Scene === */
+      .story-hero {
+        background: linear-gradient(135deg, var(--story-bg) 0%, #16213e 100%);
+        color: white;
+        text-align: center;
+        min-height: 100vh;
+      }
+
+      .story-hero h1 {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        color: white;
+        margin-bottom: var(--space-m);
+        opacity: 0;
+        animation: fadeSlideUp 1s ease forwards;
+      }
+
+      .story-hero .lead {
+        font-size: clamp(1.1rem, 3vw, 1.5rem);
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 600px;
+        margin: 0 auto var(--space-xl);
+        opacity: 0;
+        animation: fadeSlideUp 1s ease 0.3s forwards;
+      }
+
+      .story-meta {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-l);
+        font-size: 0.9rem;
+        opacity: 0.6;
+        margin-bottom: var(--space-xl);
+        opacity: 0;
+        animation: fadeSlideUp 1s ease 0.5s forwards;
+      }
+
+      .scroll-hint {
+        position: absolute;
+        bottom: var(--space-xl);
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-s);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+        animation: bounce 2s infinite;
+      }
+
+      .scroll-hint svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      /* === Scene Cards === */
+      .scene {
+        background: var(--cafe-cream);
+        position: relative;
+      }
+
+      .scene-inner {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .scene-number {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--story-accent);
+        margin-bottom: var(--space-s);
+      }
+
+      .scene-title {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+        font-family: var(--font-serif);
+        margin-bottom: var(--space-m);
+        color: var(--text-ink);
+      }
+
+      .scene-narrative {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: var(--text-faded);
+        margin-bottom: var(--space-l);
+      }
+
+      /* === Cafe Environment === */
+      .cafe-environment {
+        background: linear-gradient(180deg, var(--cafe-brown) 0%, #654321 100%);
+        color: white;
+        padding: var(--space-xl);
+        border-radius: 16px;
+        margin: var(--space-l) 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cafe-environment::before {
+        content: '☕';
+        position: absolute;
+        font-size: 15rem;
+        opacity: 0.05;
+        right: -2rem;
+        top: -2rem;
+      }
+
+      .cafe-environment h3 {
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: var(--space-m);
+      }
+
+      /* === Character Dialogue === */
+      .dialogue-scene {
+        background: white;
+        border-radius: 16px;
+        padding: var(--space-l);
+        margin: var(--space-l) 0;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .character {
+        display: flex;
+        gap: var(--space-m);
+        margin-bottom: var(--space-m);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeSlideUp 0.5s ease forwards;
+      }
+
+      .character:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .character:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .character:nth-child(3) {
+        animation-delay: 0.5s;
+      }
+      .character:nth-child(4) {
+        animation-delay: 0.7s;
+      }
+      .character:nth-child(5) {
+        animation-delay: 0.9s;
+      }
+
+      .character-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+
+      .character-avatar.anna {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .character-avatar.waiter {
+        background: linear-gradient(135deg, var(--cafe-brown) 0%, #654321 100%);
+      }
+
+      .character-bubble {
+        flex: 1;
+        background: var(--bg-paper);
+        padding: var(--space-m);
+        border-radius: 16px;
+        border-bottom-left-radius: 4px;
+        position: relative;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .character-bubble:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .character-bubble.right {
+        background: var(--story-cool);
+        color: white;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 4px;
+      }
+
+      .character-name {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-light);
+        margin-bottom: 4px;
+      }
+
+      .character-bubble.right .character-name {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .character-russian {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+      }
+
+      .character-danish {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        font-style: italic;
+      }
+
+      .character-bubble.right .character-danish {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* === Interactive Moments === */
+      .interactive-moment {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: var(--space-xl);
+        border-radius: 16px;
+        margin: var(--space-l) 0;
+        text-align: center;
+      }
+
+      .interactive-moment h3 {
+        color: white;
+        font-size: 1.5rem;
+        margin-bottom: var(--space-s);
+      }
+
+      .interactive-moment p {
+        opacity: 0.9;
+        margin-bottom: var(--space-l);
+      }
+
+      /* === Menu Card (Story Version) === */
+      .story-menu {
+        background: white;
+        border-radius: 16px;
+        padding: var(--space-l);
+        margin: var(--space-l) 0;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+      }
+
+      .story-menu-header {
+        text-align: center;
+        border-bottom: 2px solid var(--story-accent);
+        padding-bottom: var(--space-s);
+        margin-bottom: var(--space-m);
+      }
+
+      .story-menu-header h3 {
+        font-family: var(--font-serif);
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .menu-category {
+        margin-bottom: var(--space-m);
+      }
+
+      .menu-category-title {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-light);
+        margin-bottom: var(--space-s);
+      }
+
+      .story-menu-item {
+        display: flex;
+        justify-content: space-between;
+        padding: var(--space-s) 0;
+        border-bottom: 1px dotted var(--line-color);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .story-menu-item:hover {
+        background: var(--bg-paper);
+        padding-left: var(--space-s);
+        padding-right: var(--space-s);
+        margin-left: calc(-1 * var(--space-s));
+        margin-right: calc(-1 * var(--space-s));
+        border-radius: 4px;
+      }
+
+      .story-menu-item:last-child {
+        border-bottom: none;
+      }
+
+      .menu-item-name {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+      }
+
+      .menu-item-price {
+        color: var(--story-accent);
+        font-weight: 600;
+      }
+
+      /* === Phrase Cards (Floating) === */
+      .phrase-float {
+        display: inline-block;
+        background: white;
+        padding: var(--space-s) var(--space-m);
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin: var(--space-xs);
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: var(--font-serif);
+      }
+
+      .phrase-float:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .phrase-float .russian {
+        color: var(--text-ink);
+      }
+
+      .phrase-float .danish {
+        color: var(--text-light);
+        font-size: 0.85rem;
+        margin-left: var(--space-xs);
+      }
+
+      /* === Transition Scenes === */
+      .transition-scene {
+        background: var(--story-bg);
+        color: white;
+        text-align: center;
+        min-height: 60vh;
+      }
+
+      .transition-scene .big-emoji {
+        font-size: 6rem;
+        margin-bottom: var(--space-m);
+        display: block;
+      }
+
+      .transition-scene h2 {
+        color: white;
+        font-size: 2rem;
+      }
+
+      .transition-scene p {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.1rem;
+      }
+
+      /* === Cultural Note (Story) === */
+      .culture-card {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: var(--space-l);
+        border-radius: 16px;
+        margin: var(--space-l) 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .culture-card::before {
+        content: '🇷🇺';
+        position: absolute;
+        font-size: 8rem;
+        opacity: 0.1;
+        right: -1rem;
+        bottom: -1rem;
+      }
+
+      .culture-card h4 {
+        color: white;
+        font-size: 1.2rem;
+        margin-bottom: var(--space-s);
+      }
+
+      .culture-card p {
+        opacity: 0.95;
+        line-height: 1.6;
+      }
+
+      /* === Exercise Embedded in Story === */
+      .story-exercise {
+        background: white;
+        border-radius: 16px;
+        padding: var(--space-xl);
+        margin: var(--space-l) 0;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .story-exercise h3 {
+        text-align: center;
+        margin-bottom: var(--space-l);
+      }
+
+      /* === Coworking Scene === */
+      .coworking-scene {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .laptop-phrases {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--space-m);
+        margin-top: var(--space-l);
+      }
+
+      .laptop-phrase {
+        background: rgba(255, 255, 255, 0.15);
+        padding: var(--space-m);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s;
+        backdrop-filter: blur(10px);
+      }
+
+      .laptop-phrase:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-4px);
+      }
+
+      .laptop-phrase .russian {
+        font-family: var(--font-serif);
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+
+      .laptop-phrase .danish {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      /* === Final Summary === */
+      .story-summary {
+        background: var(--story-bg);
+        color: white;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--space-m);
+        margin-top: var(--space-l);
+      }
+
+      .summary-item {
+        background: rgba(255, 255, 255, 0.1);
+        padding: var(--space-m);
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .summary-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+      }
+
+      .summary-item .russian {
+        font-family: var(--font-serif);
+        font-size: 1.2rem;
+        margin-bottom: 4px;
+      }
+
+      .summary-item .danish {
+        font-size: 0.85rem;
+        opacity: 0.7;
+      }
+
+      /* === Navigation === */
+      .story-nav {
+        background: white;
+        padding: var(--space-xl);
+      }
+
+      /* === Animations === */
+      @keyframes fadeSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        40% {
+          transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+
+      /* === Scroll Animations === */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* === Responsive === */
+      @media (max-width: 768px) {
+        .story-section {
+          padding: var(--space-l) var(--space-s);
+        }
+
+        .character {
+          flex-direction: column;
+          gap: var(--space-s);
+        }
+
+        .character-avatar {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      /* Hide default header/footer for immersive experience */
+      body {
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: none;
+        padding: 0;
+      }
+
+      header,
+      footer {
+        display: none;
+      }
+
+      /* Floating back button */
+      .floating-nav {
+        position: fixed;
+        top: var(--space-m);
+        left: var(--space-m);
+        z-index: 100;
+        display: flex;
+        gap: var(--space-s);
+      }
+
+      .floating-btn {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border: none;
+        padding: var(--space-s) var(--space-m);
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--text-ink);
+        text-decoration: none;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+      }
+
+      .floating-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Progress indicator */
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: var(--story-accent);
+        z-index: 1000;
+        transition: width 0.1s;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="progress-bar" id="progress-bar"></div>
+
+    <nav class="floating-nav">
+      <a href="../index.html" class="floating-btn">← Tilbage</a>
+      <a href="07-cafe.html" class="floating-btn">Klassisk version</a>
+    </nav>
+
+    <div class="container">
+      <!-- ============================================
+             SCENE 1: HERO / OPENING
+             ============================================ -->
+      <section class="story-section story-hero">
+        <div class="story-meta">
+          <span>Lektion 7</span>
+          <span>•</span>
+          <span>Niveau A1</span>
+          <span>•</span>
+          <span>~15 min</span>
+        </div>
+        <h1>En Dag på Café</h1>
+        <p class="lead">
+          Anna er i Moskva for første gang. Hun finder en hyggelig café og skal bestille sin første
+          kaffe på russisk...
+        </p>
+        <div class="scroll-hint">
+          <span>Scroll for at begynde</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 2: SETTING THE SCENE
+             ============================================ -->
+      <section class="story-section scene">
+        <div class="scene-inner reveal">
+          <div class="scene-number">Scene 1</div>
+          <h2 class="scene-title">Cafeen</h2>
+          <p class="scene-narrative">
+            Det er en kold vinterdag i Moskva. Anna går ind på en lille café i centrum. Det dufter
+            af friskbrygget kaffe og varme croissanter. Hun finder et bord ved vinduet og venter på
+            tjeneren...
+          </p>
+
+          <div class="cafe-environment">
+            <h3>☕ Кафе «Уют»</h3>
+            <p>En typisk russisk café: varmt, hyggeligt, og med gratis Wi-Fi.</p>
+            <div style="margin-top: var(--space-m)">
+              <span class="phrase-float" onclick="TTS.speak('Здравствуйте!')">
+                <span class="russian">Здравствуйте!</span>
+                <span class="danish">Goddag!</span>
+              </span>
+              <span class="phrase-float" onclick="TTS.speak('Добро пожаловать!')">
+                <span class="russian">Добро пожаловать!</span>
+                <span class="danish">Velkommen!</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="culture-card">
+            <h4>🇷🇺 Kulturelt tip</h4>
+            <p>
+              I russiske caféer er det helt normalt at sidde i timevis med én kop kaffe. Mange
+              bruger caféer som arbejdsplads — det er accepteret og forventet!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 3: THE MENU
+             ============================================ -->
+      <section class="story-section scene" style="background: white">
+        <div class="scene-inner reveal">
+          <div class="scene-number">Scene 2</div>
+          <h2 class="scene-title">Menukortet</h2>
+          <p class="scene-narrative">
+            Tjeneren kommer med menukortet. Anna kigger på det og prøver at læse de russiske ord.
+            Heldigvis kender hun allerede nogle af dem...
+          </p>
+
+          <div class="story-menu">
+            <div class="story-menu-header">
+              <h3>МЕНЮ</h3>
+            </div>
+
+            <div class="menu-category">
+              <div class="menu-category-title">Напитки (Drikkevarer)</div>
+              <div class="story-menu-item" onclick="TTS.speak('Кофе')">
+                <span class="menu-item-name">Кофе</span>
+                <span class="menu-item-price">150 ₽</span>
+              </div>
+              <div class="story-menu-item" onclick="TTS.speak('Капучино')">
+                <span class="menu-item-name">Капучино</span>
+                <span class="menu-item-price">200 ₽</span>
+              </div>
+              <div class="story-menu-item" onclick="TTS.speak('Чай')">
+                <span class="menu-item-name">Чай</span>
+                <span class="menu-item-price">100 ₽</span>
+              </div>
+            </div>
+
+            <div class="menu-category">
+              <div class="menu-category-title">Еда (Mad)</div>
+              <div class="story-menu-item" onclick="TTS.speak('Круассан')">
+                <span class="menu-item-name">Круассан</span>
+                <span class="menu-item-price">120 ₽</span>
+              </div>
+              <div class="story-menu-item" onclick="TTS.speak('Блины')">
+                <span class="menu-item-name">Блины</span>
+                <span class="menu-item-price">250 ₽</span>
+              </div>
+              <div class="story-menu-item" onclick="TTS.speak('Борщ')">
+                <span class="menu-item-name">Борщ</span>
+                <span class="menu-item-price">350 ₽</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="scene-narrative" style="margin-top: var(--space-l)">
+            <em>Klik på et element i menuen for at høre udtalen!</em>
+          </p>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 4: THE CONVERSATION
+             ============================================ -->
+      <section class="story-section scene">
+        <div class="scene-inner reveal">
+          <div class="scene-number">Scene 3</div>
+          <h2 class="scene-title">Bestillingen</h2>
+          <p class="scene-narrative">
+            Tjeneren kommer hen til Annas bord. Nu skal hun bestille på russisk for første gang.
+            Hendes hjerte banker lidt hurtigere...
+          </p>
+
+          <div class="dialogue-scene" id="main-dialogue">
+            <!-- Dialogue will be rendered by JS -->
+          </div>
+
+          <div class="interactive-moment">
+            <h3>🎯 Din tur!</h3>
+            <p>Hvad ville DU bestille? Prøv at sige det højt:</p>
+            <div style="margin-top: var(--space-m)">
+              <span
+                class="phrase-float"
+                onclick="TTS.speak('Мне, пожалуйста, кофе.')"
+                style="background: white; color: var(--text-ink)"
+              >
+                <span class="russian">Мне, пожалуйста, кофе.</span>
+              </span>
+              <span
+                class="phrase-float"
+                onclick="TTS.speak('Мне, пожалуйста, чай.')"
+                style="background: white; color: var(--text-ink)"
+              >
+                <span class="russian">Мне, пожалуйста, чай.</span>
+              </span>
+              <span
+                class="phrase-float"
+                onclick="TTS.speak('Мне, пожалуйста, капучино.')"
+                style="background: white; color: var(--text-ink)"
+              >
+                <span class="russian">Мне, пожалуйста, капучино.</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 5: GRAMMAR MOMENT
+             ============================================ -->
+      <section class="story-section transition-scene">
+        <div class="scene-inner reveal">
+          <span class="big-emoji">💡</span>
+          <h2>Grammatik-pause</h2>
+          <p style="max-width: 500px; margin: 0 auto">
+            Bemærk hvordan Anna bestiller:
+            <strong style="color: var(--story-warm)">«Мне, пожалуйста...»</strong><br />
+            Det betyder bogstaveligt "Til mig, tak..." — en meget høflig måde at bestille på!
+          </p>
+
+          <div
+            style="
+              margin-top: var(--space-xl);
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              gap: var(--space-m);
+            "
+          >
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.1);
+                padding: var(--space-m);
+                border-radius: 12px;
+                text-align: left;
+              "
+            >
+              <div style="color: var(--story-warm); font-size: 0.8rem; margin-bottom: 4px">
+                HØFLIG
+              </div>
+              <div style="font-family: var(--font-serif); font-size: 1.2rem">
+                Мне, пожалуйста, кофе.
+              </div>
+            </div>
+            <div
+              style="
+                background: rgba(255, 255, 255, 0.1);
+                padding: var(--space-m);
+                border-radius: 12px;
+                text-align: left;
+              "
+            >
+              <div style="color: var(--story-accent); font-size: 0.8rem; margin-bottom: 4px">
+                DIREKTE
+              </div>
+              <div style="font-family: var(--font-serif); font-size: 1.2rem">Я хочу кофе.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 6: MODERN CAFE LIFE
+             ============================================ -->
+      <section class="story-section coworking-scene">
+        <div class="scene-inner reveal">
+          <div class="scene-number" style="color: rgba(255, 255, 255, 0.6)">Scene 4</div>
+          <h2 class="scene-title" style="color: white">Arbejde i Cafeen</h2>
+          <p class="scene-narrative" style="color: rgba(255, 255, 255, 0.8)">
+            Anna tager sin laptop frem. Hun skal arbejde lidt, mens hun nyder sin kaffe. Men først
+            har hun brug for Wi-Fi-koden...
+          </p>
+
+          <div class="laptop-phrases">
+            <div class="laptop-phrase" onclick="TTS.speak('Можно пароль от Wi-Fi?')">
+              <div class="russian">Можно пароль от Wi-Fi?</div>
+              <div class="danish">Må jeg få Wi-Fi-koden?</div>
+            </div>
+            <div class="laptop-phrase" onclick="TTS.speak('Здесь можно посидеть с ноутбуком?')">
+              <div class="russian">Здесь можно посидеть с ноутбуком?</div>
+              <div class="danish">Kan jeg sidde her med min laptop?</div>
+            </div>
+            <div class="laptop-phrase" onclick="TTS.speak('Есть розетка?')">
+              <div class="russian">Есть розетка?</div>
+              <div class="danish">Er der en stikkontakt?</div>
+            </div>
+            <div class="laptop-phrase" onclick="TTS.speak('Мне ещё один кофе, пожалуйста.')">
+              <div class="russian">Мне ещё один кофе, пожалуйста.</div>
+              <div class="danish">Endnu en kaffe, tak.</div>
+            </div>
+          </div>
+
+          <div
+            style="
+              background: rgba(255, 255, 255, 0.1);
+              padding: var(--space-m);
+              border-radius: 12px;
+              margin-top: var(--space-xl);
+              text-align: center;
+            "
+          >
+            <p style="margin: 0; font-style: italic; opacity: 0.9">
+              😅 «Я закажу ещё один кофе, потому что работаю здесь уже два часа.»<br />
+              <span style="font-size: 0.9rem; opacity: 0.7"
+                >(Jeg bestiller endnu en kaffe, fordi jeg har arbejdet her i to timer
+                allerede.)</span
+              >
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 7: MILK OPTIONS
+             ============================================ -->
+      <section class="story-section scene" style="background: white">
+        <div class="scene-inner reveal">
+          <div class="scene-number">Scene 5</div>
+          <h2 class="scene-title">Med mælk?</h2>
+          <p class="scene-narrative">
+            Tjeneren spørger Anna om hun vil have mælk i sin kaffe. I moderne russiske caféer er der
+            mange muligheder...
+          </p>
+
+          <div class="dialogue-scene">
+            <div class="character">
+              <div class="character-avatar waiter">👨‍🍳</div>
+              <div class="character-bubble" onclick="TTS.speak('С молоком?')">
+                <div class="character-name">Tjener</div>
+                <div class="character-russian">С молоком?</div>
+                <div class="character-danish">Med mælk?</div>
+              </div>
+            </div>
+          </div>
+
+          <p class="scene-narrative">Anna kan svare:</p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: var(--space-s); justify-content: center">
+            <span class="phrase-float" onclick="TTS.speak('Да, пожалуйста.')">
+              <span class="russian">Да, пожалуйста.</span>
+              <span class="danish">Ja tak.</span>
+            </span>
+            <span class="phrase-float" onclick="TTS.speak('Нет, спасибо.')">
+              <span class="russian">Нет, спасибо.</span>
+              <span class="danish">Nej tak.</span>
+            </span>
+            <span class="phrase-float" onclick="TTS.speak('С овсяным, пожалуйста.')">
+              <span class="russian">С овсяным, пожалуйста.</span>
+              <span class="danish">Med havremælk, tak.</span>
+            </span>
+            <span class="phrase-float" onclick="TTS.speak('Без молока.')">
+              <span class="russian">Без молока.</span>
+              <span class="danish">Uden mælk.</span>
+            </span>
+          </div>
+
+          <div class="culture-card" style="margin-top: var(--space-xl)">
+            <h4>🥛 Moderne trend</h4>
+            <p>
+              «Овсяное молоко» (havremælk) er blevet meget populært i russiske caféer. Du kan også
+              finde соевое (soja) og миндальное (mandel) mælk.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 8: PAYING
+             ============================================ -->
+      <section class="story-section scene">
+        <div class="scene-inner reveal">
+          <div class="scene-number">Scene 6</div>
+          <h2 class="scene-title">Regningen</h2>
+          <p class="scene-narrative">
+            Anna har nydt sin kaffe og croissant. Nu er det tid til at betale. Hun kalder på
+            tjeneren...
+          </p>
+
+          <div class="dialogue-scene" id="payment-dialogue">
+            <!-- Payment dialogue rendered by JS -->
+          </div>
+
+          <div class="culture-card">
+            <h4>💳 Betaling i Rusland</h4>
+            <p>
+              De fleste steder accepterer kort (картой). Kontanter (наличными) bruges sjældnere.
+              Drikkepenge er ikke obligatoriske, men 10% er blevet normalt i storbyer.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 9: PRACTICE
+             ============================================ -->
+      <section class="story-section transition-scene">
+        <div class="scene-inner reveal">
+          <span class="big-emoji">🎮</span>
+          <h2>Tid til at øve!</h2>
+          <p style="max-width: 500px; margin: 0 auto var(--space-xl)">
+            Nu har du set Anna bestille på café. Lad os teste hvad du har lært!
+          </p>
+        </div>
+      </section>
+
+      <section class="story-section scene" style="background: white">
+        <div class="scene-inner">
+          <div class="story-exercise reveal">
+            <h3>🎧 Lytteøvelse</h3>
+            <div id="listening-exercise"></div>
+          </div>
+
+          <div class="story-exercise reveal">
+            <h3>✍️ Udfyld tomme pladser</h3>
+            <div id="fill-blank-exercise"></div>
+          </div>
+
+          <div class="story-exercise reveal">
+            <h3>🔗 Par ordene</h3>
+            <div id="matching-exercise"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             SCENE 10: SUMMARY
+             ============================================ -->
+      <section class="story-section story-summary">
+        <div class="scene-inner reveal">
+          <div class="scene-number" style="color: var(--story-accent)">Afslutning</div>
+          <h2 class="scene-title" style="color: white">Hvad du har lært</h2>
+          <p class="scene-narrative" style="color: rgba(255, 255, 255, 0.7)">
+            Anna klarede det! Og nu kan du også bestille på en russisk café. Her er de vigtigste
+            fraser:
+          </p>
+
+          <div class="summary-grid">
+            <div class="summary-item" onclick="TTS.speak('Мне, пожалуйста...')">
+              <div class="russian">Мне, пожалуйста...</div>
+              <div class="danish">Jeg vil gerne have...</div>
+            </div>
+            <div class="summary-item" onclick="TTS.speak('Можно счёт?')">
+              <div class="russian">Можно счёт?</div>
+              <div class="danish">Må jeg få regningen?</div>
+            </div>
+            <div class="summary-item" onclick="TTS.speak('Сколько это стоит?')">
+              <div class="russian">Сколько это стоит?</div>
+              <div class="danish">Hvor meget koster det?</div>
+            </div>
+            <div class="summary-item" onclick="TTS.speak('Можно пароль от Wi-Fi?')">
+              <div class="russian">Можно пароль от Wi-Fi?</div>
+              <div class="danish">Må jeg få Wi-Fi-koden?</div>
+            </div>
+            <div class="summary-item" onclick="TTS.speak('Есть розетка?')">
+              <div class="russian">Есть розетка?</div>
+              <div class="danish">Er der en stikkontakt?</div>
+            </div>
+            <div class="summary-item" onclick="TTS.speak('Спасибо, очень вкусно!')">
+              <div class="russian">Спасибо, очень вкусно!</div>
+              <div class="danish">Tak, det var lækkert!</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================
+             NAVIGATION
+             ============================================ -->
+      <section class="story-section story-nav" style="min-height: auto; padding: var(--space-xl)">
+        <div class="scene-inner">
+          <nav class="lesson-nav">
+            <a href="06-food.html" class="lesson-nav-item">
+              <span class="lesson-nav-label">Forrige lektion</span>
+              <span class="lesson-nav-title">Mad og Drikke</span>
+            </a>
+            <a href="08-time.html" class="lesson-nav-item">
+              <span class="lesson-nav-label">Næste lektion</span>
+              <span class="lesson-nav-title">Hvad Er Klokken?</span>
+            </a>
+          </nav>
+        </div>
+      </section>
+    </div>
+
+    <script src="../js/lesson-engine.js"></script>
+    <script>
+      // ============================================
+      // DIALOGUE DATA
+      // ============================================
+      const mainDialogueData = [
+        {
+          speaker: 'waiter',
+          name: 'Tjener',
+          russian: 'Здравствуйте! Что будете заказывать?',
+          danish: 'Goddag! Hvad vil De bestille?',
+        },
+        {
+          speaker: 'anna',
+          name: 'Anna',
+          russian: 'Здравствуйте! Мне, пожалуйста, капучино.',
+          danish: 'Goddag! Jeg vil gerne have en cappuccino, tak.',
+        },
+        {
+          speaker: 'waiter',
+          name: 'Tjener',
+          russian: 'Большой или маленький?',
+          danish: 'Stor eller lille?',
+        },
+        { speaker: 'anna', name: 'Anna', russian: 'Большой, пожалуйста.', danish: 'Stor, tak.' },
+        { speaker: 'waiter', name: 'Tjener', russian: 'Что-нибудь ещё?', danish: 'Noget andet?' },
+        {
+          speaker: 'anna',
+          name: 'Anna',
+          russian: 'Да, круассан, пожалуйста.',
+          danish: 'Ja, en croissant, tak.',
+        },
+        {
+          speaker: 'waiter',
+          name: 'Tjener',
+          russian: 'Хорошо. Триста двадцать рублей.',
+          danish: 'OK. Tre hundrede og tyve rubler.',
+        },
+        {
+          speaker: 'anna',
+          name: 'Anna',
+          russian: 'Вот, пожалуйста. Спасибо!',
+          danish: 'Værsgo. Tak!',
+        },
+      ];
+
+      const paymentDialogueData = [
+        {
+          speaker: 'anna',
+          name: 'Anna',
+          russian: 'Можно счёт, пожалуйста?',
+          danish: 'Må jeg få regningen, tak?',
+        },
+        {
+          speaker: 'waiter',
+          name: 'Tjener',
+          russian: 'Конечно. Триста двадцать рублей.',
+          danish: 'Selvfølgelig. Tre hundrede og tyve rubler.',
+        },
+        {
+          speaker: 'anna',
+          name: 'Anna',
+          russian: 'Можно картой?',
+          danish: 'Kan jeg betale med kort?',
+        },
+        { speaker: 'waiter', name: 'Tjener', russian: 'Да, конечно.', danish: 'Ja, selvfølgelig.' },
+        { speaker: 'anna', name: 'Anna', russian: 'Спасибо! До свидания!', danish: 'Tak! Farvel!' },
+        {
+          speaker: 'waiter',
+          name: 'Tjener',
+          russian: 'До свидания! Приходите ещё!',
+          danish: 'Farvel! Kom igen!',
+        },
+      ];
+
+      // ============================================
+      // RENDER DIALOGUE
+      // ============================================
+      function renderDialogue(containerId, data) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        data.forEach((line, index) => {
+          const isAnna = line.speaker === 'anna';
+          const character = document.createElement('div');
+          character.className = 'character';
+          character.style.animationDelay = `${index * 0.2}s`;
+
+          if (isAnna) {
+            character.innerHTML = `
+                        <div class="character-avatar anna">👩</div>
+                        <div class="character-bubble right" onclick="TTS.speak('${line.russian.replace(/'/g, "\\'")}')">
+                            <div class="character-name">${line.name}</div>
+                            <div class="character-russian">${line.russian}</div>
+                            <div class="character-danish">${line.danish}</div>
+                        </div>
+                    `;
+          } else {
+            character.innerHTML = `
+                        <div class="character-avatar waiter">👨‍🍳</div>
+                        <div class="character-bubble" onclick="TTS.speak('${line.russian.replace(/'/g, "\\'")}')">
+                            <div class="character-name">${line.name}</div>
+                            <div class="character-russian">${line.russian}</div>
+                            <div class="character-danish">${line.danish}</div>
+                        </div>
+                    `;
+          }
+
+          container.appendChild(character);
+        });
+      }
+
+      // ============================================
+      // EXERCISE DATA
+      // ============================================
+      const listeningData = [
+        {
+          audio: 'Можно меню?',
+          options: ['Må jeg se menuen?', 'Må jeg få regningen?', 'Hvad koster det?'],
+          correct: 0,
+        },
+        {
+          audio: 'Сколько это стоит?',
+          options: ['Hvad anbefaler De?', 'Hvor er toilettet?', 'Hvor meget koster det?'],
+          correct: 2,
+        },
+        {
+          audio: 'Счёт, пожалуйста',
+          options: ['Menuen, tak', 'Regningen, tak', 'Kaffe, tak'],
+          correct: 1,
+        },
+        {
+          audio: 'Мне кофе',
+          options: ['Jeg vil have kaffe', 'Jeg kan lide kaffe', 'Har du kaffe?'],
+          correct: 0,
+        },
+      ];
+
+      const fillBlankData = [
+        {
+          text: 'Мне, ___, кофе.',
+          answer: 'пожалуйста',
+          hint: 'tak',
+          danish: 'Jeg vil gerne have kaffe, tak.',
+        },
+        { text: 'Можно ___?', answer: 'счёт', hint: 'regningen', danish: 'Må jeg få regningen?' },
+        {
+          text: 'Сколько это ___?',
+          answer: 'стоит',
+          hint: 'koster',
+          danish: 'Hvor meget koster det?',
+        },
+      ];
+
+      const matchingData = [
+        { russian: 'счёт', danish: 'regningen' },
+        { russian: 'меню', danish: 'menuen' },
+        { russian: 'вкусно', danish: 'lækker' },
+        { russian: 'большой', danish: 'stor' },
+        { russian: 'маленький', danish: 'lille' },
+      ];
+
+      // ============================================
+      // SCROLL ANIMATIONS
+      // ============================================
+      function initScrollAnimations() {
+        const reveals = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+          },
+        );
+
+        reveals.forEach((el) => observer.observe(el));
+      }
+
+      // ============================================
+      // PROGRESS BAR
+      // ============================================
+      function initProgressBar() {
+        const progressBar = document.getElementById('progress-bar');
+
+        window.addEventListener('scroll', () => {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = (scrollTop / docHeight) * 100;
+          progressBar.style.width = `${progress}%`;
+        });
+      }
+
+      // ============================================
+      // INITIALIZE
+      // ============================================
+      document.addEventListener('DOMContentLoaded', function () {
+        // Render dialogues
+        renderDialogue('main-dialogue', mainDialogueData);
+        renderDialogue('payment-dialogue', paymentDialogueData);
+
+        // Initialize exercises
+        new ListeningExercise('listening-exercise', listeningData);
+        new FillBlankExercise('fill-blank-exercise', fillBlankData);
+        new MatchingExercise('matching-exercise', matchingData);
+
+        // Initialize scroll animations
+        initScrollAnimations();
+        initProgressBar();
+      });
+    </script>
+  </body>
+</html>

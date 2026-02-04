@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сленг и Живой язык | Samovar</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/advanced.css" />
+    <style>
+      .slang-card {
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #e74c3c;
+      }
+
+      .slang-term {
+        font-family: monospace;
+        font-size: 1.2em;
+        color: #e74c3c;
+        font-weight: bold;
+      }
+
+      .context-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        margin-left: 10px;
+        color: white;
+      }
+
+      .ctx-youth {
+        background: #9b59b6;
+      }
+
+      .ctx-internet {
+        background: #3498db;
+      }
+
+      .ctx-criminal {
+        background: #34495e;
+      }
+
+      /* Drag and Drop improvements */
+      .drop-column {
+        transition:
+          background-color 0.3s,
+          transform 0.2s;
+        background: #f8f9fa;
+        border: 1px dashed #ccc;
+      }
+
+      .drop-column.drag-over {
+        background-color: rgba(0, 0, 0, 0.05);
+        transform: scale(1.02);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border-style: solid;
+        border-color: var(--accent-red);
+      }
+
+      .word-card {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 5px;
+        background: white;
+        border: 1px solid var(--accent-red);
+        border-radius: 20px;
+        cursor: grab;
+        user-select: none;
+        font-weight: 500;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s;
+      }
+
+      .word-card:active {
+        cursor: grabbing;
+        transform: scale(0.95);
+      }
+
+      .word-card.correct {
+        background: var(--color-success);
+        color: white;
+        border-color: var(--color-success);
+        cursor: default;
+      }
+
+      .word-card.wrong {
+        background: var(--color-error);
+        color: white;
+        border-color: var(--color-error);
+        animation: shake 0.5s;
+      }
+
+      .hint-box {
+        background: #fff3cd;
+        color: #856404;
+        padding: 10px;
+        text-align: center;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        min-height: 40px;
+        font-style: italic;
+        display: none;
+      }
+
+      @keyframes shake {
+        0% {
+          transform: translateX(0);
+        }
+
+        25% {
+          transform: translateX(-5px);
+        }
+
+        50% {
+          transform: translateX(5px);
+        }
+
+        75% {
+          transform: translateX(-5px);
+        }
+
+        100% {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <a href="../index.html" class="logo">Samovar.</a>
+        <nav>
+          <a href="../index.html">Главная</a>
+          <a
+            href="#"
+            class="active"
+            style="color: var(--text-ink); border-bottom: 1px solid var(--accent-gold)"
+            >Сленг</a
+          >
+        </nav>
+      </header>
+
+      <main class="content-block">
+        <div class="content-main">
+          <h1>Сленг и Живой язык</h1>
+          <p class="lead">
+            Учебники учат языку Пушкина, но на улице говорят на языке YouTube и TikTok. Сленг — это
+            самая быстро меняющаяся часть языка.
+          </p>
+
+          <section id="theory">
+            <h2>Популярные слова 2025</h2>
+
+            <div class="slang-card">
+              <span class="slang-term">Душнила</span>
+              <span class="context-badge ctx-youth">Молодежь</span>
+              <p>
+                Человек, который слишком нудный, придирается к мелочам и портит веселье. (A bore, a
+                buzzkill).
+              </p>
+              <p><em>Пример:</em> "Не будь душнилой, поехали с нами!"</p>
+            </div>
+
+            <div class="slang-card">
+              <span class="slang-term">Кринж</span>
+              <span class="context-badge ctx-internet">Интернет</span>
+              <p>Чувство стыда за чужие действия. (Cringe).</p>
+              <p><em>Пример:</em> "Это полный кринж."</p>
+            </div>
+
+            <div class="slang-card">
+              <span class="slang-term">Жиза</span>
+              <span class="context-badge ctx-youth">Разговорное</span>
+              <p>Жизненная ситуация, с которой все согласны. (True story, relatable).</p>
+              <p><em>Пример:</em> "— Я опять проспал. — Жиза."</p>
+            </div>
+
+            <h3>Осторожно: Табу</h3>
+            <p>
+              Русский мат — это отдельный язык. Иностранцу лучше его <strong>понимать</strong>, но
+              <strong>не использовать</strong>, пока уровень не достигнет C2. Риск звучать глупо или
+              агрессивно слишком высок.
+            </p>
+          </section>
+
+          <section id="practice-section">
+            <h2>Практика: Сленг или Литература?</h2>
+            <p>Определите, где нормальное слово, а где сленг.</p>
+
+            <div class="game-container">
+              <div id="hint-display" class="hint-box">Подсказка появится здесь...</div>
+
+              <div
+                id="word-bank"
+                style="
+                  min-height: 60px;
+                  padding: 10px;
+                  background: #fff;
+                  border-bottom: 1px solid #eee;
+                  margin-bottom: 20px;
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 10px;
+                  justify-content: center;
+                "
+              >
+                <!-- Words will be generated here -->
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px">
+                <div
+                  class="drop-column"
+                  data-target="slang"
+                  style="min-height: 200px; border-radius: 8px; padding: 10px; text-align: center"
+                >
+                  <h3>Сленг 🔥</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+                <div
+                  class="drop-column"
+                  data-target="norm"
+                  style="min-height: 200px; border-radius: 8px; padding: 10px; text-align: center"
+                >
+                  <h3>Норма 📚</h3>
+                  <div class="drop-zone-content"></div>
+                </div>
+              </div>
+              <div
+                id="feedback"
+                class="feedback"
+                style="margin-top: 20px; text-align: center; font-size: 1.2rem"
+              ></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="content-note">
+          <div class="margin-note">
+            <strong>Англицизмы</strong>
+            Современный русский переполнен словами из английского:
+            <em>чилить, рофлить, фиксить, юзать</em>. Если не знаете слово, попробуйте произнести
+            английский аналог с русским окончанием — вас могут понять.
+          </div>
+        </aside>
+      </main>
+
+      <footer>
+        <div>&copy; 2025 Samovar. Академический стандарт.</div>
+      </footer>
+    </div>
+
+    <script>
+      const words = [
+        { t: 'Хайп', g: 'slang', hint: 'Шумиха, ажиотаж (Hype).' },
+        { t: 'Популярность', g: 'norm', hint: 'Литературное слово.' },
+        { t: 'Зашквар', g: 'slang', hint: 'Что-то позорное или немодное.' },
+        { t: 'Стыд', g: 'norm', hint: 'Обычное чувство.' },
+        { t: 'Краш', g: 'slang', hint: 'Человек, который нравится (Crush).' },
+        { t: 'Возлюбленный', g: 'norm', hint: 'Романтичное, книжное слово.' },
+        { t: 'Токсик', g: 'slang', hint: 'Токсичный человек.' },
+        { t: 'Вредный', g: 'norm', hint: 'Обычное прилагательное.' },
+      ];
+
+      const bank = document.getElementById('word-bank');
+      const columns = document.querySelectorAll('.drop-column');
+      const feedback = document.getElementById('feedback');
+      const hintBox = document.getElementById('hint-display');
+      let solved = 0;
+
+      // Initialize Game
+      function initGame() {
+        words.sort(() => Math.random() - 0.5); // Shuffle
+        words.forEach((w) => {
+          const el = document.createElement('div');
+          el.className = 'word-card';
+          el.innerText = w.t;
+          el.draggable = true;
+          el.dataset.target = w.g;
+          el.dataset.hint = w.hint;
+
+          el.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', JSON.stringify(w));
+            e.dataTransfer.effectAllowed = 'move';
+            setTimeout(() => (el.style.opacity = '0.5'), 0);
+            showHint(w.hint);
+          });
+
+          el.addEventListener('dragend', () => {
+            el.style.opacity = '1';
+          });
+
+          el.addEventListener('click', () => {
+            if (el.classList.contains('correct')) return;
+            showHint(w.hint);
+            if (document.querySelector('.selected-word')) {
+              document.querySelector('.selected-word').classList.remove('selected-word');
+              document.querySelector('.selected-word').style.borderColor = 'var(--accent-red)';
+            }
+            el.classList.add('selected-word');
+            el.style.borderColor = 'var(--accent-gold)';
+          });
+
+          bank.appendChild(el);
+        });
+      }
+
+      function showHint(text) {
+        hintBox.style.display = 'block';
+        hintBox.innerText = text;
+      }
+
+      // Drop Logic
+      columns.forEach((col) => {
+        col.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          col.classList.add('drag-over');
+        });
+
+        col.addEventListener('dragleave', () => {
+          col.classList.remove('drag-over');
+        });
+
+        col.addEventListener('drop', (e) => {
+          e.preventDefault();
+          col.classList.remove('drag-over');
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          const draggedEl = [...bank.children].find(
+            (c) => c.innerText === data.t && c.style.display !== 'none',
+          );
+
+          handleMove(data, draggedEl, col);
+        });
+
+        col.addEventListener('click', () => {
+          const selected = document.querySelector('.selected-word');
+          if (selected) {
+            const target = selected.dataset.target;
+            const data = { t: selected.innerText, g: target };
+            handleMove(data, selected, col);
+          }
+        });
+      });
+
+      function handleMove(data, element, col) {
+        if (col.dataset.target === data.g) {
+          // Correct
+          const successEl = document.createElement('div');
+          successEl.className = 'word-card correct';
+          successEl.innerText = data.t;
+          successEl.style.display = 'block';
+          successEl.style.width = '100%';
+          successEl.style.marginBottom = '5px';
+          successEl.draggable = false;
+
+          col.querySelector('.drop-zone-content').appendChild(successEl);
+          if (element) element.remove();
+
+          solved++;
+          checkWin();
+          hintBox.style.display = 'none';
+        } else {
+          // Wrong
+          if (element) {
+            element.classList.add('wrong');
+            setTimeout(() => element.classList.remove('wrong'), 500);
+            hintBox.innerText = 'Не угадали! Попробуйте еще раз.';
+          }
+        }
+      }
+
+      function checkWin() {
+        if (solved === words.length) {
+          feedback.innerHTML = '<strong>Круто!</strong> Вы шарите в сленге.';
+          feedback.style.color = 'var(--color-success)';
+        }
+      }
+
+      initGame();
+    </script>
+  </body>
+</html>
