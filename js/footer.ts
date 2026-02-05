@@ -17,6 +17,7 @@ class SamovarFooter extends HTMLElement {
                         <a href="bibliotek.html">Bibliotek</a>
                         <a href="faq.html">FAQ</a>
                         <a href="kontakt.html">Kontakt</a>
+                        <a href="tilgængelighedserklæring.html">Tilgængelighed</a>
                         <a href="privatlivspolitik.html">Privatlivspolitik</a>
                         <a href="brugervilkår.html">Brugervilkår</a>
                     </div>

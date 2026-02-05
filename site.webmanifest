@@ -1,0 +1,23 @@
+{
+  "name": "Samovar - Russisk sprogkursus",
+  "short_name": "Samovar",
+  "description": "Akademisk russisk sprogkursus for danskere",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color":="#f9f9f7",
+  "theme_color": "#2c3e50",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

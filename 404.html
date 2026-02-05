@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siden blev ikke fundet | Samovar</title>
+    <meta name="description" content="Siden du leder efter, findes ikke. Gå tilbage til Samovars russiskkursus.">
+    <meta name="robots" content="noindex, follow">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.svg">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#2c3e50">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    
+    <style>
+        .error-section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-xl) var(--space-m);
+        }
+        
+        .error-content {
+            max-width: 600px;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            line-height: 1;
+            margin-bottom: var(--space-m);
+            opacity: 0.3;
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .error-message {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: var(--space-xl);
+            line-height: 1.6;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: var(--space-m);
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .suggestions {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: var(--space-l);
+            text-align: left;
+        }
+        
+        .suggestions h3 {
+            font-size: 1rem;
+            margin-bottom: var(--space-m);
+            color: var(--accent-blue);
+        }
+        
+        .suggestions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .suggestions li {
+            margin-bottom: var(--space-s);
+        }
+        
+        .suggestions a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .suggestions a:hover {
+            text-decoration: underline;
+        }
+        
+        .search-box {
+            margin-top: var(--space-xl);
+        }
+        
+        .search-box input {
+            width: 100%;
+            max-width: 400px;
+            padding: var(--space-m);
+            border: 2px solid var(--line-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+        
+        @media (max-width: 600px) {
+            .error-code {
+                font-size: 5rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="om-kursus.html">Om</a>
+                <a href="bibliotek.html">Bibliotek</a>
+                <a href="cases.html">Kasus</a>
+                <a href="phonetics.html">Fonetik</a>
+                <a href="dictionary.html">Ordbog</a>
+                <a href="faq.html">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="error-section">
+            <div class="error-content">
+                <div class="error-code">404</div>
+                <h1 class="error-title">Siden blev ikke fundet</h1>
+                <p class="error-message">
+                    Beklager, men siden du leder efter, findes ikke eller er blevet flyttet. 
+                    Måske kan du finde det, du søger, herunder?
+                </p>
+                
+                <div class="error-actions">
+                    <a href="/" class="btn btn-primary">🏠 Gå til forsiden</a>
+                    <a href="bibliotek.html" class="btn btn-secondary">📚 Gå til biblioteket</a>
+                </div>
+                
+                <div class="suggestions">
+                    <h3>Populære sider:</h3>
+                    <ul>
+                        <li><a href="beginner/">→ Nybegynderkursus (A0-A1)</a></li>
+                        <li><a href="cases.html">→ Kasus-konstruktør</a></li>
+                        <li><a href="tests/begynder-test.html">→ Tag begyndertesten</a></li>
+                        <li><a href="dictionary.html">→ Kulturel ordbog</a></li>
+                        <li><a href="faq.html">→ Ofte stillede spørgsmål</a></li>
+                    </ul>
+                </div>
+                
+                <div class="search-box">
+                    <p style="margin-bottom: var(--space-s);">Eller søg på Google:</p>
+                    <form action="https://www.google.com/search" method="GET" target="_blank">
+                        <input type="hidden" name="sitesearch" value="samovar.netlify.app">
+                        <input type="text" name="q" placeholder="Søg på Samovar..." required>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <samovar-footer></samovar-footer>
+    <script src="/js/cookie-consent.js"></script>
+</body>
+</html>

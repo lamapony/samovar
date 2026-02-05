@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tak for din besked | Samovar</title>
+    <meta name="description" content="Din besked er sendt. Vi vender tilbage hurtigst muligt.">
+    <meta name="robots" content="noindex, follow">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/identity.css">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.svg">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#2c3e50">
+    <script type="module" src="/js/header.ts"></script>
+    <script type="module" src="/js/footer.ts"></script>
+    
+    <style>
+        .thanks-section {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: var(--space-xl) var(--space-m);
+        }
+        
+        .thanks-content {
+            max-width: 500px;
+        }
+        
+        .thanks-icon {
+            font-size: 5rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .thanks-title {
+            font-size: 2rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .thanks-message {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: var(--space-xl);
+            line-height: 1.6;
+        }
+        
+        .response-time {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: var(--space-m);
+            margin: var(--space-l) 0;
+            border: 1px solid var(--line-color);
+        }
+        
+        .response-time strong {
+            color: var(--accent-blue);
+        }
+        
+        .next-steps {
+            margin-top: var(--space-xl);
+        }
+        
+        .next-steps h3 {
+            font-size: 1.1rem;
+            margin-bottom: var(--space-m);
+        }
+        
+        .next-steps-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-s);
+        }
+        
+        .next-steps-list a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            padding: var(--space-s);
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            display: block;
+            transition: background 0.2s;
+        }
+        
+        .next-steps-list a:hover {
+            background: var(--line-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <img src="images/logo.svg" alt="Samovar" height="40">
+            </a>
+            <nav class="main-nav">
+                <a href="/">Kursus</a>
+                <a href="om-kursus.html">Om</a>
+                <a href="bibliotek.html">Bibliotek</a>
+                <a href="cases.html">Kasus</a>
+                <a href="phonetics.html">Fonetik</a>
+                <a href="dictionary.html">Ordbog</a>
+                <a href="faq.html">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="thanks-section">
+            <div class="thanks-content">
+                <div class="thanks-icon">📨</div>
+                <h1 class="thanks-title">Tak for din besked!</h1>
+                <p class="thanks-message">
+                    Vi har modtaget din henvendelse og vil vende tilbage hurtigst muligt. 
+                    Din feedback hjælper os med at gøre Samovar bedre.
+                </p>
+                
+                <div class="response-time">
+                    <strong>⏱️ Svartid:</strong> Vi svarer normalt inden for <strong>24 timer</strong> på hverdage.
+                </div>
+                
+                <a href="/" class="btn btn-primary">🏠 Gå til forsiden</a>
+                
+                <div class="next-steps">
+                    <h3>Mens du venter, kan du...</h3>
+                    <ul class="next-steps-list">
+                        <li><a href="beginner/">→ Start nybegynderkurset</a></li>
+                        <li><a href="tests/begynder-test.html">→ Tag begyndertesten</a></li>
+                        <li><a href="dictionary.html">→ Udforsk den kulturelle ordbog</a></li>
+                        <li><a href="faq.html">→ Læs ofte stillede spørgsmål</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <samovar-footer></samovar-footer>
+    <script src="/js/cookie-consent.js"></script>
+</body>
+</html>

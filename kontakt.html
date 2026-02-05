@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="css/identity.css">
-    <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.svg">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#2c3e50">
     <script type="module" src="/js/header.ts"></script>
     <script type="module" src="/js/footer.ts"></script>
     
@@ -182,6 +185,7 @@
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Spring til indhold</a>
     <header class="site-header">
         <div class="header-content">
             <a href="/" class="logo">
@@ -200,7 +204,7 @@
         </div>
     </header>
 
-    <main class="container" style="margin-top: 2rem;">
+    <main id="main-content" class="container" style="margin-top: 2rem;">
         <section class="contact-section">
             <div class="contact-header">
                 <h1>Kontakt os</h1>
@@ -253,25 +257,32 @@
             
             <div class="contact-form" style="margin-top: var(--space-xl);">
                 <h2 style="margin-bottom: var(--space-l);">Send os en besked</h2>
-                <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Tak for din besked! Vi vender tilbage snart.');">
+                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/tak.html">
+                    <!-- Honeypot field to prevent spam -->
+                    <p style="display: none;">
+                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                    </p>
+                    
+                    <input type="hidden" name="form-name" value="contact" />
+                    
                     <div class="form-group">
-                        <label for="name">Navn</label>
-                        <input type="text" id="name" name="name" required placeholder="Dit navn">
+                        <label for="name">Navn *</label>
+                        <input type="text" id="name" name="name" required placeholder="Dit navn" autocomplete="name">
                     </div>
                     
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required placeholder="din@email.dk">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="din@email.dk" autocomplete="email">
                     </div>
                     
                     <div class="form-group">
-                        <label for="subject">Emne</label>
+                        <label for="subject">Emne *</label>
                         <input type="text" id="subject" name="subject" required placeholder="Hvad handler din besked om?">
                     </div>
                     
                     <div class="form-group">
-                        <label for="message">Besked</label>
-                        <textarea id="message" name="message" required placeholder="Skriv din besked her..."></textarea>
+                        <label for="message">Besked *</label>
+                        <textarea id="message" name="message" required placeholder="Skriv din besked her..." minlength="10"></textarea>
                     </div>
                     
                     <button type="submit" class="btn-submit">Send besked</button>

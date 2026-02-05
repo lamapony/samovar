@@ -66,12 +66,16 @@
     <link rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="css/tooltips.css">
     <link rel="stylesheet" href="css/identity.css">
-    <link rel="icon" type="image/svg+xml" href="images/logo-icon.svg">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.svg">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#2c3e50">
     <script type="module" src="/js/header.ts"></script>
     <script type="module" src="/js/footer.ts"></script>
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Spring til indhold</a>
 
     <header class="site-header">
         <div class="header-content">
@@ -90,7 +94,7 @@
         </div>
     </header>
 
-    <main class="container" style="margin-top: 2rem;">
+    <main id="main-content" class="container" style="margin-top: 2rem;">
         <div class="hero">
             <div class="hero-content">
                 <p class="hero-badge">Akademisk russisk sprogkursus for danskere</p>
