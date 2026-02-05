@@ -1,203 +1,901 @@
 <!doctype html>
 <html lang="da">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Russisk for Begyndere | Samovar</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="css/beginner.css" />
-    <script type="module" src="/js/header.ts"></script>
-    <script type="module" src="/js/footer.ts"></script>
-  </head>
 
-  <body>
-    <div class="container">
-      <samovar-header></samovar-header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Begynderkursus | Samovar</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="css/beginner.css" />
+  <style>
+    /* ============================================
+           EDITORIAL INDEX PAGE
+           ============================================ */
 
-      <main>
-        <div class="section-intro">
-          <div class="lesson-meta">
-            <span>Niveau A0-A1</span>
-            <span>12 lektioner</span>
-            <span>Ca. 20 timer</span>
-          </div>
-          <h1>Russisk fra Bunden</h1>
-          <p class="lead">
-            Velkommen til dit russiske eventyr. Dette kursus er designet til dig, der aldrig har
-            lært russisk eller lige er begyndt. Vi starter helt fra begyndelsen: alfabetet, lyde,
-            enkle ord og fraser. Hver lektion bygger videre pa den forrige.
-          </p>
+    :root {
+      --editorial-black: #1a1a1a;
+      --editorial-gray: #666;
+      --editorial-light: #f5f5f5;
+      --editorial-accent: #a33e3e;
+      /* Academic Red */
+      --editorial-line: #e0e0e0;
+      --font-serif: 'Georgia', 'Times New Roman', serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: white;
+      color: var(--editorial-black);
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-serif);
+      font-weight: normal;
+      /* Editorial style often uses lighter weights for serif */
+    }
+
+    /* === Hero Section === */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, #fff 0%, var(--editorial-light) 100%);
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: transparent;
+      color: var(--editorial-accent);
+      border: 1px solid var(--editorial-accent);
+      padding: 0.5rem 1.5rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-weight: 600;
+    }
+
+    .hero-lead {
+      font-size: 1.25rem;
+      color: var(--editorial-gray);
+      max-width: 500px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--editorial-accent);
+      display: block;
+    }
+
+    .hero-stat-label {
+      font-size: 0.85rem;
+      color: var(--editorial-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--editorial-black);
+      color: white;
+      padding: 1rem 3rem;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .hero-cta:hover {
+      background: var(--editorial-accent);
+      transform: translateY(-2px);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-gray);
+    }
+
+    .scroll-hint::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 30px;
+      background: var(--editorial-line);
+      margin: 0.5rem auto 0;
+      animation: scroll-bounce 2s infinite;
+    }
+
+    @keyframes scroll-bounce {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(10px);
+      }
+    }
+
+    /* === Lessons Section === */
+    .lessons-section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+    }
+
+    /* === Lessons Grid === */
+    .lessons-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--editorial-line);
+    }
+
+    .lesson-card {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--editorial-line);
+      border-bottom: 1px solid var(--editorial-line);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lesson-card:nth-child(3n) {
+      border-right: none;
+    }
+
+    .lesson-card:nth-last-child(-n + 3) {
+      border-bottom: none;
+    }
+
+    .lesson-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--editorial-black);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 0;
+    }
+
+    .lesson-card:hover::before {
+      transform: translateY(0);
+    }
+
+    .lesson-card:hover {
+      color: white;
+    }
+
+    .lesson-card:hover .lesson-number,
+    .lesson-card:hover .lesson-description {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .lesson-card:hover .lesson-icon {
+      transform: scale(1.1);
+    }
+
+    .lesson-card>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .lesson-number {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--editorial-accent);
+      margin-bottom: 1rem;
+      transition: color 0.3s;
+    }
+
+    .lesson-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .lesson-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--editorial-black);
+      transition: color 0.3s;
+    }
+
+    .lesson-card:hover .lesson-title {
+      color: white;
+    }
+
+    .lesson-description {
+      font-size: 0.9rem;
+      color: var(--editorial-gray);
+      transition: color 0.3s;
+    }
+
+    /* === Features Section === */
+    .features-section {
+      background: var(--editorial-black);
+      color: white;
+      padding: 6rem 2rem;
+    }
+
+    .features-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .features-header .section-label {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .features-header .section-title {
+      color: white;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-item {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      text-align: center;
+    }
+
+    .feature-item:last-child {
+      border-right: none;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .feature-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: white;
+    }
+
+    .feature-description {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* === CTA Section === */
+    .cta-section {
+      padding: 8rem 2rem;
+      text-align: center;
+      background: var(--editorial-light);
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    .cta-subtitle {
+      font-size: 1.1rem;
+      color: var(--editorial-gray);
+      margin-bottom: 2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--editorial-accent);
+      color: white;
+      padding: 1rem 3rem;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .cta-button:hover {
+      background: var(--editorial-black);
+      transform: translateY(-2px);
+    }
+
+    /* === Progress Section === */
+    .progress-section {
+      padding: 4rem 2rem 0;
+      background: var(--editorial-light);
+    }
+
+    .progress-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* === Dashboard / Progress === */
+    .overall-progress {
+      background: white;
+      border: 1px solid var(--editorial-line);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .progress-bar-container {
+      height: 4px;
+      background: var(--editorial-line);
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--editorial-accent);
+      transition: width 0.5s ease;
+    }
+
+    .progress-percentage {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--editorial-black);
+    }
+
+    .stats-panel {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1.5rem;
+      border: 1px solid var(--editorial-line);
+      background: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-value {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin: 0.5rem 0;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--editorial-gray);
+    }
+
+    .stat-icon {
+      margin-bottom: 0.5rem;
+      color: var(--editorial-gray);
+    }
+
+    /* === Responsive === */
+    @media (max-width: 900px) {
+      .lessons-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .lesson-card:nth-child(3n) {
+        border-right: 1px solid var(--editorial-line);
+      }
+
+      .lesson-card:nth-child(2n) {
+        border-right: none;
+      }
+
+      .lesson-card:nth-last-child(-n + 3) {
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .lesson-card:nth-last-child(-n + 2) {
+        border-bottom: none;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .feature-item:last-child {
+        border-bottom: none;
+      }
+
+      .stats-panel {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 8rem 1.5rem 4rem;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .lessons-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lesson-card {
+        border-right: none;
+        border-bottom: 1px solid var(--editorial-line);
+      }
+
+      .lesson-card:last-child {
+        border-bottom: none;
+      }
+
+      .lessons-section,
+      .features-section,
+      .cta-section {
+        padding: 4rem 1.5rem;
+      }
+    }
+  </style>
+  <script type="module" src="/js/header.ts"></script>
+  <script type="module" src="/js/footer.ts"></script>
+</head>
+
+<body>
+  <div class="container">
+    <samovar-header></samovar-header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">Interaktivt Begynderkursus</div>
+      <h1>
+        Lær Russisk
+        <span>fra Bunden</span>
+      </h1>
+      <p class="hero-lead">
+        12 interaktive lektioner med moderne design, AI-øvelser og fokus på praktisk kommunikation.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-number">12</span>
+          <span class="hero-stat-label">Lektioner</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-number">200+</span>
+          <span class="hero-stat-label">Ord</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-number">A1</span>
+          <span class="hero-stat-label">Niveau</span>
+        </div>
+      </div>
+      <a href="lessons/01-intro-v2.html" class="hero-cta">Start kurset</a>
+      <div class="scroll-hint">Scroll ned</div>
+    </section>
+
+    <!-- Lessons -->
+    <section class="lessons-section">
+      <div class="section-header">
+        <div class="section-label">Kursets indhold</div>
+        <h2 class="section-title">12 Lektioner</h2>
+      </div>
+
+      <div class="lessons-grid">
+        <a href="lessons/01-intro-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 1</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0" />
+              <path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2" />
+              <path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8" />
+              <path
+                d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Hej! Farvel!</h3>
+          <p class="lesson-description">Hilsner og høflige fraser</p>
+        </a>
+
+        <a href="lessons/02-alphabet-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 2</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 7V4h16v3" />
+              <path d="M9 20h6" />
+              <path d="M12 4v16" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Det Kyrilliske Alfabet</h3>
+          <p class="lesson-description">33 bogstaver på 60 minutter</p>
+        </a>
+
+        <a href="lessons/03-numbers-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 3</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19h16" />
+              <path d="M4 15h16" />
+              <path d="M4 11h16" />
+              <path d="M4 7h16" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Tal fra 1 til 10</h3>
+          <p class="lesson-description">Tæl, priser og telefonnumre</p>
+        </a>
+
+        <a href="lessons/04-about-me-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 4</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Jeg Hedder...</h3>
+          <p class="lesson-description">Præsentation og bekendtskab</p>
+        </a>
+
+        <a href="lessons/05-family-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 5</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 21h18" />
+              <path d="M5 21V7l8-4 8 4v14" />
+              <path d="M13 11V7" />
+              <path d="M9 11V7" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Min Familie</h3>
+          <p class="lesson-description">Familiemedlemmer og relationer</p>
+        </a>
+
+        <a href="lessons/06-food-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 6</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+              <path d="M7 2v20" />
+              <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Mad og Drikke</h3>
+          <p class="lesson-description">Fødevarer og præferencer</p>
+        </a>
+
+        <a href="lessons/07-cafe-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 7</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+              <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+              <line x1="6" y1="1" x2="6" y2="4" />
+              <line x1="10" y1="1" x2="10" y2="4" />
+              <line x1="14" y1="1" x2="14" y2="4" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">På Café</h3>
+          <p class="lesson-description">Bestil mad og drikke</p>
+        </a>
+
+        <a href="lessons/08-time-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 8</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Hvad Er Klokken?</h3>
+          <p class="lesson-description">Tid, dage og måneder</p>
+        </a>
+
+        <a href="lessons/09-city-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 9</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">I Byen</h3>
+          <p class="lesson-description">Steder, retninger og transport</p>
+        </a>
+
+        <a href="lessons/10-shopping-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 10</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Shopping</h3>
+          <p class="lesson-description">Tøj, farver og priser</p>
+        </a>
+
+        <a href="lessons/11-weather-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 11</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.5 19c0-1.7-1.3-3-3-3s-3 1.3-3 3" />
+              <path d="M14.5 16c0-1.7-1.3-3-3-3s-3 1.3-3 3" />
+              <path d="M11.5 13c0-1.7-1.3-3-3-3s-3 1.3-3 3" />
+              <path d="M8.5 10c0-1.7-1.3-3-3-3s-3 1.3-3 3" />
+              <path d="M17.5 19h-9M14.5 16h-3M11.5 13h-3" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Vejret</h3>
+          <p class="lesson-description">Vejr og årstider</p>
+        </a>
+
+        <a href="lessons/12-review-v2.html" class="lesson-card">
+          <div class="lesson-number">Lektion 12</div>
+          <span class="lesson-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="7" />
+              <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+            </svg>
+          </span>
+          <h3 class="lesson-title">Stor Repetition</h3>
+          <p class="lesson-description">Test alt hvad du har lært</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section">
+      <div class="features-inner">
+        <div class="features-header">
+          <div class="section-label">Læringsoplevelse</div>
+          <h2 class="section-title">Moderne Læringsoplevelse</h2>
         </div>
 
-        <section id="about" class="content-block">
-          <div class="content-main">
-            <h2>
-              <span>Hvordan Kurset Fungerer</span>
-            </h2>
-
-            <div class="theory-block">
-              <h3>Interaktiv Laring</h3>
-              <p>
-                Hver lektion indeholder flere typer ovelser, der gentages fra gang til gang, sa du
-                far konstant praksis:
-              </p>
-              <ul>
-                <li><strong>Ordforrad</strong> - Nye ord med udtale og oversattelse</li>
-                <li><strong>Lytteovelser</strong> - Lyt og valg det rigtige svar</li>
-                <li><strong>Udfyld tomme pladser</strong> - Skriv det manglende ord</li>
-                <li><strong>Matching</strong> - Par russisk med dansk</li>
-                <li><strong>Skriveovelser</strong> - Skriv ord pa russisk</li>
-                <li><strong>Satningsbygger</strong> - Byg satninger af ord</li>
-              </ul>
-            </div>
-
-            <div class="tip-box">
-              <strong>Tip:</strong> Brug hojttalerikonet til at hore, hvordan ordene udtales. Gentag
-              hojt efter computeren - det er den bedste made at lare pa!
-            </div>
-
-            <h2>
-              <span>Lektionsoversigt</span>
-              <span class="chapter-num">12 Lektioner</span>
-            </h2>
-
-            <ul class="module-list">
-              <li class="module-item">
-                <a href="lessons/01-introduction.html" class="module-link">
-                  <h3><span class="tag active">A0</span> Lektion 1: Hej! Farvel!</h3>
-                  <span class="module-meta">
-                    De forste russiske ord: hilsner og hoflighed. Lær at sige "hej", "farvel" og
-                    "tak".
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/02-alphabet.html" class="module-link">
-                  <h3><span class="tag active">A0</span> Lektion 2: Det Kyrilliske Alfabet</h3>
-                  <span class="module-meta">
-                    33 bogstaver, nye lyde. Vi starter med de bogstaver, der ligner de danske.
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/03-numbers.html" class="module-link">
-                  <h3><span class="tag active">A0</span> Lektion 3: Tal fra 1 til 10</h3>
-                  <span class="module-meta">
-                    Lær at talle pa russisk. Numre er overalt: priser, telefoner, adresser.
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/04-about-me.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 4: Jeg Hedder...</h3>
-                  <span class="module-meta">
-                    Preasenter dig selv. Navn, nationalitet, erhverv. "Jeg er fra Danmark."
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/05-family.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 5: Min Familie</h3>
-                  <span class="module-meta">
-                    Mor, far, bror, soster. Lær at fortelle om din familie.
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/06-food.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 6: Mad og Drikke</h3>
-                  <span class="module-meta">
-                    Brod, te, kaffe, vand. Hvad spiser og drikker man i Rusland?
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/07-cafe.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 7: Pa Cafe</h3>
-                  <span class="module-meta">
-                    Bestil kaffe, te eller madder. Praktiske dialoger i en cafe.
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/08-time.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 8: Hvad Er Klokken?</h3>
-                  <span class="module-meta">
-                    Tid, dage, maneder. Lær at fortælle og sporge om tid.
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/09-city.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 9: I Byen</h3>
-                  <span class="module-meta">
-                    Gade, butik, metro. Navigering og retninger i byen.
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/10-shopping.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 10: Shopping</h3>
-                  <span class="module-meta">
-                    Hvor meget koster det? Farver, storrelser, priser.
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/11-weather.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 11: Vejret</h3>
-                  <span class="module-meta">
-                    Koldt, varmt, sol, regn. Smalltalk om vejret pa russisk.
-                  </span>
-                </a>
-              </li>
-              <li class="module-item">
-                <a href="lessons/12-review.html" class="module-link">
-                  <h3><span class="tag active">A1</span> Lektion 12: Repetition</h3>
-                  <span class="module-meta">
-                    Test dig selv. Gennemgang af alt, hvad du har lart.
-                  </span>
-                </a>
-              </li>
-            </ul>
+        <div class="features-grid">
+          <div class="feature-item">
+            <span class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+            </span>
+            <h3 class="feature-title">Editorial Design</h3>
+            <p class="feature-description">Magasin-inspireret layout med fokus på læsbarhed</p>
           </div>
-
-          <aside class="content-note">
-            <div class="margin-note">
-              <strong>Hvorfor Russisk?</strong>
-              Russisk tales af over 250 millioner mennesker. Det er et af FN's officielle sprog og
-              abner dore til en rig kultur, litteratur og forretningsomrade.
-            </div>
-            <div class="margin-note">
-              <strong>Tid per Lektion</strong>
-              Hver lektion tager cirka 1-2 timer. Tag den tid, du har brug for. Det er bedre at lave
-              lidt hver dag end alt pa en gang.
-            </div>
-            <div class="margin-note">
-              <strong>Udtale</strong>
-              Klik pa hojttalerikonet ved hvert ord for at hore den korrekte udtale. Gentag hojt -
-              det er noelen til god udtale!
-            </div>
-          </aside>
-        </section>
-
-        <section id="start" class="content-block">
-          <div class="content-main">
-            <h2>
-              <span>Klar til at Begynde?</span>
-            </h2>
-            <p>
-              Start med den forste lektion. Du behover ikke vide noget pa forhand - vi starter helt
-              fra bunden.
-            </p>
-            <a href="lessons/01-introduction.html" class="btn" style="margin-top: var(--space-m)">
-              Start Lektion 1
-            </a>
+          <div class="feature-item">
+            <span class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="10" rx="2" />
+                <circle cx="12" cy="5" r="2" />
+                <path d="M12 7v4" />
+                <line x1="8" y1="16" x2="8" y2="16" />
+                <line x1="16" y1="16" x2="16" y2="16" />
+              </svg>
+            </span>
+            <h3 class="feature-title">AI-Øvelser</h3>
+            <p class="feature-description">Samtaler og quizzer drevet af kunstig intelligens</p>
           </div>
-        </section>
-      </main>
+          <div class="feature-item">
+            <span class="feature-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <circle cx="12" cy="12" r="4" />
+                <line x1="4.93" y1="4.93" x2="7.76" y2="7.76" />
+                <line x1="16.24" y1="16.24" x2="19.07" y2="19.07" />
+                <line x1="2" y1="12" x2="6" y2="12" />
+                <line x1="18" y1="12" x2="22" y2="12" />
+                <line x1="12" y1="2" x2="12" y2="6" />
+                <line x1="12" y1="18" x2="12" y2="22" />
+                <line x1="4.93" y1="19.07" x2="7.76" y2="16.24" />
+                <line x1="16.24" y1="7.76" x2="19.07" y2="4.93" />
+              </svg>
+            </span>
+            <h3 class="feature-title">Interaktivt</h3>
+            <p class="feature-description">Klik for at høre udtale, scroll-animationer</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <samovar-footer></samovar-footer>
-    </div>
-  </body>
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2 class="cta-title">Klar til at lære russisk?</h2>
+      <p class="cta-subtitle">Start med den første lektion — det tager kun 15 minutter.</p>
+      <a href="lessons/01-intro-v2.html" class="cta-button">Start nu →</a>
+    </section>
+
+    <samovar-footer></samovar-footer>
+  </div>
+
+  <!-- Progress System -->
+  <script src="js/progress-system.js"></script>
+  <script>
+    // Initialize progress display on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add progress indicators to lesson cards
+      const lessonIds = [
+        '01-intro',
+        '02-alphabet',
+        '03-numbers',
+        '04-about-me',
+        '05-family',
+        '06-food',
+        '07-cafe',
+        '08-time',
+        '09-city',
+        '10-shopping',
+        '11-weather',
+        '12-review',
+      ];
+
+      const lessonCards = document.querySelectorAll('.lesson-card');
+      lessonCards.forEach((card, index) => {
+        const lessonId = lessonIds[index];
+        const indicator = ProgressUIHelper.createLessonIndicator(lessonId);
+        card.style.position = 'relative';
+        card.appendChild(indicator);
+      });
+
+      // Update hero stats with actual progress
+      const stats = Progress.getStats();
+      if (stats.completedLessons > 0) {
+        // Show progress section before lessons
+        const lessonsSection = document.querySelector('.lessons-section');
+        const progressSection = document.createElement('section');
+        progressSection.className = 'progress-section';
+        progressSection.innerHTML = `
+                    <div class="progress-inner">
+                        <div id="progress-bar-container"></div>
+                        <div id="stats-panel-container"></div>
+                    </div>
+                `;
+        lessonsSection.parentNode.insertBefore(progressSection, lessonsSection);
+
+        // Add progress bar and stats
+        document
+          .getElementById('progress-bar-container')
+          .appendChild(ProgressUIHelper.createProgressBar());
+        document
+          .getElementById('stats-panel-container')
+          .appendChild(ProgressUIHelper.createStatsPanel());
+      }
+
+      // Update CTA button based on progress
+      const nextLesson = Progress.getNextLesson();
+      const ctaButton = document.querySelector('.cta-button');
+      const heroCta = document.querySelector('.hero-cta');
+
+      if (nextLesson) {
+        const lessonUrl = `lessons/${nextLesson.id}-v2.html`;
+        if (stats.completedLessons > 0) {
+          ctaButton.textContent = `Fortsæt: ${nextLesson.title} →`;
+          ctaButton.href = lessonUrl;
+          heroCta.textContent = 'Fortsæt kurset';
+          heroCta.href = lessonUrl;
+        }
+      } else if (stats.completedLessons === 12) {
+        ctaButton.textContent = '🏆 Kurset gennemført!';
+        ctaButton.href = 'lessons/12-review-v2.html';
+        heroCta.textContent = '🏆 Gennemgå igen';
+        heroCta.href = 'lessons/01-intro-v2.html';
+      }
+    });
+  </script>
+</body>
+
 </html>
